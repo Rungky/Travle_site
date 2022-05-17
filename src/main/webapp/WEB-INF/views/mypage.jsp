@@ -12,8 +12,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My page</title>
-<link rel="stylesheet" href="/project_trip/css/header_footer.css">
-<link rel="stylesheet" href="/project_trip/css/mypage-style.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/mypage-style.css">
 </head>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
@@ -92,10 +92,9 @@
             <div class="memberOut"><br>
                 <p>사적모임 사이트를 더이상 이용하고 싶지 않으신가요?</p>
                 <div class="wrap_form2">
-                    <form method="get"   id="logout_form" class="mypage_form2" action = "${contextPath}/trip">
-                        <input type="hidden" name ="member_id" value="${member.member_id}">
+                    <form method="get"  id="logout_form" class="mypage_form2" action ="${contextPath}/trip/logoutCheck.do">
                         <input type="button" onclick="out_button_event()"  value="로그아웃">
-                    	<input type="hidden" name="action" value="logout.do">
+                    	<!-- <input type="hidden" name="action" value="logout.do"> -->
                     </form>
                     <form method="get"  id="removeMember_form"  class="mypage_form2" action = "${contextPath}/trip">
                         <input type="hidden" name ="member_id" value="${member.member_id}">
