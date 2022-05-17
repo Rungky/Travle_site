@@ -1,0 +1,154 @@
+ 
+ .fs_s{ font-size: 0.4em;}
+ .fs_s2{ font-size: 0.8em;}
+ .fs_m{ font-size: 0.9em;}
+ .fs_m2{ font-size: 1.0em;}
+ .fs_l{ font-size: 1.1em;}
+ .fw_6{ font-weight: 600;}
+ .fw_7{ font-weight: 700;}
+ .margin_auto{ margin: 0 auto;}
+ .margin_top{ margin-top: 5px;}
+ 
+body{
+    width: 100%;
+}
+
+section{
+    margin: 150px auto;
+    width: 100%;
+}
+
+#wrap_qna{
+    width: 55%;
+    margin: 0 auto;
+}
+ 
+#qna{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#qna_head{
+    display: flex;
+    height: 40px;
+    border-bottom: 1px rgb(173, 173, 173) solid;
+}
+
+#my_qna, #new_qna{
+    line-height: 40px;
+    overflow-y: hidden;
+    border-bottom: 1px none rgb(173, 173, 173);
+}
+
+#new_qna>a:visited, #new_qna>a:link{
+    text-decoration: none;
+    color: black;
+}
+
+#my_qna{
+    border-bottom: 2px solid #0070C0;
+}
+
+ #new_qna:hover{
+    color: #0070C0;
+    color:rgb(173, 173, 173);
+    border-bottom: 2px solid #0070C0;
+}
+
+#qna_main{
+    display: flex;
+    flex-direction: column;
+}
+
+.qna_title{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid rgb(173, 173, 173);
+    height: 70px;
+    align-items: center;
+}
+
+.answer_button button{
+    margin-right: 10px;
+}
+
+.btn_doAnswer{
+    width: 65px;
+    height: 22px;
+    font-size: 0.6em;
+    background-color: rgb(233, 233, 233);
+    border: rgb(233,233,233) solid 1px;
+}
+
+.btn_doMod{
+	margin-left:20px;
+}
+
+.btn_doAnswer:hover{
+    background-color: rgb(209, 209, 209);
+}
+
+.btn_open{
+    border: none;
+    background-color: initial;
+    color:rgb(115, 115, 115);
+    font-size: 0.5em;
+}
+
+.btn_open:hover{
+    color: black;
+}
+
+.qna_contents{
+    /**display: flex;**/
+    flex-direction: column;
+    background-color: rgb(230, 229, 229);
+    padding: 7px 10px;
+    display: none;
+}
+
+.qna_contents2{
+    padding: 10px 5px 0;
+}
+
+.qna_answer{
+    padding: 7px 25px 10px;
+}
+
+#qna_page{
+    margin-top: 30px;
+    text-align: center;
+}
+
+#qna_page a{
+    text-decoration: none;
+    color: black;
+}
+
+
+@media screen and (max-width:800px)  {
+    /* body{background-color: orange;} */   
+    #wrap_qna{
+        width: 85%;
+    }
+}
+
+.paging {
+	display : flex;
+	justify-content: center;
+}
+.pagebt {
+	margin : 5px;
+	background : none;
+	border : none;
+	cursor : pointer;
+	font-size : 17px;
+}
+.nowpage {
+	font-weight : bold;
+	color : red;
+}

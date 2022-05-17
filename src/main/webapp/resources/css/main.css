@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+}
+
+a { text-decoration: none; }
+
+ol, ul, li { list-style: none; }
+
+header {
+    z-index: 100;
+}
+
+header .header_main .main_inner {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    padding: 0 40px;
+}
+
+header .header_main .main_inner h1 a {
+    /* 遺�紐� �슂�냼�� �넂�씠 李⑥씠媛� �깮湲곕뒗 寃껋쓣 泥섎━ */
+    display: block;
+    width: 204px;
+    height: 32px;
+    font-size:0.7em;
+    font-weight: bold;
+    font-style:italic;
+    color:white;
+}
+
+header .header_main .main_inner .gnb_area {
+    margin-left: auto;
+}
+
+header .header_main .main_inner .gnb_area .gnb .gnb_list {
+    display: flex;
+}
+
+header .header_main .main_inner .gnb_area .gnb .gnb_list .gnb_item {
+    margin-right: 40px;
+}
+
+header .header_main .main_inner .gnb_area .gnb .gnb_list .gnb_item a {
+    color: white;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.blank{
+    height:70px;
+}
+
+section .banner{
+    display: flex;
+    justify-content: center;
+}
+
+section .banner img {
+    height: 450px;
+    width: 850px;
+    padding-top: 50px;
+}
+
+.main_link{
+    margin: 30px auto;
+    background: white;
+    overflow:hidden;
+}
+
+.main_link ul {
+    display:flex;
+    flex-direction: space-around;
+    justify-content: center;
+    margin-left: -30px;
+}
+
+.main_link ul li{
+    width: 167px;
+    height:140px;
+    text-align: center;
+}
+.link_icon img {
+    width: 102px;
+    height: 102px;
+}
+
+.wrap_middle section{
+    width:100%;
+    text-align: center;
+}
+
+.wrap_middle section .ad{
+    font-size: 1.8em;
+    font-weight: 500; 
+    display: block;
+    overflow: hidden;
+    width: 962px;
+    height: 320px;
+    margin: 0 auto;
+    background: url(//image.goodchoice.kr/images/web_v3/bg_appdown.png) center center no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.ad p{
+    padding-top: 70px;
+}
+
+.ad_imgs img{
+    margin-top: 50px;
+    width: 200px;
+}
+
+.wrap_bottom{
+    width: 50%;
+    margin: 100px auto 40px;
+}
+
+.wrap_bottom > div{
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+
+
+/* ======================================== */
+.slideitem>div{
+    margin: 0 auto;
+}
+
+.a_wrap img{
+    width: 100%;
+    height: 410px;
+    max-height : 420px;
+}
+
+ul,li {
+    list-style: none;
+}
+
+[name="slide"] {
+    display: none;
+}
+
+.slidebox {
+    max-width: 1000px;
+    width: 50%;
+    margin: 0 auto 100px;
+    text-align: center;
+}
+
+.slidebox img {
+    max-width: 100%;
+}
+
+.slidebox .slidelist {
+    white-space: nowrap;
+    font-size: 1em;
+    overflow: hidden;
+}
+
+.slidebox .slideitem {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    transition: all .35s;
+}
+
+.slidebox .slideitem label {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+label.left {
+    left: 20px;
+    background-color: #5F5F5F;
+    background-image: url('../image/left-arrow.png');
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+label.right {
+    right: 20px;
+    background-color: #5F5F5F;
+    background-image: url('../image/right-arrow.png');
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+/* �럹�씠吏� �뒪���씪 */
+.paginglist {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.paginglist>li {
+    display: inline-block;
+    vertical-align: middle;
+    
+}
+
+.paginglist>li>label {
+    display: block;
+    padding: 10px 30px;
+    border-radius: 10px;
+    background: #ccc;
+    cursor: pointer;
+}
+
+.paginglist>li:hover>label {
+    background: #333;
+}
+
+
+.a_wrap {
+    position: relative;
+}
+
+.wrap_text {
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.464);
+    text-align: center;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    line-height: 10px;
+    width: 100%;
+    height: 80px;
+    color: white;
+}
+
+
+.wrap_text div p:first-child{
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+/* .category {
+    position: absolute;
+    top: 7%;
+    left: 4%;
+    width: 12%;
+    height: 35px;
+    line-height: 35px;
+    font-weight: 700;
+
+  background-color: white;
+    border-radius: 30px; 
+    text-align: center;
+}
+ */
+
+
+[id="slide01"]:checked~.slidelist .slideitem {
+    transform: translateX(0);
+    animation: slide01 10s infinite;
+}
+
+[id="slide02"]:checked~.slidelist .slideitem {
+    transform: translateX(-100%);
+    animation: slide02 10s infinite;
+}
+
+[id="slide03"]:checked~.slidelist .slideitem {
+    transform: translateX(-200%);
+    animation: slide03 10s infinite;
+}
+
+[id="slide04"]:checked~.slidelist .slideitem {
+    transform: translateX(-300%);
+    animation: slide04 10s infinite;
+}
+
+[id="slide05"]:checked~.slidelist .slideitem {
+    transform: translateX(-400%);
+    animation: slide05 10s infinite;
+}
+
+[id="slide06"]:checked~.slidelist .slideitem {
+    transform: translateX(-500%);
+    animation: slide06 10s infinite;
+}
+
+@keyframes slide01 {
+	0% {left:0%;}
+	23% {left:0%;}
+	25% {left:-100%;}
+	48% {left:-100%;}
+	50% {left:-200%;}
+	73% {left:-200%;}
+	75% {left:-300%;}
+	98% {left:-300%;}
+	100% {left:0%;}
+}
+@keyframes slide02 {
+	0% {left:0%;}
+	23% {left:0%;}
+	25% {left:-100%;}
+	48% {left:-100%;}
+	50% {left:-200%;}
+	73% {left:-200%;}
+	75% {left:100%;}
+	98% {left:100%;}
+	100% {left:0%;}
+}
+@keyframes slide03 {
+	0% {left:0%;}
+	23% {left:0%;}
+	25% {left:-100%;}
+	48% {left:-100%;}
+	50% {left:-200%;}
+	73% {left:-200%;}
+	75% {left:100%;}
+	98% {left:100%;}
+	100% {left:0%;}
+}
+@keyframes slide04 {
+	0% {left:0%;}
+	23% {left:0%;}
+	25% {left:-100%;}
+	48% {left:-100%;}
+	50% {left:-200%;}
+	73% {left:-200%;}
+	75% {left:100%;}
+	98% {left:100%;}
+	100% {left:0%;}
+}
+
+@keyframes slide05 {
+    0% {left:0%;}
+	23% {left:0%;}
+	25% {left:-100%;}
+	48% {left:-100%;}
+	50% {left:-200%;}
+	73% {left:-200%;}
+	75% {left:100%;}
+	98% {left:100%;}
+	100% {left:0%;}
+}
+@keyframes slide06 {
+    0% {left:0%;}
+    23% {left:0%;}
+    25% {left:300%;}
+    48% {left:300%;}
+    50% {left:200%;}
+    73% {left:200%;}
+    75% {left:100%;}
+    98% {left:100%;}
+    100% {left:0%;}
+}

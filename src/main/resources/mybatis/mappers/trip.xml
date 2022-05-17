@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.trip">
+	<select id="selectDorm" parameterType="int" resultType="dormDTO">
+		select * from tb_dorm
+		where dorm_no = #{dormNo}
+	</select>
+	<update id="changeLike" parameterType="java.util.HashMap">
+		UPDATE tb_dorm SET
+		like_cnt = #{totalCount}
+		WHERE dorm_no = #{dormNo}
+	</update>
+	<select id="checkLike" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(*) as count
+		FROM tb_like
+		WHERE dorm_no = #{dormNo}
+		AND member_id = #{id}
+	</select>
+	<insert id="insertLike" parameterType="java.util.HashMap">
+		INSERT INTO tb_like
+		VALUES (
+			tb_like_seq.nextval,
+			TO_DATE(SYSDATE, 'YY/MM/DD'),
+			#{id},
+			#{dormNo}
+		)
+	</insert>
+	<delete id="deleteLike" parameterType="java.util.HashMap">
+		DELETE FROM tb_like
+		WHERE member_id=#{id}
+		AND dorm_no=#{dormNo}
+	</delete>
+	<select id="selectRoomsList" resultType="roomDTO" parameterType="int">
+		SELECT *
+		FROM tb_room
+		WHERE dorm_no = #{dormNo}
+	</select>
+	<select id="reservedRoomsList" resultType="dormDTO" parameterType="java.util.HashMap">
+		SELECT room.dorm_no, room.room_no
+		FROM tb_room room, tb_reservation reser
+		WHERE
+			(
+			<![CDATA[
+				#{checkIn} <= reser.reserve_checkin AND reser.reserve_checkin < #{checkOut}
+				OR #{checkIn} < reser.reserve_checkout AND  reser.reserve_checkout <= #{checkOut}
+				OR #{checkIn} > reser.reserve_checkin AND  reser.reserve_checkout > #{checkOut}
+			]]>
+			)
+			AND reser.room_no = room.room_no
+			AND room.dorm_no = #{dormNo}
+	</select>
+	<select id="selectReviewsList" resultType="reviewDTO" parameterType="int">
+		SELECT review_no, review_title, review_contents, review_score, review_date,
+		review_picture,rev.reserve_no, rev.member_id
+		FROM tb_review rev , tb_reservation res
+		WHERE
+			rev.reserve_no = res.reserve_no
+		AND	
+			dorm_no = #{dormNo}
+		ORDER BY review_no desc
+	</select>
+	<insert id="insertReview" parameterType="java.util.HashMap">
+		INSERT INTO tb_review
+		VALUES (
+			tb_review_seq.nextval,
+			#{title},
+			#{contents},
+			#{reviewScore},
+			TO_DATE(#{date}, 'YY/MM/DD'),
+			#{picture},
+			#{reserveNo},
+			#{memberId}
+		)
+	</insert>
+	<select id="selectReservation" resultType="reservationDTO" parameterType="int">
+		SELECT *
+		FROM tb_reservation
+		WHERE reserve_no = #{reserveno}
+	</select>
+
+</mapper>

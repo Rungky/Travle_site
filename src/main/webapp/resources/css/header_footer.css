@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    margin-top: 81px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+   background-color:  rgb(18, 18, 86);
+    /*background-color: rgb(43, 43, 43);*/
+    z-index: 100;
+}
+
+.hd {
+	width: 77%;
+	margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    color: aliceblue;
+}
+.bt {
+    position: relative;
+    width: 135px;
+    height: 30px;
+    cursor: pointer;
+    background-color: rgb(18, 18, 86);
+    border: none;
+    margin: 10px;
+    overflow-y:hidden;
+}
+.rogo {
+    position: absolute;
+    width : 100%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+nav > ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav > ul > li {
+    margin: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+nav > ul > li > a{
+    color: #fff;
+    text-decoration: none;
+}
+
+/**/
+
+footer{
+    color: rgba(0,0,0,0.38);
+    background-color: rgb(245,245,245);
+    padding : 50px;
+}

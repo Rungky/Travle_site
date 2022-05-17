@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.spring.trip.dto.CategoryDTO" alias="categoryDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.CheckDTO" alias="checkDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.CommentDTO" alias="commentDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.DormDTO" alias="dormDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.DormVO" alias="dormVO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.LikeDTO" alias="likeDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.MemberDTO" alias="memberDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.QuestionDTO" alias="questionDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.ReservationDTO" alias="reservationDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.ReviewDTO" alias="reviewDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.RoomDTO" alias="roomDTO"></typeAlias>
+	</typeAliases>
+
+</configuration>

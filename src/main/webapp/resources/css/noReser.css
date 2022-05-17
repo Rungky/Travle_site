@@ -1,0 +1,275 @@
+/* header부분*/
+body {
+    margin: 0;
+    margin-top: 81px;
+}
+
+/*header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+     background-color: rgb(18, 18, 86);
+}
+
+.hd {
+	width: 77%;
+	margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    color: aliceblue;
+}
+.bt {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #f7323f;
+    border: none;
+    margin: 10px;
+    overflow-y:hidden;
+}
+.rogo {
+    position: absolute;
+    width : 100%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+nav > ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav > ul > li {
+    margin: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+nav > ul > li > a{
+    color: #fff;
+    text-decoration: none;
+}
+*/
+
+/* section부분 */
+.container {
+    width: 1024px !important;
+    height: 1000px;
+    margin: 0 auto 0 auto;
+    width: 1024px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 15px;
+}
+
+/*조건설정 부분*/
+.con1 {
+    width: 290px;
+    height: 850px;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.ner1 {
+    width: 290px;
+    height: 150px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-left:20px
+}
+
+.ner2 {
+    border-top: 1px solid rgb(125, 122, 122);
+    width: 270px;
+    height: 130px;
+    padding-left: 20px;
+}
+
+.bu {
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    
+}
+.re {
+    background-color: white;
+    color: black;
+}
+
+.che {
+    background: #7cb0edeb;
+    color: white;
+}
+
+.ner3 {
+    width: 290px;
+    height: 100px;
+    padding-left:20px
+}
+
+.p {
+    background-size: 20px auto;
+    text-indent: -9999px;
+    width: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.minus {
+    background: url(https://image.goodchoice.kr/images/web_v3/ico_minus.png) 50% 50% no-repeat;
+    margin-right: 50px;
+    margin-left: 10px;
+}
+
+.plus {
+    background: url(https://image.goodchoice.kr/images/web_v3/ico_plus.png) 50% 50% no-repeat;
+    margin-left: 50px;
+}
+
+.ner4 {
+    width: 290px;
+    height: 280px;
+    padding-left:20px
+}
+
+#bom {
+    margin-bottom: 30px;
+}
+input[type=checkbox].choice:checked + label.label_check {
+    background-position: 0 -21px;
+}
+
+input[type=checkbox].choice + label.label_check {
+    padding: 0px 0px 0px  60px;
+    height: 21px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 16px;
+    line-height: 22px;
+    color: rgba(1, 0, 0, 0.72);
+    vertical-align: top;
+    cursor: pointer;
+}
+.tum {
+    margin-bottom: 30px;
+}
+
+input[type=checkbox].choice {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: 30px;
+    padding: 0;
+    border: 0;
+}
+label.label_check {
+    background-image: url(	https://image.goodchoice.kr/images/web_v3/ico_chk.png);
+    background-size: 21px auto;
+    user-select: none;
+}
+
+
+
+
+
+
+.ner5 {
+    width: 290px;
+    height: 120px;
+    padding-left:20px
+}
+
+.dropbtn {
+    background-color: rgb(191, 151, 233);
+    color: white;
+    padding: 10px;
+    font-size: 12px;
+    border: none;
+}
+.dropdown {
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    background-color: rgb(243, 127, 127);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {background-color: white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: grey;}
+
+
+
+
+
+/* 추천순 ~높은 가격순*/
+.con2 {
+    width: 680px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.order {
+    width: 650px;
+    height: 70px;
+}
+
+.room {
+    width: 650px;
+    height: 800px;
+}
+
+.button {
+    padding: 16px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 5px;
+    cursor: pointer;
+  }
+
+.button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+  }
+  
+.button4:hover {background-color: #e7e7e7;}
+
+/*객실*/
+
+
+
+.towroom {
+    width: 680px;
+    height: 850px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+footer{
+    color: rgba(0,0,0,0.38);
+    background-color: rgb(245,245,245);
+    padding : 50px;
+}

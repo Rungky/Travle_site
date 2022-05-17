@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    margin-top: 81px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.hd {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: rgb(18, 18, 86);
+    color: aliceblue;
+}
+.bt {
+    position: relative;
+    width: 95px;
+    height: 20px;
+    cursor: pointer;
+    background-color: rgb(18, 18, 86);
+    border: none;
+    margin: 10px;
+}
+.rogo {
+    
+    position: absolute;
+    width : 100%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+nav > ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav > ul > li {
+    margin: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+nav > ul > li > a{
+    color: #fff;
+    text-decoration: none;
+}
+.info{
+    font-weight: bold ;
+    font-size: 30px;
+}
+.sec{
+    margin-left:40%;
+    padding-top:30px;
+}
+footer{
+    color: rgba(0,0,0,0.38);
+    background-color: rgb(245,245,245);
+    padding : 50px;
+}
+.c1,.c2,.c3,.c4,.c5,.c6,.c7 {
+    font-weight: bold;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+.c8 {
+    font-weight: normal;
+    margin-left: 15px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+input[type=checkbox].check {
+	display: inline-block;
+	width:15px;
+}
+
+
+
+.name{
+    width:500px;
+    height:600px;
+    background-color: #6495ed;
+    margin-bottom: 40px;
+    color:white;
+}
+.name2{
+    margin-left: 15px;
+    padding-top: 10px; 
+}
+input{
+    width:490px;
+}
+.box{
+    width:120px;
+    height:40px;
+    margin: 20px 60px 20px 60px;
+}
