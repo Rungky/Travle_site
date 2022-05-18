@@ -245,7 +245,7 @@ public class TripController extends MultiActionController{
 		} else {
 			tripService.insertLike(dormno,id);
 			tripService.changeLike(dormno, 1);
-		}
+		}f
 		like_tg = !like_tg;
 		PrintWriter out = response.getWriter();
 		out.print("{\"param\":\""+like_tg+"\"}");
