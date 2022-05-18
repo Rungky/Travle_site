@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+body{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.fw_b{
+	font-weight: 600;
+}
+
+#wrap_mypage{
+  width: 90%;
+  margin: 150px auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+#mypage_nav{
+  margin-top: 30px;
+  margin-left: -130px;
+  margin-right: 120px;
+  position: fixed;
+  left: 390px;
+  width: 120px;
+  height: 230px;
+  font-weight: 500;
+
+  border: none;
+ /**border-right: 2px solid darkgrey;**/
+}
+
+#mypage_nav ul li a{
+  text-decoration: none;
+  color: rgb(73, 73, 73);
+}
+
+#mypage_nav ul li a:hover{
+  color: black;
+  font-weight: 600;
+}
+
+
+#mypage_nav ul {
+  list-style: none;
+  font-size: 1em;
+  text-align: left;
+  padding: 0;
+  padding-right: 8px;
+}
+
+#mypage_nav ul li{
+  margin-bottom: 12px; 
+  color: rgb(55, 55, 55);
+}
+
+
+/****/
+
+#like_section{
+    width: 45%; /* 기본값*/
+    display: flex;
+    flex-direction: column;
+
+}
+
+#like_header{
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+#like_main{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.room {
+  width: 560px;
+  height: 280px;
+  margin: 0 10px;
+  background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) );
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  border: 1px solid darkgray;
+}
+
+.ggumim {
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  line-height: 0.5;
+  padding-left: 15px;  
+}
+
+.font1{
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  font-size: 1.1em;
+  
+}
+
+.addr{
+  font-size:13px;
+}
+
+.price {
+  font-size: 13px;
+  color: white;
+  font-weight: bold;
+  padding-right: 20px;
+  text-align: right;
+}
+
+.price .logo_h{
+  font-size: 2em;
+}
+
+
+@media screen and (max-width:10000px)  {
+  /* body{background-color: orange;} */   
+  #mypage_nav{
+    left: 700px;
+  }
+}
+
+
+@media screen and (max-width:2200px)  {
+  /* body{background-color: orange;} */   
+  #mypage_nav{
+    left: 400px;
+  }
+}
+
+@media screen and (max-width:1600px)  {
+  /* body{background-color: orange;} */   
+  #mypage_nav{
+    left: 340px;
+  }
+}
+
+
+@media screen and (max-width:1200px)  {
+  /* body{background-color: orange;} */   
+  #mypage_nav{
+    left: 200px;
+  }
+}
+
+

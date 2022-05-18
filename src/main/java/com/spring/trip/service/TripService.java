@@ -38,12 +38,13 @@ public interface TripService {
 	public List<QuestionDTO> selectAllQuestion(int pageNum, int countPerPage);
 	public void insertNewQuestion (QuestionDTO questionDTO);
 	public void insertReplyQuestion (QuestionDTO questionDTO);
-	public List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking,
-			int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search);
 	public List<QuestionDTO> selectQuestion(int question_no);
 	public List<QuestionDTO> selectReply();
 	public void plusViewCount(int articleNo);
 	public void updateArticle(QuestionDTO questionDTO);
 	public List<QuestionDTO> selectmodQuestion(int question_no);
 	public void deleteArticle(int question_no);
+	List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search);
+	public List<DormDTO> selectMain_dormList(); // 메인 숙소 추천
+
 }

@@ -3,6 +3,75 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.trip">
+
+	<resultMap id="map" type="dormVO">
+		<result property="dorm_no" column="dorm_no"></result>
+		<result property="dorm_name" column="dorm_name"></result>
+		<result property="dorm_addr" column="dorm_addr"></result>
+		<result property="dorm_picture" column="dorm_picture"></result>
+		<result property="opt_wifi" column="opt_wifi"></result>
+		<result property="opt_parking" column="opt_parking"></result>
+		<result property="opt_aircon" column="opt_aircon"></result>
+		<result property="opt_dryer" column="opt_dryer"></result>
+		<result property="opt_port" column="opt_port"></result>
+		<result property="min_pay_night" column="min_pay_night"></result>
+		<result property="count_reserve_no" column="count_reserve_no"></result>
+	</resultMap>
+	
+	<select id="selectDormList" resultType="dormVO" parameterType="java.util.HashMap">
+		<![CDATA[
+		SELECT d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no,
+			d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port, 
+			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
+		FROM tb_dorm d, tb_room m left join (tb_reservation r left join tb_review vo on r.reserve_no = vo.reserve_no) on m.dorm_no = r.dorm_no
+		]]>
+	    <where>
+    		d.dorm_no = m.dorm_no
+    		and (to_date(#{date_e}, 'yy/MM/dd') <![CDATA[<=]]> r.reserve_checkin or to_date(#{date_s}, 'yy/MM/dd') <![CDATA[>=]]> r.reserve_checkout or r.reserve_checkin is null)
+    		and m.room_person <![CDATA[>=]]> #{room_person}
+    		and dorm_name like '%'||#{search}||'%'
+	    	<if test="dorm_category_no != 0">
+	    		and d.dorm_category_no = #{dorm_category_no}
+	    	</if>
+	    	<if test="opt_wifi == 1">
+	    		and d.opt_wifi <![CDATA[>=]]> #{opt_wifi}
+	    	</if>
+	    	<if test="opt_parking == 1">
+	    		and d.opt_parking <![CDATA[>=]]> #{opt_parking}
+	    	</if>
+	    	<if test="opt_aircon == 1">
+	    		and d.opt_aircon <![CDATA[>=]]> #{opt_aircon}
+	    	</if>
+	    	<if test="opt_dryer == 1">
+	    		and d.opt_dryer <![CDATA[>=]]> #{opt_dryer}
+	    	</if>
+	    	<if test="opt_port == 1">
+	    		and d.opt_port <![CDATA[>=]]> #{opt_port}
+	    	</if>
+	    	<if test="price == 1">
+	    		and room_pay_night <![CDATA[<=]]> 50000
+	    	</if>
+	    	<if test="price == 2">
+	    		and (room_pay_night <![CDATA[<=]]> 100000 and room_pay_night <![CDATA[>]]> 50000)
+	    	</if>
+	    	<if test="price == 3">
+	    		and (room_pay_night <![CDATA[<=]]> 200000 and room_pay_night <![CDATA[>]]> 100000)
+	    	</if>
+	    	<if test="price == 4">
+	    		and room_pay_night <![CDATA[>]]> 200000
+	    	</if>
+	    </where>
+	    GROUP BY d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no, 
+	    	d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port
+	    <if test="order == 1">
+	    	ORDER BY min_pay_night
+	    </if>
+	    <if test="order == 2">
+	    	ORDER BY min_pay_night desc
+	    </if>
+	</select>
+
+
 	<select id="selectDorm" parameterType="int" resultType="dormDTO">
 		select * from tb_dorm
 		where dorm_no = #{dormNo}
@@ -79,5 +148,13 @@
 		FROM tb_reservation
 		WHERE reserve_no = #{reserveno}
 	</select>
+
+	<!-- 좋아요 많은 순서대로 숙소 불러오기  -->
+	<select id = "selectMain_dormList" resultType="DormDTO" >
+		SELECT *
+		FROM TB_DORM
+		ORDER BY LIKE_CNT DESC 
+	</select>
+
 
 </mapper>

@@ -253,5 +253,68 @@ public class TripController extends MultiActionController{
 		
 	}
 	
+	@RequestMapping(value="/trip/reservation.do", method= {RequestMethod.GET})
+	public ModelAndView reservation(
+			@RequestParam(defaultValue="0") int dorm_category_no,
+			@RequestParam(required=false) Date date_e,
+			@RequestParam(required=false) Date date_s,
+			@RequestParam(defaultValue="0") int opt_wifi,
+			@RequestParam(defaultValue="0") int opt_parking,
+			@RequestParam(defaultValue="0") int opt_aircon,
+			@RequestParam(defaultValue="0") int opt_dryer,
+			@RequestParam(defaultValue="0") int opt_port,
+			@RequestParam(defaultValue="1") int room_person,
+			@RequestParam(defaultValue="0") int order,
+			@RequestParam(defaultValue="5") int price,
+			@RequestParam(defaultValue="") String search,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String date1 = newDtFormat.format(cal.getTime());
+
+		cal.add(cal.DATE, +1);
+		String date2 = newDtFormat.format(cal.getTime());
+		Date end;
+		Date start;
+		Date today;
+		today = new Date(newDtFormat.parse(date1).getTime());
+		if(date_e == null) {
+			end = new Date(newDtFormat.parse(date2).getTime());			
+		} else {
+			end = date_e;
+		}
+		if(date_s == null) {			
+			start = new Date(newDtFormat.parse(date1).getTime());
+		} else {
+			start = date_s;
+		}
+		List<DormVO> dormsList = tripService.getDormList(dorm_category_no, start, end, opt_wifi, opt_parking, opt_aircon, opt_dryer, opt_port, room_person, order, price, search);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("date_s", start);
+		mav.addObject("date_e", end);
+		mav.addObject("today", today);
+		mav.addObject("dorm_category_no", dorm_category_no);
+		mav.addObject("opt_wifi", opt_wifi);
+		mav.addObject("opt_parking", opt_parking);
+		mav.addObject("opt_aircon", opt_aircon);
+		mav.addObject("opt_dryer", opt_dryer);
+		mav.addObject("opt_port", opt_port);
+		mav.addObject("room_person", room_person);
+		mav.addObject("order", order);
+		mav.addObject("price", price);
+		mav.addObject("search", search);
+		
+		mav.addObject("dormsList", dormsList);
+
+		mav.setViewName("reservation");
+		
+
+		return mav;
+	}
+	
+	
 
 }

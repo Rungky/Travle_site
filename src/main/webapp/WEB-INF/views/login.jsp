@@ -9,21 +9,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./css/login.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>로그인</title>
 
 <script>
 function loginChk() {
     var form = document.f1;
-    if (!form.id.value) {
+    if (!form.member_id.value) {
         alert("아이디를 입력해 주십시오. ");
-        form.id.focus();
+        form.member_id.focus();
         return;
     }
  
-    if (!form.password.value) {
+    if (!form.member_pw.value) {
         alert("비밀번호를 입력해 주십시오.");
-        form.password.focus(); 
+        form.member_pw.focus(); 
         return;
     }
 }
@@ -35,20 +35,21 @@ function loginChk() {
         <section>
 	        <div class="login_main">
 	            <a href="${contextPath}/trip">
-					<img src="./image/logo-black.png" alt="로고">
+					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a><p></p>
-	            <form action="${ contextPath}/trip" method="post" name="f1">
-	            	<input type="hidden" name="action" value="login.do">
+	            <form action="${ contextPath}/trip/loginCheck.do" method="post" name="f1">
 	                <div class="login_top">
-	                    <input type="text" name="id" placeholder="✉️아이디" />
-	                    <input type="password" name="password" placeholder="🔒비밀번호" />
+	                    <input type="text" name="member_id" placeholder="✉️아이디" />
+	                    <input type="password" name="member_pw" placeholder="🔒비밀번호" />
 	                </div>
 	                <div>
 	                    <input class="login_btn_box" type="submit" value="로그인" onclick="loginChk()"/>
 	                </div>
 	            </form>
                 <p>
-                    <a href="trip?action=joinForm.do">|회원가입|</a>
+                    <a href="${contextPath}/trip/idFind.do">|아이디 찾기|</a>
+                    <a href="${contextPath}/trip/pwFind.do">|비밀번호 찾기|</a>
+                    <a href="${contextPath}/trip/signup.do">|회원가입|</a>
                 </p>
 	        </div>
 	    </section>
