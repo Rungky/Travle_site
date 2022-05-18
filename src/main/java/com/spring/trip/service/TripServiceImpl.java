@@ -141,9 +141,10 @@ public class TripServiceImpl implements TripService {
 	}
 
 	@Override
-	public List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking,
-			int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) {
-		return null;
+	public List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) {
+		List<DormVO> list = tripDAO.selectDormList(dorm_category_no, start, end, opt_wifi, opt_parking, opt_aircon, opt_dryer, opt_port, room_person, order, price, search);
+		
+		return list;
 	}
 
 	@Override

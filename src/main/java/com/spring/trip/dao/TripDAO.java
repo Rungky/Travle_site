@@ -3,6 +3,8 @@ package com.spring.trip.dao;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
@@ -39,12 +41,11 @@ public interface TripDAO {
 	public List<QuestionDTO> selectAllQuestion(int pageNum, int countPerPage);
 	public void insertNewQuestion (QuestionDTO questionDTO);
 	public void insertReplyQuestion (QuestionDTO questionDTO);
-	public List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking,
-			int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search);
-	public List<QuestionDTO> selectQuestion(int question_no);
+	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
 	public List<QuestionDTO> selectReply();
 	public void plusViewCount(int articleNo);
 	public void updateArticle(QuestionDTO questionDTO);
 	public List<QuestionDTO> selectmodQuestion(int question_no);
 	public void deleteArticle(int question_no);
+	public List<QuestionDTO> selectQuestion(int question_no);
 }

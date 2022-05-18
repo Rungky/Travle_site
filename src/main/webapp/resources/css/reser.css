@@ -71,7 +71,7 @@ nav > ul > li > a{
 /*조건설정 부분*/
 .con1 {
     width: 290px;
-    height: 850px;
+    height: 950px;
     background-color: rgb(230, 230, 230);
     display: flex;
     flex-direction: column;

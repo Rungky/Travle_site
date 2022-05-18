@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.*"
+    import="java.sql.*"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <script>
-	window.onload = function(){		  
+
+	window.onload = function(){
 		const resultElement = document.getElementById('result');
 		
 		var room_member = '${param.room_person}';
@@ -14,7 +24,53 @@
 			resultElement.innerText = room_member;
 			document.getElementById('result2').value = room_member;
 		}
+		
+		$("#sub_btn").off("click").on("click", function(){
+			var start = $("#start").val();
+			var startArr = start.split('-');
+			var startCompare = new Date(startArr[0], parseInt(startArr[1])-1, startArr[2]);
+			
+			var end = $("#end").val();
+			var endArr = end.split('-');
+			var endCompare = new Date(endArr[0], parseInt(endArr[1])-1, endArr[2]);
+			
+			
+			if(startCompare.getTime() > endCompare.getTime()){
+				alert("날짜 오류");
+
+				return false;
+			}
+
+			
+			
+		})
+			if(${opt_wifi}==1){
+				$("#check_1").prop("checked", true);
+			}
+			if(${opt_parking}==1){
+				$("#check_2").prop("checked", true);
+			}
+			if(${opt_aircon}==1){
+				$("#check3").prop("checked", true);
+			}
+			if(${opt_dryer}==1){
+				$("#check4").prop("checked", true);
+			}
+			if(${opt_port}==1){
+				$("#check5").prop("checked", true);
+			}
+
+			let sb = ${param.price} + 0;
+			if(sb != 0){
+				$("#select_box").val(sb).prop("selected", true);
+			}
+			
+			$("#search_box").val(${param.search});
+			
+
 	}
+	
+	  
 
 	function count(type)  {
 	  // 결과를 표시할 element
@@ -38,8 +94,10 @@
 	  resultElement.innerText = number;
 	  document.getElementById('result2').value = number;
 	  
-	  
 	}
+	
+
+	
 </script>
 
 <!DOCTYPE html>
@@ -49,8 +107,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>목록 페이지</title>
-    <link rel="stylesheet" href="css/reser.css">
-    <link rel="stylesheet" href="./css/header_footer.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/reser.css" >
+    <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 </head>
 
 <body topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
@@ -61,36 +119,36 @@
 	</div>
     <div class="container">
         <div class="con1">
-        	<form method="get" action="${contextPath}/trip" >
+        	<form method="get" action="${contextPath}/trip/reservation.do" >
 	            <div class="ner1">
 	            	<c:if test="${not empty param.dorm_category_no }">
             			<input type="hidden" name="dorm_category_no" value="${param.dorm_category_no}">
             		</c:if>
-	            	<input type="hidden" name="action" value="reservation.do">
 	                <h3>날짜</h3>
-	                check In>> <input type="date" id="start" name="start" value="${date_s}" min="${date_s}"><br>
-	                check Out>> <input type="date" id="end" name="end" value="${date_e}" min="${date_s}">
+	                check In>> <input type="date" id="start" name="date_s" value="${date_s}" min="${today}"><br>
+	                check Out>> <input type="date" id="end" name="date_e" value="${date_e}" min="${today}">
 	            </div>
 	            <div class="ner2">
 	                <h3>상세조건</h3>
 	                <div class="boxx">
-	                	<input type="text" name="search" placeholder="숙소명 검색">
+	                	<input type="text" id="search_box" name="search" placeholder="숙소명 검색">
 	                	<br><br>
 	                	<c:choose>
 	                		<c:when test="${empty param.dorm_category_no }">
-			                	<a href="trip?action=reservation.do">
+			                	<a href="${contextPath}/trip/reservation.do">
 				                    <button type="button" class="bu re">초기화</button>
 				                </a>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<a href="trip?action=reservation.do&dorm_category_no=${param.dorm_category_no}">
+	                			<a href=${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
 				                    <input type="button" class="bu re" value ="초기화">
 				                </a>
 	                		</c:otherwise>
 	                	</c:choose>
-	                    <button type="submit" class="bu che" onClick="compleBtn()">적용</button>
+	                    <button type="submit" id="sub_btn" class="bu che">적용</button>
 	                </div>
 	            </div>
+	            <br><br>
 	            <div class="ner3">
 	                <h3>인원</h3>
 	                	<input type="button" class="p minus" value="-" onClick='count("minus")' />
@@ -105,64 +163,24 @@
 	                <div>
 	                   <ul style="list-style-type: none;">
 	                        <li class="tum">
-		                        <c:choose>
-		                        	<c:when test="${empty param.wifi}">
-			                            <input type="checkbox" id="check_1" class="choice" name="wifi" value="1">
-			                            <label for="check_1" class="label_check">와이파이</label>
-		                        	</c:when>
-		                        	<c:otherwise>
-		                        		<input type="checkbox" id="check_1" class="choice" name="wifi" value="1" checked>
-			                            <label for="check_1" class="label_check">와이파이</label>
-		                        	</c:otherwise>
-		                        </c:choose>
+			                	<input type="checkbox" id="check_1" class="choice" name="opt_wifi" value="1">
+			                    <label for="check_1" class="label_check">와이파이</label>
 	                        </li>
 	                        <li  class="tum">
-	                        	<c:choose>
-		                        	<c:when test="${empty param.parking}">
-		                        		<input type="checkbox" id="check_2" class="choice" name="parking" value="1">
-	                            		<label for="check_2" class="label_check">주차장</label>
-		                        	</c:when>
-			                        <c:otherwise>
-			                        	<input type="checkbox" id="check_2" class="choice" name="parking" value="1" checked>
-	                            		<label for="check_2" class="label_check">주차장</label>
-			                        </c:otherwise>
-		                        </c:choose>
+		                        <input type="checkbox" id="check_2" class="choice" name="opt_parking" value="1">
+	                            <label for="check_2" class="label_check">주차장</label>
 	                        </li>
 	                        <li  class="tum">
-	                        	<c:choose>
-		                        	<c:when test="${empty param.aircon}">
-		                    			<input type="checkbox" id="check_3" class="choice" name="aircon" value="1">
-			                            <label for="check_3" class="label_check">에어컨</label>
-		                        	</c:when>
-			                        <c:otherwise>
-			                            <input type="checkbox" id="check_3" class="choice" name="aircon" value="1" checked>
-			                            <label for="check_3" class="label_check">에어컨</label>
-			                        </c:otherwise>
-		                        </c:choose>
+		                    	<input type="checkbox" id="check_3" class="choice" name="opt_aircon" value="1">
+			                    <label for="check_3" class="label_check">에어컨</label>
 	                        </li>
 	                        <li  class="tum">
-	                        	<c:choose>
-		                        	<c:when test="${empty param.dryer}">
-			                            <input type="checkbox" id="check_4" class="choice" name="dryer" value="1">
-			                            <label for="check_4" class="label_check">드라이기</label>
-		                        	</c:when>
-			                        <c:otherwise>
-			                        	<input type="checkbox" id="check_4" class="choice" name="dryer" value="1" checked>
-			                            <label for="check_4" class="label_check">드라이기</label>
-			                        </c:otherwise>
-		                        </c:choose>
+			                    <input type="checkbox" id="check_4" class="choice" name="opt_dryer" value="1">
+			                    <label for="check_4" class="label_check">드라이기</label>
 	                        </li>
 	                        <li  class="tum">
-	                        	<c:choose>
-		                        	<c:when test="${empty param.port}">
-			                        	<input type="checkbox" id="check_5" class="choice" name="port" value="1">
-		                            	<label for="check_5" class="label_check">커피포트</label>
-		                        	</c:when>
-			                        <c:otherwise>
-			                            <input type="checkbox" id="check_5" class="choice" name="port" value="1" checked>
-			                            <label for="check_5" class="label_check">커피포트</label>
-			                        </c:otherwise>
-		                        </c:choose>
+			                    <input type="checkbox" id="check_5" class="choice" name="opt_port" value="1">
+		                        <label for="check_5" class="label_check">커피포트</label>
 	                        </li>
 	                   </ul>
 	                </div>
@@ -172,40 +190,12 @@
 	            <div class="ner5">
 	                <h3>가격</h3>
 	                <div class="dropdown">
-	                    <select name="price" class="dropbtn">
+	                    <select id="select_box" name="price" class="dropbtn">
 	                    	<option value="5">-------선택-------</option>
-	                    	<c:choose>
-	                    		<c:when test="${param.price eq 1}">
-	                    			<option value="1" selected>5만원이하</option>
-			                    	<option value="2">5만원~10만원이하</option>
-			                    	<option value="3">10만원~20만원이하</option>
-			                    	<option value="4">20만원~</option>
-	                    		</c:when>
-	                    		<c:when test="${param.price eq 2}">
-	                    			<option value="1">5만원이하</option>
-			                    	<option value="2" selected>5만원~10만원이하</option>
-			                    	<option value="3">10만원~20만원이하</option>
-			                    	<option value="4">20만원~</option>
-	                    		</c:when>
-	                    		<c:when test="${param.price eq 3}">
-	                    			<option value="1">5만원이하</option>
-			                    	<option value="2">5만원~10만원이하</option>
-			                    	<option value="3" selected>10만원~20만원이하</option>
-			                    	<option value="4">20만원~</option>
-	                    		</c:when>
-	                    		<c:when test="${param.price eq 4}">
-									<option value="1">5만원이하</option>
-			                    	<option value="2">5만원~10만원이하</option>
-			                    	<option value="3">10만원~20만원이하</option>
-			                    	<option value="4" selected>20만원~</option>
-	                    		</c:when>
-	                    		<c:otherwise>
-			                    	<option value="1">5만원이하</option>
-			                    	<option value="2">5만원~10만원이하</option>
-			                    	<option value="3">10만원~20만원이하</option>
-			                    	<option value="4">20만원~</option>
-	                    		</c:otherwise>
-	                    	</c:choose>
+	                    	<option value="1">5만원이하</option>
+			                <option value="2">5만원~10만원이하</option>
+			                <option value="3">10만원~20만원이하</option>
+			                <option value="4">20만원~</option>
 	                    </select>
 					 </div>
 	            </div>
@@ -213,31 +203,30 @@
         </div>
         <div class="con2">
             <div class="order"> 
-            	<form method="post" action="${contextPath}/trip" >
+            	<form method="get" action="${contextPath}/trip/reservation.do" >
             		<c:if test="${not empty param.dorm_category_no }">
             			<input type="hidden" name="dorm_category_no" value="${param.dorm_category_no}">
             		</c:if>
-	            	<input type="hidden" name="action" value="reservation.do">
 	            	<c:if test="${not empty param.start}">
 	            		<input type="hidden" name="start" value="${param.start}">
 	            	</c:if>
 	            	<c:if test="${not empty param.end}">
 	            		<input type="hidden" name="end" value="${param.end}">
 	            	</c:if>
-	            	<c:if test="${not empty param.wifi}">
-	            		<input type="hidden" name="wifi" value="${param.wifi}">
+	            	<c:if test="${not empty param.opt_wifi}">
+	            		<input type="hidden" name="opt_wifi" value="${param.opt_wifi}">
 	            	</c:if>
-	            	<c:if test="${not empty param.parking}">
-	            		<input type="hidden" name="parking" value="${param.parking}">
+	            	<c:if test="${not empty param.opt_parking}">
+	            		<input type="hidden" name="opt_parking" value="${param.opt_parking}">
 	            	</c:if>
-	            	<c:if test="${not empty param.aircon}">
-	            		<input type="hidden" name="aircon" value="${param.aircon}">
+	            	<c:if test="${not empty param.opt_aircon}">
+	            		<input type="hidden" name="opt_aircon" value="${param.opt_aircon}">
 	            	</c:if>
-	            	<c:if test="${not empty param.dryer}">
-	            		<input type="hidden" name="dryer" value="${param.dryer}">
+	            	<c:if test="${not empty param.opt_dryer}">
+	            		<input type="hidden" name="opt_dryer" value="${param.opt_dryer}">
 	            	</c:if>
-	            	<c:if test="${not empty param.port}">
-	            		<input type="hidden" name="port" value="${param.port}">
+	            	<c:if test="${not empty param.opt_port}">
+	            		<input type="hidden" name="opt_port" value="${param.opt_port}">
 	            	</c:if>
 	            	<c:if test="${not empty param.room_person}">
 	            		<input type="hidden" name="room_person" value="${param.room_person}">
@@ -252,10 +241,10 @@
         
             <div class="towroom">
 				<c:choose>
-					<c:when test="${not empty dormList }">
-		            	<c:forEach var="i" items="${dormList }" step="1" >
-		               		<a href="trip?action=detail.do&dormno=${i.dorm_no }&reserve_checkin=${date_s}&reserve_checkout=${date_e}">
-		                    <div class="romm" style="background-image:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) ),url(./image/dorm/${i.getDorm_picture()})">
+					<c:when test="${not empty dormsList }">
+		            	<c:forEach var="i" items="${dormsList }" step="1" >
+		               		<a href="${contextPath}/trip/detail.do?dormno=${i.dorm_no}&reserve_checkin=${date_s}&reserve_checkout=${date_e}">
+		                    <div class="romm" style="background-image:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) ),url(${contextPath}/resources/image/dorm/${i.getDorm_picture()})">
 		                        <div class="ggumim">
 		                            <p>
 		                                <strong>

@@ -245,10 +245,26 @@ public class TripDAOImpl implements TripDAO{
 	}
 
 	@Override
-	public List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking,
-			int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search){
+		Map map = new HashMap();
+
+		
+		map.put("dorm_category_no", dorm_category_no);
+		map.put("date_s", start);
+		map.put("date_e", end);
+		map.put("opt_wifi", opt_wifi);
+		map.put("opt_parking", opt_parking);
+		map.put("opt_aircon", opt_aircon);
+		map.put("opt_dryer", opt_dryer);
+		map.put("opt_port", opt_port);
+		map.put("room_person", room_person);
+		map.put("order", order);
+		map.put("price", price);
+		map.put("search", search);
+		
+		List<DormVO> dormList = sqlSession.selectList("mapper.trip.selectDormList", map);
+
+		return dormList;
 	}
 
 	@Override

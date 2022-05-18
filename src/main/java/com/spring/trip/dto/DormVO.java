@@ -1,11 +1,18 @@
 package com.spring.trip.dto;
 
+import java.util.Date;
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class DormVO {
 	
 	private int dorm_no; 
 	private String dorm_name;
 	private String dorm_addr; 
 	private String dorm_picture; 
+	private Date date_s;
+	private Date date_e;
 	private int opt_wifi;
 	private int opt_parking;
 	private int opt_aircon;
@@ -15,10 +22,29 @@ public class DormVO {
 	private int min_pay_night;
 	private int count_reserve_no;
 	private int room_persion;
+	private String search;
 	
 	
 	
 
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public Date getDate_s() {
+		return date_s;
+	}
+	public void setDate_s(Date date_s) {
+		this.date_s = date_s;
+	}
+	public Date getDate_e() {
+		return date_e;
+	}
+	public void setDate_e(Date date_e) {
+		this.date_e = date_e;
+	}
 	public int getRoom_persion() {
 		return room_persion;
 	}
