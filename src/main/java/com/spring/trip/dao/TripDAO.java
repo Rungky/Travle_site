@@ -48,4 +48,6 @@ public interface TripDAO {
 	public List<QuestionDTO> selectmodQuestion(int question_no);
 	public void deleteArticle(int question_no);
 	public List<QuestionDTO> selectQuestion(int question_no);
+	public List<DormDTO> selectMain_dormList(); // 메인 숙소 추천
+	
 }

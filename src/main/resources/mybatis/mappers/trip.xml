@@ -149,4 +149,12 @@
 		WHERE reserve_no = #{reserveno}
 	</select>
 
+	<!-- 좋아요 많은 순서대로 숙소 불러오기  -->
+	<select id = "selectMain_dormList" resultType="DormDTO" >
+		SELECT *
+		FROM TB_DORM
+		ORDER BY LIKE_CNT DESC 
+	</select>
+
+
 </mapper>
