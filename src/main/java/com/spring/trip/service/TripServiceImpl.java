@@ -1,6 +1,7 @@
 package com.spring.trip.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,5 +176,12 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public void deleteArticle(int question_no) {
 		
+	}
+	
+	@Override
+	public List<DormDTO> selectMain_dormList() {
+		List<DormDTO> list = new ArrayList();
+		list = tripDAO.selectMain_dormList();
+		return list;
 	}
 }

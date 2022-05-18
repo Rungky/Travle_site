@@ -81,6 +81,12 @@
 		DELETE FROM TB_REVIEW
 		WHERE member_id= #{member_id}
 	</delete>
+	
+	<!-- 예약내역 삭제 -->
+	<delete id="removeReservation" parameterType="String">
+		DELETE FROM TB_RESERVATION
+		WHERE member_id= #{member_id}
+	</delete>
 
 	<!-- 좋아요 목록 삭제 -->
 	<delete id="removeLike" parameterType="String">

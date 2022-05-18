@@ -133,6 +133,7 @@
 			return;
 		}
 	}
+	
 
 	function del_button_event() {
 		if (confirm("사적모임 페이지를 탈퇴하시겠습니까? 탈퇴한 회원은 복구되지 않습니다. ") == true) { //확인

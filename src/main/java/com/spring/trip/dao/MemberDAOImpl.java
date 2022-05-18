@@ -1,5 +1,6 @@
 package com.spring.trip.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +12,7 @@ import com.spring.trip.dto.MemberDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -21,8 +22,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberDTO login(MemberDTO memberDTO) throws Exception{
-		System.out.println("memberDAO  member_id : " + memberDTO.getMember_id() + " member_pw : " + memberDTO.getMember_pw());
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
+		System.out.println(
+				"memberDAO  member_id : " + memberDTO.getMember_id() + " member_pw : " + memberDTO.getMember_pw());
 		return sqlSession.selectOne("mapper.member.login", memberDTO);
 	}
 
@@ -31,49 +33,68 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("memberDAO  member_id : " + memberDTO.getMember_id());
 		return sqlSession.selectOne("mapper.member.idFind", memberDTO);
 	}
-	
-	//=========================================
+
+	// =========================================
 
 	@Override
 	public MemberDTO select_myMember(String member_id) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberDTO memberDTO = sqlSession.selectOne("mapper.member.select_myMember", member_id);
+		return memberDTO;
 	}
 
 	@Override
 	public List<DormVO> selectList_likeDorm(String member_id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DormVO> list = new ArrayList<DormVO>();
+		list = sqlSession.selectList("mapper.member.selectList_likeDorm", member_id);
+		return list;
 	}
 
 	@Override
+	public void modifyMemberName(String member_id, String member_name) {
+		sqlSession.update("mapper.member.modifyMemberName", member_name);
+
+	}
+
+	@Override
+	public void modifyMemberPw(String member_id, String member_pw) {
+		sqlSession.update("mapper.member.modifyMemberPw", member_pw);
+
+	}
+
+	// =========회원탈퇴=============
+	@Override
 	public void removeComment(String member_id) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete("mapper.menter.removeComment", member_id);
+
 	}
 
 	@Override
 	public void removeReview(String member_id) {
-		// TODO Auto-generated method stub
+		sqlSession.delete("mapper.menter.removeReview", member_id);
+
+	}
+	
+	@Override
+	public void removeReservation(String member_id) {
+		sqlSession.delete("mapper.menter.removeReservation", member_id);
 		
 	}
 
 	@Override
 	public void removeLike(String member_id) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete("mapper.menter.removeLike", member_id);
 	}
 
 	@Override
 	public void removeQuestion(String member_id) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete("mapper.menter.removeQuestion", member_id);
 	}
 
 	@Override
 	public void removeMember(String member_id) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete("mapper.menter.removeMember", member_id);
 	}
+
+
 
 }
