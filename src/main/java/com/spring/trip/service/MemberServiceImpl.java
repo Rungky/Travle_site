@@ -15,8 +15,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberDAO memberDAO;
-	@Autowired
-	private MemberDTO memberDTO;
 	
 	@Override
 	public MemberDTO login(MemberDTO memberDTO) throws Exception{
@@ -39,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 	//=================
 	@Override
 	public MemberDTO select_myMember(String member_id) throws Exception {
-		memberDTO = memberDAO.select_myMember(member_id);
+		MemberDTO  memberDTO = memberDAO.select_myMember(member_id);
 		return memberDTO;
 	}
 

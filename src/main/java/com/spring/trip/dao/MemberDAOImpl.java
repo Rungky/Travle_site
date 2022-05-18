@@ -64,35 +64,35 @@ public class MemberDAOImpl implements MemberDAO {
 	// =========회원탈퇴=============
 	@Override
 	public void removeComment(String member_id) {
-		sqlSession.delete("mapper.menter.removeComment", member_id);
+		sqlSession.delete("mapper.member.removeComment", member_id);
 
 	}
 
 	@Override
 	public void removeReview(String member_id) {
-		sqlSession.delete("mapper.menter.removeReview", member_id);
+		sqlSession.delete("mapper.member.removeReview", member_id);
 
 	}
 	
 	@Override
 	public void removeReservation(String member_id) {
-		sqlSession.delete("mapper.menter.removeReservation", member_id);
+		sqlSession.delete("mapper.member.removeReservation", member_id);
 		
 	}
 
 	@Override
 	public void removeLike(String member_id) {
-		sqlSession.delete("mapper.menter.removeLike", member_id);
+		sqlSession.delete("mapper.member.removeLike", member_id);
 	}
 
 	@Override
 	public void removeQuestion(String member_id) {
-		sqlSession.delete("mapper.menter.removeQuestion", member_id);
+		sqlSession.delete("mapper.memberer.removeQuestion", member_id);
 	}
 
 	@Override
 	public void removeMember(String member_id) {
-		sqlSession.delete("mapper.menter.removeMember", member_id);
+		sqlSession.delete("mapper.member.removeMember", member_id);
 	}
 
 

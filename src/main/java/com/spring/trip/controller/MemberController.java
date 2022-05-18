@@ -22,9 +22,10 @@ import com.spring.trip.service.MemberService;
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
+	
 	@Autowired // 의존성 주입함
 	private MemberService memberService;
-
+	/*
 	// 메인 페이지 이동
 	@RequestMapping(value = "/trip/main.do", method = RequestMethod.GET)
 	public String mainForm() {
@@ -63,7 +64,7 @@ public class MemberController {
 		logger.info("get 비밀번호 찾기 메소드 진입");
 		return "pwFind";
 	}
-
+*/
 	// ------------------기능 메소드----------------------
 
 	// 로그인 기능
@@ -153,10 +154,12 @@ public class MemberController {
 	
 // 마이페이지
 	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
-	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		HttpSession session = request.getSession();
+		session.setAttribute("id", "co9382");
 		String member_id = (String) session.getAttribute("id");
-		MemberDTO memberDTO = memberService.select_myMember(member_id);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO = 	memberService.select_myMember(member_id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage");
@@ -192,9 +195,11 @@ public class MemberController {
 
 //회원 탈퇴
 	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.GET)
-	public ModelAndView removeMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView removeMember(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("member_id") String member_id
+			) throws Exception {
 		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("id");
+	//	String member_id = (String) session.getAttribute("id");
 		MemberDTO memberDTO = memberService.select_myMember(member_id);
 
 		ModelAndView mav = new ModelAndView();
@@ -205,9 +210,11 @@ public class MemberController {
 
 // 관심숙소
 	@RequestMapping(value = "/trip/myLike.do", method = RequestMethod.GET)
-	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("member_id") String member_id
+			) throws Exception {
 		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("id");
+		//String member_id = (String) session.getAttribute("id");
 		MemberDTO memberDTO = memberService.select_myMember(member_id);
 
 		ModelAndView mav = new ModelAndView();
