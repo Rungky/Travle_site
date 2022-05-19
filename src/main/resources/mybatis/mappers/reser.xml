@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.reser">
-<!--<mapper namespace="com.spring.ex01.mapper.MemberMapper">-->
-<!-- <mapper namespace="com.spring.trip.mapper.TripMapper"> -->
+ <mapper namespace="mapper.reser">  
+ <!-- <mapper namespace="com.spring.trip.mapper.TripMapper"> -->
+
+
 
 	<!-- 예약 인서트 -->
 	<insert id="insertReservation" parameterType="Map">
@@ -45,6 +46,10 @@
 	<select id="memberDto" parameterType="String" resultType="memberDTO">
 		select * from tb_member
 		where member_id = #{member}
+	</select>
+	
+	<select id="checkList" parameterType="java.util.HashMap" resultType="checkDTO">
+		
 	</select>
 	
 	
