@@ -8,74 +8,24 @@ a{
 	text-decoration: none;
 }
 
-/*header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-     background-color: #f7323f;
-}
-
-.hd {
-	width: 77%;
-	margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
-    color: aliceblue;
-}
-.bt {
-    position: relative;
-    width: 100px;
-    height: 30px;
-    cursor: pointer;
-    background-color: #f7323f;
-    border: none;
-    margin: 10px;
-    overflow-y:hidden;
-}
-.rogo {
-    position: absolute;
-    width : 100%;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-}
-nav > ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-nav > ul > li {
-    margin: 10px;
-    color: #fff;
-    text-decoration: none;
-}
-nav > ul > li > a{
-    color: #fff;
-    text-decoration: none;
-}
-
-*/
-/* section부분 */
 .container {
     width: 1024px !important;
     height: 1000px;
-    margin: 0px auto 0 auto;
-    width: 1024px;
+    margin: 5px auto;
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
     padding: 15px 15px;
 }
 
 /*조건설정 부분*/
 .con1 {
-    width: 290px;
+    width: 340px;
     height: 950px;
     background-color: rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
-
+	padding-left: 20px;
 }
 
 .ner1 {
@@ -91,6 +41,9 @@ nav > ul > li > a{
     width: 270px;
     height: 130px;
     padding-left: 20px;
+}
+.boxx{
+	text-align: center;
 }
 
 .bu {
@@ -115,7 +68,12 @@ nav > ul > li > a{
 .ner3 {
     width: 290px;
     height: 100px;
-    padding-left:20px
+    padding-left:20px;
+    text-align:center;
+    border-top: 1px solid rgb(125, 122, 122);
+}
+.ner3 h3{
+	text-align:left;
 }
 
 .p {
@@ -140,7 +98,8 @@ nav > ul > li > a{
 .ner4 {
     width: 290px;
     height: 280px;
-    padding-left:20px
+    padding-left:20px;
+    border-top: 1px solid rgb(125, 122, 122);
 }
 
 #bom {
@@ -188,7 +147,8 @@ label.label_check {
 .ner5 {
     width: 290px;
     height: 120px;
-    padding-left:20px
+    padding-left:20px;
+    border-top: 1px solid rgb(125, 122, 122);
 }
 
 .dropbtn {
@@ -228,12 +188,19 @@ label.label_check {
     
     align-items: center;
 }
-
 .order {
-	margin-left:150px;
-    width: 650px;
-    height: 70px;
+	margin: 0 20px;
+	width:1024px;
+    height:46px;
+    margin: 0 auto;
+    background-color:rgb(230,230,230);
+    
 }
+.order form{
+	margin:0px;
+	float: right;
+}
+
 
 .room {
     width: 650px;
@@ -241,7 +208,7 @@ label.label_check {
 }
 
 .button {
-    padding: 16px 60px;
+    padding: 10px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -251,26 +218,26 @@ label.label_check {
   }
 
 .button4 {
-    background-color: white;
+    background-color: rgb(230,230,230);
     color: black;
     border: 2px solid #e7e7e7;
+    border-radius: 22px;
   }
   
-.button4:hover {background-color: #e7e7e7;}
+.button4:hover {background-color: orange; color: white;}
 
 /*객실*/
-
 
 
 .towroom {
     width: 680px;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .romm {
     width: 640px;
-    height: 300px;
+    height: 330px;
     margin: 10px 10px;
     background-size:cover;
 }
@@ -309,6 +276,12 @@ label.label_check {
     color: white;
     font-weight: bold;
     padding-right: 15px;
+}
+
+.img_sz {
+	text-align:center;
+	width:95px;
+	height:80px;
 }
 
 footer{
