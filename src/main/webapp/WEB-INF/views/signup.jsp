@@ -12,6 +12,15 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/signup.css">
 <title>회원가입</title>
+
+<script>
+function signup() {
+	if (confirm("회원가입 완료!") == true) {
+		document.getElementById('signup').submit();
+	}
+}
+</script>
+
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script src="${contextPath}/resources/js/signup.js"></script>
 </head>
@@ -51,7 +60,7 @@
 	                    <div class="hide_1 red_1">유효한 전화번호를 입력해 주시기 바랍니다.</div>
 	                </div>
 	                <div>
-	                    <input class="signup_btn_box" type="submit" id="signup" value="회원가입">
+	                    <input class="signup_btn_box" type="submit" id="signup" value="회원가입" onclick="signup()">
 	                </div>
 	            </form>
 	        </div>

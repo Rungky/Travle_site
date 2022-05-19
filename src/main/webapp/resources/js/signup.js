@@ -14,7 +14,10 @@ function bind(){
 		if(evt.keyCode == 13){  //enter : 13일때
 			$("#pw").focus();
 			return false;
-		}else if(! /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test($("#id").val())){
+		}
+	});
+	$("#id").off("keyup").on("keyup", function(evt){
+		if(! /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test($("#id").val())){
 			$(this).parent().find("div.red_1").removeClass("hide_1");
 		}else {
 			$(this).parent().find("div.red_1").addClass("hide_1");
@@ -23,11 +26,13 @@ function bind(){
 	
 	//비밀번호 칸에서 엔터 시 비밀번호 확인 칸에 focus
 	$("#pw").off("keydown").on("keydown", function(evt){
-		console.log("evt.keyCode : " + evt.keyCode);
 		if(evt.keyCode == 13){  //enter : 13일때
 			$("#pw_2").focus();
-			return evt.preventDefault();
-		}else if(!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*\W).{8,20}$/g.test($("#pw").val())){
+			return false;
+		}
+	});
+	$("#pw").off("keyup").on("keyup", function(evt){
+		if(!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*\W).{8,20}$/g.test($("#pw").val())){
 			$(this).parent().find("div.red_1").removeClass("hide_1");
 		}else {
 			$(this).parent().find("div.red_1").addClass("hide_1");
@@ -38,8 +43,11 @@ function bind(){
 	$("#pw_2").off("keydown").on("keydown", function(evt){
 		if(evt.keyCode == 13){
 			$("#name_1").focus();
-			return evt.preventDefault();
-		}else if($("#pw").val() != $("#pw_2").val()){
+			return false;
+		}
+	});
+	$("#pw_2").off("keyup").on("keyup", function(evt){
+		if($("#pw").val() != $("#pw_2").val()){
           $(this).parent().find("div.red_1").removeClass("hide_1");
         } else{
           $(this).parent().find("div.red_1").addClass("hide_1");
@@ -50,8 +58,11 @@ function bind(){
 	$("#name_1").off("keydown").on("keydown", function(evt){
 		if(evt.keyCode == 13){  //enter : 13일때
 			$("#tel_1").focus();
-			return evt.preventDefault();
-		}else if(!/^[가-힣a-zA-Z0-9]{2,10}$/g.test($("#name_1").val())){
+			return false;
+		}
+	});
+	$("#name_1").off("keyup").on("keyup", function(evt){
+		if(!/^[가-힣a-zA-Z0-9]{2,10}$/g.test($("#name_1").val())){
 			$(this).parent().find("div.red_1").removeClass("hide_1");
 		}else {
 			$(this).parent().find("div.red_1").addClass("hide_1");
@@ -62,8 +73,11 @@ function bind(){
 	$("#tel_1").off("keydown").on("keydown", function(evt){
 		if(evt.keyCode == 13){  //enter : 13일때
 			$("#signup").focus();
-			return evt.preventDefault();
-		}else if(!/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})?[0-9]{4,4}?[0-9]{4}$/.test($("#tel_1").val())){
+			return false;
+		}
+	});
+	$("#tel_1").off("keyup").on("keyup", function(evt){
+		if(!/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})?[0-9]{4,4}?[0-9]{4}$/.test($("#tel_1").val())){
 			$(this).parent().find("div.red_1").removeClass("hide_1");
 		}else {
 			$(this).parent().find("div.red_1").addClass("hide_1");
