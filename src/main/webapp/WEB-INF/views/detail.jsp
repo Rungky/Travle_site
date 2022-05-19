@@ -10,10 +10,61 @@
     <title>details</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header_footer.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	if(${!empty dateerror}){
 		alert("날짜가 맞지않아 오늘 값으로 되었습니다.");
 	}
+
+	var getCookie = function(name) {
+		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		return value? value[2] : null;
+	};
+	
+	var setCookie = function(name, value, exp) {
+		var date = new Date();
+		date.setTime(date.getTime() + exp*24*30*60*1000);
+		document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+	};
+	
+	var dormno = "${param.dormno}";
+	var pic = "${dormdto.dorm_picture}";
+	
+	// 특정 이름을 가진 쿠키의 value를 변수에 담음
+	var dormCookie = getCookie("dormno");
+	var picCookie = getCookie("pic");
+
+	var dom; 
+	var pi;
+	
+	// 기존 쿠키가 있을 경우 배열로 변환하여 변수에 담음
+	var domList = [];
+	var picList= [];
+	if(dormCookie != null){
+		dom = dormCookie.split(",");
+		pi = picCookie.split(",");
+		for(var i=0;i<dom.length;i++){	
+			domList.push(dom[i]);
+			picList.push(pi[i]);
+		}
+		if(dom.length>=5){
+			domList.slice(0,dom.length-4);
+			picList.slice(0,dom.length-4);
+		}
+	}
+	domList.push(dormno);
+	picList.push(pic);
+	
+	// 배열을 다시 String 값으로 변환하여 cookie의 value값에 넣어줌
+	var domm = domList.join(",");
+	var pict = picList.join(",");
+	
+	setCookie("dormno", domm, 1);
+	setCookie("pic", pict, 1);
+	
+
+
 </script>
 </head>
 <body>

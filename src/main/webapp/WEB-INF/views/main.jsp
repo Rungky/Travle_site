@@ -25,12 +25,12 @@
 	</div>
 	<div class="main_link">
 		<ul>
-			<li><a href="${contextPath}/trip/reservation.do&dorm_category_no=1">
+			<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=1">
 					<span class="link_icon"> <img
 						src="${contextPath}/resources/image/ico_category_h.png"></span>
 					<p style="color: black; font-weight: 600;">호텔</p>
 			</a></li>
-			<li><a href="${contextPath}/trip/reservation.do&dorm_category_no=4"> <span class="link_icon"><img
+			<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=4"> <span class="link_icon"><img
 						src="${contextPath}/resources/image/ico_category_g.png"></span>
 					<p style="color: black; font-weight: 600;">게스트하우스</p>
 			</a></li>	
@@ -38,11 +38,11 @@
 						src="${contextPath}/resources/image/ico_category_do.png"></span>
 					<p style="color: black; font-weight: 600;">전체 보기</p>
 			</a></li>
-			<li><a href="${contextPath}/trip/reservation.do&dorm_category_no=3"> <span class="link_icon"><img
+			<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=3"> <span class="link_icon"><img
 						src="${contextPath}/resources/image/ico_category_r.png"></span>
 					<p style="color: black; font-weight: 600;">리조트</p>
 			</a></li>
-			<li><a href="${contextPath}/trip/reservation.do&dorm_category_no=2"> <span class="link_icon"> <img
+			<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=2"> <span class="link_icon"> <img
 						src="${contextPath}/resources/image/ico_category_p.png"></span>
 					<p style="color: black; font-weight: 600;">펜션</p>
 			</a></li>
@@ -80,7 +80,7 @@
 			<li class="slideitem">
 				<div>
 					<div class="a_wrap">
-						<a href="trip/detail.do&dormno=${i.dorm_no }&reserve_checkin=${reserve_checkin}&reserve_checkout=${reserve_checkout}">
+						<a href="${contextPath}/trip/detail.do?dormno=${i.dorm_no }&reserve_checkin=${reserve_checkin}&reserve_checkout=${reserve_checkout}">
 						<img src="${contextPath}/resources/image/dorm/${i.dorm_picture}">
 						<!-- 	<div class="category">숙소</div> -->
 							<div class="wrap_text">
