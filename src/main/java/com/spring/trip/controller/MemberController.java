@@ -62,30 +62,27 @@ public class MemberController {
 
 	// 로그인 기능
 	@RequestMapping(value = "/trip/loginCheck.do", method = RequestMethod.POST)
-	public String login(@ModelAttribute MemberDTO dto, HttpServletRequest req) throws Exception {
+	public ModelAndView login(@ModelAttribute MemberDTO dto, HttpServletRequest req) throws Exception {
 		logger.info("post login");
 
 		HttpSession session = req.getSession();
 		System.out.println("Controller  member_id : " + dto.getMember_id() + " member_pw : " + dto.getMember_pw());
 
 		if (dto == null) {
-			logger.info("controller if문   member_id : " + dto.getMember_id());
-			logger.info("controller if문   member_pw : " + dto.getMember_pw());
 			session.setAttribute("id", null);
-			return "login";
+			ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
+			return mav;
 		} else {
 			MemberDTO login = memberService.login(dto);
 
 			if (login == null) {
-				logger.info("controller if문   member_id : " + dto.getMember_id());
-				logger.info("controller if문   member_pw : " + dto.getMember_pw());
 				session.setAttribute("id", null);
-				return "login";
+				ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
+				return mav;
 			} else {
-				logger.info("controller else문    member_id : " + login.getMember_id());
-				logger.info("controller else문    member_pw : " + login.getMember_pw());
 				session.setAttribute("id", login.getMember_id());
-				return "main";
+				ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+				return mav;
 			}
 		}
 

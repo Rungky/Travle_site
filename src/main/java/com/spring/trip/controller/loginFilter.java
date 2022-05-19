@@ -1,3 +1,4 @@
+
 package com.spring.trip.controller;
 
 import java.io.IOException;
@@ -36,6 +37,9 @@ public class loginFilter implements Filter {
 		System.out.println("path : "+path);
         if (path.contains("login.do") 
 				  || path.contains("loginCheck.do") 
+				  || path.contains("detail.do") 
+				  || path.contains("reservation.do") 
+				  || path.contains("newPw.do") 
 				  || path.contains("signup.do") 
 				  || path.contains("idFind.do")
 				  || path.contains("pwFind.do")
@@ -44,6 +48,8 @@ public class loginFilter implements Filter {
 				  || path.contains("pwFindCheck.do")
 				  || path.contains("newPw.do")
 				  || path.contains("main.do")
+				  || path.contains("history.do")
+				  || path.contains("page8.do")
 				  ) { 
         	chain.doFilter(request, response);
             // 제외한 url이 들어 왔을때 동작할 코드 작성

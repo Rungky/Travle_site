@@ -210,7 +210,6 @@ public class TripController extends MultiActionController {
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		session = request.getSession();
-		session.setAttribute("id", "jin5856u"); // �엫�쓽 媛�
 		ReservationDTO reservationdto = tripService.selectReservation(reserveno);
 		mav.addObject("reserveno", reserveno);
 		mav.addObject("reservationdto", reservationdto);

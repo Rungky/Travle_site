@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: tnqls
 Build-Jdk: 11.0.15.1
+=======
+Built-By: User
+Build-Jdk: 11.0.14
+>>>>>>> ee444dfb08f9a827167ead9295a5e27dba921486
 Created-By: Maven Integration for Eclipse
 
