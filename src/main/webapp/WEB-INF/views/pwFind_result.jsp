@@ -27,7 +27,7 @@ function newPw() {
 	<div class="wrap_top">
         <section>
 	        <div class="login_main">
-	            <a href="${contextPath}/trip/main.do">
+	            <a href="#">
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a>
 				<h2 style="text-align: center;">새 비밀번호 설정하기</h2>
