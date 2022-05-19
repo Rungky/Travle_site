@@ -49,8 +49,8 @@
 			picList.push(pi[i]);
 		}
 		if(dom.length>=5){
-			domList.slice(0,dom.length-4);
-			picList.slice(0,dom.length-4);
+			domList.splice(0,dom.length-4);
+			picList.splice(0,dom.length-4);
 		}
 	}
 	domList.push(dormno);
