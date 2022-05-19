@@ -13,12 +13,6 @@
 <title>아이디 결과</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script src="${contextPath}/resources/js/pwFind.js"></script>
-<script type="text/javascript">
-	window.onload = function msg() {
-		var msg = "${msg}";
-		alert(msg);
-	}
-</script>
 </head>
 <body>
 	<div class="wrap_top">
@@ -34,10 +28,10 @@
 		                <div class="login_top">
 		                    <input type="password" id="pw" name="member_pw" placeholder="새 비밀번호" />
 		                   	<input type="password" id="pw_2" name="member_pwCheck" placeholder="새 비밀번호 확인" />
-		                   	<div class="hide_1 red_1 hi_2">비밀번호가 일치하지 않습니다.</div>
+		                   	<div class="hide_1 red_1">비밀번호가 일치하지 않습니다.</div>
 		            	</div>
 		                <div>
-		                    <input class="login_btn_box" id="change_btn" type="submit" value="비밀번호 변경하기" onclick="msg()"/>
+		                    <input class="login_btn_box" id="change_btn" type="submit" value="비밀번호 변경하기"/>
 		                </div>
 	            	</form>
 		         </c:if>

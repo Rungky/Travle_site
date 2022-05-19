@@ -27,10 +27,9 @@ import com.spring.trip.service.MemberService;
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
-	
 	@Autowired // 의존성 주입함
 	private MemberService memberService;
-	
+
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
 	public String loginForm() {
@@ -139,61 +138,51 @@ public class MemberController {
 		return "main";
 	}
 
-	//비밀번호 찾기 기능
-		@RequestMapping(value="/trip/pwFindCheck.do", method = RequestMethod.POST)
-		public String pwFind(@ModelAttribute MemberDTO dto, Model model, HttpSession session) throws Exception{
-			logger.info("post 비밀번호 찾기 메소드 진입");
-			MemberDTO result = memberService.pwFind(dto);
-			
-			if(result == null) {
-				logger.info("controller if문   member_pw : " + dto.getMember_pw());
-				System.out.println("비밀번호 찾기" + dto.getMember_id());
-				System.out.println("비밀번호 찾기" + dto.getMember_pw());
-			} else {
-				System.out.println("비밀번호 찾기" + result.getMember_pw());
-				System.out.println("아이디" + result.getMember_id());
-				logger.info("controller else문    member_pw : " + result.getMember_pw());
-				session.setAttribute("id", dto.getMember_id());
-				model.addAttribute("member_pw", result.getMember_pw());
-			}
-			return "pwFind_result";
-		}	
-		
-		//새 비밀번호 변경하기
-		@RequestMapping(value="/trip/	" , method=RequestMethod.POST)
-		public String newPw(@ModelAttribute MemberDTO dto, HttpSession session, Model model, HttpServletRequest req)throws Exception{
-			dto.setMember_id((String)session.getAttribute("id"));
-			System.out.println(session.getAttribute("id"));
-			
-			System.out.println("세션에 저장한 아이디 : " + session.getAttribute("id"));
-			logger.info("세션에 저장한 아이디 : " + session.getAttribute("id"));
-			model.addAttribute("member_pw", dto.getMember_pw());
-			model.addAttribute("member_id", session.getAttribute("id"));
-			
-			int result = memberService.newPw(dto);
-			System.out.println("result : " + result);
-			
-			if(result == 0) {
-				model.addAttribute("msg", "비밀번호 변경에 실패하였습니다. 메인페이지로 이동합니다.");
-				return "main";
-			} else {
-				model.addAttribute("msg", "비밀번호 변경이 완료되었습니다. 로그인 페이지로 이동합니다.");
-				return "login";
-			}
+	// 비밀번호 찾기 기능
+	@RequestMapping(value = "/trip/pwFindCheck.do", method = RequestMethod.POST)
+	public String pwFind(@ModelAttribute MemberDTO dto, Model model, HttpSession session) throws Exception {
+		logger.info("post 비밀번호 찾기 메소드 진입");
+		MemberDTO result = memberService.pwFind(dto);
+
+		if (result == null) {
+			logger.info("controller if문   member_pw : " + dto.getMember_pw());
+			System.out.println("비밀번호 찾기" + dto.getMember_id());
+			System.out.println("비밀번호 찾기" + dto.getMember_pw());
+		} else {
+			System.out.println("비밀번호 찾기" + result.getMember_pw());
+			System.out.println("아이디" + result.getMember_id());
+			logger.info("controller else문    member_pw : " + result.getMember_pw());
+			session.setAttribute("id", dto.getMember_id());
+			model.addAttribute("member_pw", result.getMember_pw());
 		}
-	
-	
-	
-	
+		return "pwFind_result";
+	}
+
+	// 새 비밀번호 변경하기
+	@RequestMapping(value = "/trip/newPw.do", method = RequestMethod.POST)
+	public String newPw(@ModelAttribute MemberDTO dto, HttpSession session, Model model, HttpServletRequest req)
+			throws Exception {
+		dto.setMember_id((String) session.getAttribute("id"));
+		System.out.println(session.getAttribute("id"));
+
+		System.out.println("세션에 저장한 아이디 : " + session.getAttribute("id"));
+		logger.info("세션에 저장한 아이디 : " + session.getAttribute("id"));
+		model.addAttribute("member_pw", dto.getMember_pw());
+		model.addAttribute("member_id", session.getAttribute("id"));
+
+		int result = memberService.newPw(dto);
+
+		return "login";
+	}
+
 // 마이페이지
 	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
-	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response)  throws Exception{
+	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("id", "co9382"); // 임시코드 
 		String member_id = (String) session.getAttribute("id");
-		System.out.println("member_id ="+member_id);
+		System.out.println("member_id =" + member_id);
 		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = 	memberService.select_myMember(member_id);
+		memberDTO = memberService.select_myMember(member_id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage");
@@ -202,27 +191,24 @@ public class MemberController {
 	}
 
 // 닉네임 수정 
-		@RequestMapping(value = "/trip/modifyName.do", method = RequestMethod.POST)
-		public ModelAndView modifyName(HttpServletRequest request, HttpServletResponse response,
-				@RequestParam("member_id") String member_id,
-				@RequestParam("member_name") String member_name
-				) throws Exception {
-			
-			MemberDTO memberDTO = new MemberDTO();
-			memberDTO.setMember_id(member_id);
-			memberDTO.setMember_name(member_name);
-			memberService.modifyMemberName(memberDTO);
+	@RequestMapping(value = "/trip/modifyName.do", method = RequestMethod.POST)
+	public ModelAndView modifyName(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("member_id") String member_id, @RequestParam("member_name") String member_name)
+			throws Exception {
 
-			ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
-			return mav;
-		}
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMember_id(member_id);
+		memberDTO.setMember_name(member_name);
+		memberService.modifyMemberName(memberDTO);
+
+		ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
+		return mav;
+	}
 
 //비밀번호 수정 
 	@RequestMapping(value = "/trip/modifyPw.do", method = RequestMethod.POST)
 	public ModelAndView modifyPw(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id,
-			@RequestParam("member_pw") String member_pw
-			) throws Exception {
+			@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw) throws Exception {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setMember_id(member_id);
 		memberDTO.setMember_pw(member_pw);
@@ -235,10 +221,9 @@ public class MemberController {
 //회원 탈퇴
 	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.GET)
 	public ModelAndView removeMember(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id
-			) throws Exception {
+			@RequestParam("member_id") String member_id) throws Exception {
 		HttpSession session = request.getSession();
-	//	String member_id = (String) session.getAttribute("id");
+		// String member_id = (String) session.getAttribute("id");
 		memberService.removeMember(member_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/trip/main.do");
@@ -248,12 +233,11 @@ public class MemberController {
 // 관심숙소
 	@RequestMapping(value = "/trip/myLike.do", method = RequestMethod.GET)
 	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id
-			) throws Exception {
-		
+			@RequestParam("member_id") String member_id) throws Exception {
+
 		List<DormVO> dorm_list = new ArrayList<DormVO>();
 		dorm_list = memberService.selectList_likeDorm(member_id);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLike");
 		mav.addObject("dorm_list", dorm_list);
