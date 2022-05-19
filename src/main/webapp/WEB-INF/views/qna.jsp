@@ -11,17 +11,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Q&A</title>
-<link href="css/q&a.css" rel="stylesheet">
-<link href="css/header_footer.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/q&a.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/header_footer.css" rel="stylesheet">
 </head>
 <body>
-     <%@include file="header.jsp" %>
+     <%@include file="./header.jsp" %>
     <section>
         <div id="wrap_qna">
 			<div id="qna">
 				<div id="qna_head" class="fs_m2 fw_7">
 					<div id="my_qna"> 문의내역 </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div id="new_qna"><a href="${contextPath}/trip?action=qnaForm.do">새 문의 작성</a> </div>
+					<div id="new_qna"><a href="${contextPath}/trip/qnaForm.do">새 문의 작성</a> </div>
 				</div>
 				<c:choose>
 					<c:when test="${ empty questionList}">
