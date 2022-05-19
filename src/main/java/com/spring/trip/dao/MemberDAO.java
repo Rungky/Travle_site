@@ -17,9 +17,9 @@ public interface MemberDAO {
 	
 	public List<DormVO> selectList_likeDorm(String member_id); // 내가 좋아요한 숙소 보기 
 	
-	public void modifyMemberName(String member_id, String member_name);  //닉네임  수정
+	public void modifyMemberName(MemberDTO memberDTO);  //닉네임  수정
 	
-	public void modifyMemberPw(String member_id, String member_pw) ;  //비밀번호 수정 
+	public void modifyMemberPw(MemberDTO memberDTO) ;  //비밀번호 수정 
 	
 	
 	// 회원 탈퇴 

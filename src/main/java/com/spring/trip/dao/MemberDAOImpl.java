@@ -50,14 +50,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void modifyMemberName(String member_id, String member_name) {
-		sqlSession.update("mapper.member.modifyMemberName", member_name);
-
+	public void modifyMemberName(MemberDTO memberDTO) {
+		sqlSession.update("mapper.member.modifyMemberName", memberDTO);
 	}
 
 	@Override
-	public void modifyMemberPw(String member_id, String member_pw) {
-		sqlSession.update("mapper.member.modifyMemberPw", member_pw);
+	public void modifyMemberPw( MemberDTO memberDTO) {
+		sqlSession.update("mapper.member.modifyMemberPw", memberDTO);
 
 	}
 

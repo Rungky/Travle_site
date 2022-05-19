@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관심숙소</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/myLike.css">
 </head>
@@ -19,12 +19,12 @@
 		<nav id="mypage_nav">
 			<div>
 				<ul class="">
-					<li class="fw_b" style="font-size: 1.1em; color: black;">사적모임✈️</li>
+					<li class="fw_b" style="font-size:1.1em; color:black;">사적모임✈️</li>
 					<br>
-					<li><a href="trip?action=mypage.do">마이페이지</a></li>
-					<li><a href="trip?action=myLike.do">내 관심숙소</a></li>
-					<li><a href="trip?action=history.do">내 예약내역</a></li>
-					<li><a href="trip?action=qna.do">Q&A</a></li>
+					<li><a href="${contextPath}/trip/mypage.do">마이페이지</a></li>
+					<li><a href="${contextPath}/trip/myLike.do?member_id=${id}">내 관심숙소</a></li>
+					<li><a href="${contextPath}/trip/history.do">내 예약내역</a></li>
+					<li><a href="${contextPath}/trip/qna.do">Q&A</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -36,7 +36,7 @@
 			<div id="like_main">
 				<c:forEach var="i" items="${dorm_list }">
 					<a style="text-decoration: none"
-						href="trip?action=detail.do&dormno=${i.dorm_no }&reserve_checkin=${reserve_checkin}&reserve_checkout=${reserve_checkout}">
+						href="trip/detail.do&dormno=${i.dorm_no }&reserve_checkin=${reserve_checkin}&reserve_checkout=${reserve_checkout}">
 						<div class="room"
 							style="background-image:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) ),url(./image/dorm/${i.getDorm_picture()}); ">
 							<div class="ggumim">

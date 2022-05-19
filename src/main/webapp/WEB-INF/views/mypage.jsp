@@ -56,10 +56,10 @@
 				<ul class="">
 					<li class="fw_b" style="font-size:1.1em; color:black;">사적모임✈️</li>
 					<br>
-					<li><a href="trip?action=mypage.do">마이페이지</a></li>
-					<li><a href="trip?action=myLike.do">내 관심숙소</a></li>
-					<li><a href="trip?action=history.do">내 예약내역</a></li>
-					<li><a href="trip?action=qna.do">Q&A</a></li>
+					<li><a href="${contextPath}/trip/mypage.do">마이페이지</a></li>
+							<li><a href="${contextPath}/trip/myLike.do?member_id=${id}">내 관심숙소</a></li>
+					<li><a href="${contextPath}/trip/history.do">내 예약내역</a></li>
+					<li><a href="${contextPath}/trip/qna.do">Q&A</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -73,16 +73,15 @@
 						<div>
 							<h3>마이페이지</h3>
 							<!--로그인한 회원 정보에 맞게 출력되야함-->
-							<p>${sessionScope.member_id}</p>
+							<p>${member.member_id}</p>
 							<br>
 						</div>
 					</div>
 					<hr>
 
 					<%-- 백단에서 조건걸어서 수정하기 --%>
-						<form method="get" id="modify_name" class="mypage_form1" action="${contextPath}/trip">
+			<form method="post" id="modify_name" class="mypage_form1" action="${contextPath}/trip/modifyName.do">
 				<span>닉네임 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${member.member_name}</span>
-					  <input type="hidden" name="action" value="modify_name.do">
 					<input id="tab"class="input1" type="button" value="수정"><br> 
 					<input name="member_name"  style="display: none;" class="re_input" type="text" >
 					 <input style="display: none;" class="re_input1" type="submit" value="수정하기">
@@ -90,31 +89,28 @@
 					 <input type="hidden" name ="member_id" value="${member.member_id}">
 			</form>
 			<br>
-			<form method="post" id="modify_pw" class="mypage_form1" action = "${contextPath}/trip">
+			<form method="post" id="modify_pw" class="mypage_form1" action = "${contextPath}/trip/modifyPw.do">
                 <span> 비밀번호 &nbsp;&nbsp;${member.member_pw}</span>
                 <input id="tab" class="input2" type="button" value="수정"><br>
                 <input name="member_pw"  style="display: none;" class="re_input2" type="text">
                 <input style="display: none;" class="re_input2_1" type="submit" value="수정하기">
                 <input style="display: none;" class="re_input2_1" type="button" value="취소">
                 <input type="hidden" name ="member_id" value="${member.member_id}">
-                 <input type="hidden" name="action" value="modify_pw.do">
                 <br>
-                <a href="trip?action=history.do">내가 예약한 숙소보기</a>
+                <a href="trip/history.do">내가 예약한 숙소보기</a>
             </form>
 						<br>
 						<hr>
 						<div class="memberOut"><br>
                 <p>사적모임 사이트를 더이상 이용하고 싶지 않으신가요?</p>
                 <div class="wrap_form2">
-                    <form method="get"   id="logout_form" class="mypage_form2" action = "${contextPath}/trip">
+                    <form method="get"   id="logout_form" class="mypage_form2" action = "${contextPath}/trip/logout.do">
                         <input type="hidden" name ="member_id" value="${member.member_id}">
                         <input type="button" onclick="out_button_event()"  value="로그아웃">
-                    	<input type="hidden" name="action" value="logout.do">
                     </form>
-                    <form method="get"  id="removeMember_form"  class="mypage_form2" action = "${contextPath}/trip">
+                    <form method="post"  id="removeMember_form"  class="mypage_form2" action = "${contextPath}/trip/removeMember.do">
                         <input type="hidden" name ="member_id" value="${member.member_id}">
                         <input type="button" onclick="del_button_event()" value="회원탈퇴">
-                        <input type="hidden" name="action" value="removeMember.do">
                     </form>
                 </div>
             </div>
@@ -124,7 +120,6 @@
 		<%@ include file="footer.jsp" %>
 </body>
 <script>
-
 	function out_button_event() {
 		if (confirm("로그아웃 하시겠습니까?") == true) { //확인
 			document.getElementById('logout_form').submit();
@@ -134,7 +129,6 @@
 		}
 	}
 	
-
 	function del_button_event() {
 		if (confirm("사적모임 페이지를 탈퇴하시겠습니까? 탈퇴한 회원은 복구되지 않습니다. ") == true) { //확인
 			document.getElementById('removeMember_form').submit();

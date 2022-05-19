@@ -61,13 +61,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void modifyMemberName(String member_id, String member_name) {
-		memberDAO.modifyMemberName(member_id, member_name);
+	public void modifyMemberName(MemberDTO memberDTO) {
+		memberDAO.modifyMemberName(memberDTO);
 	}
 
 	@Override
-	public void modifyMemberPw(String member_id, String member_pw) {
-		memberDAO.modifyMemberPw(member_id, member_pw);
+	public void modifyMemberPw(MemberDTO memberDTO) {
+		memberDAO.modifyMemberPw(memberDTO);
 	}
 	
 

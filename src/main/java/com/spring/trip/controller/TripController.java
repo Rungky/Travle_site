@@ -1,18 +1,12 @@
 package com.spring.trip.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,18 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.trip.dao.MemberDAOImpl;
-import com.spring.trip.dao.TripDAOImpl;
-import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
-import com.spring.trip.dto.MemberDTO;
-import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
 import com.spring.trip.dto.RoomDTO;
-import com.spring.trip.service.MemberServiceImpl;
-import com.spring.trip.service.QnaServiceImpl;
 import com.spring.trip.service.TripService;
 
 
@@ -315,6 +302,16 @@ public class TripController extends MultiActionController{
 		return mav;
 	}
 	
+	@RequestMapping(value={"trip/main.do","trip/","trip", "trip/main"}, method=RequestMethod.GET)
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response
+			) {
+		
+		List<DormDTO> dormList = tripService.selectMain_dormList();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		mav.addObject("dormList",dormList);
+		return mav;
+	}
 	
 
 }

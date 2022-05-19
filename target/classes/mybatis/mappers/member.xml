@@ -28,25 +28,24 @@
 		parameterType="String">
 		select member_id, rpad(substr(member_pw, 1, 2), 5, '*')
 		as member_pw,
-		member_names, member_tel
+		member_names as member_name, member_tel
 		from tb_member
 		WHERE member_id= #{member_id}
 	</select>
 
 	<!-- 마이페이지 닉네임 수정하기 -->
-	<update id="modifyMemberName" parameterType="String">
+	<update id="modifyMemberName" parameterType="MemberDTO">
 		UPDATE
 		TB_MEMBER
-		SET MEMBER_NAMES= #{member_names}
-		WHERE MEMBER_ID =
-		#{member_id}
+		SET MEMBER_NAMES= #{member_name}
+		WHERE MEMBER_ID = #{member_id}
 	</update>
 
 	<!-- 마이페이지 비밀번호 수정하기 -->
-	<update id=" modifyMemberPw" parameterType="Map">
-		UPDATE TB_MEMBER
-		SET
-		MEMBER_PW= #{member_pw}
+	<update id="modifyMemberPw" parameterType="MemberDTO">
+		UPDATE 
+		TB_MEMBER
+		SET MEMBER_PW= #{member_pw}
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 

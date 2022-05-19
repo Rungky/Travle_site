@@ -305,8 +305,8 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public List<DormDTO> selectMain_dormList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<DormDTO> list= sqlSession.selectList("mapper.trip.selectMain_dormList");
+		return list ;
 	}
 
 	

@@ -1,5 +1,8 @@
 package com.spring.trip.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.trip.dto.DormDTO;
+import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.service.MemberService;
 
@@ -156,8 +161,9 @@ public class MemberController {
 	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		HttpSession session = request.getSession();
-		session.setAttribute("id", "co9382");
+		session.setAttribute("id", "co9382"); // 임시코드 
 		String member_id = (String) session.getAttribute("id");
+		System.out.println("member_id ="+member_id);
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO = 	memberService.select_myMember(member_id);
 
@@ -168,26 +174,31 @@ public class MemberController {
 	}
 
 // 닉네임 수정 
-		@RequestMapping(value = "/trip/modifyName.do", method = RequestMethod.GET)
+		@RequestMapping(value = "/trip/modifyName.do", method = RequestMethod.POST)
 		public ModelAndView modifyName(HttpServletRequest request, HttpServletResponse response,
 				@RequestParam("member_id") String member_id,
 				@RequestParam("member_name") String member_name
 				) throws Exception {
 			
-			memberService.modifyMemberName(member_id, member_name);
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMember_id(member_id);
+			memberDTO.setMember_name(member_name);
+			memberService.modifyMemberName(memberDTO);
 
 			ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
 			return mav;
 		}
 
 //비밀번호 수정 
-	@RequestMapping(value = "/trip/modifyPw.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/trip/modifyPw.do", method = RequestMethod.POST)
 	public ModelAndView modifyPw(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("member_id") String member_id,
 			@RequestParam("member_pw") String member_pw
 			) throws Exception {
-		
-		memberService.modifyMemberName(member_id, member_pw);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMember_id(member_id);
+		memberDTO.setMember_pw(member_pw);
+		memberService.modifyMemberPw(memberDTO);
 
 		ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
 		return mav;
@@ -200,11 +211,9 @@ public class MemberController {
 			) throws Exception {
 		HttpSession session = request.getSession();
 	//	String member_id = (String) session.getAttribute("id");
-		MemberDTO memberDTO = memberService.select_myMember(member_id);
-
+		memberService.removeMember(member_id);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage");
-		mav.addObject("member", memberDTO);
+		mav.setViewName("redirect:/trip/main.do");
 		return mav;
 	}
 
@@ -213,13 +222,13 @@ public class MemberController {
 	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("member_id") String member_id
 			) throws Exception {
-		HttpSession session = request.getSession();
-		//String member_id = (String) session.getAttribute("id");
-		MemberDTO memberDTO = memberService.select_myMember(member_id);
-
+		
+		List<DormVO> dorm_list = new ArrayList<DormVO>();
+		dorm_list = memberService.selectList_likeDorm(member_id);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage");
-		mav.addObject("member", memberDTO);
+		mav.setViewName("myLike");
+		mav.addObject("dorm_list", dorm_list);
 		return mav;
 	}
 

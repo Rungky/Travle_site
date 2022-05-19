@@ -20,9 +20,9 @@ public interface MemberService {
 	
 	public List<DormVO> selectList_likeDorm(String member_id) throws Exception; // 내가 좋아요한 숙소 보기 
 	
-	public void modifyMemberName(String member_id, String member_name) throws Exception;  //닉네임  수정
+	public void modifyMemberName(MemberDTO memberDTO) throws Exception;  //닉네임  수정
 	
-	public void modifyMemberPw(String member_id, String member_pw) throws Exception;  //비밀번호 수정 
+	public void modifyMemberPw(MemberDTO memberDTO) throws Exception;  //비밀번호 수정 
 	
 	// 회원 탈퇴 
 	public void removeMember(String member_id) throws Exception; ;
