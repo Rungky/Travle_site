@@ -34,7 +34,7 @@ function loginChk() {
 	<div class="wrap_top">
         <section>
 	        <div class="login_main">
-	            <a href="${contextPath}/trip">
+	            <a href="${contextPath}/trip/main.do">
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a><p></p>
 	            <form action="${ contextPath}/trip/loginCheck.do" method="post" name="f1">
