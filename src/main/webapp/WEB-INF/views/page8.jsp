@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>예약페이지</title>
-<link rel="stylesheet" href="css/page8.css">
-<link rel="stylesheet" href="./css/header_footer.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/page8.css" >
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -30,7 +31,6 @@
 			}
 			
 		});
-		
 		
 		$("#btn_pay").off("click").on("click", function(){
 			if(!$(".one").prop("checked")){
@@ -78,7 +78,7 @@
 </script>
 </head>
 <body>
-	<%@ include file="./header.jsp"%>
+	<%@ include file="./header.jsp" %>
 	<section>
 		<div class="sec">
 			<div class="info">예약자 정보</div>
@@ -124,10 +124,10 @@
 					<div>[ 💷결제수단선택]</div>
 					<div>
 						<select name="pay">
-							<option value="a" selected="selected">카카오페이</option>
-							<option value="b">신용체크카드</option>
-							<option value="c">네이버페이</option>
-							<option value="d">휴대폰결제</option>
+							<option value="kakao" selected="selected">카카오페이</option>
+							<option value="card">신용체크카드</option>
+							<option value="na_pay">네이버페이</option>
+							<option value="phone">휴대폰결제</option>
 						</select>
 					</div>
 				</div>
@@ -158,6 +158,6 @@
 			</form>
 		</div>
 	</section>
-	<%@ include file="./footer.jsp"%>
+	<%@ include file="./footer.jsp" %>
 </body>
 </html>

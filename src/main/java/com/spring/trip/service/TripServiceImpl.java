@@ -74,12 +74,15 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<ReservationDTO> selectReservationsList(String member) {
-		return null;
+		
+		List<ReservationDTO> list = tripDAO.selectReservationsList(member);
+		return list;
 	}
 
 	@Override
-	public void reserDelete(int reserve_no) {
-		
+	public int reserDelete(int reserve_no) {
+		int rs = tripDAO.reserDelete(reserve_no);
+		return rs;
 	}
 
 	@Override
@@ -103,12 +106,13 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
 			int room_no, int dorm_no) {
-		
+		tripDAO.insertReservation(member,reserve_checkin,reserve_checkout,reserve_pay,room_no,dorm_no);
 	}
 
 	@Override
 	public MemberDTO memberDto(String member_id) {
-		return null;
+		MemberDTO dto = tripDAO.memberDto(member_id);
+		return dto;
 	}
 
 	@Override

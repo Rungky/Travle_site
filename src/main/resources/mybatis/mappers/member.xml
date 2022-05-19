@@ -105,5 +105,4 @@
 		WHERE member_id= #{member_id}
 	</delete>
 
-
 </mapper>

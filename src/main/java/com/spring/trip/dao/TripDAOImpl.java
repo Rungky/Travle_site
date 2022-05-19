@@ -149,11 +149,18 @@ public class TripDAOImpl implements TripDAO{
 	@Override
 	public List<ReservationDTO> selectReservationsList(String member) {
 		List<ReservationDTO> list = new ArrayList<ReservationDTO>();
+		list = sqlSession.selectList("mapper.reser.selectReservationsList",member);
+		System.out.println("모든 숙소 조회 성공");
 		return list;
 	}
 
 	@Override
-	public void reserDelete(int reserve_no) {
+	public int reserDelete(int reserve_no) {
+		int rs = -1;
+		rs = sqlSession.delete("mapper.trip.reserDelete", reserve_no);
+		System.out.println("예약취소 성공");
+		return rs;
+		
 	}
 
 	@Override
@@ -167,6 +174,7 @@ public class TripDAOImpl implements TripDAO{
 		dto.setReserve_checkin(reserve_checkin);
 		dto.setReserve_checkout(reserve_checkout);
 		dto.setReserve_pay(reserve_pay);
+		
 		return dto;
 	}
 
@@ -200,11 +208,20 @@ public class TripDAOImpl implements TripDAO{
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
 			int room_no, int dorm_no) {
+		Map map = new HashMap();
+		map.put("dorm_no", dorm_no);
+		map.put("room_no", room_no);
+		map.put("reserve_checkin", reserve_checkin);
+		map.put("reserve_checkout", reserve_checkout);
+		map.put("reserve_pay", reserve_pay);
+		sqlSession.insert("mapper.reser.insertReservation", map);
+		System.out.println("예약인서트 성공");
 	}
 
 	@Override
 	public MemberDTO memberDto(String member_id) {
 		MemberDTO dto = new MemberDTO();
+		dto = sqlSession.selectOne("mapper.reser.memberDto",member_id );
 		return dto;
 	}
 
