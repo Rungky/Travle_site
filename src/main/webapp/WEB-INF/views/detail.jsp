@@ -48,9 +48,9 @@
 			domList.push(dom[i]);
 			picList.push(pi[i]);
 		}
-		if(dom.length==5){
-			dormList.slice(0,1);
-			picList.slice(0,1);
+		if(dom.length>=5){
+			domList.slice(0,dom.length-4);
+			picList.slice(0,dom.length-4);
 		}
 	}
 	domList.push(dormno);
