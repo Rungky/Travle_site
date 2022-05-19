@@ -140,9 +140,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
 		return mav;
 	}
-<<<<<<< HEAD
-	
-=======
+
 
 	// 비밀번호 찾기 기능
 	@RequestMapping(value = "/trip/pwFindCheck.do", method = RequestMethod.POST)
@@ -181,20 +179,13 @@ public class MemberController {
 		return "login";
 	}
 
->>>>>>> 8174a393df3fda5968aba677b63c0641aacbf379
 // 마이페이지
 	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("id");
-<<<<<<< HEAD
 		System.out.println("member_id ="+member_id);
-		MemberDTO memberDTO = memberService.select_myMember(member_id);
-=======
-		System.out.println("member_id =" + member_id);
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = memberService.select_myMember(member_id);
->>>>>>> 8174a393df3fda5968aba677b63c0641aacbf379
+		MemberDTO memberDTO = memberService.select_myMember(member_id);		
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage");
@@ -244,7 +235,6 @@ public class MemberController {
 
 // 관심숙소
 	@RequestMapping(value = "/trip/myLike.do", method = RequestMethod.GET)
-<<<<<<< HEAD
 	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response
 			) throws Exception {
 		////@RequestParam("member_id") String member_id
@@ -261,22 +251,18 @@ public class MemberController {
 		calendar.add(Calendar.DATE, +1);	
 		String reserve_checkout = SDF.format(calendar.getTime());		
 		
-=======
-	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id) throws Exception {
-
->>>>>>> 8174a393df3fda5968aba677b63c0641aacbf379
 		List<DormVO> dorm_list = new ArrayList<DormVO>();
 		dorm_list = memberService.selectList_likeDorm(member_id);
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLike");
 		mav.addObject("dorm_list", dorm_list);
 		mav.addObject("reserve_checkin", reserve_checkin);
 		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;
+		
 	}
-	
+		
 	
 
 }
