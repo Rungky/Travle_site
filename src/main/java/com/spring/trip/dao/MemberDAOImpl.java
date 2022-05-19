@@ -33,6 +33,16 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("memberDAO  member_id : " + memberDTO.getMember_id());
 		return sqlSession.selectOne("mapper.member.idFind", memberDTO);
 	}
+	
+	@Override
+	public MemberDTO pwFind(MemberDTO memberDTO) {
+		return sqlSession.selectOne("mapper.member.pwFind", memberDTO);
+	}
+
+	@Override
+	public int newPw(MemberDTO memberDTO) {
+		return sqlSession.update("mapper.member.newPw", memberDTO);
+	}
 
 	// =========================================
 

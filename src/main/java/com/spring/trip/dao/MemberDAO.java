@@ -13,6 +13,10 @@ public interface MemberDAO {
 	
 	public MemberDTO idFind(MemberDTO memberDTO);  //아이디 찾기
 	
+	public MemberDTO pwFind(MemberDTO memberDTO);  //비밀번호 찾기
+	
+	public int newPw(MemberDTO memberDTO); //새 비밀번호 설정하기
+	
 	public MemberDTO select_myMember(String member_id); // 마이페이지 표시
 	
 	public List<DormVO> selectList_likeDorm(String member_id); // 내가 좋아요한 숙소 보기 

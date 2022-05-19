@@ -18,10 +18,26 @@
 		member_id = #{member_id} and member_pw = #{member_pw}
 	</select>
 
+	<!-- 아이디 찾기 -->
 	<select id="idFind" resultType="memberDTO">
 		select member_id from tb_member
-		where member_names = #{member_name} and member_tel = #{member_tel}
+		where 
+		member_names = #{member_name} and member_tel = #{member_tel}
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pwFind" resultType="memberDTO">
+		select member_pw from tb_member
+		where 
+		member_id = #{member_id} and member_tel = #{member_tel}
+	</select>
+	
+	<!-- 비밀번호 찾기 후 새 비밀번호 설정하기 -->
+	<update id="newPw" parameterType="int">
+		update tb_member
+		set member_pw = #{member_pw}
+		where member_id = #{member_id}
+	</update>
 
 	<!-- 마이페이지 세션에 있는 아이디 받아서 내정보 나타내기 -->
 	<select id="select_myMember" resultType="MemberDTO"

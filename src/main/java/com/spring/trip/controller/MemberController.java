@@ -30,19 +30,7 @@ public class MemberController {
 	
 	@Autowired // 의존성 주입함
 	private MemberService memberService;
-	/*
-	// 메인 페이지 이동
-	@RequestMapping(value = "/trip/main.do", method = RequestMethod.GET)
-	public String mainForm() {
-		return "main";
-	}
-
-	// 마이 페이지 이동
-	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
-	public String mypageForm() {
-		return "mypage";
-	}
-*/
+	
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
 	public String loginForm() {
@@ -151,7 +139,48 @@ public class MemberController {
 		return "main";
 	}
 
-	
+	//비밀번호 찾기 기능
+		@RequestMapping(value="/trip/pwFindCheck.do", method = RequestMethod.POST)
+		public String pwFind(@ModelAttribute MemberDTO dto, Model model, HttpSession session) throws Exception{
+			logger.info("post 비밀번호 찾기 메소드 진입");
+			MemberDTO result = memberService.pwFind(dto);
+			
+			if(result == null) {
+				logger.info("controller if문   member_pw : " + dto.getMember_pw());
+				System.out.println("비밀번호 찾기" + dto.getMember_id());
+				System.out.println("비밀번호 찾기" + dto.getMember_pw());
+			} else {
+				System.out.println("비밀번호 찾기" + result.getMember_pw());
+				System.out.println("아이디" + result.getMember_id());
+				logger.info("controller else문    member_pw : " + result.getMember_pw());
+				session.setAttribute("id", dto.getMember_id());
+				model.addAttribute("member_pw", result.getMember_pw());
+			}
+			return "pwFind_result";
+		}	
+		
+		//새 비밀번호 변경하기
+		@RequestMapping(value="/trip/	" , method=RequestMethod.POST)
+		public String newPw(@ModelAttribute MemberDTO dto, HttpSession session, Model model, HttpServletRequest req)throws Exception{
+			dto.setMember_id((String)session.getAttribute("id"));
+			System.out.println(session.getAttribute("id"));
+			
+			System.out.println("세션에 저장한 아이디 : " + session.getAttribute("id"));
+			logger.info("세션에 저장한 아이디 : " + session.getAttribute("id"));
+			model.addAttribute("member_pw", dto.getMember_pw());
+			model.addAttribute("member_id", session.getAttribute("id"));
+			
+			int result = memberService.newPw(dto);
+			System.out.println("result : " + result);
+			
+			if(result == 0) {
+				model.addAttribute("msg", "비밀번호 변경에 실패하였습니다. 메인페이지로 이동합니다.");
+				return "main";
+			} else {
+				model.addAttribute("msg", "비밀번호 변경이 완료되었습니다. 로그인 페이지로 이동합니다.");
+				return "login";
+			}
+		}
 	
 	
 	
