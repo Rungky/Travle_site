@@ -7,8 +7,8 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #f7323f;
 }
+
 .hd {
 	width: 77%;
 	margin: 0 auto;
@@ -22,7 +22,6 @@ header {
     width: 100px;
     height: 30px;
     cursor: pointer;
-    background-color: #f7323f;
     border: none;
     margin: 10px;
     overflow-y:hidden;

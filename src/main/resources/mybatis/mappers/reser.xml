@@ -3,6 +3,8 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.reser">
+<!--<mapper namespace="com.spring.ex01.mapper.MemberMapper">-->
+<!-- <mapper namespace="com.spring.trip.mapper.TripMapper"> -->
 
 	<!-- 예약 인서트 -->
 	<insert id="insertReservation" parameterType="Map">
@@ -26,23 +28,23 @@
 	</delete>
 	
 	<!-- 예약리스트 뽑기 -->
-	<select id="selectReservationsList" parameterType="String" resultType="List" >
+	<select id="selectReservationsList" parameterType="String" resultType="java.util.HashMap" >
 		select reser.reserve_no, dorm.dorm_name,
 				room.room_name, reser.member_id,
 				reser.reserve_checkin, reser.reserve_date,
 				reser.reserve_checkout, reser.reserve_pay,
 				room.room_picture, reser.reserve_person
-		from tb_reservation reser , tb_room room, tb_dorm dorm
+		from tb_reservation reser, tb_room room, tb_dorm dorm
 		where reser.room_no = room.room_no		
 			and reser.dorm_no = room.dorm_no
 			and room.dorm_no = dorm.dorm_no
-			and reser.member_id = {#member}	
+			and reser.member_id = #{member}	
 			order by reserve_no desc
 	</select>
 	
-	<select id="memberDto" parameterType="String" resultType="MemberDTO">
+	<select id="memberDto" parameterType="String" resultType="memberDTO">
 		select * from tb_member
-		where member_id = {#member}
+		where member_id = #{member}
 	</select>
 	
 	

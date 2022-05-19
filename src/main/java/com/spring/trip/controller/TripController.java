@@ -297,6 +297,7 @@ public class TripController extends MultiActionController {
 			@RequestParam("reserve_checkout") Date reserve_checkout, @RequestParam("reserve_pay") int reserve_pay,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
 		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no);
 		mav.addObject("member_id", member);
@@ -339,8 +340,11 @@ public class TripController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/trip/history.do", method = RequestMethod.GET)
-	public ModelAndView history() {
+	public ModelAndView history(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("history.do 진입");
+		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
+		System.out.println(member);
 		ModelAndView mav = new ModelAndView();
 		try {
 			MemberDTO dto = tripService.memberDto(member);
@@ -348,13 +352,13 @@ public class TripController extends MultiActionController {
 			List<ReservationDTO> reserList = tripService.selectReservationsList(member);
 			mav.addObject("reserList", reserList);
 			System.out.println(reserList.size());
-
+			System.out.println(reserList);
 			if (reserList != null && reserList.size() > 0) {
-				System.out.println("List�궡�슜�엳�쓬, �삁�빟�궡�뿭 異쒕젰");
+				System.out.println("List예약내역 출력시작");
 				mav.setViewName("history");
 
 			} else if (reserList.size() == 0 && member != null) {
-				System.out.println("�삁�빟�궡�뿭 �뾾�쓬");
+				System.out.println("예약내역 없음");
 				mav.setViewName("nohistory");
 			}
 		} catch (Exception e) {
@@ -369,6 +373,7 @@ public class TripController extends MultiActionController {
 			@RequestParam("reserve_pay") int roompay, @RequestParam("reser_checkin") Date reserve_checkin,
 			@RequestParam("reserve_checkout") Date reserve_checkout, HttpServletRequest request,
 			HttpServletResponse response) {
+		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		try {
