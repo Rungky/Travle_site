@@ -16,18 +16,18 @@
 	<div class="wrap_top">
         <section>
 	        <div class="login_main">
-	            <a href="${contextPath}/trip/main.do">
+	            <a href="${contextPath}/trip">
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a>
 				<h2 style="text-align: center;">비밀번호 찾기</h2>
-	            <form action="${ contextPath}/trip" method="post" name="f1">
+	            <form action="${ contextPath}/trip/pwFindCheck.do" method="post" name="f1">
 	                <div class="login_top">
 	                    <input type="text" name="member_id" placeholder="아이디" />
 	                    <input type="text" name="member_tel" placeholder="전화번호" />
 	                </div>
 	                <div>
 	                    <input class="find_btn" type="submit" value="찾기"/>
-	                    <input class="reset_btn" type="reset" value="취소" onclick="location.href='${contextPath}/trip/login'"/>
+	                    <input class="reset_btn" type="reset" value="취소" onclick="location.href='${contextPath}/trip/login.do'"/>
 	                </div>
 	            </form>
 	        </div>

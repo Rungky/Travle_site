@@ -67,10 +67,60 @@
 			
 			$("#search_box").val(${param.search});
 			
+			var getCookie = function(name) {
+				var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+				return value? value[2] : null;
+			}
+			
+			// 특정 이름을 가진 쿠키의 value를 변수에 담음
+			var dormCookie = getCookie("dormno");
+			var picCookie = getCookie("pic");
+			
+			// 쿠키의 value 값을 배열로 변환
+			var dormno = dormCookie.split(",");
+			var pic = picCookie.split(",");
+			
+			console.log(dormno);
+			console.log(pic);
+			
+			
+			
+			var Arr = [];
+			console.log("dormno.length:" + dormno.length);
+			if(dormno.length > 0){	
+				for(var i=0; i<dormno.length;i++){					
+					Arr.push(dormno[i]);
+					Arr.push(pic[i]);
+				}
+			}
+			console.log(Arr.length);
+			if(Arr.length != 0){
+				for(var i =0; i<Arr.length; i+=2){
+					if(i<5*2){
+					console.log(i)
+						var html = "";
+						html += "<tr>";
+						html += "	<td>";
+						html += "		<a href='detail.do?dormno="+Arr[i]+"'>";
+						html += "		<img class='img_sz' src='${pageContext.request.contextPath}/resources/image/dorm/"+Arr[i+1]+"'>";
+						html += "		</a>";
+						html += "	</td>";
+						html += "</tr>";
+						
+						$("#listbody").append(html);
+					}
+					
+				}
+			}
+ 			if($("#tb_list > tbody tr").length>5){
+				$("#tb_list > tbody").find("tr:first-child").remove();
+			}
+			
 
+			
 	}
 	
-	  
+	
 
 	function count(type)  {
 	  // 결과를 표시할 element
@@ -111,14 +161,56 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 </head>
 
-<body topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
+<body>
     <%@ include file="./header.jsp" %>
-
-<section>
-	<div style="height:15px">
+    <br>
+<div class="clear">
+	<div class="order">
+		<div class="or_l" style="float:left; line-height:50px; margin-left:20px; font-size:16px;">
+		총 ${dormsList.size()} 개의 숙소가 검색되었습니다.
+		</div>
+		<div></div>
+		<div class="or_r">
+			<form method="get" action="${contextPath}/trip/reservation.do" >
+			    <c:if test="${not empty param.dorm_category_no }">
+			    	<input type="hidden" name="dorm_category_no" value="${param.dorm_category_no}">
+			    </c:if>
+				<c:if test="${not empty param.start}">
+					<input type="hidden" name="start" value="${param.start}">
+				</c:if>
+				<c:if test="${not empty param.end}">
+					<input type="hidden" name="end" value="${param.end}">
+				</c:if>
+				<c:if test="${not empty param.opt_wifi}">
+					<input type="hidden" name="opt_wifi" value="${param.opt_wifi}">
+				</c:if>
+				<c:if test="${not empty param.opt_parking}">
+					<input type="hidden" name="opt_parking" value="${param.opt_parking}">
+				</c:if>
+				<c:if test="${not empty param.opt_aircon}">
+					<input type="hidden" name="opt_aircon" value="${param.opt_aircon}">
+				</c:if>
+				<c:if test="${not empty param.opt_dryer}">
+					<input type="hidden" name="opt_dryer" value="${param.opt_dryer}">
+				</c:if>
+				<c:if test="${not empty param.opt_port}">
+					<input type="hidden" name="opt_port" value="${param.opt_port}">
+				</c:if>
+				<c:if test="${not empty param.room_person}">
+					<input type="hidden" name="room_person" value="${param.room_person}">
+				</c:if>
+				<c:if test="${not empty param.price}">
+					<input type="hidden" name="price" value="${param.price}">
+				</c:if>
+			    <button type="submit" class="button button4" name="order" value="1">낮은 가격 순</button>
+				<button type="submit" class="button button4" name="order" value="2">높은 가격 순</button>
+		    </form>
+		</div>
 	</div>
+</div>
+<section>
     <div class="container">
-        <div class="con1">
+       <div class="con1">
         	<form method="get" action="${contextPath}/trip/reservation.do" >
 	            <div class="ner1">
 	            	<c:if test="${not empty param.dorm_category_no }">
@@ -135,17 +227,17 @@
 	                	<br><br>
 	                	<c:choose>
 	                		<c:when test="${empty param.dorm_category_no }">
-			                	<a href="${contextPath}/trip/reservation.do">
+			                	<a href="${contextPath}/reservation.do">
 				                    <button type="button" class="bu re">초기화</button>
 				                </a>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<a href=${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
+	                			<a href=${contextPath}/reservation.do?dorm_category_no=${param.dorm_category_no}">
 				                    <input type="button" class="bu re" value ="초기화">
 				                </a>
 	                		</c:otherwise>
 	                	</c:choose>
-	                    <button type="submit" id="sub_btn" class="bu che">적용</button>
+	                    &nbsp&nbsp<button type="submit" id="sub_btn" class="bu che">적용</button>
 	                </div>
 	            </div>
 	            <br><br>
@@ -156,6 +248,7 @@
 	                	<input id="result2" type="hidden" name="room_person" value="2"/>
 	                	<input type="button" class="p plus" value="+" onClick='count("plus")' />
 	            </div>
+	            <br>
 	            <div class="ner4">
 	                <div id="bom">
 	                    <h3>객실 내 시설</h3>
@@ -186,7 +279,7 @@
 	                </div>
 	                
 	            </div>
-
+				<br><br>
 	            <div class="ner5">
 	                <h3>가격</h3>
 	                <div class="dropdown">
@@ -201,49 +294,14 @@
 	            </div>
             </form>
         </div>
+        <div></div>
         <div class="con2">
-            <div class="order"> 
-            	<form method="get" action="${contextPath}/trip/reservation.do" >
-            		<c:if test="${not empty param.dorm_category_no }">
-            			<input type="hidden" name="dorm_category_no" value="${param.dorm_category_no}">
-            		</c:if>
-	            	<c:if test="${not empty param.start}">
-	            		<input type="hidden" name="start" value="${param.start}">
-	            	</c:if>
-	            	<c:if test="${not empty param.end}">
-	            		<input type="hidden" name="end" value="${param.end}">
-	            	</c:if>
-	            	<c:if test="${not empty param.opt_wifi}">
-	            		<input type="hidden" name="opt_wifi" value="${param.opt_wifi}">
-	            	</c:if>
-	            	<c:if test="${not empty param.opt_parking}">
-	            		<input type="hidden" name="opt_parking" value="${param.opt_parking}">
-	            	</c:if>
-	            	<c:if test="${not empty param.opt_aircon}">
-	            		<input type="hidden" name="opt_aircon" value="${param.opt_aircon}">
-	            	</c:if>
-	            	<c:if test="${not empty param.opt_dryer}">
-	            		<input type="hidden" name="opt_dryer" value="${param.opt_dryer}">
-	            	</c:if>
-	            	<c:if test="${not empty param.opt_port}">
-	            		<input type="hidden" name="opt_port" value="${param.opt_port}">
-	            	</c:if>
-	            	<c:if test="${not empty param.room_person}">
-	            		<input type="hidden" name="room_person" value="${param.room_person}">
-	            	</c:if>
-	            	<c:if test="${not empty param.price}">
-	            		<input type="hidden" name="price" value="${param.price}">
-	            	</c:if>
-    	            <button type="submit" class="button button4" name="order" value="1">낮은 가격 순</button>
-	                <button type="submit" class="button button4" name="order" value="2">높은 가격 순</button>
-                </form>
-            </div>
         
             <div class="towroom">
 				<c:choose>
 					<c:when test="${not empty dormsList }">
 		            	<c:forEach var="i" items="${dormsList }" step="1" >
-		               		<a href="${contextPath}/trip/detail.do?dormno=${i.dorm_no}&reserve_checkin=${date_s}&reserve_checkout=${date_e}">
+		               		<a href="detail.do?dormno=${i.dorm_no}&reserve_checkin=${date_s}&reserve_checkout=${date_e}">
 		                    <div class="romm" style="background-image:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) ),url(${contextPath}/resources/image/dorm/${i.getDorm_picture()})">
 		                        <div class="ggumim">
 		                            <p>
@@ -273,11 +331,20 @@
 				</c:choose>
 			
             </div>
-       </div>
-
-    </div>
-
+       	</div>
+	</div>
 </section>
+<div style="position:absolute; right:50px; bottom:250px;border:solid 1px rgb(230,230,230);text-align:center;">
+	<div>Quick Menu</div>
+	<div style="background-color:orange;color:white; width:100px; height:30px; font-size:bold; vertical-align:center;">최근본숙소</div>
+	<div style="width:100px;">
+		<table id="tb_list">
+			<tbody id="listbody">
+			
+			</tbody>
+		</table>
+	</div>
+</div>
 <%@ include file="./footer.jsp" %>
 </body>
 </html>

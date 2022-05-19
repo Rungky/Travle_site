@@ -16,6 +16,10 @@ public interface MemberService {
 	
 	public MemberDTO idFind(MemberDTO memberDTO) throws Exception;
 	
+	public MemberDTO pwFind(MemberDTO memberDTO) throws Exception;
+	
+	public int newPw(MemberDTO memberDTO) throws Exception;
+	
 	public MemberDTO select_myMember(String member_id) throws Exception; // 마이페이지 표시
 	
 	public List<DormVO> selectList_likeDorm(String member_id) throws Exception; // 내가 좋아요한 숙소 보기 

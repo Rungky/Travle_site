@@ -34,6 +34,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.idFind(memberDTO);
 	}
 	
+	@Override
+	public MemberDTO pwFind(MemberDTO memberDTO) throws Exception {
+		return memberDAO.pwFind(memberDTO);
+	}
+
+	@Override
+	public int newPw(MemberDTO memberDTO) throws Exception {
+		return memberDAO.newPw(memberDTO);
+	}
+	
 	//=================
 	@Override
 	public MemberDTO select_myMember(String member_id) throws Exception {
