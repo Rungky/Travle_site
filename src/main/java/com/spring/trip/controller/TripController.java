@@ -5,14 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,23 +20,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.trip.dao.MemberDAOImpl;
-import com.spring.trip.dao.TripDAOImpl;
 import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
-import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
 import com.spring.trip.dto.RoomDTO;
-import com.spring.trip.service.MemberServiceImpl;
-import com.spring.trip.service.QnaServiceImpl;
 import com.spring.trip.service.TripService;
+
+import net.sf.json.JSONObject;
 
 
 @Controller
@@ -63,7 +56,7 @@ public class TripController extends MultiActionController{
 		if (session.getAttribute("id") != null) {
 			id = (String) session.getAttribute("id");
 		}
-		session.setAttribute("id", "jin5856u"); // 임의 값
+		session.setAttribute("id", "jin5856u"); // �엫�쓽 媛�
 		Calendar cal = Calendar.getInstance();
 		String format = "yyyy-MM-dd";
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -118,8 +111,8 @@ public class TripController extends MultiActionController{
 		mav.addObject("checkout",checkout);
 		mav.addObject("like_tg",like_tg);
 		mav.setViewName("detail");
-		System.out.println("체크인 : "+checkin+" ~ 체크아웃 : "+checkout);
-		System.out.println("detail 페이지");
+		System.out.println("泥댄겕�씤 : "+checkin+" ~ 泥댄겕�븘�썐 : "+checkout);
+		System.out.println("detail �럹�씠吏�");
 		return mav;
 	}
 	
@@ -142,7 +135,7 @@ public class TripController extends MultiActionController{
 	String picture = "none";
 	String encoding = "utf-8"; 
 	
-	//경로 수정
+	//寃쎈줈 �닔�젙
 	File currentDirPath = new File("C:\\workstation\\a_final\\src\\main\\webapp\\resources\\review");
 	DiskFileItemFactory factory = new DiskFileItemFactory();  
 	factory.setRepository(currentDirPath); 
@@ -205,7 +198,7 @@ public class TripController extends MultiActionController{
 	
 	if (title.equals("") || contents.equals("")) {
 		mav.addObject("textnull", "textnull");
-		System.out.println("텍스트 null오류");
+		System.out.println("�뀓�뒪�듃 null�삤瑜�");
 		mav.setViewName("redirect:review.do?reserve_no="+reservNo+"");
 	} else {
 		System.out.println("INSERT");
@@ -223,7 +216,7 @@ public class TripController extends MultiActionController{
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav= new ModelAndView();
 		session = request.getSession();
-		session.setAttribute("id", "jin5856u"); // 임의 값
+		session.setAttribute("id", "jin5856u"); // �엫�쓽 媛�
 		ReservationDTO reservationdto = tripService.selectReservation(reserveno);
 		mav.addObject("reserveno",reserveno);
 		mav.addObject("reservationdto",reservationdto);
@@ -245,7 +238,7 @@ public class TripController extends MultiActionController{
 		} else {
 			tripService.insertLike(dormno,id);
 			tripService.changeLike(dormno, 1);
-		}f
+		}
 		like_tg = !like_tg;
 		PrintWriter out = response.getWriter();
 		out.print("{\"param\":\""+like_tg+"\"}");
@@ -315,6 +308,107 @@ public class TripController extends MultiActionController{
 		return mav;
 	}
 	
+	@RequestMapping(value="/trip/result.do", method=RequestMethod.GET)
+	public ModelAndView result(
+			@RequestParam("dorm_no") int dorm_no,
+			@RequestParam("room_no") int room_no,
+			@RequestParam("reserve_checkin") Date reserve_checkin,
+			@RequestParam("reserve_checkout") Date reserve_checkout,
+			@RequestParam("reserve_pay") int reserve_pay,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav= new ModelAndView();
+		String member = (String) session.getAttribute("id"); 
+		tripService.insertReservation(member,reserve_checkin,reserve_checkout,reserve_pay,room_no,dorm_no);
+		mav.addObject("member_id",member);
+		mav.setViewName("history");
+		return mav;
+	}
 	
-
+	@RequestMapping(value="/trip/reserDelete.do", method=RequestMethod.GET)
+	public ModelAndView reserDelete(
+			@RequestParam("reserve_no") int reserve_no,
+			@RequestParam("reserve_checkin") Date reserve_checkin,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav= new ModelAndView();
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+        if(reserve_checkin.after(date)) tripService.reserDelete(reserve_no);
+        mav.setViewName("history");
+		return mav;
+	}
+	
+	@RequestMapping(value="/trip/Delete.do", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView Delete(
+			@RequestParam("reserve_no") int reserve_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		try {
+			int result = tripService.reserDelete(reserve_no);
+			JSONObject resMap = new JSONObject();
+			resMap.put("msg", result);
+			PrintWriter out;
+			out = response.getWriter();
+			out.print(resMap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.setViewName(null);
+		return mav;
+	}
+	
+	@RequestMapping(value="/trip/history.do", method=RequestMethod.GET)
+	public ModelAndView history() {
+		String member = (String)session.getAttribute("id");
+		ModelAndView mav= new ModelAndView();
+		try {
+			MemberDTO dto = tripService.memberDto(member);
+			mav.addObject("dto", dto);
+			List<ReservationDTO> reserList = tripService.selectReservationsList(member);
+			mav.addObject("reserList", reserList);
+			System.out.println(reserList.size());
+			
+			if(reserList != null && reserList.size()> 0) {
+				System.out.println("List�궡�슜�엳�쓬, �삁�빟�궡�뿭 異쒕젰");
+				mav.setViewName("history");
+				
+			}  else if(reserList.size() == 0 && member != null) {
+				System.out.println("�삁�빟�궡�뿭 �뾾�쓬");
+				mav.setViewName("nohistory");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/trip/page8.do", method=RequestMethod.GET)
+	public ModelAndView page8(
+			@RequestParam("dormno") int dorm_no,
+			@RequestParam("roomno") int room_no,
+			@RequestParam("dormname") String dorm_name,
+			@RequestParam("roomname") String room_name,
+			@RequestParam("reserve_pay") int roompay,
+			@RequestParam("reser_checkin") Date reserve_checkin,
+			@RequestParam("reserve_checkout") Date reserve_checkout,
+			HttpServletRequest request, 
+			HttpServletResponse response) {
+		String member = (String)session.getAttribute("id");
+		ModelAndView mav= new ModelAndView();
+		try {
+			MemberDTO dto = tripService.memberDto(member);
+			mav.addObject("dto", dto);
+			CheckDTO checkDto = tripService.checkList(dorm_no, room_no, dorm_name, room_name, reserve_checkin, reserve_checkout, roompay);
+			mav.addObject("check", checkDto);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("page8");
+		return mav;
+		
+	}
 }

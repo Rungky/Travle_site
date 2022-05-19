@@ -37,7 +37,7 @@ public class MemberController {
 	public String mypageForm() {
 		return "mypage";
 	}
-
+*/
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
 	public String loginForm() {
@@ -64,7 +64,6 @@ public class MemberController {
 		logger.info("get 비밀번호 찾기 메소드 진입");
 		return "pwFind";
 	}
-*/
 	// ------------------기능 메소드----------------------
 
 	// 로그인 기능

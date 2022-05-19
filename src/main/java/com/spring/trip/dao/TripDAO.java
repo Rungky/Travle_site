@@ -26,7 +26,7 @@ public interface TripDAO {
 	public List<ReviewDTO> selectReviewsList(int dormNo);
 	public ReservationDTO selectReservation(int reserveno);
 	public List<ReservationDTO> selectReservationsList(String member);
-	public void reserDelete(int reserve_no);
+	public int reserDelete(int reserve_no);
 	public CheckDTO checkList(int dorm_no, int room_no, String dorm_name, String room_name, 
 			Date reserve_checkin,Date reserve_checkout, int reserve_pay) ;
 	public void insertReview(String title, String contents, double reviewScore, Date date, 
