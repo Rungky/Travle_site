@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${ pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +25,8 @@
 					<li class="fw_b" style="font-size:1.1em; color:black;">사적모임✈️</li>
 					<br>
 					<li><a href="${contextPath}/trip/mypage.do">마이페이지</a></li>
-					<li><a href="${contextPath}/trip/myLike.do?member_id=${id}">내 관심숙소</a></li>
-					<li><a href="${contextPath}/trip/history.do">내 예약내역</a></li>
+					<li><a href="${contextPath}/trip/myLike.do">내 관심숙소</a></li>
+					<li><a href="${contextPath}/trip/history.do?id=${id}">내 예약내역</a></li>
 					<li><a href="${contextPath}/trip/qna.do">Q&A</a></li>
 				</ul>
 			</div>
@@ -36,9 +39,9 @@
 			<div id="like_main">
 				<c:forEach var="i" items="${dorm_list }">
 					<a style="text-decoration: none"
-						href="trip/detail.do&dormno=${i.dorm_no }&reserve_checkin=${reserve_checkin}&reserve_checkout=${reserve_checkout}">
+						href="${contextPath}/trip/detail.do?dormno=${i.dorm_no }&reserve_checkin=${reserve_checkin}&reserve_checkout=${ reserve_checkout}">
 						<div class="room"
-							style="background-image:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) ),url(./image/dorm/${i.getDorm_picture()}); ">
+							style="background-image:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0.5, 0.8) ),url(../resources/image/dorm/${i.getDorm_picture()}); ">
 							<div class="ggumim">
 								<p>
 									<strong>

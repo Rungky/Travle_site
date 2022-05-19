@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <c:set var="contextPath" value="${ pageContext.request.contextPath}" />
-	
+
 <!DOCTYPE html>
 <html> 
 <head>
@@ -57,7 +57,7 @@
 					<li class="fw_b" style="font-size:1.1em; color:black;">사적모임✈️</li>
 					<br>
 					<li><a href="${contextPath}/trip/mypage.do">마이페이지</a></li>
-							<li><a href="${contextPath}/trip/myLike.do?member_id=${id}">내 관심숙소</a></li>
+					<li><a href="${contextPath}/trip/myLike.do">내 관심숙소</a></li>
 					<li><a href="${contextPath}/trip/history.do">내 예약내역</a></li>
 					<li><a href="${contextPath}/trip/qna.do">Q&A</a></li>
 				</ul>
@@ -104,8 +104,7 @@
 						<div class="memberOut"><br>
                 <p>사적모임 사이트를 더이상 이용하고 싶지 않으신가요?</p>
                 <div class="wrap_form2">
-                    <form method="get"   id="logout_form" class="mypage_form2" action = "${contextPath}/trip/logout.do">
-                        <input type="hidden" name ="member_id" value="${member.member_id}">
+                    <form method="get"   id="logout_form" class="mypage_form2" action = "${contextPath}/trip/logoutCheck.do">
                         <input type="button" onclick="out_button_event()"  value="로그아웃">
                     </form>
                     <form method="post"  id="removeMember_form"  class="mypage_form2" action = "${contextPath}/trip/removeMember.do">

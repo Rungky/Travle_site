@@ -1,6 +1,9 @@
 package com.spring.trip.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.service.MemberService;
@@ -30,19 +32,7 @@ public class MemberController {
 	
 	@Autowired // 의존성 주입함
 	private MemberService memberService;
-	/*
-	// 메인 페이지 이동
-	@RequestMapping(value = "/trip/main.do", method = RequestMethod.GET)
-	public String mainForm() {
-		return "main";
-	}
 
-	// 마이 페이지 이동
-	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
-	public String mypageForm() {
-		return "mypage";
-	}
-*/
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
 	public String loginForm() {
@@ -138,33 +128,27 @@ public class MemberController {
 		return "idFind_result";
 	}
 
+	
 	// 로그아웃
 	@RequestMapping(value = "/trip/logoutCheck.do", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request) throws Exception {
+	public ModelAndView  logout(HttpServletRequest request) throws Exception {
 
 		logger.info("logoutMainGET메서드 진입");
 
 		HttpSession session = request.getSession();
-
 		session.invalidate();
 
-		return "main";
+		ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+		return mav;
 	}
-
-	
-	
-	
-	
 	
 // 마이페이지
 	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		HttpSession session = request.getSession();
-		session.setAttribute("id", "co9382"); // 임시코드 
 		String member_id = (String) session.getAttribute("id");
 		System.out.println("member_id ="+member_id);
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = 	memberService.select_myMember(member_id);
+		MemberDTO memberDTO = memberService.select_myMember(member_id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage");
@@ -218,9 +202,21 @@ public class MemberController {
 
 // 관심숙소
 	@RequestMapping(value = "/trip/myLike.do", method = RequestMethod.GET)
-	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id
+	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response
 			) throws Exception {
+		////@RequestParam("member_id") String member_id
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
+		
+		Calendar cal = Calendar.getInstance();
+		String format = "yyyy-MM-dd";
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		Calendar calendar = new GregorianCalendar();
+		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String reserve_checkin = SDF.format(calendar.getTime());		
+		calendar.add(Calendar.DATE, +1);	
+		String reserve_checkout = SDF.format(calendar.getTime());		
 		
 		List<DormVO> dorm_list = new ArrayList<DormVO>();
 		dorm_list = memberService.selectList_likeDorm(member_id);
@@ -228,7 +224,11 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLike");
 		mav.addObject("dorm_list", dorm_list);
+		mav.addObject("reserve_checkin", reserve_checkin);
+		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;
 	}
+	
+	
 
 }

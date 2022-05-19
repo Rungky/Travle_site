@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -387,10 +388,22 @@ public class TripController extends MultiActionController {
 	@RequestMapping(value = { "trip/main.do", "trip/", "trip", "trip/main" }, method = RequestMethod.GET)
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
 
+		Calendar cal = Calendar.getInstance();
+		String format = "yyyy-MM-dd";
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		Calendar calendar = new GregorianCalendar();
+		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String reserve_checkin = SDF.format(calendar.getTime());		
+		calendar.add(Calendar.DATE, +1);	
+		String reserve_checkout = SDF.format(calendar.getTime());		
+		
 		List<DormDTO> dormList = tripService.selectMain_dormList();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		mav.addObject("dormList", dormList);
+		mav.addObject("reserve_checkin", reserve_checkin);
+		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;
 	}
 }
