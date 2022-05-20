@@ -194,7 +194,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	//==========================================
 	// 회원정보 수정 
 		@RequestMapping(value = "/trip/modifyMember.do", method = RequestMethod.POST)
 		public ModelAndView modifyMember(HttpServletRequest request, HttpServletResponse response,
@@ -225,8 +224,6 @@ public class MemberController {
 			ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
 			return mav;
 		}
-	
-	//==========================
 	
 
 //회원 탈퇴

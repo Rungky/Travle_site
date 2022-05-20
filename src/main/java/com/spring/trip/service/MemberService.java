@@ -26,10 +26,6 @@ public interface MemberService {
 	
 	public void modifyMember(MemberDTO memberDTO) throws Exception;  //회원정보 수정 
 	
-	public void modifyMemberName(MemberDTO memberDTO) throws Exception;  //닉네임  수정
-	
-	public void modifyMemberPw(MemberDTO memberDTO) throws Exception;  //비밀번호 수정 
-	
 	// 회원 탈퇴 
 	public void removeMember(String member_id) throws Exception; ;
 	

@@ -64,17 +64,7 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update("mapper.member.modifyMember", memberDTO);
 	}
-	
-	@Override
-	public void modifyMemberName(MemberDTO memberDTO) {
-		sqlSession.update("mapper.member.modifyMemberName", memberDTO);
-	}
 
-	@Override
-	public void modifyMemberPw( MemberDTO memberDTO) {
-		sqlSession.update("mapper.member.modifyMemberPw", memberDTO);
-
-	}
 
 	// =========회원탈퇴=============
 	@Override

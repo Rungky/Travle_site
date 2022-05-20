@@ -69,7 +69,7 @@
 	<!-- 내가 좋아요한 숙소보기 -->
 	<select id="selectList_likeDorm" parameterType="String"  resultType="DormVO">
 		select
-		tb_like.member_id, tb_dorm.dorm_name, tb_dorm.dorm_addr,
+		tb_like.member_id, tb_like.like_date , tb_dorm.dorm_name, tb_dorm.dorm_addr,
 		tb_dorm.dorm_picture, tb_dorm.dorm_no,
 		Min(tb_room.room_pay_night) as min_pay_night, 
 		count(distinct tb_review.reserve_no) as count_reserve_no
@@ -79,8 +79,9 @@
 		left join tb_reservation on tb_room.dorm_no = tb_reservation.dorm_no
 		left join tb_review on tb_reservation.reserve_no = tb_review.reserve_no
 		where tb_like.member_id = #{member_id}
-		group by tb_like.member_id,tb_dorm.dorm_name, tb_dorm.dorm_addr,
+		group by tb_like.member_id, tb_like.like_date, tb_dorm.dorm_name, tb_dorm.dorm_addr,
 		tb_dorm.dorm_picture, tb_dorm.dorm_no
+		order by tb_like.like_date desc
 	</select>
 
 	<!-- =====회원탈퇴하기==================== -->

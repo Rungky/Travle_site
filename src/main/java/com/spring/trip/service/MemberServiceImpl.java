@@ -45,6 +45,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	//=================
+	
 	@Override
 	public MemberDTO select_myMember(String member_id) throws Exception {
 		MemberDTO  memberDTO = memberDAO.select_myMember(member_id);
@@ -53,7 +54,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<DormVO> selectList_likeDorm(String member_id) throws Exception {
-		// TODO Auto-generated method stub
 		List <DormVO> list = new ArrayList();
 		list = memberDAO.selectList_likeDorm(member_id);
 		return list;
@@ -61,7 +61,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void removeMember(String member_id) throws Exception {
-		// TODO Auto-generated method stub
 		memberDAO.removeComment(member_id);
 		memberDAO.removeReview(member_id);
 		memberDAO.removeReservation(member_id);
@@ -72,23 +71,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void modifyMember(MemberDTO memberDTO) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("2  modifyMember  실행 직전 ");
+		//System.out.println("2  modifyMember  실행 직전 ");
 		memberDAO.modifyMember(memberDTO);
 	}
 	
 	
-	@Override
-	public void modifyMemberName(MemberDTO memberDTO) {
-		memberDAO.modifyMemberName(memberDTO);
-	}
-
-	@Override
-	public void modifyMemberPw(MemberDTO memberDTO) {
-		memberDAO.modifyMemberPw(memberDTO);
-	}
-
-	
-
-
 }
