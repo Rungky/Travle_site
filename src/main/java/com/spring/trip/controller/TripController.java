@@ -30,6 +30,7 @@ import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
 import com.spring.trip.dto.RoomDTO;
@@ -406,5 +407,100 @@ public class TripController extends MultiActionController {
 		mav.addObject("reserve_checkin", reserve_checkin);
 		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;
+	}
+	
+	//문의게시판 조회
+	@RequestMapping(value = "/trip/qna.do", method = RequestMethod.GET)
+	public ModelAndView qna(
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+	session = request.getSession();
+	ModelAndView mav= new ModelAndView();
+	String id = "";
+		if(session.getAttribute("id")!=null) {
+			// 로그인 했으면 아이디 받아오기
+			id = (String) session.getAttribute("id");
+		}
+		if("".equals(id)) { // 로그인 안하면 로그인 페이지로
+			mav.setViewName("redirect:login.do"); // 로그인 페이지로
+//			return; // 메소드 종료
+		}else {
+			
+			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
+			List<QuestionDTO> answerList = tripService.selectAnswer();
+			
+			
+			int nowPage = 1; // 기본 값
+			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
+				nowPage = Integer.parseInt(request.getParameter("nowPage"));
+//		System.out.println("nowPage : " + nowPage);
+			int total = tripService.countQuestion(id);  // 게시물 수 부모 없는글 카운트
+//		System.out.println("total : " + total);
+			int pageNum = 5; // 한 페이지 게시물 5 개씩 (임의로 정함)
+			int pagingNum = 5; // 페이징 5개씩
+			int totalPage = (int) Math.ceil((double)total / pageNum); // 총 페이지 수
+//		System.out.println("totalPage : " + totalPage);
+			int totalPageCount = (totalPage+4) / pagingNum; // 페이징 수
+//		System.out.println("totalPageCount : " + totalPageCount);
+			int nowPageCount = (nowPage+4) / pagingNum; // 지금 페이징
+//		System.out.println("nowPageCount : " + nowPageCount);
+			int beginPage = 1 + (pageNum * (nowPage-1)); // 해당 페이지 게시물 begin 
+//		System.out.println("beginPage : " + beginPage);
+			int endPage = pageNum;	
+			if (totalPage == nowPage) {
+				endPage = total; 	// 마지막 페이지 일경우 게시물 범위 끝까지
+			} else {
+				endPage = pageNum + (pageNum * (nowPage - 1));	// 해당 페이지 게시물 end
+			}
+			mav.addObject("questionList", questionList); // 부모 없는글
+			mav.addObject("answerList", answerList);
+			mav.addObject("nowPageCount", nowPageCount); // 지금 페이징
+			mav.addObject("totalPageCount", totalPageCount); // 총 페이징
+			mav.addObject("totalPage", totalPage); // 마지막 페이지
+			mav.addObject("beginPage", beginPage); // 해당 페이지 게시물 begin
+			mav.addObject("endPage", endPage); // 해당 페이지 게시물 end
+			mav.addObject("nowPage", nowPage); // 지금 페이지
+			mav.setViewName("qna");
+		}
+		return mav;
+	}
+
+	//문의작성페이지
+	@RequestMapping(value = "/trip/qnaForm.do", method = RequestMethod.GET)
+	public String questionWriteForm() {
+		return "questionWrite";
+	}
+	
+	//문의글쓰기
+	@RequestMapping(value = "/trip/addqna.do", method = RequestMethod.GET)
+	public ModelAndView questionWrite(
+			@RequestParam("title") String title,
+			@RequestParam("content") String content,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+	
+		String id= (String)session.getAttribute("id");
+		
+		QuestionDTO qdto = new QuestionDTO();
+		qdto.setQuestion_title(title);
+		qdto.setQuestion_contents(content);
+		qdto.setQuestion_parentno(0);
+		
+		
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+		qdto.setQuestion_date(date);
+		qdto.setQuestion_picture("sss");
+		qdto.setQuestion_view(0);
+		qdto.setMember_id(id);
+		
+		tripService.insertNewQuestion(qdto);
+
+		
+		mav.setViewName("redirect:qna.do");
+		return mav;
+	
 	}
 }

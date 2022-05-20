@@ -14,11 +14,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question page</title>
-	<link rel="stylesheet" href="./css/header_footer.css">
-    <link rel="stylesheet" href="./css/questionWrite-style.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/questionWrite-style.css">
 </head>
 <body>
-    <%@ include file="header.jsp"%>
+    <%@ include file="./header.jsp"%>
     <section>
         <div>
             <div class="question_head">
@@ -29,8 +29,7 @@
                 <p>이용 중 불편하신 점을 문의주시면 최대한 빠른 시일내에 답변 드리겠습니다.</p>
             </div>
             <div class="question_input">
-                <form action="${contextPath}/trip">
-                	<input type="hidden" name="action" value="addqna.do">
+                <form action="${contextPath}/trip/addqna.do">
                     <p>문의 제목</p>
                     <input class="question_input_title" type="text" placeholder="제목을 입력해주세요." name="title">
                     <p>문의 내용</p>
