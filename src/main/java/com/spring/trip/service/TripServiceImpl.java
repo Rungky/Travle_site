@@ -181,17 +181,19 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void updateArticle(QuestionDTO questionDTO) {
-		
+		tripDAO.updateArticle(questionDTO);
 	}
 
 	@Override
 	public List<QuestionDTO> selectmodQuestion(int question_no) {
-		return null;
+		List<QuestionDTO> QuestionList = tripDAO.selectmodQuestion(question_no);
+		
+		return QuestionList;
 	}
 
 	@Override
 	public void deleteArticle(int question_no) {
-		
+		tripDAO.deleteArticle(question_no);
 	}
 	
 	@Override

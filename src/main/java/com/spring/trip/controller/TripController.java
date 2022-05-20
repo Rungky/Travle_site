@@ -569,4 +569,64 @@ public class TripController extends MultiActionController {
 	return mav;
 	
 	}
+	
+	//수정페이지
+	@RequestMapping(value = "/trip/modwrite.do", method = RequestMethod.GET)
+	public ModelAndView qna_modpage(
+			@RequestParam("select_no") int select_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	
+	QuestionList= tripService.selectQuestion(select_no);
+
+	mav.addObject("questionList", QuestionList);
+	mav.setViewName("modquestionWrite");
+	return mav;
+	
+	}
+	
+	//수정하기
+	@RequestMapping(value = "/trip/modqna.do", method = RequestMethod.GET)
+	public ModelAndView qna_mod(
+			@RequestParam("title") String title,
+			@RequestParam("content") String content,
+			@RequestParam("questionNO") int questionNO,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	
+	QuestionDTO qdto = new QuestionDTO();
+	qdto.setQuestion_no(questionNO);
+	qdto.setQuestion_title(title);
+	qdto.setQuestion_contents(content);
+	
+	tripService.updateArticle(qdto);
+
+	mav.addObject("questionList", QuestionList);
+	mav.setViewName("close");
+	return mav;
+	
+	}
+	
+	//삭제하기
+	@RequestMapping(value = "/trip/removeqna.do", method = RequestMethod.GET)
+	public ModelAndView qna_remove(
+			@RequestParam("remove_no") int remove_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+	
+		tripService.deleteArticle(remove_no);
+	
+		mav.setViewName("redirect:qna.do");
+		return mav;
+	}
 }

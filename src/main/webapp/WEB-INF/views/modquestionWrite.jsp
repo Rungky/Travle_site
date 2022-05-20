@@ -14,11 +14,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question page</title>
-	<link rel="stylesheet" href="./css/header_footer.css">
-    <link rel="stylesheet" href="./css/questionWrite-style.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/questionWrite-style.css">
 </head>
 <body>
-    <%@ include file="header.jsp"%>
+    <%@ include file="./header.jsp"%>
     <section>
         <div>
             <div class="question_head">
@@ -30,14 +30,13 @@
             </div>
             <c:forEach var="question" items="${questionList}" varStatus="questionNum">
             <div class="question_input">
-                <form action="${contextPath}/trip">
-                	<input type="hidden" name="action" value="modqna.do">
+                <form action="${contextPath}/trip/modqna.do">
                     <p>문의 제목</p>
                     <input class="question_input_title" type="text" placeholder="제목을 입력해주세요." name="title" value="${question.question_title}">
                     <p>문의 내용</p>
                     <textarea type="text" placeholder="내용을 입력해주세요." name="content">${question.question_contents}</textarea><br>
                     <input type="hidden" name="questionNO" value="${question.question_no}">
-                    <input class="question_input_btn" type="submit" value="수정완료"><input class="question_input_btn" type="reset" value="취소">
+                    <input class="question_input_btn" type="submit" value="수정하기"><input class="question_input_btn" type="reset" value="취소">
                 </form>    
             </div>
             </c:forEach>

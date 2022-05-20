@@ -314,20 +314,22 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void updateArticle(QuestionDTO questionDTO) {
-		// TODO Auto-generated method stub
 		
+		sqlSession.update("mapper.qna.updateArticle", questionDTO);
 	}
 
 	@Override
 	public List<QuestionDTO> selectmodQuestion(int question_no) {
-		// TODO Auto-generated method stub
-		return null;
+		List<QuestionDTO> QuestionList = new ArrayList();
+		QuestionList =  sqlSession.selectList("mapper.qna.selectmodQuestion", question_no);
+		
+		return QuestionList;
 	}
 
 	@Override
 	public void deleteArticle(int question_no) {
-		// TODO Auto-generated method stub
 		
+		sqlSession.delete("mapper.qna.deleteArticle", question_no);
 	}
 
 	@Override

@@ -155,7 +155,7 @@
     for(let i=0; i<list_mod.length; i++){
         list_mod[i].addEventListener("click", function(event){
         	let select_no = event.target.getAttribute("data-id");
-            window.open("http://localhost:8080/project_trip/trip?action=modwrite.do&select_no="+select_no,"mod","width: 600px");
+        	 window.open("http://localhost:8080/final_trip/trip/modwrite.do?select_no="+select_no,"mod","width: 600px");
         })
     }
     
@@ -166,7 +166,7 @@
         	let remove_no = event.target.getAttribute("data-id");
         	var isDel = window.confirm("정말 삭제하시겠습니까?");
         	if(isDel){
-        		location.href="http://localhost:8080/project_trip/trip?action=removeqna.do&remove_no="+remove_no;	
+        		location.href="http://localhost:8080/final_trip/trip/removeqna.do?remove_no="+remove_no;	
         	}
         })
     }
