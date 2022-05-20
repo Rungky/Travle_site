@@ -36,4 +36,31 @@
 			#{member_id}
 		)
 	</insert>
+	
+	<!-- 답변작성 페이지 -->
+	<select id="selectQuestion" resultType="questionDTO" parameterType="int">
+		select * from tb_question
+		where question_no=#{question_no}
+	</select>
+	
+	<!-- 답변작성 -->
+	<insert id="insertReplyQuestion" parameterType="questionDTO">
+		INSERT INTO tb_question
+		VALUES (
+			tb_question_seq.nextval,
+			#{question_parentno},
+			#{question_title},
+			#{question_contents},
+			#{question_picture},
+			TO_DATE(SYSDATE, 'YY/MM/DD'),
+			#{question_view},
+			#{member_id}
+		)
+	</insert>
+	
+	<!-- 답변조회 -->
+	<select id="selectReply" resultType="questionDTO" parameterType="java.util.HashMap">
+		select * from tb_question
+		where question_no=question_parentno
+	</select>
 </mapper>
