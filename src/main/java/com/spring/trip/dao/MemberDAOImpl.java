@@ -58,7 +58,13 @@ public class MemberDAOImpl implements MemberDAO {
 		list = sqlSession.selectList("mapper.member.selectList_likeDorm", member_id);
 		return list;
 	}
-
+	
+	@Override
+	public void modifyMember(MemberDTO memberDTO) {
+		// TODO Auto-generated method stub
+		sqlSession.update("mapper.member.modifyMember", memberDTO);
+	}
+	
 	@Override
 	public void modifyMemberName(MemberDTO memberDTO) {
 		sqlSession.update("mapper.member.modifyMemberName", memberDTO);
@@ -103,6 +109,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public void removeMember(String member_id) {
 		sqlSession.delete("mapper.member.removeMember", member_id);
 	}
+
 
 
 

@@ -49,22 +49,22 @@
 		WHERE member_id= #{member_id}
 	</select>
 
-	<!-- 마이페이지 닉네임 수정하기 -->
-	<update id="modifyMemberName" parameterType="MemberDTO">
-		UPDATE
-		TB_MEMBER
-		SET MEMBER_NAMES= #{member_name}
+	<!-- 마이페이지 : 회원정보 수정하기 -->
+	<update id="modifyMember" parameterType="MemberDTO">
+			UPDATE TB_MEMBER
+		<set>
+		<if  test = "member_name != null  and  member_name !=''  ">
+		MEMBER_NAMES= #{member_name} ,
+		</if>
+		<if   test = "member_pw != null  and  '' != member_pw ">
+		 MEMBER_PW = #{member_pw} ,
+		</if>
+		<if   test = "member_tel != null  and  '' != member_tel ">
+		MEMBER_TEL = #{member_tel}
+		</if>
+		</set>
 		WHERE MEMBER_ID = #{member_id}
 	</update>
-
-	<!-- 마이페이지 비밀번호 수정하기 -->
-	<update id="modifyMemberPw" parameterType="MemberDTO">
-		UPDATE 
-		TB_MEMBER
-		SET MEMBER_PW= #{member_pw}
-		WHERE MEMBER_ID = #{member_id}
-	</update>
-
 
 	<!-- 내가 좋아요한 숙소보기 -->
 	<select id="selectList_likeDorm" parameterType="String"  resultType="DormVO">
