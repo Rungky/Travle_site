@@ -8,7 +8,7 @@
 
 
 	<!-- 예약 인서트 -->
-	<insert id="insertReservation" parameterType="Map">
+	<insert id="insertReservation" parameterType="java.util.HashMap">
 		insert into tb_reservation
 		values(
 			tb_reservation_seq.nextval,
@@ -17,6 +17,7 @@
 			#{reserve_checkin},
 			#{reserve_checkout},
 			#{reserve_pay},
+			0,
 			#{room_no},
 			#{dorm_no}
 		)

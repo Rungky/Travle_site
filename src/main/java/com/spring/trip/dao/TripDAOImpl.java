@@ -208,6 +208,7 @@ public class TripDAOImpl implements TripDAO{
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
 			int room_no, int dorm_no) {
 		Map map = new HashMap();
+		map.put("member", member);
 		map.put("dorm_no", dorm_no);
 		map.put("room_no", room_no);
 		map.put("reserve_checkin", reserve_checkin);

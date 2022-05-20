@@ -66,13 +66,18 @@ article {
 }
 table {
     margin-bottom: 20px;
-    background-color: antiquewhite;
+    background-color: rgb(253, 253, 253);
     padding: 10px 80px 10px 10px;
     width: 1000px;
+    border-left: 5px solid #369;
+    box-shadow: 0px 0px 8px #369;
 }
+
+
+
 .img {
     width: 150px;
-    height: 100px;
+    height: 130px;
     padding: 10px;
 }
 .img2 {
@@ -90,6 +95,27 @@ table {
     width: 100px;
     margin-left: 15px;
 }
+
+.del.check.css {
+	background-color: #ffffff;
+	border: 1px solid #369;
+}
+
+.checkin.css, .check.css{
+	font-weight: 600;
+}
+
+.re.button, .rvbt.button {
+	background-color: #ffffff;
+	color: #000000;
+	padding: 7px 7px;
+	border-radius: 15px;
+	border: 1px solid #369;
+	font-size: 12px;
+	box-shadow: 0px 0px 8px #369;
+}
+
+
 
 .right {
     text-align: right;

@@ -23,12 +23,6 @@
 	border-bottom: 1px solid black;
 }
 
-table {
-	margin-bottom: 20px;
-	background-color: antiquewhite;
-	padding: 10px 80px 10px 10px;
-	width: 1000px;
-}
 </style>
 <script>
 	$(function() {
@@ -120,28 +114,29 @@ table {
 	<section>
 		<article style='display: flex; justify-content: center;'>
 			<div class="pd">
-				<div class="atc">예약 내역</div>
+				<div class="atc">예약 내역📆</div>
+				<br>
 
 				<c:forEach var="result" items="${reserList}">
-					<table style="padding: 10px 10px 10px 10px;">
+					<table style="padding: 10px 10px 10px 10px;" id="table_css" >
 						<form action="/project_trip/trip">
 							<tr>
 								<td colspan="3">숙소 예약번호 ${result.RESERVE_NO}</td>
-								<td><input type="button" class="del"
+								<td><input type="button" class="del check css" 
 									data-checkout="${result.RESERVE_CHECKOUT}"
-									data-num="${result.RESERVE_NO}" value="❌"></td>
+									data-num="${result.RESERVE_NO}" value="X"></td>
 							</tr>
 							<tr>
 								<td rowspan="4" class="img"><img class="img2"
-									style="width: 150px; height: 100px; padding: 10px"
+									style="width: 150px; height: 130px; padding: 10px"
 									src="${contextPath}/resources/image/room/${result.ROOM_PICTURE}"></td>
 								<td>${result.DORM_NAME}</td>
 								<td rowspan="5" class="rv">
 									<div class="forms">
 										<a
 											href="/project_trip/trip?action=review.do&reserve_no=${result.RESERVE_NO}"><button
-												class="rvbt" id="re_button" name="action" value="review">리뷰</button></a>
-										<input type="submit" class="re" value="예약 취소하기"
+												class="rvbt button" id="re_button" name="action" value="review">리뷰</button></a>
+										<input type="submit" class="re button" value="예약 취소하기"
 											data-no="${result.RESERVE_NO}"
 											onclick="return confirm('예약을 취소하시겠습니까?')"> <input
 											type="hidden" name="reserve_checkin"
@@ -157,11 +152,11 @@ table {
 							<td>${result.ROOM_NAME}</td>
 						</tr>
 						<tr>
-							<td>예약 날짜 : <fmt:formatDate value="${result.RESERVE_DATE}" pattern="yyyy-MM-dd" /></td>
+							<td>예약 날짜 : <span class="check css"><fmt:formatDate value="${result.RESERVE_DATE}" pattern="yyyy-MM-dd" /></span></td>
 						</tr>
 						<tr>
-							<td>체크인 : <span class="checkin"><fmt:formatDate value="${result.RESERVE_CHECKIN}" pattern="yyyy-MM-dd" /></span>
-								/ 체크아웃 : <fmt:formatDate value="${result.RESERVE_CHECKOUT}" pattern="yyyy-MM-dd" />
+							<td>체크인 : <span class="checkin css"><fmt:formatDate value="${result.RESERVE_CHECKIN}" pattern="yyyy-MM-dd" /></span>
+								/ 체크아웃 : <span class="check css"><fmt:formatDate value="${result.RESERVE_CHECKOUT}" pattern="yyyy-MM-dd" /></span>
 							</td>
 						</tr>
 						<tr>

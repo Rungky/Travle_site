@@ -295,11 +295,13 @@ public class TripController extends MultiActionController {
 			@RequestParam("reserve_checkout") Date reserve_checkout, @RequestParam("reserve_pay") int reserve_pay,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("인서트result진입");
 		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
+		System.out.println(reserve_checkin+"값들어가있음");
 		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no);
 		mav.addObject("member_id", member);
-		mav.setViewName("history");
+		mav.setViewName("forward:/trip/history.do");
 
 		return mav;
 	}
@@ -309,6 +311,7 @@ public class TripController extends MultiActionController {
 			@RequestParam("reserve_checkin") Date reserve_checkin, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("reserDelete.do");
 		long miliseconds = System.currentTimeMillis();
 		Date date = new Date(miliseconds);
 		if (reserve_checkin.after(date))
