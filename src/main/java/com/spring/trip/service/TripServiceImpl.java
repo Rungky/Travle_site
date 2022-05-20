@@ -108,7 +108,9 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
 			int room_no, int dorm_no) {
+		System.out.println("서비스 메소드 부분" + reserve_checkin);
 		tripDAO.insertReservation(member,reserve_checkin,reserve_checkout,reserve_pay,room_no,dorm_no);
+		System.out.println("인서트성공");
 	}
 
 	@Override

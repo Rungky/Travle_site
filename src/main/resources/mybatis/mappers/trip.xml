@@ -106,7 +106,7 @@
 		FROM tb_room
 		WHERE dorm_no = #{dormNo}
 	</select>
-	<select id="reservedRoomsList" resultType="dormDTO" parameterType="java.util.HashMap">
+	<select id="reservedRoomsList" resultType="roomDTO" parameterType="java.util.HashMap">
 		SELECT room.dorm_no, room.room_no
 		FROM tb_room room, tb_reservation reser
 		WHERE

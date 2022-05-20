@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>로그인</title>
-
+<script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script>
 function loginChk() {
     var form = document.f1;
@@ -27,6 +27,13 @@ function loginChk() {
         return;
     }
 }
+
+
+	$("document").ready(function(){
+		if(${param.msg} == 1){
+			alert("로그인에 실패했습니다. 다시 시도해주세요!");
+		}
+	});
 </script>
 
 </head>

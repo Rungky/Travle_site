@@ -63,6 +63,7 @@ public class MemberController {
 	// 로그인 기능
 	@RequestMapping(value = "/trip/loginCheck.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute MemberDTO dto, HttpServletRequest req) throws Exception {
+		int msg = 1;
 		logger.info("post login");
 
 		HttpSession session = req.getSession();
@@ -71,6 +72,7 @@ public class MemberController {
 		if (dto == null) {
 			session.setAttribute("id", null);
 			ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
+			mav.addObject("msg", msg);
 			return mav;
 		} else {
 			MemberDTO login = memberService.login(dto);
@@ -78,6 +80,7 @@ public class MemberController {
 			if (login == null) {
 				session.setAttribute("id", null);
 				ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
+				mav.addObject("msg", msg);
 				return mav;
 			} else {
 				session.setAttribute("id", login.getMember_id());

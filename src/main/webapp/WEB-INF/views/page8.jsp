@@ -146,8 +146,8 @@
 				</div>
 			</div>
 			<!--  member_id 가져가야함-->
-			<form action="trip">
-				<button id="btn_pay" class="box" name="action" value="result.do">결제하기</button>
+			<form action="result.do">
+				<button id="btn_pay" class="box" name="action" value="history.do">결제하기</button>
 				<button class="box" onclick="history.back()">돌아가기</button>
 				<input type="hidden" name="dorm_no" value="${check.dorm_no}">
 				<input type="hidden" name="room_no" value="${check.room_no}">
