@@ -16,11 +16,7 @@
 		where question_parentno!=0
 	</select>
 	
-	<select id="countQuestion" resultType="int" parameterType="java.util.HashMap">
-		select * from tb_question
-		where question_parentno=0
-		and member_id = #{id}
-	</select>
+	 
 
 	<!-- 문의작성 -->
 	<insert id="insertNewQuestion" parameterType="questionDTO">
