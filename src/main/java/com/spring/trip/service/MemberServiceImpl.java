@@ -71,6 +71,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void modifyMember(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("2  modifyMember  실행 직전 ");
+		memberDAO.modifyMember(memberDTO);
+	}
+	
+	
+	@Override
 	public void modifyMemberName(MemberDTO memberDTO) {
 		memberDAO.modifyMemberName(memberDTO);
 	}
@@ -79,6 +87,7 @@ public class MemberServiceImpl implements MemberService {
 	public void modifyMemberPw(MemberDTO memberDTO) {
 		memberDAO.modifyMemberPw(memberDTO);
 	}
+
 	
 
 
