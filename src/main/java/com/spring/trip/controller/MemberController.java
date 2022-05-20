@@ -34,7 +34,11 @@ public class MemberController {
 
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
-	public String loginForm() {
+	public String loginForm(Model model, HttpServletRequest req, HttpServletResponse response) throws Exception{
+		String referer = req.getHeader("referer");
+		req.getSession().setAttribute("referer", referer);
+		model.addAttribute("referer", referer);
+		System.out.println("컨트롤러 referer : " + referer);
 		return "login";
 	}
 
@@ -68,7 +72,6 @@ public class MemberController {
 
 		HttpSession session = req.getSession();
 		System.out.println("Controller  member_id : " + dto.getMember_id() + " member_pw : " + dto.getMember_pw());
-
 		if (dto == null) {
 			session.setAttribute("id", null);
 			ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
@@ -83,12 +86,38 @@ public class MemberController {
 				mav.addObject("msg", msg);
 				return mav;
 			} else {
-				session.setAttribute("id", login.getMember_id());
-				ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
-				return mav;
+				String refererURL = (String) session.getAttribute("referer");
+				System.out.println("test : " + refererURL);
+				
+				//login이라는 단어가 포함되어 있지 않은 경우
+				if(refererURL.indexOf("login") != -1 || refererURL.indexOf("/trip") != -1) {
+					session.setAttribute("id", login.getMember_id());
+					
+					String[] refererSplit = refererURL.split("/trip");
+					String url = "";
+					for(String test : refererSplit) {
+						System.out.println("refererSplit : " + test);
+						
+						url = test;
+					}
+					
+					url = url.substring(1);
+					String url_2 = "trip/";
+					
+					ModelAndView mav = new ModelAndView("redirect:" + url);
+					System.out.println("url : " + url);
+					
+					
+					return mav;
+				} else if(refererURL.indexOf("login") == -1 || refererURL.indexOf("/trip") != -1){  //login 이라는 단어가 포함되어 있는 경우 
+					session.setAttribute("id", login.getMember_id());
+					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+					return mav;
+				} else {
+					return null;
+				}
 			}
 		}
-
 	}
 
 	// 회원가입 기능
