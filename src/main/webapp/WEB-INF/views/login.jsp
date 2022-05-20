@@ -32,8 +32,6 @@ function loginChk() {
 	$("document").ready(function(){
 		if(${param.msg} == 1){
 			alert("로그인에 실패했습니다. 다시 시도해주세요!");
-		} else if(${param.msg} == 0){
-			alert("로그인에 성공했습니다.");
 		}
 	});
 </script>
