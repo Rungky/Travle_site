@@ -84,6 +84,7 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public int reserDelete(int reserve_no) {
 		int rs = tripDAO.reserDelete(reserve_no);
+		System.out.println("서비스에서 나온 rs"+ rs);
 		return rs;
 	}
 

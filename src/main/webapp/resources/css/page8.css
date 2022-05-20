@@ -84,9 +84,10 @@ input[type=checkbox].check {
 .name{
     width:500px;
     height:600px;
-    background-color: #6495ed;
+    background-color: #ffffff;
     margin-bottom: 40px;
-    color:white;
+    color:#000000;
+    box-shadow: inset 0px 0px 8px #369;
 }
 .name2{
     margin-left: 15px;

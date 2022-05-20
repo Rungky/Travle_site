@@ -157,8 +157,8 @@ public class TripDAOImpl implements TripDAO{
 	@Override
 	public int reserDelete(int reserve_no) {
 		int rs = -1;
-		rs = sqlSession.delete("mapper.trip.reserDelete", reserve_no);
-		System.out.println("예약취소 성공");
+		rs = sqlSession.delete("mapper.reser.reserDelete", reserve_no);
+		System.out.println("다오 예약취소 성공 " + rs);
 		return rs;
 	}
 

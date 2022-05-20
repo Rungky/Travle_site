@@ -323,22 +323,19 @@ public class TripController extends MultiActionController {
 
 	@RequestMapping(value = "/trip/Delete.do", method = RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView Delete(@RequestParam("reserve_no") int reserve_no, HttpServletRequest request,
+	public JSONObject Delete(@RequestParam("reserve_no") int reserve_no, HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
+		JSONObject resMap = new JSONObject();
 		try {
+			System.out.println("delete.do 진입함");
 			int result = tripService.reserDelete(reserve_no);
-			JSONObject resMap = new JSONObject();
+			System.out.println(result);
 			resMap.put("msg", result);
-			PrintWriter out;
-			out = response.getWriter();
-			out.print(resMap);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.setViewName(null);
-		return mav;
+		return resMap;
 	}
 
 	@RequestMapping(value = "/trip/history.do", method = RequestMethod.GET)
