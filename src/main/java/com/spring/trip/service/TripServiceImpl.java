@@ -121,7 +121,8 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public int countQuestion(String id) {
-		return 0;
+		
+		return tripDAO.countQuestion(id);
 	}
 
 	@Override

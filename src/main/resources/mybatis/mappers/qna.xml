@@ -114,4 +114,10 @@
 		delete from tb_question
 		where question_no = #{question_no}
 	</delete>
+	
+	<select id="countQuestion" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM tb_question
+		WHERE question_parentno = 0
+		AND member_id = #{id}
+	</select>
 </mapper>

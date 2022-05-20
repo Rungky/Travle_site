@@ -227,7 +227,7 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public int countQuestion(String id) {
-		int count = 0 ;
+		int count = sqlSession.selectOne("mapper.qna.countQuestion",id );
 		return count;
 	}
 
