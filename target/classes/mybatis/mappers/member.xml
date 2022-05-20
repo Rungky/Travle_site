@@ -49,27 +49,27 @@
 		WHERE member_id= #{member_id}
 	</select>
 
-	<!-- 마이페이지 닉네임 수정하기 -->
-	<update id="modifyMemberName" parameterType="MemberDTO">
-		UPDATE
-		TB_MEMBER
-		SET MEMBER_NAMES= #{member_name}
+	<!-- 마이페이지 : 회원정보 수정하기 -->
+	<update id="modifyMember" parameterType="MemberDTO">
+			UPDATE TB_MEMBER
+		<set>
+		<if  test = "member_name != null  and  member_name !=''  ">
+		MEMBER_NAMES= #{member_name} ,
+		</if>
+		<if   test = "member_pw != null  and  '' != member_pw ">
+		 MEMBER_PW = #{member_pw} ,
+		</if>
+		<if   test = "member_tel != null  and  '' != member_tel ">
+		MEMBER_TEL = #{member_tel}
+		</if>
+		</set>
 		WHERE MEMBER_ID = #{member_id}
 	</update>
-
-	<!-- 마이페이지 비밀번호 수정하기 -->
-	<update id="modifyMemberPw" parameterType="MemberDTO">
-		UPDATE 
-		TB_MEMBER
-		SET MEMBER_PW= #{member_pw}
-		WHERE MEMBER_ID = #{member_id}
-	</update>
-
 
 	<!-- 내가 좋아요한 숙소보기 -->
 	<select id="selectList_likeDorm" parameterType="String"  resultType="DormVO">
 		select
-		tb_like.member_id, tb_dorm.dorm_name, tb_dorm.dorm_addr,
+		tb_like.member_id, tb_like.like_date , tb_dorm.dorm_name, tb_dorm.dorm_addr,
 		tb_dorm.dorm_picture, tb_dorm.dorm_no,
 		Min(tb_room.room_pay_night) as min_pay_night, 
 		count(distinct tb_review.reserve_no) as count_reserve_no
@@ -79,8 +79,9 @@
 		left join tb_reservation on tb_room.dorm_no = tb_reservation.dorm_no
 		left join tb_review on tb_reservation.reserve_no = tb_review.reserve_no
 		where tb_like.member_id = #{member_id}
-		group by tb_like.member_id,tb_dorm.dorm_name, tb_dorm.dorm_addr,
+		group by tb_like.member_id, tb_like.like_date, tb_dorm.dorm_name, tb_dorm.dorm_addr,
 		tb_dorm.dorm_picture, tb_dorm.dorm_no
+		order by tb_like.like_date desc
 	</select>
 
 	<!-- =====회원탈퇴하기==================== -->

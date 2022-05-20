@@ -63,4 +63,40 @@
 		select * from tb_question
 		where question_no=question_parentno
 	</select>
+	
+	<!-- 문의수정 페이지 -->
+	<select id="selectmodQuestion" resultType="questionDTO" parameterType="java.util.HashMap">
+		select * from tb_question
+		where question_no=#{question_no}
+	</select>
+	
+	<!-- 문의수정 -->
+	<update id="updateArticle" parameterType="questionDTO">
+		update tb_question
+		set
+		question_title = #{question_title}
+		,question_contents = #{question_contents}
+		where question_no = #{question_no}
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="deleteArticle" parameterType="int" >
+		delete from tb_question
+		where question_no in (
+		select question_no from tb_question
+		start with question_no = #{question_no}
+		connect by prior question_no = question_parentno
+		)
+	</delete>
+	
+	<!-- 수정답글페이지 부모글 조회 -->
+	<select id="selectAllQuestion" resultType="questionDTO" parameterType="int">
+		select * from tb_question
+		where question_no=#{question_no}
+	</select>
+	<!-- 수정답글페이지 -->
+	<select id="selectmodReply" resultType="questionDTO" parameterType="int">
+		select * from tb_question
+		where question_no=#{question_no}
+	</select>
 </mapper>

@@ -139,10 +139,6 @@ public class TripServiceImpl implements TripService {
 		return answerList;
 	}
 
-	@Override
-	public List<QuestionDTO> selectAllQuestion(int pageNum, int countPerPage) {
-		return null;
-	}
 
 	@Override
 	public void insertNewQuestion(QuestionDTO questionDTO) {
@@ -182,17 +178,19 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void updateArticle(QuestionDTO questionDTO) {
-		
+		tripDAO.updateArticle(questionDTO);
 	}
 
 	@Override
 	public List<QuestionDTO> selectmodQuestion(int question_no) {
-		return null;
+		List<QuestionDTO> QuestionList = tripDAO.selectmodQuestion(question_no);
+		
+		return QuestionList;
 	}
 
 	@Override
 	public void deleteArticle(int question_no) {
-		
+		tripDAO.deleteArticle(question_no);
 	}
 	
 	@Override
@@ -200,5 +198,26 @@ public class TripServiceImpl implements TripService {
 		List<DormDTO> list = new ArrayList();
 		list = tripDAO.selectMain_dormList();
 		return list;
+	}
+	@Override
+	public List<QuestionDTO> selectAllQuestion(int parentno) {
+		List<QuestionDTO> QuestionList = tripDAO.selectAllQuestion(parentno);		
+		return QuestionList;
+	}
+	@Override
+	public List<QuestionDTO> selectmodReply(int question_no) {
+		List<QuestionDTO> answerList = tripDAO.selectmodReply(question_no);
+		
+		return answerList;
+	}
+	@Override
+	public void updateReply(QuestionDTO questionDTO) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void deleteReply(int question_no) {
+		// TODO Auto-generated method stub
+		
 	}
 }

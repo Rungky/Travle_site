@@ -186,40 +186,45 @@ public class MemberController {
 		String member_id = (String) session.getAttribute("id");
 		System.out.println("member_id ="+member_id);
 		MemberDTO memberDTO = memberService.select_myMember(member_id);		
-
+		
+		System.out.println("마이페이지값 :"+memberDTO.toString());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage");
 		mav.addObject("member", memberDTO);
 		return mav;
 	}
+	
+	// 회원정보 수정 
+		@RequestMapping(value = "/trip/modifyMember.do", method = RequestMethod.POST)
+		public ModelAndView modifyMember(HttpServletRequest request, HttpServletResponse response,
+				@RequestParam("member_id") String member_id)
+			//@RequestParam("member_name") String member_name)
+				throws Exception {
 
-// 닉네임 수정 
-	@RequestMapping(value = "/trip/modifyName.do", method = RequestMethod.POST)
-	public ModelAndView modifyName(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id, @RequestParam("member_name") String member_name)
-			throws Exception {
-
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setMember_id(member_id);
-		memberDTO.setMember_name(member_name);
-		memberService.modifyMemberName(memberDTO);
-
-		ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
-		return mav;
-	}
-
-//비밀번호 수정 
-	@RequestMapping(value = "/trip/modifyPw.do", method = RequestMethod.POST)
-	public ModelAndView modifyPw(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw) throws Exception {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setMember_id(member_id);
-		memberDTO.setMember_pw(member_pw);
-		memberService.modifyMemberPw(memberDTO);
-
-		ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
-		return mav;
-	}
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMember_id(member_id);
+			
+			if(request.getParameter("member_name") != null) {
+				String member_name = request.getParameter("member_name");
+				memberDTO.setMember_name(member_name);
+			}
+			if(request.getParameter("member_tel") != null) {
+				String member_tel = request.getParameter("member_tel");
+				memberDTO.setMember_tel(member_tel);
+			}
+			if(request.getParameter("member_pw") != null) {
+				String member_pw = request.getParameter("member_pw");
+				memberDTO.setMember_pw(member_pw);
+			}
+		
+			String test = memberDTO.toString();
+			System.out.println("test:"+test);
+			memberService.modifyMember(memberDTO);
+			System.out.println("memerModify DAO 실행 완료 ");
+			ModelAndView mav = new ModelAndView("redirect:/trip/mypage.do");
+			return mav;
+		}
+	
 
 //회원 탈퇴
 	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.GET)
@@ -260,7 +265,6 @@ public class MemberController {
 		mav.addObject("reserve_checkin", reserve_checkin);
 		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;
-		
 	}
 		
 	

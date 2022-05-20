@@ -430,7 +430,7 @@ public class TripController extends MultiActionController {
 			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
 			List<QuestionDTO> answerList = tripService.selectAnswer();
 			
-			System.out.println("answer : " + answerList.get(0).getQuestion_title());
+			
 			int nowPage = 1; // 기본 값
 			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
 				nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -563,6 +563,89 @@ public class TripController extends MultiActionController {
 	ModelAndView mav= new ModelAndView();
 
 	mav.setViewName("close");
+	return mav;
+	
+	}
+	
+	//수정페이지
+	@RequestMapping(value = "/trip/modwrite.do", method = RequestMethod.GET)
+	public ModelAndView qna_modpage(
+			@RequestParam("select_no") int select_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	
+	QuestionList= tripService.selectQuestion(select_no);
+
+	mav.addObject("questionList", QuestionList);
+	mav.setViewName("modquestionWrite");
+	return mav;
+	
+	}
+	
+	//수정하기
+	@RequestMapping(value = "/trip/modqna.do", method = RequestMethod.GET)
+	public ModelAndView qna_mod(
+			@RequestParam("title") String title,
+			@RequestParam("content") String content,
+			@RequestParam("questionNO") int questionNO,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	
+	QuestionDTO qdto = new QuestionDTO();
+	qdto.setQuestion_no(questionNO);
+	qdto.setQuestion_title(title);
+	qdto.setQuestion_contents(content);
+	
+	tripService.updateArticle(qdto);
+
+	mav.addObject("questionList", QuestionList);
+	mav.setViewName("close");
+	return mav;
+	
+	}
+	
+	//삭제하기
+	@RequestMapping(value = "/trip/removeqna.do", method = RequestMethod.GET)
+	public ModelAndView qna_remove(
+			@RequestParam("remove_no") int remove_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+	
+		tripService.deleteArticle(remove_no);
+	
+		mav.setViewName("redirect:qna.do");
+		return mav;
+	}
+	
+	//답글수정페이지
+	@RequestMapping(value = "/trip/modreplywrite.do", method = RequestMethod.GET)
+	public ModelAndView qna_modreplypage(
+			@RequestParam("reply_no") int reply_no,
+			@RequestParam("parent_no") int parent_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
+	
+	answerList= tripService.selectmodReply(reply_no);
+	QuestionList= tripService.selectAllQuestion(parent_no);
+
+	mav.addObject("questionList", QuestionList);
+	mav.addObject("answerList", answerList);
+	mav.setViewName("qna_modanswer");
 	return mav;
 	
 	}

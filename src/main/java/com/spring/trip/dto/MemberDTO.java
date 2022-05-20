@@ -8,6 +8,13 @@ public class MemberDTO {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "MemberDTO [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
+				+ ", member_tel=" + member_tel + "]";
+	}
+	
+	
 	public String getMember_id() {
 		return member_id;
 	}

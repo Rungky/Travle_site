@@ -44,7 +44,7 @@ table {
 							<td>예약내역이 없습니다</td>
 						</tr>
 						<tr>
-							<td><a href="trip?action=reservation.do">예약하러 가기</a></td>
+							<td><a href="${contextPath}/trip/reservation.do">예약하러 가기</a></td>
 						</tr>
 					</table>
 			</div>
