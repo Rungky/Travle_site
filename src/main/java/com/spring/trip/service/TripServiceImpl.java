@@ -16,11 +16,14 @@ import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
 import com.spring.trip.dto.RoomDTO;
+import com.spring.trip.mapper.TripMapper;
 
 @Service
 public class TripServiceImpl implements TripService {
+	
 	@Autowired
 	private TripDAO tripDAO;
+	
 
 	@Override
 	public DormDTO selectDorm(int dormNo) {
@@ -74,7 +77,6 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<ReservationDTO> selectReservationsList(String member) {
-		
 		List<ReservationDTO> list = tripDAO.selectReservationsList(member);
 		return list;
 	}
@@ -129,9 +131,9 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<QuestionDTO> selectAnswer() {
-		List<QuestionDTO> answersList = tripDAO.selectAnswer();
+		List<QuestionDTO> answerList = tripDAO.selectAnswer();
 		
-		return answersList;
+		return answerList;
 	}
 
 	@Override
@@ -146,7 +148,7 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void insertReplyQuestion(QuestionDTO questionDTO) {
-		
+		tripDAO.insertReplyQuestion(questionDTO);
 	}
 
 	@Override
@@ -158,12 +160,16 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<QuestionDTO> selectQuestion(int question_no) {
-		return null;
+		List<QuestionDTO> QuestionList = tripDAO.selectQuestion(question_no);
+		
+		return QuestionList;
 	}
 
 	@Override
 	public List<QuestionDTO> selectReply() {
-		return null;
+		List<QuestionDTO> QuestionList = tripDAO.selectReply();
+		
+		return QuestionList;
 	}
 
 	@Override

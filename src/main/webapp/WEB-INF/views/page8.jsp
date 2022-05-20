@@ -124,10 +124,10 @@
 					<div>[ 💷결제수단선택]</div>
 					<div>
 						<select name="pay">
-							<option value="kakao" selected="selected">카카오페이</option>
-							<option value="card">신용체크카드</option>
-							<option value="na_pay">네이버페이</option>
-							<option value="phone">휴대폰결제</option>
+							<option value="card" selected="selected">신용카드</option>
+							<option value="payco">페이 결제</option>
+							<option value="phone">휴대폰 결제</option>
+							<option value="non">현장결제</option>
 						</select>
 					</div>
 				</div>

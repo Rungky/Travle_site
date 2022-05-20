@@ -160,7 +160,6 @@ public class TripDAOImpl implements TripDAO{
 		rs = sqlSession.delete("mapper.trip.reserDelete", reserve_no);
 		System.out.println("예약취소 성공");
 		return rs;
-		
 	}
 
 	@Override
@@ -242,8 +241,10 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public List<QuestionDTO> selectAnswer() {
-		List<QuestionDTO> answersList = new ArrayList();
-		return answersList;
+		List<QuestionDTO> answerList = new ArrayList();
+		
+		answerList=sqlSession.selectList("mapper.qna.selectAnswer");
+		return answerList;
 	}
 
 	@Override
@@ -261,8 +262,8 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void insertReplyQuestion(QuestionDTO questionDTO) {
-		// TODO Auto-generated method stub
-		
+
+		sqlSession.insert("mapper.qna.insertReplyQuestion", questionDTO);
 	}
 
 	@Override
@@ -290,14 +291,18 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public List<QuestionDTO> selectQuestion(int question_no) {
-		// TODO Auto-generated method stub
-		return null;
+		List<QuestionDTO> QuestionList = new ArrayList();
+		QuestionList =  sqlSession.selectList("mapper.qna.selectQuestion", question_no);
+		
+		return QuestionList;
 	}
 
 	@Override
 	public List<QuestionDTO> selectReply() {
-		// TODO Auto-generated method stub
-		return null;
+		List<QuestionDTO> QuestionList = new ArrayList();
+		QuestionList =  sqlSession.selectList("mapper.qna.selectReply");
+		
+		return QuestionList;
 	}
 
 	@Override
