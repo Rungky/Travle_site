@@ -11,8 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>답변작성 페이지</title>
-<link rel="stylesheet" href="./css/header_footer.css">
-<link href="./css/review.css" rel="stylesheet">
+<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
+<link href="${contextPath}/resources/css/review.css" rel="stylesheet">
 </head>
 <body>
 	<section>
@@ -20,7 +20,7 @@
             <div id="main">
                 <div id="main_title">
                     <div class="margin_auto"><img class="review_logo"
-                            src="./image/logo-black.png" alt="로고"> </div>
+                            src="${contextPath}/resources/image/logo-black.png" alt="로고"> </div>
                     <div style="margin-top: 5px;">
                         <div class="fs_m2 fw_6">문의에 답변을 남겨주세요!</div>
                         <div class="fs_s">
@@ -32,8 +32,8 @@
                 </div>
                 <c:forEach var="question" items="${questionList}" varStatus="questionNum">
                 <div id="main_contents">
-                    <form id="review_form" action="${contextPath}/trip">
-                    <input type="hidden" name="action" value="replyqna.do">
+                    <form id="review_form" action="${contextPath}/trip/replyqna.do">
+                    
                         <div class="review_title">
                             <!--데이터 받아와서 표시하기-->
                             <div class="fs_m2 fw_6">질문제목 : ${question.question_title}</div>

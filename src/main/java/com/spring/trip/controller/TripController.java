@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -432,7 +433,7 @@ public class TripController extends MultiActionController {
 			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
 			List<QuestionDTO> answerList = tripService.selectAnswer();
 			
-			
+			System.out.println("answer : " + answerList.get(0).getQuestion_title());
 			int nowPage = 1; // 기본 값
 			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
 				nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -504,6 +505,68 @@ public class TripController extends MultiActionController {
 		
 		mav.setViewName("redirect:qna.do");
 		return mav;
+	
+	}
+	
+	//답변작성페이지
+	@RequestMapping(value = "/trip/answerqna.do", method = RequestMethod.GET)
+	public ModelAndView qna_answer(
+			@RequestParam("product_no") int product_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	
+	QuestionList= tripService.selectQuestion(product_no);
+
+	mav.addObject("questionList", QuestionList);
+	mav.setViewName("qna_answer");
+	return mav;
+	
+	}
+	
+	//답변작성
+	@RequestMapping(value = "/trip/replyqna.do", method = RequestMethod.GET)
+	public ModelAndView qna_answer(
+			@RequestParam("recontent") String recontent,
+			@RequestParam("parentNO") int parentNO,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+	
+		String id= (String)session.getAttribute("id");
+		
+		QuestionDTO qdto = new QuestionDTO();
+		qdto.setQuestion_contents(recontent);
+		qdto.setQuestion_parentno(parentNO);
+		qdto.setQuestion_title("retitle");
+		
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+		qdto.setQuestion_date(date);
+		qdto.setQuestion_picture("picture");
+		qdto.setQuestion_view(0);
+		qdto.setMember_id(id);
+		
+		tripService.insertReplyQuestion(qdto);
+		mav.setViewName("redirect:replylist.do");
+		return mav;
+	
+	}
+	
+	//팝업창 닫기
+	@RequestMapping(value = "/trip/replylist.do", method = RequestMethod.GET)
+	public ModelAndView replylist(
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	mav.setViewName("close");
+	return mav;
 	
 	}
 }

@@ -129,9 +129,9 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<QuestionDTO> selectAnswer() {
-		List<QuestionDTO> answersList = tripDAO.selectAnswer();
+		List<QuestionDTO> answerList = tripDAO.selectAnswer();
 		
-		return answersList;
+		return answerList;
 	}
 
 	@Override
@@ -146,7 +146,7 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void insertReplyQuestion(QuestionDTO questionDTO) {
-		
+		tripDAO.insertReplyQuestion(questionDTO);
 	}
 
 	@Override
@@ -158,12 +158,16 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<QuestionDTO> selectQuestion(int question_no) {
-		return null;
+		List<QuestionDTO> QuestionList = tripDAO.selectQuestion(question_no);
+		
+		return QuestionList;
 	}
 
 	@Override
 	public List<QuestionDTO> selectReply() {
-		return null;
+		List<QuestionDTO> QuestionList = tripDAO.selectReply();
+		
+		return QuestionList;
 	}
 
 	@Override
