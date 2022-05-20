@@ -178,13 +178,13 @@
 		                    <tr>
 		                        <td class="bdbt" colspan="2">
 		                        	<c:if test="${item.reserved == 0}">
-		                            <form action="trip">
+		                            <form action="page8.do">
 		                                <button class="rsv2">예약</button>
 		                                <input type="hidden" name="roomno" value="${item.room_no}">
 		                                <input type="hidden" name="roomname" value="${item.room_name}">
 		                                <input type="hidden" name="dormno" value="${dormdto.dorm_no}">
 		                                <input type="hidden" name="dormname" value="${dormdto.dorm_name}">
-		                                <input type="hidden" name="roompay" value="${roomday * item.room_pay_night}">
+		                                <input type="hidden" name="reserve_pay" value="${roomday * item.room_pay_night}">
 		                                <input type="hidden" name="reserve_checkin" value="${param.reserve_checkin}">
 		                                <input type="hidden" name="reserve_checkout" value="${param.reserve_checkout}">
 		                            </form>
@@ -226,7 +226,7 @@
 		                                <input type="hidden" name="roomname" value="${item.room_name}">
 		                                <input type="hidden" name="dormno" value="${dormdto.dorm_no}">
 		                                <input type="hidden" name="dormname" value="${dormdto.dorm_name}">
-		                                <input type="hidden" name="roompay" value="${item.room_pay_day}">
+		                                <input type="hidden" name="reserve_pay" value="${item.room_pay_day}">
 		                                <input type="hidden" name="reserve_checkin" value="${param.reserve_checkin}">
 		                                <input type="hidden" name="reserve_checkout" value="${param.reserve_checkout}">
 		                            </form>
@@ -238,7 +238,7 @@
 		                                <input type="hidden" name="roomname" value="${item.room_name}">
 		                                <input type="hidden" name="dormno" value="${dormdto.dorm_no}">
 		                                <input type="hidden" name="dormname" value="${dormdto.dorm_name}">
-		                                <input type="hidden" name="roompay" value="${roomday * item.room_pay_night}">
+		                                <input type="hidden" name="reserve_pay" value="${roomday * item.room_pay_night}">
 		                                <input type="hidden" name="reserve_checkin" value="${param.reserve_checkin}">
 		                                <input type="hidden" name="reserve_checkout" value="${param.reserve_checkout}">
 		                            </form>

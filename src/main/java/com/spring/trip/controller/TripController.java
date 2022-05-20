@@ -368,7 +368,7 @@ public class TripController extends MultiActionController {
 	@RequestMapping(value = "/trip/page8.do", method = RequestMethod.GET)
 	public ModelAndView page8(@RequestParam("dormno") int dorm_no, @RequestParam("roomno") int room_no,
 			@RequestParam("dormname") String dorm_name, @RequestParam("roomname") String room_name,
-			@RequestParam("reserve_pay") int roompay, @RequestParam("reser_checkin") Date reserve_checkin,
+			@RequestParam("reserve_pay") int roompay, @RequestParam("reserve_checkin") Date reserve_checkin,
 			@RequestParam("reserve_checkout") Date reserve_checkout, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
