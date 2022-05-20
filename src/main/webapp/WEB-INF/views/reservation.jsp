@@ -207,16 +207,6 @@
 		    </form>
 		</div>
 	</div>
-	<div style="position:absolute; top: 200px; right: 200px;border:solid 1px rgb(230,230,230);text-align:center;">
-	<div>Quick Menu</div>
-	<div style="background-color:orange;color:white; width:100px; height:30px; font-size:bold; vertical-align:center;">최근본숙소</div>
-	<div style="width:100px;">
-		<table id="tb_list">
-			<tbody id="listbody">
-			
-			</tbody>
-		</table>
-	</div>
 </div>
 </div>
 <section>
@@ -343,6 +333,18 @@
 			
             </div>
        	</div>
+	    <div>
+		    <div style="margin-left:10px;border:solid 1px rgb(230,230,230);text-align:center;">
+			<div>Quick Menu</div>
+			<div style="background-color:orange;color:white; width:100px; height:30px; font-size:bold; vertical-align:center;">최근본숙소</div>
+			<div style="width:100px;">
+				<table id="tb_list">
+					<tbody id="listbody">
+					
+					</tbody>
+				</table>
+			</div>
+	    </div>
 	</div>
 </section>
 <%@ include file="./footer.jsp" %>

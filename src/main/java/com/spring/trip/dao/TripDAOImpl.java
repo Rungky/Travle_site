@@ -160,7 +160,6 @@ public class TripDAOImpl implements TripDAO{
 		rs = sqlSession.delete("mapper.trip.reserDelete", reserve_no);
 		System.out.println("예약취소 성공");
 		return rs;
-		
 	}
 
 	@Override
