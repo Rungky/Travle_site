@@ -47,8 +47,13 @@
 		for(var i=0;i<dom.length;i++){	
 			domList.push(dom[i]);
 			picList.push(pi[i]);
+			if(dom[i]==dormno){
+				domList	.splice(i,1);
+				picList.splice(i,1);
+			}
 		}
-		if(dom.length>=5){
+		console.log("domList:" +  domList.length);
+		if(domList.length>=5){
 			domList.splice(0,dom.length-4);
 			picList.splice(0,dom.length-4);
 		}

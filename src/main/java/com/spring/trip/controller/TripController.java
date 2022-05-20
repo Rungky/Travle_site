@@ -54,7 +54,6 @@ public class TripController extends MultiActionController {
 		if (session.getAttribute("id") != null) {
 			id = (String) session.getAttribute("id");
 		}
-		session.setAttribute("id", "jin5856u"); // �엫�쓽 媛�
 		Calendar cal = Calendar.getInstance();
 		String format = "yyyy-MM-dd";
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -109,8 +108,6 @@ public class TripController extends MultiActionController {
 		mav.addObject("checkout", checkout);
 		mav.addObject("like_tg", like_tg);
 		mav.setViewName("detail");
-		System.out.println("泥댄겕�씤 : " + checkin + " ~ 泥댄겕�븘�썐 : " + checkout);
-		System.out.println("detail �럹�씠吏�");
 		return mav;
 	}
 
