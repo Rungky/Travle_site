@@ -16,7 +16,7 @@
 	<div class="wrap_top">
         <section>
 	        <div class="login_main">
-	            <a href="${contextPath}/trip">
+	            <a href="${contextPath}/trip/main.do">
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a>
 				<h2 style="text-align: center;">아이디 찾기</h2>
@@ -34,7 +34,7 @@
 				
 	            
 	            <div>
-	                <input class="back" type="reset" value="로그인 화면으로 돌아가기" onclick="location.href='${contextPath}/trip/login'"/>
+	                <input class="back" type="reset" value="로그인 화면으로 돌아가기" onclick="location.href='${contextPath}/trip/login.do'"/>
 	            </div>
 	        </div>
 	        

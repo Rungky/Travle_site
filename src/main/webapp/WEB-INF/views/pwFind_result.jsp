@@ -11,6 +11,15 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>아이디 결과</title>
+
+<script>
+function newPw() {
+	if (confirm("비밀번호 변경이 완료되었습니다. 로그인 페이지로 이동합니다.") == true) {
+		document.getElementById('newPw').submit();
+	}
+}
+</script>
+
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script src="${contextPath}/resources/js/pwFind.js"></script>
 </head>
@@ -18,20 +27,20 @@
 	<div class="wrap_top">
         <section>
 	        <div class="login_main">
-	            <a href="${contextPath}/trip">
+	            <a href="#">
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a>
 				<h2 style="text-align: center;">새 비밀번호 설정하기</h2>
 				
 				<c:if test = "${!empty member_pw}">
-	            	<form action="${ contextPath}/trip/newPw.do" method="post" name="f1">
+	            	<form action="${ contextPath}/trip/newPw.do" id="newPw" method="post" name="f1">
 		                <div class="login_top">
 		                    <input type="password" id="pw" name="member_pw" placeholder="새 비밀번호" />
 		                   	<input type="password" id="pw_2" name="member_pwCheck" placeholder="새 비밀번호 확인" />
 		                   	<div class="hide_1 red_1">비밀번호가 일치하지 않습니다.</div>
 		            	</div>
 		                <div>
-		                    <input class="login_btn_box" id="change_btn" type="submit" value="비밀번호 변경하기"/>
+		                    <input class="login_btn_box" id="change_btn" type="submit" value="비밀번호 변경하기" onclick="newPw()"/>
 		                </div>
 	            	</form>
 		         </c:if>

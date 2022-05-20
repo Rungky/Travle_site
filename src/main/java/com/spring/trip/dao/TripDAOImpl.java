@@ -233,13 +233,16 @@ public class TripDAOImpl implements TripDAO{
 	@Override
 	public List<QuestionDTO> selectMemberQuestion(String id) {
 		List<QuestionDTO> QuestionList = new ArrayList();
+		Map map = new HashMap();
+		map.put("id",id);
+		QuestionList  = sqlSession.selectList("mapper.qna.selectMemberQuestion", map);
 		return QuestionList;
 	}
 
 	@Override
 	public List<QuestionDTO> selectAnswer() {
-		List<QuestionDTO> QuestionList = new ArrayList();
-		return QuestionList;
+		List<QuestionDTO> answersList = new ArrayList();
+		return answersList;
 	}
 
 	@Override
@@ -250,7 +253,8 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void insertNewQuestion(QuestionDTO questionDTO) {
-		// TODO Auto-generated method stub
+		
+	sqlSession.insert("mapper.qna.insertNewQuestion", questionDTO);
 		
 	}
 

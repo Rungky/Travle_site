@@ -124,12 +124,16 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<QuestionDTO> selectMemberQuestion(String id) {
-		return null;
+		List<QuestionDTO> articlesList = tripDAO.selectMemberQuestion(id);
+		
+		return articlesList;
 	}
 
 	@Override
 	public List<QuestionDTO> selectAnswer() {
-		return null;
+		List<QuestionDTO> answersList = tripDAO.selectAnswer();
+		
+		return answersList;
 	}
 
 	@Override
@@ -139,7 +143,7 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void insertNewQuestion(QuestionDTO questionDTO) {
-		
+		tripDAO.insertNewQuestion(questionDTO);
 	}
 
 	@Override

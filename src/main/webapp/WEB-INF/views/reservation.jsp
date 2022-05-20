@@ -164,7 +164,7 @@
 <body>
     <%@ include file="./header.jsp" %>
     <br>
-<div class="clear">
+<div class="clear" style="position:relative;">
 	<div class="order">
 		<div class="or_l" style="float:left; line-height:50px; margin-left:20px; font-size:16px;">
 		총 ${dormsList.size()} 개의 숙소가 검색되었습니다.
@@ -207,6 +207,7 @@
 		    </form>
 		</div>
 	</div>
+</div>
 </div>
 <section>
     <div class="container">
@@ -332,19 +333,20 @@
 			
             </div>
        	</div>
+	    <div>
+		    <div style="margin-left:10px;border:solid 1px rgb(230,230,230);text-align:center;">
+			<div>Quick Menu</div>
+			<div style="background-color:orange;color:white; width:100px; height:30px; font-size:bold; vertical-align:center;">최근본숙소</div>
+			<div style="width:100px;">
+				<table id="tb_list">
+					<tbody id="listbody">
+					
+					</tbody>
+				</table>
+			</div>
+	    </div>
 	</div>
 </section>
-<div style="position:absolute; right:50px; bottom:250px;border:solid 1px rgb(230,230,230);text-align:center;">
-	<div>Quick Menu</div>
-	<div style="background-color:orange;color:white; width:100px; height:30px; font-size:bold; vertical-align:center;">최근본숙소</div>
-	<div style="width:100px;">
-		<table id="tb_list">
-			<tbody id="listbody">
-			
-			</tbody>
-		</table>
-	</div>
-</div>
 <%@ include file="./footer.jsp" %>
 </body>
 </html>
