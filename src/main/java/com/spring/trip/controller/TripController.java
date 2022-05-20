@@ -430,7 +430,7 @@ public class TripController extends MultiActionController {
 			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
 			List<QuestionDTO> answerList = tripService.selectAnswer();
 			
-			System.out.println("answer : " + answerList.get(0).getQuestion_title());
+			
 			int nowPage = 1; // 기본 값
 			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
 				nowPage = Integer.parseInt(request.getParameter("nowPage"));
