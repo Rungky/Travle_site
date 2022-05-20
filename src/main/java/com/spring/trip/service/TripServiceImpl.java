@@ -211,12 +211,11 @@ public class TripServiceImpl implements TripService {
 	}
 	@Override
 	public void updateReply(QuestionDTO questionDTO) {
-		// TODO Auto-generated method stub
-		
+		tripDAO.updateReply(questionDTO);	
 	}
+	
 	@Override
 	public void deleteReply(int question_no) {
-		// TODO Auto-generated method stub
-		
+		tripDAO.deleteReply(question_no);
 	}
 }

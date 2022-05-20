@@ -32,9 +32,8 @@
                 </div>
                     <c:forEach var="answerList" items="${answerList}"> 
                 <div id="main_contents">
-                    <form id="review_form" action="${contextPath}/trip/">
-                    <input type="hidden" name="action" value="modreply.do">
-               
+                    <form id="review_form" action="${contextPath}/trip/modreply.do">
+                  
                      <c:forEach var="question" items="${questionList}">
                      
                         <div class="review_title">

@@ -600,7 +600,7 @@ public class TripController extends MultiActionController {
 
 	ModelAndView mav= new ModelAndView();
 
-	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	//List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
 	
 	QuestionDTO qdto = new QuestionDTO();
 	qdto.setQuestion_no(questionNO);
@@ -609,7 +609,7 @@ public class TripController extends MultiActionController {
 	
 	tripService.updateArticle(qdto);
 
-	mav.addObject("questionList", QuestionList);
+	//mav.addObject("questionList", QuestionList);
 	mav.setViewName("close");
 	return mav;
 	
@@ -651,5 +651,44 @@ public class TripController extends MultiActionController {
 	mav.setViewName("qna_modanswer");
 	return mav;
 	
+	}
+	
+	//답글수정
+	@RequestMapping(value = "/trip/modreply.do", method = RequestMethod.GET)
+	public ModelAndView qna_modreply(
+			@RequestParam("recontent") String recontent,
+			@RequestParam("ReplyNO") int ReplyNO,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	
+	QuestionDTO qdto = new QuestionDTO();
+	qdto.setQuestion_no(ReplyNO);
+	qdto.setQuestion_contents(recontent);
+	
+	tripService.updateReply(qdto);
+
+	mav.addObject("questionList", QuestionList);
+	mav.setViewName("close");
+	return mav;
+	
+	}
+	
+	//답글삭제
+	@RequestMapping(value = "/trip/removereply.do", method = RequestMethod.GET)
+	public ModelAndView qna_removereply(
+			@RequestParam("removereply_no") int removereply_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+	
+	tripService.deleteReply(removereply_no);
+	
+	mav.setViewName("redirect:qna.do");
+	return mav;
 	}
 }
