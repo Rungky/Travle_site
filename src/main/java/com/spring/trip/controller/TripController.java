@@ -629,4 +629,27 @@ public class TripController extends MultiActionController {
 		mav.setViewName("redirect:qna.do");
 		return mav;
 	}
+	
+	//답글수정페이지
+	@RequestMapping(value = "/trip/modreplywrite.do", method = RequestMethod.GET)
+	public ModelAndView qna_modreplypage(
+			@RequestParam("reply_no") int reply_no,
+			@RequestParam("parent_no") int parent_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+	List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
+	
+	answerList= tripService.selectmodReply(reply_no);
+	QuestionList= tripService.selectAllQuestion(parent_no);
+
+	mav.addObject("questionList", QuestionList);
+	mav.addObject("answerList", answerList);
+	mav.setViewName("qna_modanswer");
+	return mav;
+	
+	}
 }

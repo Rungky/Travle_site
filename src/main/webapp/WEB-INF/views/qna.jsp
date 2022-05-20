@@ -54,6 +54,8 @@
 				                            <div>
 				                            	${answerList.question_contents}
 				                            </div>
+				                            <button class="reply_doMod" data-id="${answerList.question_no}" data-parentid="${answerList.question_parentno}">답변수정</button>
+				                            <button class="reply_doRemove" data-id="${answerList.question_no}">답변삭제</button>
 			                        	</div>
 			                        	</c:if>
 		                        	</c:forEach>
@@ -168,6 +170,16 @@
         	if(isDel){
         		location.href="http://localhost:8080/final_trip/trip/removeqna.do?remove_no="+remove_no;	
         	}
+        })
+    }
+    
+    var list_modreply = document.querySelectorAll(".reply_doMod");
+    console.log(list_modreply.length);
+    for(let i=0; i<list_modreply.length; i++){
+    	list_modreply[i].addEventListener("click", function(event){
+        	let reply_no = event.target.getAttribute("data-id");
+        	let parent_no = event.target.getAttribute("data-parentid");
+            window.open("http://localhost:8080/final_trip/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
         })
     }
 </script>

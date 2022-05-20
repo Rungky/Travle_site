@@ -249,12 +249,6 @@ public class TripDAOImpl implements TripDAO{
 	}
 
 	@Override
-	public List<QuestionDTO> selectAllQuestion(int pageNum, int countPerPage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void insertNewQuestion(QuestionDTO questionDTO) {
 		
 	sqlSession.insert("mapper.qna.insertNewQuestion", questionDTO);
@@ -336,6 +330,34 @@ public class TripDAOImpl implements TripDAO{
 	public List<DormDTO> selectMain_dormList() {
 		List<DormDTO> list= sqlSession.selectList("mapper.trip.selectMain_dormList");
 		return list ;
+	}
+
+	@Override
+	public List<QuestionDTO> selectAllQuestion(int parentno) {
+		List<QuestionDTO> QuestionList = new ArrayList();
+		QuestionList =  sqlSession.selectList("mapper.qna.selectAllQuestion", parentno);
+		
+		return QuestionList;
+	}
+
+	@Override
+	public List<QuestionDTO> selectmodReply(int question_no) {
+		List<QuestionDTO> answerList = new ArrayList();
+		answerList =  sqlSession.selectList("mapper.qna.selectmodReply", question_no);
+		
+		return answerList;
+	}
+
+	@Override
+	public void updateReply(QuestionDTO questionDTO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteReply(int question_no) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
