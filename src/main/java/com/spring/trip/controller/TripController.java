@@ -198,7 +198,18 @@ public class TripController extends MultiActionController {
 		} else {
 			System.out.println("INSERT");
 			tripService.insertReview(title, contents, score, date, picture, reservNo, memberId);
+			Calendar cal = Calendar.getInstance();
+			String format = "yyyy-MM-dd";
+			SimpleDateFormat sdf = new SimpleDateFormat(format);
+			cal.add(cal.DATE, +1);
+			String tomorrow = sdf.format(cal.getTime());
+
+			java.util.Date today = new java.util.Date();
+			String checkin = sdf.format(today);
+			String checkout = tomorrow;
 			redirect.addAttribute("dormno", dormno);
+			redirect.addAttribute("reserve_checkout", checkout);
+			redirect.addAttribute("reserve_checkin", checkin);
 			mav.setViewName("redirect:detail.do");
 		}
 		return mav;
