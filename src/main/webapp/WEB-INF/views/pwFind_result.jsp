@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
-<title>아이디 결과</title>
+<title>사적모임 | 비밀번호 찾기 결과</title>
 
 <script>
 function newPw() {

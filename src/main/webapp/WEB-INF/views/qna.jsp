@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A</title>
+<title>사적모임 | Q&A 목록페이지</title>
 <link href="${contextPath}/resources/css/q&a.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/header_footer.css" rel="stylesheet">
 </head>

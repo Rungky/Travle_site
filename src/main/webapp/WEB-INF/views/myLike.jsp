@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관심숙소</title>
+<title>사적모임 | 관심숙소</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/myLike.css">
 </head>

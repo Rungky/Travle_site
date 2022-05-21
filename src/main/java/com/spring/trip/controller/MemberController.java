@@ -89,27 +89,27 @@ public class MemberController {
 				String refererURL = (String) session.getAttribute("referer");
 				System.out.println("test : " + refererURL);
 				
+				String[] refererSplit = refererURL.split("/trip");
+				String url = "";
+				for(String test : refererSplit) {
+					System.out.println("refererSplit : " + test);
+					url = test;
+				}
+				
+				url = url.substring(1);
+				
 				//login이라는 단어가 포함되어 있지 않은 경우
-				if(refererURL.indexOf("login") != -1 || refererURL.indexOf("/trip") != -1) {
+				if(url.indexOf("login") == -1 || url.indexOf("/trip") != -1) {
 					session.setAttribute("id", login.getMember_id());
 					
-					String[] refererSplit = refererURL.split("/trip");
-					String url = "";
-					for(String test : refererSplit) {
-						System.out.println("refererSplit : " + test);
-						
-						url = test;
-					}
-					
-					url = url.substring(1);
-					String url_2 = "trip/";
+					System.out.println("if   indexOf : "+url.indexOf("login"));
 					
 					ModelAndView mav = new ModelAndView("redirect:" + url);
 					System.out.println("url : " + url);
 					
-					
 					return mav;
-				} else if(refererURL.indexOf("login") == -1 || refererURL.indexOf("/trip") != -1){  //login 이라는 단어가 포함되어 있는 경우 
+				} else if(url.indexOf("login") != -1 || url.indexOf("null") != -1){  //login 이라는 단어가 포함되어 있는 경우 
+					System.out.println("else if  indexOf : "+url.indexOf("login"));
 					session.setAttribute("id", login.getMember_id());
 					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
 					return mav;
@@ -145,10 +145,8 @@ public class MemberController {
 	public String idFind(@ModelAttribute MemberDTO dto, Model model) throws Exception {
 		logger.info("post 아이디 찾기 메소드 진입");
 		MemberDTO result = memberService.idFind(dto);
-		System.out.println("아이디 찾기" + result.getMember_id());
 		if (result == null) {
-			logger.info("controller if문   member_id : " + result.getMember_id());
-
+			model.addAttribute("member_id", null);
 		} else {
 			logger.info("controller else문    member_id : " + result.getMember_id());
 			model.addAttribute("member_id", result.getMember_id());

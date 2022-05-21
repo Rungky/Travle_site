@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 페이지</title>
+<title>사적모임 | 리뷰 페이지</title>
  <link href="${pageContext.request.contextPath}/resources/css/header_footer.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/css/review.css" rel="stylesheet">
 <script>

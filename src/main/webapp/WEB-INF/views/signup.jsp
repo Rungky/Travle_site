@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/signup.css">
-<title>회원가입</title>
+<title>사적모임 | 회원가입</title>
 
 <script>
 function signup() {

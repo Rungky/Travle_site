@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
-<title>로그인</title>
+<title>사적모임 | 로그인</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script>
 function loginChk() {

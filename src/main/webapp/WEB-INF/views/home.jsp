@@ -2,7 +2,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>사적모임 | Home</title>
 </head>
 <body>
 <h1>

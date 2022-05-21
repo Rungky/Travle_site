@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>예약페이지</title>
+<title>사적모임 | 예약페이지</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/page8.css" >
 <script src="https://code.jquery.com/jquery-3.6.0.js"

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>답변작성 페이지</title>
+<title>사적모임 | 답변작성 페이지</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link href="${contextPath}/resources/css/review.css" rel="stylesheet">
 </head>

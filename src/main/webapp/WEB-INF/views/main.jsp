@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/main.css">
-<title>main</title>
+<title>사적모임</title>
 
 	<%@ include file="./header.jsp"%>
 	<div class="wrap_top">
