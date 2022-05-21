@@ -126,7 +126,7 @@ public class MemberController {
 		logger.info("post 회원가입 메소드 진입");
 		System.out.println("회원가입" + dto.getMember_id());
 		System.out.println("회원가입" + dto.getMember_pw());
-		System.out.println("회원가입" + dto.getMember_name());
+		System.out.println("회원가입" + dto.getMember_names());
 		System.out.println("회원가입" + dto.getMember_tel());
 		MemberDTO result = memberService.join(dto);
 		if (result == null) {
@@ -235,7 +235,7 @@ public class MemberController {
 			
 			if(request.getParameter("member_name") != null) {
 				String member_name = request.getParameter("member_name");
-				memberDTO.setMember_name(member_name);
+				memberDTO.setMember_names(member_name);
 			}
 			if(request.getParameter("member_tel") != null) {
 				String member_tel = request.getParameter("member_tel");

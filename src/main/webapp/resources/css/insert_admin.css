@@ -1,0 +1,30 @@
+
+.nodisplay {
+    display: none;
+}
+
+.input_domrno {
+	width:300px;
+}
+.input_name {
+	width:300px;
+}
+.input_addr {
+	width:300px;
+}
+textarea {
+	width:300px;
+	height:450px;
+	resize :none;
+}
+input:focus {
+	outline : none;
+}
+textarea:focus {
+	outline : none;
+}
+
+.fl_between {
+    display: flex;
+    justify-content: space-between;
+}

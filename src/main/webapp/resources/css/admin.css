@@ -1,0 +1,60 @@
+.center {
+    text-align: center;
+}
+.fl_center {
+    display: flex;
+    justify-content: center;
+}
+
+.nodisplay {
+    display: none;
+}
+.nav {
+	display: flex;
+    justify-content: center;
+}
+.tap {
+    display: flex;  
+    justify-content: center;
+    width: 396px;
+    margin-bottom : 10px;
+}
+.tap_list {
+    padding: 10px 20px 10px 20px;
+    border: 1px solid black;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgb(128, 128, 128, 0.5);
+}
+.tap_state {
+    font-weight: 100;
+    font-size: 15px;
+    background-color: rgb(128, 128, 128, 0.3);
+}
+
+table {
+    border : 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    border : 1px solid black;
+    padding: 5px;
+}
+
+th {
+    padding: 10px;
+}
+
+.td_dorm {
+	width :70px;
+}
+input {
+    border: none;
+    margin: none;
+    padding: none;
+    font-size: 17px;    
+}
+input:focus {
+    outline: none;
+}

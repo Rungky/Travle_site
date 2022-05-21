@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.admin">
+	<select id="allMembers" resultType="memberDTO">
+		select * from tb_member
+	</select>
+	
+	<update id="adminMember" parameterType="memberDTO">
+		UPDATE tb_member SET
+			member_pw = #{member_pw},
+			member_names = #{member_names},
+			member_tel = #{member_tel}
+		WHERE member_id = #{member_id}
+	</update>
+	<select id="allDorm" resultType="dormDTO">
+		select * from tb_dorm
+	</select>
+	
+	<update id="adminDorm" parameterType="dormDTO">
+		UPDATE tb_dorm SET
+			dorm_name = #{dorm_name},
+			dorm_contents = #{dorm_contents},
+			dorm_addr = #{dorm_addr},
+			dorm_picture = #{dorm_picture},
+			opt_wifi = #{opt_wifi},
+			opt_parking = #{opt_parking},
+			opt_aircon = #{opt_aircon},
+			opt_dryer = #{opt_dryer},
+			opt_port = #{opt_port},
+			dorm_category_no = #{dorm_category_no}
+		WHERE dorm_no = #{dorm_no}
+	</update>
+	
+	<insert id="adminDormInsert" parameterType="dormDTO">
+		INSERT INTO tb_dorm
+		VALUES
+		(
+			#{dorm_no},
+			#{dorm_name},
+			#{dorm_contents},
+			#{dorm_addr},
+			#{dorm_picture},
+			0,
+			#{opt_wifi},
+			#{opt_parking},
+			#{opt_aircon},
+			#{opt_dryer},
+			#{opt_port},
+			#{dorm_category_no}
+		)
+	</insert>
+	<select id="dormnoChecking" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM tb_dorm
+		WHERE dorm_no = #{dormno}
+	</select>
+</mapper>

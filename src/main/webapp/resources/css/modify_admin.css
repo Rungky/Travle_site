@@ -1,0 +1,76 @@
+body {
+	margin : 50px;
+}
+input {
+	font-size:18px;
+	border: none;
+}
+input:focus {
+	outline : none;
+}
+.bts {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px;
+}
+button {
+    width: 100px;
+}
+
+.fl_center {
+    display: flex;
+    justify-content: center;
+}
+table {
+    border-collapse: collapse;
+    table-layout:fixed;
+    word-wrap:break-word;
+}
+
+td, th {
+    border : 1px solid black;
+    padding: 5px;
+    height: auto;
+}
+.td_dorm {
+	width:50px;
+}
+
+.nodisplay {
+    display: none;
+}
+.contents_bg_off {
+	display: none;
+}
+.contents_bg_on{
+	display : block;
+	background-color : rgb(0,0,0,0.5);
+	position:fixed;
+ 	width:100vw;
+ 	height: 100vh;
+ 	top:0;
+ 	left:0;
+ 	touch-action: none;
+}
+#hidden_contents {
+	width:40vw;
+	height : 40vh;
+	margin: -20vh 0 0 -20vw;
+ 	top: 50vh;
+ 	bottom: 50vh;
+ 	left:50vw;
+ 	right : 50vw;
+ 	position: fixed;
+ 	z-index:200;
+ 	background : white;
+ 	padding:20px;
+}
+#contents_textarea {
+	width:100%;
+	height:80%;
+	resize:none;
+}
+.ct_bt {
+	display:flex;
+	justify-content:space-between;
+}
