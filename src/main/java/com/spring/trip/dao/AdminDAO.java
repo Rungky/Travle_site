@@ -12,4 +12,5 @@ public interface AdminDAO {
 	public void adminDorm(DormDTO dto);
 	public int checkDormno(int dormno);
 	public void adminDormInsert(DormDTO dto);
+	public void adminDelDorm(int dormno);
 }

@@ -29,8 +29,7 @@
 			<button type="button" onclick="window.close()"id="bt2">닫기</button>
 		</div>
 	<script>
-		document.getElementById("mod").innerHTML = opener.$("#nextpage").attr(
-				"value");
+		document.getElementById("mod").innerHTML = opener.$("#nextpage").attr("value");
 		$(".bts").prepend($("#mod tr td:last-child").html());
 		$("#mod tr th:last-child").remove();
 		$("#mod tr td:last-child").remove();
@@ -106,7 +105,6 @@
 					}
 				})
 			}
-
 		})
 
 		$(".contents_bt").off("click").on("click", function() {
@@ -157,6 +155,7 @@
 						id : id,
 					},
 					complete : function() {
+						alert("삭제 되었습니다!");
 						opener.parent.location.reload();
 						window.close();
 					}
@@ -171,13 +170,14 @@
 						dormno : dormno,
 					},
 					complete : function() {
+						alert("삭제 되었습니다!");
 						opener.parent.location.reload();
 						window.close();
 					}
 				})
 			}
-			
 		});
+		
 	</script>
 </body>
 </html>
