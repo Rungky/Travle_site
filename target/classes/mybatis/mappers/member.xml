@@ -42,8 +42,7 @@
 	<!-- 마이페이지 세션에 있는 아이디 받아서 내정보 나타내기 -->
 	<select id="select_myMember" resultType="MemberDTO"
 		parameterType="String">
-		select member_id, rpad(substr(member_pw, 1, 2), 5, '*')
-		as member_pw,
+		select member_id, member_pw,
 		member_names, member_tel
 		from tb_member
 		WHERE member_id= #{member_id}

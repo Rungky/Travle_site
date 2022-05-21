@@ -10,31 +10,54 @@
     display: none;
 }
 
+#wrap_admin{
+    width: 85%;
+    margin: 100px auto;
+}
+
+body{
+    display: flex;
+}
+
 .insert_bt{
-	text-align: right;
+	width: 100px;
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: 500;
+	margin-bottom: 10px;
 }
 
 .nav {
+    margin-top: 100px;
 	display: flex;
-    justify-content: center;
+    justify-content: left;    
 }
+
 .tap {
     display: flex;  
+    flex-direction: column;
     justify-content: center;
-    width: 396px;
+    width: 50px;
     margin-bottom : 10px;
 }
+
 .tap_list {
+    width: 85px;
     padding: 10px 20px 10px 20px;
-    border: 1px solid black;
-    font-weight: bold;
+    border-top: 1px solid rgb(143, 142, 142);
+    border-bottom: none;
     cursor: pointer;
-    background-color: rgb(128, 128, 128, 0.5);
+    font-weight: bold;
+     font-size: 16px;
+     background-color: rgb(65, 65, 65);
+     color: white;
 }
+
 .tap_state {
-    font-weight: 100;
+    font-weight: 500;
     font-size: 15px;
-    background-color: rgb(128, 128, 128, 0.3);
+    color: black;
+    background-color: white;
 }
 
 table {
@@ -88,4 +111,40 @@ input:focus {
  	z-index:200;
  	background : white;
  	padding :30px;
+}
+
+/**/
+
+.my_info{
+    display: flex; 
+    justify-content:space-between;
+    align-items: center;
+    font-size: 1.3em;
+}
+
+#info_contents{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+#info_contents > div{
+    padding: 5px 50px;
+}
+
+#admin_form{
+    margin-top: 10px;
+    display: flex;
+}
+
+#admin_form input{
+    width: 100px;
+    height: 35px;
+    margin: 30px 15px 0;
+}
+
+.mem_info{
+    margin-left: 100px;
+    font-weight: 400;
+    color: rgb(120, 120, 120);
 }

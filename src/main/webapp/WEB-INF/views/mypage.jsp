@@ -85,22 +85,25 @@
 				<form method="post" id="modify_form" class="mypage_form1" action="${contextPath}/trip/modifyMember.do">
 						<input type="hidden" name="member_id" value="${member.member_id}"> <br>
 					<div>
-						<span>닉네임
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${member.member_names}</span>
-						<input id="tab" class="input1" type="button" value="수정"><br>
-						<input name="member_name" style="display: none;" class="re_input" 	type="text"> 
-						<input style="display: none;" onclick="modify_button_event()" class="re_input1" value="수정하기">
-						<input style="display: none;" class="re_input1" type="button"
-							value="취소"> 
-					</div>
-					<br><br><br>
-					<div>
-						<span> 전화번호 &nbsp;&nbsp;${member.member_tel}</span>
-							 <input id="tab" class="input2" type="button" value="수정"><br> 
-							<input name="member_tel" style="display: none;" class="re_input2"	type="text"> 
-							<input style="display: none;" onclick="modify_button_event()" class="re_input2_1" value="수정하기">
-							<input style="display: none;" class="re_input2_1" type="button" value="취소"> 
-					</div>
+											<span>닉네임
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${member.member_names}</span>
+											<input id="tab" class="input1" type="button" value="수정"><br>
+											<input id="input_name" name="member_name" style="display: none;"
+												class="re_input" type="text">
+											<input style="display: none;" onclick="modify_button_event()"
+												class="re_input1 modifyEvent" id="submit_name" value="수정하기">
+											<input style="display: none;" class="re_input1" type="button" value="취소">
+										</div>
+										<br><br><br>
+										<div>
+											<span> 전화번호 &nbsp;&nbsp;${member.member_tel}</span>
+											<input id="tab" class="input2" type="button" value="수정"><br>
+											<input id="input_tel" name="member_tel" style="display: none;"
+												class="re_input2" type="tel">
+											<input style="display: none;" onclick="modify_button_event()"
+												class="re_input2_1 modifyEvent btn_tel" id="submit_tel" value="수정하기">
+											<input style="display: none;" class="re_input2_1" type="button" value="취소">
+										</div>
 				</form>
 				<br>
 				<hr>
@@ -125,13 +128,41 @@
 	<%@ include file="footer.jsp"%>
 </body>
 <script>
-	function modify_button_event() {
-		if (confirm("수정 하시겠습니까?") == true) { //확인
-			document.getElementById('modify_form').submit();
-		} else { //취소
-			return;
-		}
+	
+	let input_name = document.querySelector("#input_name");
+	let input_tel = document.querySelector("#input_tel");
+	let pattern = /\s/g;
+
+	let btn_modify = document.querySelectorAll(".modifyEvent");
+	for (let i = 0; i < btn_modify.length; i++) {
+		btn_modify[i].addEventListener("click", function (event) {
+			let evtID = event.target.id;
+			if (confirm("수정 하시겠습니까?") == true) { //확인
+				if (evtID == "submit_name") {
+					if (input_name.value != "" && !(input_name.value.match(pattern)) &&input_name.value.length >=2) {
+						input_tel.value = "";
+						console.log("tel val :" + input_tel.value);
+						console.log("name_val :" + input_name.value);
+						document.getElementById('modify_form').submit();
+					} else {
+						alert("수정할 닉네임을 다시 입력해주세요 (공백없이 2자리 이상입력)");
+						return;
+					}
+				} if (evtID == "submit_tel") {
+					if (input_tel.value != "" && !(input_tel.value.match(pattern))) {
+						input_name.value = "";
+						document.getElementById('modify_form').submit();
+					} else {
+						alert("수정할 전화번호를 다시 입력해주세요 (공백없이 입력)");
+						return;
+					}
+				}
+			} else { //취소
+				return;
+			}
+		})
 	}
+	
 
 	function out_button_event() {
 		if (confirm("로그아웃 하시겠습니까?") == true) { //확인
@@ -142,12 +173,21 @@
 	}
 
 	function del_button_event() {
-		if (confirm("사적모임 페이지를 탈퇴하시겠습니까? 탈퇴한 회원은 복구되지 않습니다. ") == true) { //확인
+		
+		if (confirm("사적모임 페이지를 탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.") == true) { //확인
+			
+			let re_pw = prompt("비밀번호를 입력하세요");
+			if("${member.member_pw}" == re_pw){
 			document.getElementById('removeMember_form').submit();
+			}else{
+				alert("비밀번호가 일치하지 않습니다.");
+				return;
+			}
 		} else { //취소
 			return;
 		}
-	}
+	
+}
 </script>
 
 </html>

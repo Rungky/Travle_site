@@ -9,7 +9,7 @@
 	<div class="hd">
 		<div>
 			<form action="${contextPath}/trip/main.do">
-				<button class="bt">
+				<button class="header_bt">
 					<img class="rogo" src="${pageContext.request.contextPath}/resources/image/logo-white.png">
 				</button>
 			</form>

@@ -37,7 +37,12 @@ public class AdminController extends MultiActionController {
 	public ModelAndView admin(
 			HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
+		session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
+		
 		ModelAndView mav= new ModelAndView();
+		MemberDTO memberDTO = memberService.select_myMember(member_id);
+		mav.addObject("memberDTO",memberDTO);
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
 		List <DormDTO> dormslist = adminService.allDormsList();
