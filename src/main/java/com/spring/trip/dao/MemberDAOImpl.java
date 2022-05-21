@@ -89,13 +89,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void removeQuestion(String member_id) {
-<<<<<<< HEAD
-		sqlSession.delete("mapper.member.removeQuestion", member_id);
-=======
 		System.out.println("5");
 		sqlSession.delete("mapper.member.removeQuestion", member_id);
-		System.out.println("5");
->>>>>>> ec65eb2384e2a7c5f1ba3b95bbe2d889b9ec6a9a
 	}
 
 	@Override

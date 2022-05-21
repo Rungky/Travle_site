@@ -261,11 +261,8 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		// String member_id = (String) session.getAttribute("id");
 		memberService.removeMember(member_id);
-<<<<<<< HEAD
 		session.invalidate();
-=======
 		System.out.println("2");
->>>>>>> ec65eb2384e2a7c5f1ba3b95bbe2d889b9ec6a9a
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/trip/main.do");
 		return mav;
