@@ -36,9 +36,10 @@
 			if(!$(".one").prop("checked")){
 				alert("동의 항목을 확인해주세요!");
 				return false;
+				
 			}
 			if(!$(".two").prop("checked")){
-				alert("동의 항목을 확인해주세요!")
+				alert("동의 항목을 확인해주세요!")0
 				return false;
 			}
 		})
