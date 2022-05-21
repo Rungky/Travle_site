@@ -182,6 +182,18 @@
             window.open("http://localhost:8080/final_trip/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
         })
     }
+    
+    var list_removereply = document.querySelectorAll(".reply_doRemove");
+    console.log(list_removereply.length);
+    for(let i=0; i<list_removereply.length; i++){
+    	list_removereply[i].addEventListener("click", function(event){
+        	let removereply_no = event.target.getAttribute("data-id");
+        	var isDel = window.confirm("정말 삭제하시겠습니까?");
+        	if(isDel){
+        		location.href="http://localhost:8080/final_trip/trip/removereply.do?removereply_no="+removereply_no;	
+        	}
+        })
+    }
 </script>
 
 </html>

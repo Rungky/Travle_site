@@ -16,11 +16,7 @@
 		where question_parentno!=0
 	</select>
 	
-	<select id="countQuestion" resultType="int" parameterType="java.util.HashMap">
-		select * from tb_question
-		where question_parentno=0
-		and member_id = #{id}
-	</select>
+	 
 
 	<!-- 문의작성 -->
 	<insert id="insertNewQuestion" parameterType="questionDTO">
@@ -94,9 +90,30 @@
 		select * from tb_question
 		where question_no=#{question_no}
 	</select>
+	
 	<!-- 수정답글페이지 -->
 	<select id="selectmodReply" resultType="questionDTO" parameterType="int">
 		select * from tb_question
 		where question_no=#{question_no}
+	</select>
+	
+	<!-- 답글수정 -->
+	<update id="updateReply" parameterType="questionDTO">
+		update tb_question
+		set
+		question_contents = #{question_contents}
+		where question_no = #{question_no}
+	</update>
+	
+	<!-- 답글삭제 -->
+	<delete id="deleteReply" parameterType="int" >
+		delete from tb_question
+		where question_no = #{question_no}
+	</delete>
+	
+	<select id="countQuestion" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM tb_question
+		WHERE question_parentno = 0
+		AND member_id = #{id}
 	</select>
 </mapper>

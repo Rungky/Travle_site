@@ -45,6 +45,7 @@ function loginChk() {
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a><p></p>
 	            <form action="${ contextPath}/trip/loginCheck.do" method="post" name="f1">
+	            <input type="hidden" name="referer">
 	                <div class="login_top">
 	                    <input type="text" name="member_id" placeholder="✉️아이디" />
 	                    <input type="password" name="member_pw" placeholder="🔒비밀번호" />

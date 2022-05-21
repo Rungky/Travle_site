@@ -227,7 +227,7 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public int countQuestion(String id) {
-		int count = 0 ;
+		int count = sqlSession.selectOne("mapper.qna.countQuestion",id );
 		return count;
 	}
 
@@ -350,13 +350,13 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void updateReply(QuestionDTO questionDTO) {
-		// TODO Auto-generated method stub
+		sqlSession.update("mapper.qna.updateReply", questionDTO);
 		
 	}
 
 	@Override
 	public void deleteReply(int question_no) {
-		// TODO Auto-generated method stub
+		sqlSession.delete("mapper.qna.deleteReply", question_no);
 		
 	}
 
