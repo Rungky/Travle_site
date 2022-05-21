@@ -97,24 +97,25 @@ public class MemberController {
 				}
 				
 				url = url.substring(1);
+				System.out.println("여기 url은 ? : " + url);
 				
 				//login이라는 단어가 포함되어 있지 않은 경우
-				if(url.indexOf("login") == -1 || url.indexOf("/trip") != -1) {
+				if(url.contains("login") || url.contains("idFindCheck.do")
+						|| url.contains("pwFindCheck.do")
+						|| url.contains("signupCheck.do")
+						|| url.contains("newPw.do")
+						|| url.contains("null")) {
 					session.setAttribute("id", login.getMember_id());
 					
-					System.out.println("if   indexOf : "+url.indexOf("login"));
-					
-					ModelAndView mav = new ModelAndView("redirect:" + url);
+					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
 					System.out.println("url : " + url);
 					
 					return mav;
-				} else if(url.indexOf("login") != -1 || url.indexOf("null") != -1){  //login 이라는 단어가 포함되어 있는 경우 
-					System.out.println("else if  indexOf : "+url.indexOf("login"));
+				} else {  //login 이라는 단어가 포함되어 있는 경우 
 					session.setAttribute("id", login.getMember_id());
-					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+//					System.out.println("else if  indexOf : "+url.indexOf("login"));
+					ModelAndView mav = new ModelAndView("redirect:" + url);
 					return mav;
-				} else {
-					return null;
 				}
 			}
 		}
@@ -124,10 +125,6 @@ public class MemberController {
 	@RequestMapping(value = "/trip/signupCheck.do", method = RequestMethod.POST)
 	public String postJoin(@ModelAttribute MemberDTO dto) throws Exception {
 		logger.info("post 회원가입 메소드 진입");
-		System.out.println("회원가입" + dto.getMember_id());
-		System.out.println("회원가입" + dto.getMember_pw());
-		System.out.println("회원가입" + dto.getMember_names());
-		System.out.println("회원가입" + dto.getMember_tel());
 		MemberDTO result = memberService.join(dto);
 		if (result == null) {
 			logger.info("controller if문   member_id : " + dto.getMember_id());

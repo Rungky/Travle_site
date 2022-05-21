@@ -51,7 +51,7 @@ function signup() {
 	               </div>    
 	               <div class="signup_top">
                         <p><span class="red">* </span>닉네임</p>
-	                    <input type="text" name="member_name" id="name_1" placeholder="닉네임을 입력해 주세요" />
+	                    <input type="text" name="member_names" id="name_1" placeholder="닉네임을 입력해 주세요" />
 	                    <div class="hide_1 red_1">유효한 닉네임을 입력해 주시기 바랍니다.</div>
 	               </div>
 	               <div class="signup_top">
