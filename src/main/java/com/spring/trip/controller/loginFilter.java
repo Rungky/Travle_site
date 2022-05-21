@@ -48,6 +48,7 @@ public class loginFilter implements Filter {
 				  || path.contains("pwFindCheck.do")
 				  || path.contains("newPw.do")
 				  || path.contains("main.do")
+				  || path.contains("admin.do")
 				  ) { 
         	chain.doFilter(request, response);
             // 제외한 url이 들어 왔을때 동작할 코드 작성
