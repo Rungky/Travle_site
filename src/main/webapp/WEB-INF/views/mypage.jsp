@@ -86,7 +86,7 @@
 						<input type="hidden" name="member_id" value="${member.member_id}"> <br>
 					<div>
 						<span>닉네임
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${member.member_name}</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${member.member_names}</span>
 						<input id="tab" class="input1" type="button" value="수정"><br>
 						<input name="member_name" style="display: none;" class="re_input" 	type="text"> 
 						<input style="display: none;" onclick="modify_button_event()" class="re_input1" value="수정하기">

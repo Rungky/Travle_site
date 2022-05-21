@@ -8,7 +8,7 @@
 		insert into tb_member(member_id,
 		member_pw, member_names, member_tel)
 		values
-		(#{member_id},#{member_pw},#{member_name},#{member_tel})
+		(#{member_id},#{member_pw},#{member_names},#{member_tel})
 	</insert>
 
 	<!-- 로그인 -->
@@ -22,7 +22,7 @@
 	<select id="idFind" resultType="memberDTO">
 		select member_id from tb_member
 		where 
-		member_names = #{member_name} and member_tel = #{member_tel}
+		member_names = #{member_names} and member_tel = #{member_tel}
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
@@ -44,7 +44,7 @@
 		parameterType="String">
 		select member_id, rpad(substr(member_pw, 1, 2), 5, '*')
 		as member_pw,
-		member_names as member_name, member_tel
+		member_names, member_tel
 		from tb_member
 		WHERE member_id= #{member_id}
 	</select>
@@ -53,8 +53,8 @@
 	<update id="modifyMember" parameterType="MemberDTO">
 			UPDATE TB_MEMBER
 		<set>
-		<if  test = "member_name != null  and  member_name !=''  ">
-		MEMBER_NAMES= #{member_name} ,
+		<if  test = "member_names != null  and  member_names !=''  ">
+		MEMBER_NAMES= #{member_names} ,
 		</if>
 		<if   test = "member_pw != null  and  '' != member_pw ">
 		 MEMBER_PW = #{member_pw} ,

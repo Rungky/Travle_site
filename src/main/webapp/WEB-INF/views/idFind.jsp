@@ -14,7 +14,7 @@
 <script type="text/javascript">
 function loginChk() {
     var form = document.f1;
-    if (!form.member_name.value) {
+    if (!form.member_names.value) {
         alert("닉네임을 입력해 주십시오. ");
         form.member_name.focus();
         return;
@@ -40,7 +40,7 @@ function loginChk() {
 				<h2 style="text-align: center;">아이디 찾기</h2>
 	            <form action="${ contextPath}/trip/idFindCheck.do" method="post" name="f1">
 	                <div class="login_top">
-	                    <input type="text" name="member_name" placeholder="닉네임" />
+	                    <input type="text" name="member_names" placeholder="닉네임" />
 	                    <input type="text" name="member_tel" placeholder="전화번호" />
 	                </div>
 	                <div>
