@@ -9,6 +9,11 @@
 .nodisplay {
     display: none;
 }
+
+.insert_bt{
+	text-align: right;
+}
+
 .nav {
 	display: flex;
     justify-content: center;

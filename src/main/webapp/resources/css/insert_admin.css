@@ -1,11 +1,23 @@
 
 .nodisplay {
     display: none;
+    margin: 50px auto;
+}
+
+table{
+	margin: 0 auto;
+	text-align: left;
+}
+
+table th {
+    width: 75px;
 }
 
 .input_domrno {
 	width:300px;
+	margin-right: 10px;
 }
+
 .input_name {
 	width:300px;
 }
@@ -25,6 +37,12 @@ textarea:focus {
 }
 
 .fl_between {
+	margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.fl_between button {
+	margin: 10px;
+	width: 100px;
 }

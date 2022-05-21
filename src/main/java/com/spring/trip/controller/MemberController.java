@@ -227,7 +227,6 @@ public class MemberController {
 		@RequestMapping(value = "/trip/modifyMember.do", method = RequestMethod.POST)
 		public ModelAndView modifyMember(HttpServletRequest request, HttpServletResponse response,
 				@RequestParam("member_id") String member_id)
-			//@RequestParam("member_name") String member_name)
 				throws Exception {
 
 			MemberDTO memberDTO = new MemberDTO();
@@ -256,12 +255,13 @@ public class MemberController {
 	
 
 //회원 탈퇴
-	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.POST)
 	public ModelAndView removeMember(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("member_id") String member_id) throws Exception {
 		HttpSession session = request.getSession();
 		// String member_id = (String) session.getAttribute("id");
 		memberService.removeMember(member_id);
+		session.invalidate();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/trip/main.do");
 		return mav;
