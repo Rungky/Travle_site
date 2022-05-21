@@ -16,8 +16,11 @@
 	crossorigin="anonymous"></script>
 <script>
 
+	
+
 	$(function(){
 		bind();
+		event();
 	});
 	
 	function bind(){
@@ -39,13 +42,37 @@
 				
 			}
 			if(!$(".two").prop("checked")){
-				alert("동의 항목을 확인해주세요!")0
+				alert("동의 항목을 확인해주세요!")
 				return false;
 			}
 		})
+		
+		
 	}
 	
+	function event() {
+		if($("select[name=pay] option:selected").text() == '신용카드') {
+			console.log($("select[name=pay] option:selected").text() == '신용카드');
+			$('#pays').show();
+			$('#pay_ment').show();
+		} else if ($("select[name=pay] option:selected").text() == '페이 결제'){
+			$('#pays').show();
+			$('#pay_ment').show();
+		} else if ($("select[name=pay] option:selected").text() == '휴대폰 결제') {
+			$('#pays').show();
+			$('#pay_ment').show();
+		} 
+		
+/* 		if ($("select[name=pay] option:selected").text() == '현장결제') {
+			$('#pay_not_yet').show();
+			$('#pays').hide();
+			$('#pay_ment').hide();
+		} */
+		
+	} 
 
+
+	
 	function alarm() {
 		alert("예약이 완료되었습니다!");
 	}
@@ -122,7 +149,7 @@
 				</div>
 				<br>
 				<div class="c7">
-					<div>[ 💷결제수단선택]</div>
+					<div>[ 💳결제수단선택]</div>
 					<div>
 						<select name="pay">
 							<option value="card" selected="selected">신용카드</option>
@@ -130,6 +157,11 @@
 							<option value="phone">휴대폰 결제</option>
 							<option value="non">현장결제</option>
 						</select>
+						<div id="impor">
+							<span id="names">예약자명 :</span> <input id="real_name" class="name_input"	type="text"><br>
+							<span id="pays" style="display: none;">결제정보 입력 :</span> <input id="pay_ment" style="display: none;" class="pay_input"	type="text">
+							<span id="pay_not_yet" style="display: none;">현장에서 결제 바랍니다.</span>
+						</div>
 					</div>
 				</div>
 				<br>

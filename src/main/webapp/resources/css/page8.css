@@ -74,16 +74,28 @@ footer{
     line-height: 1.6;
 }
 
+#impor {
+	font-weight:400;
+	font-size: 16px; 
+}
 input[type=checkbox].check {
 	display: inline-block;
 	width:15px;
 }
 
+.name_input {
+	width: 60px;
+	height: 15px;
+}
 
+#pay_ment {
+	width: 100px;
+	height: 15px;
+}
 
 .name{
     width:500px;
-    height:600px;
+    height:650px;
     background-color: #ffffff;
     margin-bottom: 40px;
     color:#000000;
@@ -94,7 +106,9 @@ input[type=checkbox].check {
     padding-top: 10px; 
 }
 input{
-    width:490px;
+	margin-top: 10px;
+    width:80px;
+    height:15px;
 }
 .box{
     width:120px;
