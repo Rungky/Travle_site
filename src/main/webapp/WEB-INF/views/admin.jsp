@@ -30,7 +30,7 @@
 	        </div>
     	</div>
     </nav>
-    <div id="hidden_bg" class="cotents_bg_off"></div>
+    <div id="hidden_bg" class="nodisplay"></div>
     <div id="hidden_contents" class="nodisplay"></div>
     <div id="insert_type" data-type="insert"></div>
     <section>
@@ -185,13 +185,13 @@
         
         $(".contents_bt").off("click").on("click", function () {
         	$("#hidden_bg").addClass("contents_bg_on");
-        	$("#hidden_bg").removeClass("contents_bg_off");
+        	$("#hidden_bg").removeClass("nodisplay");
         	$("#hidden_contents").removeClass("nodisplay");
         	$("#hidden_contents").html($(this).val());
         });
         
         $("#hidden_bg").off("click").on("click", function () {
-        	$("#hidden_bg").addClass("contents_bg_off");
+        	$("#hidden_bg").addClass("nodisplay");
         	$("#hidden_bg").removeClass("contents_bg_on");
         	$("#hidden_contents").addClass("nodisplay");
         });
