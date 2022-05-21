@@ -110,7 +110,7 @@ public class AdminController extends MultiActionController {
 			String tel = request.getParameter("tel");
 			MemberDTO dto = new MemberDTO();
 			dto.setMember_id(id);
-			dto.setMember_name(name);
+			dto.setMember_names(name);
 			dto.setMember_pw(pw);
 			dto.setMember_tel(tel);
 			
