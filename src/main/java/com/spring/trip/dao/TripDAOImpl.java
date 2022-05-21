@@ -17,6 +17,7 @@ import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.LikeDTO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.PaymentDTO;
 import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
@@ -206,14 +207,19 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
-			int room_no, int dorm_no) {
+			int room_no, int dorm_no, int pay_no, int pay_check) {
 		Map map = new HashMap();
 		map.put("member", member);
-		map.put("dorm_no", dorm_no);
-		map.put("room_no", room_no);
+		System.out.println(member);
 		map.put("reserve_checkin", reserve_checkin);
 		map.put("reserve_checkout", reserve_checkout);
 		map.put("reserve_pay", reserve_pay);
+		System.out.println(reserve_pay);
+		map.put("room_no", room_no);
+		map.put("dorm_no", dorm_no);
+		map.put("pay_no", pay_no);
+		System.out.println(pay_no);
+		map.put("pay_check", pay_check);
 		sqlSession.insert("mapper.reser.insertReservation", map);
 		System.out.println("예약인서트 성공");
 	}
@@ -358,6 +364,27 @@ public class TripDAOImpl implements TripDAO{
 	public void deleteReply(int question_no) {
 		sqlSession.delete("mapper.qna.deleteReply", question_no);
 		
+	}
+
+	@Override
+	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, String real_name, String dorm_name, String room_name) {
+		Map map = new HashMap();
+		map.put("pay_check", pay_check);
+		map.put("member", member);
+		map.put("pay_ment", pay_ment);
+		map.put("pay_num", pay_num);
+		System.out.println("다오값" + pay_num);
+		map.put("real_name", real_name);
+		map.put("dorm_name", dorm_name);
+		map.put("room_name", room_name);
+		sqlSession.insert("mapper.reser.insertPayment", map);
+		System.out.println("결제인서트 성공");
+	}
+
+	@Override
+	public PaymentDTO selectPayment(String pay_num) {
+		PaymentDTO dto = sqlSession.selectOne("mapper.reser.paySelect", pay_num);
+		return dto;
 	}
 
 	

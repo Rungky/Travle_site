@@ -2,58 +2,83 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="mapper.reser">  
- <!-- <mapper namespace="com.spring.trip.mapper.TripMapper"> -->
+<mapper namespace="mapper.reser">
+	<!-- <mapper namespace="com.spring.trip.mapper.TripMapper"> -->
 
 
 
 	<!-- 예약 인서트 -->
 	<insert id="insertReservation" parameterType="java.util.HashMap">
-		insert into tb_reservation
+		insert into
+		tb_reservation
 		values(
-			tb_reservation_seq.nextval,
-			#{member},
-			sysdate,
-			#{reserve_checkin},
-			#{reserve_checkout},
-			#{reserve_pay},
-			0,
-			#{room_no},
-			#{dorm_no}
+		tb_reservation_seq.nextval,
+		#{member},
+		sysdate,
+		#{reserve_checkin},
+		#{reserve_checkout},
+		#{reserve_pay},
+		0,
+		#{room_no},
+		#{dorm_no},
+		#{pay_no},
+		#{pay_check}
 		)
 	</insert>
-	
+
 	<!-- 예약삭제 -->
 	<delete id="reserDelete" parameterType="int">
-		delete from tb_reservation
+		delete from
+		tb_reservation
 		where reserve_no = #{reserve_no}
 	</delete>
-	
+
 	<!-- 예약리스트 뽑기 -->
-	<select id="selectReservationsList" parameterType="String" resultType="java.util.HashMap" >
-		select reser.reserve_no, dorm.dorm_name,
-				room.room_name, reser.member_id,
-				reser.reserve_checkin, reser.reserve_date,
-				reser.reserve_checkout, reser.reserve_pay,
-				room.room_picture, reser.reserve_person
-		from tb_reservation reser, tb_room room, tb_dorm dorm
-		where reser.room_no = room.room_no		
-			and reser.dorm_no = room.dorm_no
-			and room.dorm_no = dorm.dorm_no
-			and reser.member_id = #{member}	
-			order by reserve_no desc
+	<select id="selectReservationsList" parameterType="String"
+		resultType="java.util.HashMap">
+		select reser.reserve_no,
+		dorm.dorm_name,
+		room.room_name, reser.member_id,
+		reser.reserve_checkin, reser.reserve_date,
+		reser.reserve_checkout, reser.reserve_pay,
+		room.room_picture, reser.reserve_person
+		from tb_reservation reser, tb_room room, tb_dorm
+		dorm
+		where reser.room_no = room.room_no
+		and reser.dorm_no = room.dorm_no
+		and room.dorm_no = dorm.dorm_no
+		and reser.member_id = #{member}
+		order by reserve_no desc
 	</select>
-	
-	<select id="memberDto" parameterType="String" resultType="memberDTO">
+
+	<select id="memberDto" parameterType="String"
+		resultType="memberDTO">
 		select * from tb_member
 		where member_id = #{member}
 	</select>
+
+
+	<!-- 결제인서트 -->
+	<insert id="insertPayment" parameterType="java.util.HashMap">
+		insert into
+		tb_payment
+		values(
+		tb_payment_seq.nextval,
+		#{pay_check},
+		#{member},
+		#{pay_ment},
+		#{pay_num},
+		#{real_name},
+		#{dorm_name},
+		#{room_name}
+		)
+	</insert>
 	
-	<select id="checkList" parameterType="java.util.HashMap" resultType="checkDTO">
-		
+	<!-- 결제정보 조회 -->
+	<select id="paySelect" parameterType="String" resultType="paymentDTO">
+		select * from tb_payment
+		where pay_num = #{pay_num}
 	</select>
-	
-	
 
 
 </mapper>

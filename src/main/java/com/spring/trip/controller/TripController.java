@@ -1,7 +1,6 @@
 package com.spring.trip.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -31,6 +30,7 @@ import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.PaymentDTO;
 import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
@@ -291,16 +291,41 @@ public class TripController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/trip/result.do", method = RequestMethod.GET)
-	public ModelAndView result(@RequestParam("dorm_no") int dorm_no, @RequestParam("room_no") int room_no,
+	public ModelAndView result(
+			@RequestParam("dorm_no") int dorm_no, 
+			@RequestParam("room_no") int room_no,
+			@RequestParam("dorm_name") String dorm_name,
+			@RequestParam("room_name") String room_name,
 			@RequestParam("reserve_checkin") Date reserve_checkin,
-			@RequestParam("reserve_checkout") Date reserve_checkout, @RequestParam("reserve_pay") int reserve_pay,
+			@RequestParam("reserve_checkout") Date reserve_checkout, 
+			@RequestParam("reserve_pay") int reserve_pay,
+			@RequestParam("pay_check") int pay_check,
+			@RequestParam("pay_ment") String pay_ment,
+			@RequestParam("pay_num") String pay_num,
+			@RequestParam("real_name") String real_name,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("인서트result진입");
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		System.out.println(dorm_no);
+		System.out.println(reserve_checkout);
+		System.out.println(pay_ment);
+		System.out.println(real_name);
+		System.out.println(pay_num);
+		
+		
 		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
-		System.out.println(reserve_checkin+"값들어가있음");
-		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no);
+		
+		tripService.insertPayment(pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
+		PaymentDTO dto = tripService.selectPayment(pay_num);
+		int pay_no = dto.getPay_no();
+		System.out.println("컨트롤러 pay_no" + pay_no);
+	
+		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no, pay_no, pay_check);
+		
+		System.out.println("결제 인서트 성공");
 		mav.addObject("member_id", member);
 		mav.setViewName("forward:/trip/history.do");
 

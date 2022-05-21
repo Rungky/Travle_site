@@ -12,6 +12,7 @@ import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.PaymentDTO;
 import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
@@ -108,10 +109,10 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
-			int room_no, int dorm_no) {
-		System.out.println("서비스 메소드 부분" + reserve_checkin);
-		tripDAO.insertReservation(member,reserve_checkin,reserve_checkout,reserve_pay,room_no,dorm_no);
-		System.out.println("인서트성공");
+			int room_no, int dorm_no, int pay_no, int pay_check) {
+		
+		tripDAO.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no ,dorm_no, pay_no, pay_check);
+		System.out.println("서비스쪽 이제 다오 메소드 들어가는중");
 	}
 
 	@Override
@@ -219,5 +220,18 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public void deleteReply(int question_no) {
 		tripDAO.deleteReply(question_no);
+	}
+	@Override
+	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, String real_name, String dorm_name, String room_name) {
+		tripDAO.insertPayment(pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
+	}
+	@Override
+	public PaymentDTO selectPayment(String pay_num) {
+		PaymentDTO dto = tripDAO.selectPayment(pay_num);
+		System.out.println("dto num " + dto.getPay_num());
+		System.out.println("dto num " + dto.getPay_no());
+		
+		return dto;
+		
 	}
 }

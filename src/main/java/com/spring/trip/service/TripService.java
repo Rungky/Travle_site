@@ -7,6 +7,7 @@ import com.spring.trip.dto.CheckDTO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.PaymentDTO;
 import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.dto.ReservationDTO;
 import com.spring.trip.dto.ReviewDTO;
@@ -30,7 +31,9 @@ public interface TripService {
 			String picture, int reserveNo, String memberId);
 	public int selectTotalQuestion();
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, 
-			int reserve_pay,int room_no, int dorm_no);
+			int reserve_pay,int room_no, int dorm_no, int pay_no, int pay_check);
+	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, 
+			String real_name,String dorm_name,String room_name);
 	public MemberDTO memberDto(String member_id);
 	public int countQuestion(String id);
 	public List<QuestionDTO> selectMemberQuestion(String id);
@@ -49,5 +52,7 @@ public interface TripService {
 	public List<QuestionDTO> selectmodReply(int question_no);
 	public void updateReply(QuestionDTO questionDTO);
 	public void deleteReply(int question_no);
+	public PaymentDTO selectPayment(String pay_num);
+	
 	
 }

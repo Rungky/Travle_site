@@ -12,6 +12,8 @@ public class ReservationDTO {
 	private int reserve_person;
 	private int room_no;
 	private int dorm_no;
+	private int pay_no;
+	private int pay_check;
 	
 	private String room_picture;
 	private String dorm_name;
@@ -89,4 +91,18 @@ public class ReservationDTO {
 	public void setRoom_picture(String room_picture) {
 		this.room_picture = room_picture;
 	}
+	
+	public int getPay_check() {
+		return pay_check;
+	}
+	public void setPay_check(int pay_check) {
+		this.pay_check = pay_check;
+	}
+	public int getPay_no() {
+		return pay_no;
+	}
+	public void setPay_no(int pay_no) {
+		this.pay_no = pay_no;
+	}
+	
 }
