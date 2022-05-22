@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>사적모임 | 비밀번호 찾기</title>
+<script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
+<script src="${contextPath}/resources/js/pwFind2.js"></script>
 </head>
 <body>
 	<div class="wrap_top">
@@ -22,11 +24,11 @@
 				<h2 style="text-align: center;">비밀번호 찾기</h2>
 	            <form action="${ contextPath}/trip/pwFindCheck.do" method="post" name="f1">
 	                <div class="login_top">
-	                    <input type="text" name="member_id" placeholder="아이디" />
-	                    <input type="text" name="member_tel" placeholder="전화번호" />
+	                    <input type="text" id="id" name="member_id" placeholder="아이디" />
+	                    <input type="text" id="tel" name="member_tel" placeholder="전화번호" />
 	                </div>
 	                <div>
-	                    <input class="find_btn" type="submit" value="찾기"/>
+	                    <input class="find_btn" id="btn" type="submit" value="찾기"/>
 	                    <input class="reset_btn" type="reset" value="취소" onclick="location.href='${contextPath}/trip/login.do'"/>
 	                </div>
 	            </form>
