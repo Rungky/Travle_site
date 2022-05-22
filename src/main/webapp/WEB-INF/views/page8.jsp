@@ -89,7 +89,7 @@
 			
 				
 				$.ajax({
-					url : "http://localhost:8080/final_trip/trip/result.do",
+					url : "${contextPath}/trip/result.do",
 					type : "get",
 					data : {
 						dorm_no : dorm_no,
@@ -107,7 +107,7 @@
 					},
 					success : function(data) {
 							console.log("성공");
-							location.href = "http://localhost:8080/final_trip/trip/history.do";
+							location.href = "${contextPath}/trip/history.do";
 						
 					},
 					fail : function(data) {
