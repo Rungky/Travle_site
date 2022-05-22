@@ -40,12 +40,17 @@ public class AdminController extends MultiActionController {
 		session = request.getSession();
 		String member_id = (String) session.getAttribute("id");
 		
+		if(!(member_id.contains("admin"))) {
+			ModelAndView mav= new ModelAndView("redirect:/trip/main.do");
+			return mav;
+		}
+		
 		ModelAndView mav= new ModelAndView();
 		MemberDTO memberDTO = memberService.select_myMember(member_id);
 		mav.addObject("memberDTO",memberDTO);
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
-		List <DormDTO> dormslist = adminService.allDormsList();
+		List<DormDTO> dormslist = adminService.allDormsList();
 		mav.addObject("dormsList", dormslist);
 		mav.setViewName("admin");
 		return mav;
