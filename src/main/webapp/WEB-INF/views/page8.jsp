@@ -80,17 +80,7 @@
 			let pay_num = document.getElementById('pay_num').value;
 			let dorm_name = $("#dorm").text();
 			let room_name = $("#room").text();
-			console.log(dorm_no);
-			console.log(room_no);
-			console.log(reserve_checkin);
-			console.log(reserve_checkout);
-			console.log(reserve_pay);
-			console.log(pay_ment);
-			console.log(real_name);
-			console.log(pay_num);
-			console.log(pay_check);
-			console.log(dorm_name);
-			console.log(room_name);
+			
 				
 				$.ajax({
 					url : "http://localhost:8080/final_trip/trip/result.do",
@@ -145,6 +135,7 @@
 				$('#phone_not_yet').show();
 				$('#pay_not_yet').hide();
 				$('#payco_not_yet').hide();
+				$('#card_not_yet').hide();
 			}
 			})
 
