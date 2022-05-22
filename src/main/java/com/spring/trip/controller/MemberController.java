@@ -282,10 +282,12 @@ public class MemberController {
 		
 		List<DormVO> dorm_list = new ArrayList<DormVO>();
 		dorm_list = memberService.selectList_likeDorm(member_id);
+		MemberDTO memberDTO = memberService.select_myMember(member_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLike");
 		mav.addObject("dorm_list", dorm_list);
+		mav.addObject("member",memberDTO);
 		mav.addObject("reserve_checkin", reserve_checkin);
 		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;
