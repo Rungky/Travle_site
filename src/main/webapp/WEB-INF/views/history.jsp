@@ -28,6 +28,7 @@
 
 		history_del();
 		hide();
+		bind();
 	})
 
 	function hide() {
@@ -96,6 +97,56 @@
 			}
 		});
 	}
+
+	function bind() {
+		let target = document.querySelectorAll('.btn_open');
+		let btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
+		let targetID;
+
+		// 팝업 열기
+		for(var i = 0; i < target.length; i++){
+		  target[i].addEventListener('click', function(){
+		    targetID = this.getAttribute('href');
+		    
+		    
+		    $.ajax({
+				url : "http://localhost:8080/final_trip/trip/Delete.do",
+				type : "get",
+				data : {
+					reserve_no : no
+				},
+				success : function(data) {
+					console.log("컨트롤러에서 넘어온 값4", data.msg);
+					if (data.msg == 0 || data.msg == 1) {
+						console.log("값 가져옴 성공");
+						location.reload();
+					}
+				},
+				fail : function(data) {
+					console.log("fail", data);
+				},
+				complete : function(data) {
+					console.log("comp", data);
+				}
+			})
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    document.querySelector(targetID).style.display = 'block';
+		  });
+		}
+
+		// 팝업 닫기
+		for(var j = 0; j < target.length; j++){
+		  btnPopClose[j].addEventListener('click', function(){
+		    this.parentNode.parentNode.style.display = 'none';
+		  });
+		}
+	}
 </script>
 </head>
 
@@ -110,8 +161,7 @@
 
 				<c:forEach var="result" items="${reserList}">
 					<table style="padding: 10px 10px 10px 10px;" id="table_css">
-						<form
-							action="${contextPath}/trip/reserDelete.do">
+						<form action="${contextPath}/trip/reserDelete.do">
 							<tr>
 								<td colspan="3">숙소 예약번호 ${result.RESERVE_NO}</td>
 								<td><input type="button" class="del check css"
@@ -123,20 +173,48 @@
 									style="width: 150px; height: 130px; padding: 10px"
 									src="${contextPath}/resources/image/room/${result.ROOM_PICTURE}"></td>
 								<td>${result.DORM_NAME}</td>
-								<td rowspan="5" class="rv">
+								<td rowspan="4" class="rv">
 									<div class="forms">
 										<a
 											href="${contextPath}/trip/review.do?reserve_no=${result.RESERVE_NO}">
-											<input type="button" class="rvbt button" id="re_button" name="action"
-												value="리뷰">
-										</a> 
-										<input type="submit" class="re button" value="예약 취소하기"
+											<input type="button" class="rvbt button" id="re_button"
+											name="action" value="리뷰">
+										</a> <input type="submit" class="re button" value="예약 취소하기"
 											data-no="${result.RESERVE_NO}"
-											onclick="return confirm('예약을 취소하시겠습니까?')">
-										<input
-										type="hidden" name="reserve_checkin"
-										value="<fmt:formatDate value='${result.RESERVE_CHECKIN}' pattern='yyyy-MM-dd' />"> 
-										<input type="hidden" name="reserve_no" value="${result.RESERVE_NO}">
+											onclick="return confirm('예약을 취소하시겠습니까?')"> <input
+											type="hidden" name="reserve_checkin"
+											value="<fmt:formatDate value='${result.RESERVE_CHECKIN}' pattern='yyyy-MM-dd' />">
+										<input type="hidden" name="reserve_no"
+											value="${result.RESERVE_NO}"><br>
+										<br>
+
+										<div class="wrap">
+											<a href="#pop_info_1" class="btn_open" data-num="${result.RESERVE_NO}">결제 정보</a> <a
+												href="#pop_info_2" class="btn_open" style="display: none;">팝업 열기2</a>
+
+
+											<div id="pop_info_1" class="pop_wrap" style="display: none;">
+												<div class="pop_inner">
+													<p class="dsc">
+														<span>결제정보</span><br>
+														<span>예약자명 : </span><br>
+														<span>결제날짜 : <fmt:formatDate
+										value="${result.RESERVE_DATE}" pattern="yyyy-MM-dd" /> </span><br>
+														<span>결제수단 : </span><br>
+														<span>> </span><br>
+														<span>결제여부 : </span>
+													</p>
+													<input type="button" class="btn_close" value="x">
+												</div>
+											</div>
+
+											<div id="pop_info_2" class="pop_wrap" style="display: none;">
+												<div class="pop_inner">
+													<p class="dsc"></p>
+													<input type="button" class="btn_close">닫기
+												</div>
+											</div>
+										</div>
 						</form>
 						</div>
 						</td>

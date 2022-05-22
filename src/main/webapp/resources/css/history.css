@@ -105,7 +105,7 @@ table {
 	font-weight: 600;
 }
 
-.re.button, .rvbt.button {
+.re.button, .rvbt.button, .btn_open {
 	background-color: #ffffff;
 	color: #000000;
 	padding: 7px 7px;
@@ -115,7 +115,25 @@ table {
 	box-shadow: 0px 0px 8px #369;
 }
 
+a{text-decoration:none;}
 
+.pop_wrap{position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); font-size:0; text-align:center;}
+.pop_wrap:after{display:inline-block; height:100%; vertical-align:middle; content:'';}
+.pop_wrap .pop_inner{display:inline-block;
+	 padding:20px 30px; 
+	 background-image:url("../image/popup.jpg"); 
+	 background-repeat: no-repeat;
+	 background-size: 100% 100%;
+	 width:600px; 
+	 height:400px;
+	 vertical-align:middle; 
+	 font-size:15px;}
+	 
+.dsc {
+	padding-top: 150px;
+	font-size: 17px;
+	font-weight: 600;
+}
 
 .right {
     text-align: right;
