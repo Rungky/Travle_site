@@ -11,24 +11,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>사적모임 | 아이디 찾기</title>
-<script type="text/javascript">
-function loginChk() {
-    var form = document.f1;
-    if (!form.member_names.value) {
-        alert("닉네임을 입력해 주십시오. ");
-        form.member_name.focus();
-        return;
-    }
- 
-    if (!form.member_tel.value) {
-        alert("전화번호를 입력해 주십시오.");
-        form.member_tel.focus(); 
-        return;
-    }
-    
-    
-}
-</script>
+<script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
+<script src="${contextPath}/resources/js/idFind.js"></script>
 </head>
 <body>
 	<div class="wrap_top">
@@ -40,11 +24,11 @@ function loginChk() {
 				<h2 style="text-align: center;">아이디 찾기</h2>
 	            <form action="${ contextPath}/trip/idFindCheck.do" method="post" name="f1">
 	                <div class="login_top">
-	                    <input type="text" name="member_names" placeholder="닉네임" />
-	                    <input type="text" name="member_tel" placeholder="전화번호" />
+	                    <input type="text" id="names" name="member_names" placeholder="닉네임" />
+	                    <input type="text" id="tel" name="member_tel" placeholder="전화번호" />
 	                </div>
 	                <div>
-	                    <input class="find_btn" type="submit" value="찾기" onclick="loginChk()"/>
+	                    <input class="find_btn" id="btn" type="submit" value="찾기" onclick="loginChk()"/>
 	                    <input class="reset_btn" type="reset" value="취소" onclick="location.href='${contextPath}/trip/login.do'"/>
 	                </div>
 	            </form>

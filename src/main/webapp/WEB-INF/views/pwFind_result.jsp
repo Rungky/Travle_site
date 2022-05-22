@@ -18,6 +18,20 @@ function newPw() {
 		document.getElementById('newPw').submit();
 	}
 }
+
+$("#pw").off("keydown").on("keydown", function(evt){
+	if(evt.keyCode == 13){  //enter : 13일때
+		$("#pw_2").focus();
+		return false;
+	}
+});
+
+$("#pw_2").off("keydown").on("keydown", function(evt){
+	if(evt.keyCode == 13){  //enter : 13일때
+		$("#change_btn").focus();
+		return false;
+	}
+});
 </script>
 
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
@@ -40,7 +54,7 @@ function newPw() {
 		                   	<div class="hide_1 red_1">비밀번호가 일치하지 않습니다.</div>
 		            	</div>
 		                <div>
-		                    <input class="login_btn_box" id="change_btn" type="submit" value="비밀번호 변경하기" onclick="newPw()"/>
+		                    <input class="login_btn_box" id="btn" type="submit" value="비밀번호 변경하기" onclick="newPw()"/>
 		                </div>
 	            	</form>
 		         </c:if>

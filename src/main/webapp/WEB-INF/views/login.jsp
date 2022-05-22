@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>사적모임 | 로그인</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
+<script src="${contextPath}/resources/js/login.js"></script>
 <script>
 function loginChk() {
     var form = document.f1;
@@ -20,15 +21,15 @@ function loginChk() {
         form.member_id.focus();
         return;
     }
+    
  
     if (!form.member_pw.value) {
         alert("비밀번호를 입력해 주십시오.");
         form.member_pw.focus(); 
         return;
     }
+    
 }
-
-
 	$("document").ready(function(){
 		if(${param.msg} == 1){
 			alert("로그인에 실패했습니다. 다시 시도해주세요!");
@@ -47,11 +48,11 @@ function loginChk() {
 	            <form action="${ contextPath}/trip/loginCheck.do" method="post" name="f1">
 	            <input type="hidden" name="referer">
 	                <div class="login_top">
-	                    <input type="text" name="member_id" placeholder="✉️아이디" />
-	                    <input type="password" name="member_pw" placeholder="🔒비밀번호" />
+	                    <input type="text" id="id" name="member_id" placeholder="✉️아이디" />
+	                    <input type="password" id="pw" name="member_pw" placeholder="🔒비밀번호" />
 	                </div>
 	                <div>
-	                    <input class="login_btn_box" type="submit" value="로그인" onclick="loginChk()"/>
+	                    <input class="login_btn_box" id="btn" type="submit" value="로그인" onclick="loginChk()"/>
 	                </div>
 	            </form>
                 <p>

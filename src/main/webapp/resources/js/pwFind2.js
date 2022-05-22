@@ -9,14 +9,14 @@ function init(){
 
 function bind(){
 	
-	$("#pw").off("keydown").on("keydown", function(evt){
+	$("#id").off("keydown").on("keydown", function(evt){
 		if(evt.keyCode == 13){  //enter : 13일때
-			$("#pw_2").focus();
+			$("#tel").focus();
 			return false;
 		}
 	});
 
-    $("#pw_2").off("keydown").on("keydown", function(evt){
+    $("#tel").off("keydown").on("keydown", function(evt){
 		if(evt.keyCode == 13){  //enter : 13일때
 			$("#btn").focus();
 			return false;
