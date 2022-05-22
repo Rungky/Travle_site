@@ -53,6 +53,7 @@ public interface TripService {
 	public void updateReply(QuestionDTO questionDTO);
 	public void deleteReply(int question_no);
 	public PaymentDTO selectPayment(String pay_num);
-	
+	public int paynoSelect(int reserve_no);
+	public PaymentDTO nopaynoSelect(int pay_no);
 	
 }

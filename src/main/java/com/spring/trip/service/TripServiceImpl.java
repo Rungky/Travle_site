@@ -234,4 +234,16 @@ public class TripServiceImpl implements TripService {
 		return dto;
 		
 	}
+	@Override
+	public int paynoSelect(int reserve_no) {
+		int pay_no = tripDAO.paynoSelect(reserve_no);
+		System.out.println("서비스에서 나온 pay_no값 : " + pay_no);
+		return pay_no;
+	}
+	@Override
+	public PaymentDTO nopaynoSelect(int pay_no) {
+		PaymentDTO dto = tripDAO.nopaynoSelect(pay_no);
+		System.out.println("서비스에서 나온 pay_no로 인한 dto결과값: " + dto );
+		return dto;
+	}
 }

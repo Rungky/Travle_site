@@ -374,6 +374,49 @@ public class TripController extends MultiActionController {
 		return resMap;
 	}
 
+	
+	@RequestMapping(value = "/trip/bridge.do", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONObject bridge(
+			@RequestParam("reserve_no") int reserve_no, 
+			HttpServletRequest request,			HttpServletResponse response) {
+		JSONObject resMap = new JSONObject();
+		PaymentDTO dto = new PaymentDTO();
+		try {
+			System.out.println("bridge.do 진입함");
+			
+			
+			int pay_no = tripService.paynoSelect(reserve_no);
+			dto = tripService.nopaynoSelect(pay_no);
+			String real_name= dto.getReal_name();
+			String pay_ment = dto.getPay_ment();
+			String pay_num = dto.getPay_num();
+			String dorm_name = dto.getDorm_name();
+			String room_name = dto.getRoom_name();
+			int pay_check = dto.getPay_check();
+			resMap.put("real_name", real_name);
+			resMap.put("pay_ment", pay_ment);
+			resMap.put("pay_num", pay_num);
+			resMap.put("dorm_name", dorm_name);
+			resMap.put("room_name", room_name);
+			resMap.put("pay_check", pay_check);
+			
+			System.out.println("resMAp에 담아준 값은: " + real_name);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resMap;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/trip/history.do", method = RequestMethod.GET)
 	public ModelAndView history(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("history.do 진입");

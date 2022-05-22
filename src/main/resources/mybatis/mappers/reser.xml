@@ -80,5 +80,15 @@
 		where pay_num = #{pay_num}
 	</select>
 
+ 
+	<select id="paynoSelect" parameterType="int" resultType="int">
+		select pay_no from tb_reservation
+		where reserve_no = #{reserve_no}
+	</select>
+	
+	<select id="nopaynoSelect" parameterType="int" resultType="paymentDTO">
+		select * from tb_payment
+		where pay_no = #{pay_no}
+	</select>
 
 </mapper>

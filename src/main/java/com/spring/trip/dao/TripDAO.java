@@ -56,4 +56,6 @@ public interface TripDAO {
 	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, 
 			String real_name,String dorm_name,String room_name);
 	public PaymentDTO selectPayment(String pay_num);
+	public int paynoSelect(int reserve_no);
+	public PaymentDTO nopaynoSelect(int pay_no);
 }

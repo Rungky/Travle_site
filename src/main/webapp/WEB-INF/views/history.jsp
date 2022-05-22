@@ -107,19 +107,29 @@
 		for(var i = 0; i < target.length; i++){
 		  target[i].addEventListener('click', function(){
 		    targetID = this.getAttribute('href');
-		    
-		    
+		    let payCheck;
+		    let reserve_no = $(this).data("reserveno")
 		    $.ajax({
-				url : "http://localhost:8080/final_trip/trip/Delete.do",
+				url : "http://localhost:8080/final_trip/trip/bridge.do",
 				type : "get",
 				data : {
-					reserve_no : no
+					reserve_no : reserve_no
 				},
 				success : function(data) {
-					console.log("컨트롤러에서 넘어온 값4", data.msg);
-					if (data.msg == 0 || data.msg == 1) {
-						console.log("값 가져옴 성공");
-						location.reload();
+					console.log("컨트롤러에서 넘어온 값", data.real_name);
+					console.log("컨트롤러에서 넘어온 값", data.pay_ment);
+					console.log("컨트롤러에서 넘어온 값", data.pay_num);
+					$('.real_name').text(data.real_name);
+					$('.pay_ment').text(data.pay_ment);
+					$('.pay_num').text(data.pay_num);
+					$('.dorm_name').text(data.dorm_name);
+					$('.room_name').text(data.room_name);
+					if(1 == data.pay_check) {
+						payCheck = "결제완료";
+						$('.pay_check').text(payCheck); 
+					} else if(0 == data.pay_check) {
+						payCheck = "미결제";
+						$('.pay_check').text(payCheck);
 					}
 				},
 				fail : function(data) {
@@ -129,12 +139,6 @@
 					console.log("comp", data);
 				}
 			})
-		    
-		    
-		    
-		    
-		    
-		    
 		    
 		    document.querySelector(targetID).style.display = 'block';
 		  });
@@ -189,7 +193,7 @@
 										<br>
 
 										<div class="wrap">
-											<a href="#pop_info_1" class="btn_open" data-num="${result.RESERVE_NO}">결제 정보</a> <a
+											<a href="#pop_info_1" class="btn_open" data-reserveno="${result.RESERVE_NO}">결제 정보</a> <a
 												href="#pop_info_2" class="btn_open" style="display: none;">팝업 열기2</a>
 
 
@@ -197,12 +201,13 @@
 												<div class="pop_inner">
 													<p class="dsc">
 														<span>결제정보</span><br>
-														<span>예약자명 : </span><br>
+														<span>예약자명 : <span class="real_name"></span> </span><br>
 														<span>결제날짜 : <fmt:formatDate
 										value="${result.RESERVE_DATE}" pattern="yyyy-MM-dd" /> </span><br>
-														<span>결제수단 : </span><br>
-														<span>> </span><br>
-														<span>결제여부 : </span>
+														<span>결제수단 : <span class="pay_ment"></span></span><br>
+														<span>> <span class="pay_num"></span></span><br>
+														<span>결제여부 : <span class="pay_check"></span></span></span><br>
+														<span>상품명 : <span class="dorm_name"></span> / <span class="room_name"></span></span>
 													</p>
 													<input type="button" class="btn_close" value="x">
 												</div>

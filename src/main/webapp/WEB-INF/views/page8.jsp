@@ -86,7 +86,7 @@
 			let pay_num = document.getElementById('pay_num').value;
 			let dorm_name = $("#dorm").text();
 			let room_name = $("#room").text();
-			if(pay_num == '') pay_num = "현장결제 - 카드번호 없음";
+			if(pay_num == '') pay_num = "현장에서 결제 바랍니다.";
 			
 				
 				$.ajax({

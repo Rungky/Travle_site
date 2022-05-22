@@ -387,5 +387,17 @@ public class TripDAOImpl implements TripDAO{
 		return dto;
 	}
 
+	@Override
+	public int paynoSelect(int reserve_no) {
+		int pay_no = sqlSession.selectOne("mapper.reser.paynoSelect",reserve_no );
+		return pay_no;
+	}
+
+	@Override
+	public PaymentDTO nopaynoSelect(int pay_no) {
+		PaymentDTO dto = sqlSession.selectOne("mapper.reser.nopaynoSelect",pay_no );
+		return dto;
+	}
+
 	
 }
