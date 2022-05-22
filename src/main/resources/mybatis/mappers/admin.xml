@@ -11,7 +11,8 @@
 		UPDATE tb_member SET
 			member_pw = #{member_pw},
 			member_names = #{member_names},
-			member_tel = #{member_tel}
+			member_tel = #{member_tel},
+			member_authority = #{member_authority}
 		WHERE member_id = #{member_id}
 	</update>
 	<select id="allDorm" resultType="dormDTO">

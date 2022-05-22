@@ -44,6 +44,7 @@
 				let pw = $("#pw").val();
 				let name = $("#name").val();
 				let tel = $("#tel").val();
+				let authority = $("#authority").val();
 				$.ajax({
 					url : "update_admin.do",
 					type : "post",
@@ -52,7 +53,8 @@
 						id : id,
 						pw : pw,
 						name : name,
-						tel : tel
+						tel : tel,
+						authority : authority
 					},
 					complete : function() {
 						opener.parent.location.reload();

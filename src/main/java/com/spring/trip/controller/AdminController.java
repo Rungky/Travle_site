@@ -40,13 +40,14 @@ public class AdminController extends MultiActionController {
 		session = request.getSession();
 		String member_id = (String) session.getAttribute("id");
 		
-		if(!(member_id.contains("admin"))) {
+		MemberDTO memberDTO =memberService.select_myMember(member_id);
+		
+		if(!(memberDTO.getMember_authority().equals("admin"))) {
 			ModelAndView mav= new ModelAndView("redirect:/trip/main.do");
 			return mav;
 		}
 		
 		ModelAndView mav= new ModelAndView();
-		MemberDTO memberDTO = memberService.select_myMember(member_id);
 		mav.addObject("memberDTO",memberDTO);
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
@@ -120,11 +121,15 @@ public class AdminController extends MultiActionController {
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String tel = request.getParameter("tel");
+			String authority = request.getParameter("authority");
 			MemberDTO dto = new MemberDTO();
 			dto.setMember_id(id);
 			dto.setMember_names(name);
 			dto.setMember_pw(pw);
 			dto.setMember_tel(tel);
+			dto.setMember_authority(authority);
+			
+			System.out.println("admin member업데이트 전 :"+dto.toString());
 			
 			adminService.adminMember(dto);
 			System.out.println("업데이트 성공");

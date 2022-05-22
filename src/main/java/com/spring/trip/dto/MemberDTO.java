@@ -5,15 +5,13 @@ public class MemberDTO {
 	private String member_pw;
 	private String member_names;
 	private String member_tel;
-	
-	
+	private String member_authority;
 	
 	@Override
 	public String toString() {
 		return "MemberDTO [member_id=" + member_id + ", member_pw=" + member_pw + ", member_names=" + member_names
-				+ ", member_tel=" + member_tel + "]";
+				+ ", member_tel=" + member_tel + ", member_authority=" + member_authority + "]";
 	}
-	
 	
 	public String getMember_id() {
 		return member_id;
@@ -39,5 +37,16 @@ public class MemberDTO {
 	public void setMember_tel(String member_tel) {
 		this.member_tel = member_tel;
 	}
+	public String getMember_authority() {
+		return member_authority;
+	}
+	public void setMember_authority(String member_authority) {
+		this.member_authority = member_authority;
+	}
+	
+	
+	
+
+	
 
 }

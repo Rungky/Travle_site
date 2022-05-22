@@ -36,9 +36,6 @@
         <div id="st0">
                     <div class="my_info">
                         <div>
-                            <!--
-                            <img src="https://cdn.pixabay.com/photo/2019/06/04/21/53/airplane-4252410_960_720.jpg "
-                                style="width: 300px;">-->
                             <img src="${contextPath }/resources/image/main2.jpg" style="width: 500px">
                         </div>
 
@@ -74,6 +71,7 @@
                             <th>비밀번호</th>
                             <th>닉네임</th>
                             <th>전화번호</th>
+                            <th>권한</th>
                             <th>수정</th>
                         </tr>
                     </thead>
@@ -85,6 +83,7 @@
                             <td><input type="text" id="pw" name="pw" readonly value="${member.member_pw}"></td>
                             <td><input type="text" id="name" name="name" readonly value="${member.member_names}"></td>
                             <td><input type="text" id="tel" name="tel" readonly value="${member.member_tel}"></td>
+                            <td><input type="text" id="authority" name="authority" readonly value="${member.member_authority}"></td>
                             <td style="text-align: center;"><button class="bt" name="type" value="mem">수정하기</button></td>
                         </tr>
                     </c:forEach>
