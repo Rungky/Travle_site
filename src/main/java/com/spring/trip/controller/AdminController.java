@@ -28,6 +28,8 @@ public class AdminController extends MultiActionController {
 	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private MemberService memberService;
 	
 	HttpSession session;
 	
@@ -35,7 +37,12 @@ public class AdminController extends MultiActionController {
 	public ModelAndView admin(
 			HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
+		session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
+		
 		ModelAndView mav= new ModelAndView();
+		MemberDTO memberDTO = memberService.select_myMember(member_id);
+		mav.addObject("memberDTO",memberDTO);
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
 		List <DormDTO> dormslist = adminService.allDormsList();
@@ -149,5 +156,21 @@ public class AdminController extends MultiActionController {
 		if(dormChecking >0)
 			data = "1";
 		return data;
+	}
+	
+	@RequestMapping(value="/trip/delete_admin.do", method=RequestMethod.POST)
+	public void adminDelete(
+			@RequestParam("type") String type,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		if(type.equals("mem")) {
+			String id = request.getParameter("id");
+			memberService.removeMember(id);
+			System.out.println("삭제 성공");
+		} else if(type.equals("dorm")) {
+			int dormno = Integer.parseInt(request.getParameter("dormno"));
+			System.out.println("dorm 삭제 성공");
+			adminService.adminDelDorm(dormno);
+		}
 	}
 }

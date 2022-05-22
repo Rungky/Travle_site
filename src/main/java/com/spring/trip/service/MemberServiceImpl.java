@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 	public void removeMember(String member_id) throws Exception {
 		memberDAO.removeComment(member_id);
 		memberDAO.removeReview(member_id);
+		memberDAO.removePayment(member_id);
 		memberDAO.removeReservation(member_id);
 		memberDAO.removeLike(member_id);
 		memberDAO.removeQuestion(member_id);

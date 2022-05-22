@@ -10,9 +10,14 @@ input:focus {
 }
 .bts {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 50px;
 }
+
+.bts button {
+    margin: 0 5px;
+}
+
 button {
     width: 100px;
 }

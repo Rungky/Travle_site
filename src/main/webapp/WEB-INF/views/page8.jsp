@@ -8,10 +8,16 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <title>예약페이지</title>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/header_footer.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/page8.css">
+=======
+<title>사적모임 | 예약페이지</title>
+<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/page8.css" >
+>>>>>>> c9eda41b949d27e910f710773541b6f57c636332
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>

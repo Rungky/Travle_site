@@ -1,41 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${ pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>사적모임 | Document</title>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header_footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 
 <body>
-    <header>
-        <div class="center">
-            <a href="/project_trip/trip">
-                <img width="400" height="210" src="${pageContext.request.contextPath}/resources/image/logo-black.png" alt="로고">
-            </a>
-        </div>
-    </header>
+    <%@include file="header.jsp" %>
     <nav>
     	<div class="nav">
 	        <div class="tap">
-	            <div data-tap="st1" class="tap_list">회원 관리</div>
+	            <div data-tap="st0" class="tap_list">내 정보</div>
+                <div data-tap="st1" class="tap_list tap_state">회원 관리</div>
 	            <div data-tap="st2" class="tap_list tap_state">숙소 관리</div>
 <!-- 	            <div data-tap="st3" class="tap_list tap_state">문의 관리</div> -->
 	        </div>
     	</div>
     </nav>
+    <div id="wrap_admin">
     <div id="hidden_bg" class="nodisplay"></div>
     <div id="hidden_contents" class="nodisplay"></div>
     <div id="insert_type" data-type="insert"></div>
     <section>
         <div class="fl_center">
-            <div id="st1">
+        <div id="st0">
+                    <div class="my_info">
+                        <div>
+                            <!--
+                            <img src="https://cdn.pixabay.com/photo/2019/06/04/21/53/airplane-4252410_960_720.jpg "
+                                style="width: 300px;">-->
+                            <img src="${contextPath }/resources/image/main2.jpg" style="width: 500px">
+                        </div>
+
+                        <div id="info_contents" >
+                            <div>
+                                <h3>관리자 페이지</h3>
+                                <p>환영합니다. ${memberDTO.member_names} 님</p>
+                            </div>
+                            <div>
+                                아이디 &nbsp;&nbsp;<span class="mem_info">${memberDTO.member_id}</span> <br>
+                                닉네임&nbsp;&nbsp;<span class="mem_info"> ${memberDTO.member_names} </span><br>
+                                전화번호<span class="mem_info">${memberDTO.member_tel} </span><br>
+                            </div>
+                             <div id="admin_form">
+                                <form id="logout_form" action="${contextPath}/trip/logoutCheck.do">
+                                    <input id="btn_logout" type="button" value="로그아웃">
+                                </form>
+                                <form id="withdraw_form" method="post" action="${contextPath}/trip/removeMember.do">
+                                    <input id="btn_withdraw" type="button" value="회원탈퇴">
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <!---->
+            <div id="st1" class="nodisplay">
             	<div class="nodisplay" style="text-align:center;"><button data-type="mem" class="insert_bt" type="button">추가</button></div>
                 <table>
                     <thead>
@@ -62,7 +92,7 @@
                 </table>
             </div>
             <div id="st2" class="nodisplay">
-            	<div style="text-align:center;"><button data-type="dorm" class="insert_bt" type="button">추가2</button></div>
+            	<div style="text-align:right;"><button data-type="dorm" class="insert_bt" type="button">숙소추가</button></div>
                 <table> 
                     <thead>
                         <tr>
@@ -157,6 +187,7 @@
             </div>
         </div>
         <input type="hidden" id="nextpage" value="">
+        </div>
     </section>
 
     <script>
@@ -207,6 +238,24 @@
             var _top = Math.ceil(( window.screen.height - _height )/2); 
             var _window = window.open("insert_admin.do", "insert", "width="+_width+",height="+_height+", left="+_left+",top="+_top);
         });
+        
+        /*-----*/
+
+        $("#btn_logout").off("click").on("click", function(){
+            if(confirm("로그아웃하시겠습니까?")==true){
+                $("#logout_form").submit();
+            }else{
+                return;
+            }
+        })
+        $("#btn_withdraw").off("click").on("click", function(){
+            if(confirm("탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.")==true){
+                $("#withdraw_form").submit();
+            }else{
+                return;
+            }
+        })
+       
     </script>
 </body>
 

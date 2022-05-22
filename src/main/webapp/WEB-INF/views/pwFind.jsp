@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
-<title>로그인</title>
+<title>사적모임 | 비밀번호 찾기</title>
 </head>
 <body>
 	<div class="wrap_top">

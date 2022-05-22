@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사적모임 | Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/insert_admin.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 

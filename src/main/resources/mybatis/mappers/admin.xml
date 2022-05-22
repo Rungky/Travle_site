@@ -55,4 +55,9 @@
 		SELECT COUNT(*) FROM tb_dorm
 		WHERE dorm_no = #{dormno}
 	</select>
+	
+	<delete id="adminDormDelete" parameterType="int">
+		DELETE FROM tb_dorm
+		WHERE dorm_no = #{dormno}
+	</delete>
 </mapper>

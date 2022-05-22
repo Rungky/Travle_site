@@ -89,32 +89,33 @@ public class MemberController {
 				String refererURL = (String) session.getAttribute("referer");
 				System.out.println("test : " + refererURL);
 				
+				String[] refererSplit = refererURL.split("/trip");
+				String url = "";
+				for(String test : refererSplit) {
+					System.out.println("refererSplit : " + test);
+					url = test;
+				}
+				
+				url = url.substring(1);
+				System.out.println("여기 url은 ? : " + url);
+				
 				//login이라는 단어가 포함되어 있지 않은 경우
-				if(refererURL.indexOf("login") != -1 || refererURL.indexOf("/trip") != -1) {
+				if(url.contains("login") || url.contains("idFindCheck.do")
+						|| url.contains("pwFindCheck.do")
+						|| url.contains("signupCheck.do")
+						|| url.contains("newPw.do")
+						|| url.contains("null")) {
 					session.setAttribute("id", login.getMember_id());
 					
-					String[] refererSplit = refererURL.split("/trip");
-					String url = "";
-					for(String test : refererSplit) {
-						System.out.println("refererSplit : " + test);
-						
-						url = test;
-					}
-					
-					url = url.substring(1);
-					String url_2 = "trip/";
-					
-					ModelAndView mav = new ModelAndView("redirect:" + url);
+					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
 					System.out.println("url : " + url);
 					
-					
 					return mav;
-				} else if(refererURL.indexOf("login") == -1 || refererURL.indexOf("/trip") != -1){  //login 이라는 단어가 포함되어 있는 경우 
+				} else {  //login 이라는 단어가 포함되어 있는 경우 
 					session.setAttribute("id", login.getMember_id());
-					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+//					System.out.println("else if  indexOf : "+url.indexOf("login"));
+					ModelAndView mav = new ModelAndView("redirect:" + url);
 					return mav;
-				} else {
-					return null;
 				}
 			}
 		}
@@ -124,10 +125,6 @@ public class MemberController {
 	@RequestMapping(value = "/trip/signupCheck.do", method = RequestMethod.POST)
 	public String postJoin(@ModelAttribute MemberDTO dto) throws Exception {
 		logger.info("post 회원가입 메소드 진입");
-		System.out.println("회원가입" + dto.getMember_id());
-		System.out.println("회원가입" + dto.getMember_pw());
-		System.out.println("회원가입" + dto.getMember_names());
-		System.out.println("회원가입" + dto.getMember_tel());
 		MemberDTO result = memberService.join(dto);
 		if (result == null) {
 			logger.info("controller if문   member_id : " + dto.getMember_id());
@@ -145,10 +142,8 @@ public class MemberController {
 	public String idFind(@ModelAttribute MemberDTO dto, Model model) throws Exception {
 		logger.info("post 아이디 찾기 메소드 진입");
 		MemberDTO result = memberService.idFind(dto);
-		System.out.println("아이디 찾기" + result.getMember_id());
 		if (result == null) {
-			logger.info("controller if문   member_id : " + result.getMember_id());
-
+			model.addAttribute("member_id", null);
 		} else {
 			logger.info("controller else문    member_id : " + result.getMember_id());
 			model.addAttribute("member_id", result.getMember_id());
@@ -227,7 +222,6 @@ public class MemberController {
 		@RequestMapping(value = "/trip/modifyMember.do", method = RequestMethod.POST)
 		public ModelAndView modifyMember(HttpServletRequest request, HttpServletResponse response,
 				@RequestParam("member_id") String member_id)
-			//@RequestParam("member_name") String member_name)
 				throws Exception {
 
 			MemberDTO memberDTO = new MemberDTO();
@@ -256,12 +250,13 @@ public class MemberController {
 	
 
 //회원 탈퇴
-	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.POST)
 	public ModelAndView removeMember(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("member_id") String member_id) throws Exception {
 		HttpSession session = request.getSession();
 		// String member_id = (String) session.getAttribute("id");
 		memberService.removeMember(member_id);
+		session.invalidate();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/trip/main.do");
 		return mav;
@@ -287,10 +282,12 @@ public class MemberController {
 		
 		List<DormVO> dorm_list = new ArrayList<DormVO>();
 		dorm_list = memberService.selectList_likeDorm(member_id);
+		MemberDTO memberDTO = memberService.select_myMember(member_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLike");
 		mav.addObject("dorm_list", dorm_list);
+		mav.addObject("member",memberDTO);
 		mav.addObject("reserve_checkin", reserve_checkin);
 		mav.addObject("reserve_checkout", reserve_checkout);
 		return mav;

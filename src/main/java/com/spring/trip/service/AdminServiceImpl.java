@@ -46,6 +46,11 @@ public class AdminServiceImpl implements AdminService{
 	public void adminDormInsert(DormDTO dto) {
 		adminDAO.adminDormInsert(dto);
 	}
+
+	@Override
+	public void adminDelDorm(int dormno) {
+		adminDAO.adminDelDorm(dormno);
+	}
 	
 
 }

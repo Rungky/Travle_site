@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A</title>
+<title>사적모임 | Q&A 목록페이지</title>
 <link href="${contextPath}/resources/css/q&a.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/header_footer.css" rel="stylesheet">
 </head>
@@ -71,7 +71,7 @@
 					<c:if test="${nowPageCount != 1}">
 						<form>
 							<button class="pagebt" name="action" value="qna.do">이전</button>
-							<input type="hidden" name="nowPage" value="${(nowPageCount-1)*5-1}">
+							<input type="hidden" name="nowPage" value="${(nowPageCount-1)*5}">
 						</form>
 					</c:if>
 					<c:if test="${nowPageCount != totalPageCount}">
@@ -148,7 +148,7 @@
     for(let i=0; i<list_answer.length; i++){
         list_answer[i].addEventListener("click", function(event){
         	let product_no = event.target.getAttribute("data-id");
-            window.open("http://localhost:8080/final_trip/trip/answerqna.do?product_no="+product_no,"answer","width: 600px");
+            window.open("${contextPath}/trip/answerqna.do?product_no="+product_no,"answer","width: 600px");
         })
     }
     
@@ -157,7 +157,7 @@
     for(let i=0; i<list_mod.length; i++){
         list_mod[i].addEventListener("click", function(event){
         	let select_no = event.target.getAttribute("data-id");
-        	 window.open("http://localhost:8080/final_trip/trip/modwrite.do?select_no="+select_no,"mod","width: 600px");
+        	 window.open("${contextPath}/trip/modwrite.do?select_no="+select_no,"mod","width: 600px");
         })
     }
     
@@ -168,7 +168,7 @@
         	let remove_no = event.target.getAttribute("data-id");
         	var isDel = window.confirm("정말 삭제하시겠습니까?");
         	if(isDel){
-        		location.href="http://localhost:8080/final_trip/trip/removeqna.do?remove_no="+remove_no;	
+        		location.href="${contextPath}/trip/removeqna.do?remove_no="+remove_no;	
         	}
         })
     }
@@ -179,7 +179,7 @@
     	list_modreply[i].addEventListener("click", function(event){
         	let reply_no = event.target.getAttribute("data-id");
         	let parent_no = event.target.getAttribute("data-parentid");
-            window.open("http://localhost:8080/final_trip/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
+            window.open("${contextPath}/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
         })
     }
     
@@ -190,7 +190,7 @@
         	let removereply_no = event.target.getAttribute("data-id");
         	var isDel = window.confirm("정말 삭제하시겠습니까?");
         	if(isDel){
-        		location.href="http://localhost:8080/final_trip/trip/removereply.do?removereply_no="+removereply_no;	
+        		location.href="${contextPath}/trip/removereply.do?removereply_no="+removereply_no;	
         	}
         })
     }

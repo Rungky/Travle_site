@@ -47,4 +47,9 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.insert("mapper.admin.adminDormInsert",dto);
 	}
 
+	@Override
+	public void adminDelDorm(int dormno) {
+		sqlSession.delete("mapper.admin.adminDormDelete", dormno);
+	}
+
 }

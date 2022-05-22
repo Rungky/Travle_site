@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>details</title>
+    <title>사적모임 | details</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header_footer.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
