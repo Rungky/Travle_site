@@ -78,6 +78,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+	public void removePayment(String member_id) {
+		sqlSession.delete("mapper.member.removePayment", member_id);
+	}
+	
+	@Override
 	public void removeReservation(String member_id) {
 		sqlSession.delete("mapper.member.removeReservation", member_id);
 	}

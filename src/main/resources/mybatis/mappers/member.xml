@@ -97,6 +97,12 @@
 		WHERE member_id= #{member_id}
 	</delete>
 	
+	<!-- 결제정보 삭제 -->
+	<delete id="removePayment" parameterType="String">
+		DELETE FROM TB_PAYMENT
+		WHERE member_id= #{member_id}
+	</delete>
+	
 	<!-- 예약내역 삭제 -->
 	<delete id="removeReservation" parameterType="String">
 		DELETE FROM TB_RESERVATION

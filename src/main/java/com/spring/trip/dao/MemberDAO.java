@@ -26,6 +26,7 @@ public interface MemberDAO {
 	// 회원 탈퇴 
 	public void removeComment(String member_id);
 	public void removeReview(String member_id);
+	public void removePayment(String member_id);
 	public void removeReservation(String member_id);
 	public void removeLike(String member_id);
 	public void removeQuestion(String member_id);
