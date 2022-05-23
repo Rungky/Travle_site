@@ -109,7 +109,7 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
-			int room_no, int dorm_no, int pay_no, int pay_check) {
+			int room_no, int dorm_no, long pay_no, int pay_check) {
 		
 		tripDAO.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no ,dorm_no, pay_no, pay_check);
 		System.out.println("서비스쪽 이제 다오 메소드 들어가는중");
@@ -222,28 +222,32 @@ public class TripServiceImpl implements TripService {
 		tripDAO.deleteReply(question_no);
 	}
 	@Override
-	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, String real_name, String dorm_name, String room_name) {
-		tripDAO.insertPayment(pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
+	public void insertPayment(long pay_no, int pay_check, String member, String pay_ment, String pay_num, String real_name, String dorm_name, String room_name) {
+		tripDAO.insertPayment(pay_no, pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
 	}
 	@Override
-	public PaymentDTO selectPayment(String pay_num) {
-		PaymentDTO dto = tripDAO.selectPayment(pay_num);
+	public PaymentDTO selectPayment(long pay_no) {
+		PaymentDTO dto = tripDAO.nopaynoSelect(pay_no);
 		System.out.println("dto num " + dto.getPay_num());
-		System.out.println("dto num " + dto.getPay_no());
+		System.out.println("dto no " + dto.getPay_no());
 		
 		return dto;
 		
 	}
 	@Override
-	public int paynoSelect(int reserve_no) {
-		int pay_no = tripDAO.paynoSelect(reserve_no);
+	public long paynoSelect(int reserve_no) {
+		long pay_no = tripDAO.paynoSelect(reserve_no);
 		System.out.println("서비스에서 나온 pay_no값 : " + pay_no);
 		return pay_no;
 	}
 	@Override
-	public PaymentDTO nopaynoSelect(int pay_no) {
+	public PaymentDTO nopaynoSelect(long pay_no) {
 		PaymentDTO dto = tripDAO.nopaynoSelect(pay_no);
 		System.out.println("서비스에서 나온 pay_no로 인한 dto결과값: " + dto );
 		return dto;
+	}
+	@Override
+	public int reviewChecking(int reserno) {
+		return tripDAO.reviewChecking(reserno);
 	}
 }

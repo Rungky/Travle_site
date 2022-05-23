@@ -35,12 +35,12 @@
 
 	<!-- 예약리스트 뽑기 -->
 	<select id="selectReservationsList" parameterType="String"
-		resultType="java.util.HashMap">
+		resultType="reservationDTO">
 		select reser.reserve_no,
 		dorm.dorm_name,
 		room.room_name, reser.member_id,
 		reser.reserve_checkin, reser.reserve_date,
-		reser.reserve_checkout, reser.reserve_pay,
+		reser.reserve_checkout, reser.reserve_pay, reser.pay_check,
 		room.room_picture, reser.reserve_person
 		from tb_reservation reser, tb_room room, tb_dorm
 		dorm
@@ -63,7 +63,7 @@
 		insert into
 		tb_payment
 		values(
-		tb_payment_seq.nextval,
+		#{pay_no},
 		#{pay_check},
 		#{member},
 		#{pay_ment},
@@ -74,19 +74,19 @@
 		)
 	</insert>
 	
-	<!-- 결제정보 조회 -->
-	<select id="paySelect" parameterType="String" resultType="paymentDTO">
+	<!-- 결제정보 조회
+	<select id="paySelect" parameterType="long" resultType="paymentDTO">
 		select * from tb_payment
-		where pay_num = #{pay_num}
-	</select>
+		where pay_no = #{pay_no}
+	</select> -->
 
  
-	<select id="paynoSelect" parameterType="int" resultType="int">
+	<select id="paynoSelect" parameterType="int" resultType="long">
 		select pay_no from tb_reservation
 		where reserve_no = #{reserve_no}
 	</select>
 	
-	<select id="nopaynoSelect" parameterType="int" resultType="paymentDTO">
+	<select id="nopaynoSelect" parameterType="long" resultType="paymentDTO">
 		select * from tb_payment
 		where pay_no = #{pay_no}
 	</select>

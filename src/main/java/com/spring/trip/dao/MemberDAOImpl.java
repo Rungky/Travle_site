@@ -103,7 +103,10 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.delete("mapper.member.removeMember", member_id);
 	}
 
-
+	@Override
+	public int idDuplCheck(String result) throws Exception {
+		return sqlSession.selectOne("mapper.member.idDuplCheck", result);
+	}
 
 
 }

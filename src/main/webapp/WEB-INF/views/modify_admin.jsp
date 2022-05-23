@@ -157,9 +157,15 @@
 						id : id,
 					},
 					complete : function() {
+						if(id=="${sessionScope.id}"){
+							alert("본인은 삭제할 수 없습니다. 회원탈퇴를 이용하세요");
+							opener.parent.location.reload();
+							window.close();
+						}else{
 						alert("삭제 되었습니다!");
 						opener.parent.location.reload();
 						window.close();
+						}
 					}
 				})
 			}else if(type=="dorm"){

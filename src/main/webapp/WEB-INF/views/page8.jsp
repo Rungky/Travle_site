@@ -31,6 +31,8 @@
 	});
 	
 	function bind(){
+		
+		
 		jQuery("#check_all").off("click").on("click", function(){
 			
 			
@@ -43,6 +45,9 @@
 		});
 		
 		$("#btn_pay").off("click").on("click", function(){
+			
+			Checkform2();
+			
 			if(!$(".one").prop("checked")){
 				alert("동의 항목을 확인해주세요!");
 				return false;
@@ -52,22 +57,8 @@
 				alert("동의 항목을 확인해주세요!")
 				return false;
 			}
-			//항목 체크 
-
-			/*
-			var form = document.f1;
-    		if (!form.text_one.value) {
-        	alert("예약자명을 입력해 주십시오. ");
-       	 	form.text_one.focus();
-       	 	return;
-    		}
- 
-    		if (!form.text_two.value) {
-        	alert("비밀번호를 입력해 주십시오.");
-        	form.text_two.focus(); 
-        	return;
-    		}		
-    		*/
+			
+    		
     		
 			let pay_check;
 			if($("select[name=pay] option:selected").text() == '현장결제'){
@@ -86,7 +77,7 @@
 			let pay_num = document.getElementById('pay_num').value;
 			let dorm_name = $("#dorm").text();
 			let room_name = $("#room").text();
-			if(pay_num == '') pay_num = "현장에서 결제 바랍니다.";
+			if(pay_num == '' && $("select[name=pay] option:selected").text() == '현장결제') pay_num = "현장에서 결제 바랍니다.";
 			
 				
 				$.ajax({
@@ -139,11 +130,23 @@
 				$('#pay_not_yet').hide();
 				$('#card_not_yet').hide();
 				$('#payco_not_yet').show();
+				$('#phone_not_yet').hide();
+				$('#pays').show();
+				$('#pay_num').show();
 			} else if($(this).val() == "phone" ){
 				$('#phone_not_yet').show();
 				$('#pay_not_yet').hide();
 				$('#payco_not_yet').hide();
 				$('#card_not_yet').hide();
+				$('#pays').show();
+				$('#pay_num').show();
+			}else if($(this).val() == "card" ){
+				$('#phone_not_yet').hide();
+				$('#pay_not_yet').hide();
+				$('#payco_not_yet').hide();
+				$('#card_not_yet').show();
+				$('#pays').show();
+				$('#pay_num').show();
 			}
 			})
 
@@ -182,7 +185,26 @@
 		    checkbox.checked = selectAll.checked
 		  })
 		}
-	
+		
+		
+		function Checkform2() { 
+			if( (document.querySelector("#real_name").value == '' && document.querySelector("#pay_num").value == '') 
+					|| (document.querySelector("#real_name").value == '' && document.querySelector("#pay_num").value != '') ) { 
+				alert("예약자명을 입력해 주십시오.");
+				$(document.querySelector("#real_name")).focus();
+				return false;
+			} else if(document.querySelector("#real_name").value != '' 
+					&& $("select[name=pay] option:selected").text() != '현장결제' 
+					&& document.querySelector("#pay_num").value == '') {
+				alert("결제정보를 입력해 주십시오.");
+				$(document.querySelector("#pay_num")).focus();
+				return false;
+			}
+			
+		
+		
+		
+		}
 </script>
 </head>
 <body>
@@ -240,11 +262,12 @@
 						<div id="impor">
 							<span id="names">예약자명 :</span> <input id="real_name" name="text_one"
 								class="name_input" type="text"><br> <span id="pays">결제정보
-								입력 :</span> <input id="pay_num" class="pay_input" name="text_two" type="text"><br>
-							<span id="card_not_yet">*카드번호 16자리를 입력해 주세요.</span> <span
+								입력 :</span> <input id="pay_num" class="pay_input" name="text_two" 
+								type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
+							<span id="card_not_yet">*카드번호 16자리를 입력해 주세요.<br>*숫자만 입력 가능합니다.</span> <span
 								id="payco_not_yet" style="display: none;">*페이 카드번호를 입력해
-								주세요.</span> <span id="phone_not_yet" style="display: none;">*휴대폰
-								번호를 입력 해주세요.</span> <span id="pay_not_yet" style="display: none;">*현장에서
+								주세요.<br>*숫자만 입력 가능합니다.</span> <span id="phone_not_yet" style="display: none;">*휴대폰
+								번호를 입력 해주세요.<br>*숫자만 입력 가능합니다.</span> <span id="pay_not_yet" style="display: none;">*현장에서
 								결제 바랍니다.</span>
 						</div>
 					</div>
@@ -269,7 +292,7 @@
 			<!--  member_id 가져가야함-->
 			<form action="result.do">
 				<input type="button" id="btn_pay" class="box" name="action" value="결제하기">
-				<button class="box" onclick="history.back()">돌아가기</button>
+				<a href="${contextPath}/trip/detail.do?dormno=${param.dormno}&reserve_checkin=${param.reserve_checkin}&reserve_checkout=${param.reserve_checkout}"><input type="button" class="box" value="돌아가기"></a>
 				<input type="hidden"  id="dorm_no" value="${check.dorm_no}">
 				<input type="hidden"  id="room_no" value="${check.room_no}">
 				<!-- <input type="hidden" name="reserve_checkin"

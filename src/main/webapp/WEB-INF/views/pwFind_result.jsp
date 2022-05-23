@@ -11,29 +11,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <title>사적모임 | 비밀번호 찾기 결과</title>
-
-<script>
-function newPw() {
-	if (confirm("비밀번호 변경이 완료되었습니다. 로그인 페이지로 이동합니다.") == true) {
-		document.getElementById('newPw').submit();
-	}
-}
-
-$("#pw").off("keydown").on("keydown", function(evt){
-	if(evt.keyCode == 13){  //enter : 13일때
-		$("#pw_2").focus();
-		return false;
-	}
-});
-
-$("#pw_2").off("keydown").on("keydown", function(evt){
-	if(evt.keyCode == 13){  //enter : 13일때
-		$("#change_btn").focus();
-		return false;
-	}
-});
-</script>
-
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script src="${contextPath}/resources/js/pwFind.js"></script>
 </head>
@@ -49,12 +26,13 @@ $("#pw_2").off("keydown").on("keydown", function(evt){
 				<c:if test = "${!empty member_pw}">
 	            	<form action="${ contextPath}/trip/newPw.do" id="newPw" method="post" name="f1">
 		                <div class="login_top">
+		                	<input type="hidden" id="id" name="member_id" value="${member_id}"/>
 		                    <input type="password" id="pw" name="member_pw" placeholder="새 비밀번호" />
 		                   	<input type="password" id="pw_2" name="member_pwCheck" placeholder="새 비밀번호 확인" />
-		                   	<div class="hide_1 red_1">비밀번호가 일치하지 않습니다.</div>
+		                   	<div class="hide_1 red_1" id="no">비밀번호가 일치하지 않습니다.</div>
 		            	</div>
 		                <div>
-		                    <input class="login_btn_box" id="btn" type="submit" value="비밀번호 변경하기" onclick="newPw()"/>
+		                    <input class="login_btn_box" id="btn" type="submit" value="비밀번호 변경하기"/>
 		                </div>
 	            	</form>
 		         </c:if>

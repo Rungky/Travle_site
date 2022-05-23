@@ -328,10 +328,9 @@ public class TripController extends MultiActionController {
 		
 		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
-		
-		tripService.insertPayment(pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
-		PaymentDTO dto = tripService.selectPayment(pay_num);
-		int pay_no = dto.getPay_no();
+		long pay_no = System.currentTimeMillis();
+		tripService.insertPayment(pay_no, pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
+		PaymentDTO dto = tripService.selectPayment(pay_no);
 		System.out.println("컨트롤러 pay_no" + pay_no);
 	
 		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no, pay_no, pay_check);
@@ -343,6 +342,7 @@ public class TripController extends MultiActionController {
 		return mav;
 	}
 
+	//예약취소하기
 	@RequestMapping(value = "/trip/reserDelete.do", method = RequestMethod.GET)
 	public ModelAndView reserDelete(@RequestParam("reserve_no") int reserve_no,
 			@RequestParam("reserve_checkin") Date reserve_checkin, HttpServletRequest request,
@@ -353,10 +353,11 @@ public class TripController extends MultiActionController {
 		Date date = new Date(miliseconds);
 		if (reserve_checkin.after(date))
 			tripService.reserDelete(reserve_no);
-		mav.setViewName("history");
+		mav.setViewName("forward:/trip/history.do");
 		return mav;
 	}
 
+	//예약내역 삭제하기
 	@RequestMapping(value = "/trip/Delete.do", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONObject Delete(@RequestParam("reserve_no") int reserve_no, HttpServletRequest request,
@@ -385,9 +386,11 @@ public class TripController extends MultiActionController {
 		try {
 			System.out.println("bridge.do 진입함");
 			
-			
-			int pay_no = tripService.paynoSelect(reserve_no);
-			dto = tripService.nopaynoSelect(pay_no);
+			System.out.println(tripService.paynoSelect(reserve_no));
+			long pay_no = tripService.paynoSelect(reserve_no);
+			System.out.println("브릿지 pay_no" + pay_no);
+			System.out.println(pay_no);
+			dto = tripService.selectPayment(pay_no);
 			String real_name= dto.getReal_name();
 			String pay_ment = dto.getPay_ment();
 			String pay_num = dto.getPay_num();
@@ -410,13 +413,6 @@ public class TripController extends MultiActionController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/trip/history.do", method = RequestMethod.GET)
 	public ModelAndView history(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("history.do 진입");
@@ -429,8 +425,10 @@ public class TripController extends MultiActionController {
 			mav.addObject("dto", dto);
 			List<ReservationDTO> reserList = tripService.selectReservationsList(member);
 			mav.addObject("reserList", reserList);
-			System.out.println(reserList.size());
-			System.out.println(reserList);
+			for(int i=0;i<reserList.size();i++) {
+				int review_checking = tripService.reviewChecking(reserList.get(i).getReserve_no());
+				reserList.get(i).setReser_review(review_checking);
+			}
 			if (reserList != null && reserList.size() > 0) {
 				System.out.println("List예약내역 출력시작");
 				mav.setViewName("history");
@@ -439,6 +437,7 @@ public class TripController extends MultiActionController {
 				System.out.println("예약내역 없음");
 				mav.setViewName("nohistory");
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

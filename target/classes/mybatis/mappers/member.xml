@@ -11,6 +11,11 @@
 		(#{member_id},#{member_pw},#{member_names},#{member_tel})
 	</insert>
 
+	<select id="idDuplCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM tb_member
+		WHERE member_id = #{member}
+	</select>
+
 	<!-- 로그인 -->
 	<select id="login" resultType="memberDTO">
 		select * from tb_member

@@ -19,6 +19,8 @@ public class ReservationDTO {
 	private String dorm_name;
 	private String room_name;
 	
+	private int reser_review;
+	
 	public int getReserve_no() {
 		return reserve_no;
 	}
@@ -104,5 +106,13 @@ public class ReservationDTO {
 	public void setPay_no(int pay_no) {
 		this.pay_no = pay_no;
 	}
+	public int getReser_review() {
+		return reser_review;
+	}
+	public void setReser_review(int reser_review) {
+		this.reser_review = reser_review;
+	}
+	
+	
 	
 }

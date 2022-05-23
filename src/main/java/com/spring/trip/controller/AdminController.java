@@ -1,10 +1,13 @@
 package com.spring.trip.controller;
 
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import java.io.PrintWriter;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +27,6 @@ import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.service.AdminService;
 import com.spring.trip.service.MemberService;
-import com.spring.trip.service.TripService;
 
 @Controller
 public class AdminController extends MultiActionController {
@@ -60,37 +62,6 @@ public class AdminController extends MultiActionController {
 		List<QuestionDTO> questionList = adminService.allQuestion();
 		mav.addObject("questionList", questionList);
 		
-		int nowPage = 1; // 기본 값
-		if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
-			nowPage = Integer.parseInt(request.getParameter("nowPage"));
-//	System.out.println("nowPage : " + nowPage);
-		int total = adminService.countQuestion();  // 게시물 수 부모 없는글 카운트
-//	System.out.println("total : " + total);
-		int pageNum = 5; // 한 페이지 게시물 5 개씩 (임의로 정함)
-		int pagingNum = 5; // 페이징 5개씩
-		int totalPage = (int) Math.ceil((double)total / pageNum); // 총 페이지 수
-//	System.out.println("totalPage : " + totalPage);
-		int totalPageCount = (totalPage+4) / pagingNum; // 페이징 수
-//	System.out.println("totalPageCount : " + totalPageCount);
-		int nowPageCount = (nowPage+4) / pagingNum; // 지금 페이징
-//	System.out.println("nowPageCount : " + nowPageCount);
-		int beginPage = 1 + (pageNum * (nowPage-1)); // 해당 페이지 게시물 begin 
-//	System.out.println("beginPage : " + beginPage);
-		int endPage = pageNum;	
-		if (totalPage == nowPage) {
-			endPage = total; 	// 마지막 페이지 일경우 게시물 범위 끝까지
-		} else {
-			endPage = pageNum + (pageNum * (nowPage - 1));	// 해당 페이지 게시물 end
-		}
-		
-		
-		
-		mav.addObject("nowPageCount", nowPageCount); // 지금 페이징
-		mav.addObject("totalPageCount", totalPageCount); // 총 페이징
-		mav.addObject("totalPage", totalPage); // 마지막 페이지
-		mav.addObject("beginPage", beginPage); // 해당 페이지 게시물 begin
-		mav.addObject("endPage", endPage); // 해당 페이지 게시물 end
-		mav.addObject("nowPage", nowPage); // 지금 페이지
 		mav.setViewName("admin");
 		return mav;
 	}
@@ -206,6 +177,7 @@ public class AdminController extends MultiActionController {
 		return data;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/trip/delete_admin.do", method=RequestMethod.POST)
 	public void adminDelete(
 			@RequestParam("type") String type,
@@ -213,8 +185,16 @@ public class AdminController extends MultiActionController {
 			HttpServletResponse response) throws Exception {
 		if(type.equals("mem")) {
 			String id = request.getParameter("id");
-			memberService.removeMember(id);
-			System.out.println("삭제 성공");
+			
+			session = request.getSession();
+			String id2 = (String)session.getAttribute("id");
+			System.out.println("값비교 테스트 :"+id+"/"+id2);
+			if(id.equals( id2)) {
+				System.out.println("본인삭제 불가");
+			}else{
+				memberService.removeMember(id);
+				System.out.println("삭제 성공");
+			}		
 		} else if(type.equals("dorm")) {
 			int dormno = Integer.parseInt(request.getParameter("dormno"));
 			System.out.println("dorm 삭제 성공");

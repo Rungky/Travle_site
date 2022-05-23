@@ -76,5 +76,10 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.modifyMember(memberDTO);
 	}
 	
+	@Override
+	public int idDuplCheck(String result) throws Exception {
+		return memberDAO.idDuplCheck(result);
+	}
+	
 	
 }

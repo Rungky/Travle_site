@@ -51,13 +51,13 @@
 				$("#check_2").prop("checked", true);
 			}
 			if(${opt_aircon}==1){
-				$("#check3").prop("checked", true);
+				$("#check_3").prop("checked", true);
 			}
 			if(${opt_dryer}==1){
-				$("#check4").prop("checked", true);
+				$("#check_4").prop("checked", true);
 			}
 			if(${opt_port}==1){
-				$("#check5").prop("checked", true);
+				$("#check_5").prop("checked", true);
 			}
 
 			let sb = ${param.price} + 0;
@@ -175,11 +175,11 @@
 			    <c:if test="${not empty param.dorm_category_no }">
 			    	<input type="hidden" name="dorm_category_no" value="${param.dorm_category_no}">
 			    </c:if>
-				<c:if test="${not empty param.start}">
-					<input type="hidden" name="start" value="${param.start}">
+				<c:if test="${not empty param.date_s}">
+					<input type="hidden" name="date_s" value="${param.date_s}">
 				</c:if>
-				<c:if test="${not empty param.end}">
-					<input type="hidden" name="end" value="${param.end}">
+				<c:if test="${not empty param.date_e}">
+					<input type="hidden" name="date_e" value="${param.date_e}">
 				</c:if>
 				<c:if test="${not empty param.opt_wifi}">
 					<input type="hidden" name="opt_wifi" value="${param.opt_wifi}">
@@ -228,12 +228,12 @@
 	                	<br><br>
 	                	<c:choose>
 	                		<c:when test="${empty param.dorm_category_no }">
-			                	<a href="${contextPath}/reservation.do">
+			                	<a href="${contextPath}/trip/reservation.do">
 				                    <button type="button" class="bu re">초기화</button>
 				                </a>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<a href=${contextPath}/reservation.do?dorm_category_no=${param.dorm_category_no}">
+	                			<a href=${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
 				                    <input type="button" class="bu re" value ="초기화">
 				                </a>
 	                		</c:otherwise>

@@ -156,5 +156,9 @@
 		ORDER BY LIKE_CNT DESC 
 	</select>
 
+	<select id="reserReviewChecking" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM tb_review
+		WHERE reserve_no = #{reserno}
+	</select>
 
 </mapper>
