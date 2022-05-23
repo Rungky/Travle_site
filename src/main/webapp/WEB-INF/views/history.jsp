@@ -166,14 +166,9 @@
 			let result = payCheck[i].dataset.pay;
 			console.log("result값", result);
 			if(result == 1){ 
-				
-				//statement[i].style.display = "visible";
-				//nostatement[i].style.display= "none";
 				$(statement[i]).show();
 				$(nostatement[i]).hide();
 			}else if(result == 0){
-				//nostatement[i].style.display = "visible";
-				//statement[i].style.display= "none";
 				$(statement[i]).hide();
 				$(nostatement[i]).show();
 			}

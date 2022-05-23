@@ -31,6 +31,8 @@
 	});
 	
 	function bind(){
+		
+		
 		jQuery("#check_all").off("click").on("click", function(){
 			
 			
@@ -43,6 +45,9 @@
 		});
 		
 		$("#btn_pay").off("click").on("click", function(){
+			
+			Checkform2();
+			
 			if(!$(".one").prop("checked")){
 				alert("동의 항목을 확인해주세요!");
 				return false;
@@ -52,23 +57,8 @@
 				alert("동의 항목을 확인해주세요!")
 				return false;
 			}
-			//항목 체크 
-
-			/*
-			var form = document.text_one;
-    		if (!form.text_one.value) {
-        	alert("예약자명을 입력해 주십시오. ");
-       	 	form.text_one.focus();
-       	 	return;
-    		}
- 
-			var form = document.text_two;
-    		if (!form.text_two.value) {
-        	alert("결제번호를 입력해 주십시오.");
-        	form.text_two.focus(); 
-        	return;
-    		}		
-    		*/
+			
+    		
     		
 			let pay_check;
 			if($("select[name=pay] option:selected").text() == '현장결제'){
@@ -87,7 +77,7 @@
 			let pay_num = document.getElementById('pay_num').value;
 			let dorm_name = $("#dorm").text();
 			let room_name = $("#room").text();
-			if(pay_num == '') pay_num = "현장에서 결제 바랍니다.";
+			if(pay_num == '' && $("select[name=pay] option:selected").text() == '현장결제') pay_num = "현장에서 결제 바랍니다.";
 			
 				
 				$.ajax({
@@ -194,7 +184,26 @@
 		    checkbox.checked = selectAll.checked
 		  })
 		}
-	
+		
+		
+		function Checkform2() { 
+			if( (document.querySelector("#real_name").value == '' && document.querySelector("#pay_num").value == '') 
+					|| (document.querySelector("#real_name").value == '' && document.querySelector("#pay_num").value != '') ) { 
+				alert("예약자명을 입력해 주십시오.");
+				$(document.querySelector("#real_name")).focus();
+				return false;
+			} else if(document.querySelector("#real_name").value != '' 
+					&& $("select[name=pay] option:selected").text() != '현장결제' 
+					&& document.querySelector("#pay_num").value == '') {
+				alert("결제정보를 입력해 주십시오.");
+				$(document.querySelector("#pay_num")).focus();
+				return false;
+			}
+			
+		
+		
+		
+		}
 </script>
 </head>
 <body>
