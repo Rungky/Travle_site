@@ -101,7 +101,7 @@
 						var html = "";
 						html += "<tr>";
 						html += "	<td>";
-						html += "		<a href='detail.do?dormno="+Arr[i]+"'>";
+						html += "		<a href='detail.do?dormno="+Arr[i]+"&reserve_checkin=${date_s}&reserve_checkout=${date_e}'>";
 						html += "		<img class='img_sz' src='${pageContext.request.contextPath}/resources/image/dorm/"+Arr[i+1]+"'>";
 						html += "		</a>";
 						html += "	</td>";
