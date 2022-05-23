@@ -95,7 +95,7 @@ table {
     width: 100px;
 }
 
-.del.check.css {
+.del.check.css, .btn_close {
 	background-color: #ffffff;
 	border: 1px solid #369;
 }

@@ -236,6 +236,7 @@
 														<span>결제여부 : <span class="pay_check"></span></span></span><br>
 														<span>상품명 : <span class="dorm_name"></span> /  <br><span class="room_name"></span></span>
 													</p>
+													<br>
 													<input type="button" class="btn_close" value="x">
 												</div>
 											</div>
