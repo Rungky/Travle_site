@@ -1,8 +1,7 @@
 package com.spring.trip.controller;
 
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,6 @@ import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.service.AdminService;
 import com.spring.trip.service.MemberService;
-import com.spring.trip.service.TripService;
 
 @Controller
 public class AdminController extends MultiActionController {
@@ -168,6 +166,7 @@ public class AdminController extends MultiActionController {
 		return data;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/trip/delete_admin.do", method=RequestMethod.POST)
 	public void adminDelete(
 			@RequestParam("type") String type,
@@ -175,8 +174,16 @@ public class AdminController extends MultiActionController {
 			HttpServletResponse response) throws Exception {
 		if(type.equals("mem")) {
 			String id = request.getParameter("id");
-			memberService.removeMember(id);
-			System.out.println("삭제 성공");
+			
+			session = request.getSession();
+			String id2 = (String)session.getAttribute("id");
+			System.out.println("값비교 테스트 :"+id+"/"+id2);
+			if(id.equals( id2)) {
+				System.out.println("본인삭제 불가");
+			}else{
+				memberService.removeMember(id);
+				System.out.println("삭제 성공");
+			}		
 		} else if(type.equals("dorm")) {
 			int dormno = Integer.parseInt(request.getParameter("dormno"));
 			System.out.println("dorm 삭제 성공");

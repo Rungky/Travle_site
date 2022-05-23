@@ -55,6 +55,7 @@
                                 </form>
                                 <form id="withdraw_form" method="post" action="${contextPath}/trip/removeMember.do">
                                     <input id="btn_withdraw" type="button" value="회원탈퇴">
+                                    <input type="hidden" name="member_id" value="${memberDTO.member_id}">
                                 </form>
                             </div>
                         </div>
