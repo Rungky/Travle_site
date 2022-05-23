@@ -130,6 +130,7 @@
 				$('#pay_not_yet').hide();
 				$('#card_not_yet').hide();
 				$('#payco_not_yet').show();
+				$('#phone_not_yet').hide();
 				$('#pays').show();
 				$('#pay_num').show();
 			} else if($(this).val() == "phone" ){
@@ -261,11 +262,12 @@
 						<div id="impor">
 							<span id="names">예약자명 :</span> <input id="real_name" name="text_one"
 								class="name_input" type="text"><br> <span id="pays">결제정보
-								입력 :</span> <input id="pay_num" class="pay_input" name="text_two" type="text"><br>
-							<span id="card_not_yet">*카드번호 16자리를 입력해 주세요.</span> <span
+								입력 :</span> <input id="pay_num" class="pay_input" name="text_two" 
+								type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
+							<span id="card_not_yet">*카드번호 16자리를 입력해 주세요.<br>*숫자만 입력 가능합니다.</span> <span
 								id="payco_not_yet" style="display: none;">*페이 카드번호를 입력해
-								주세요.</span> <span id="phone_not_yet" style="display: none;">*휴대폰
-								번호를 입력 해주세요.</span> <span id="pay_not_yet" style="display: none;">*현장에서
+								주세요.<br>*숫자만 입력 가능합니다.</span> <span id="phone_not_yet" style="display: none;">*휴대폰
+								번호를 입력 해주세요.<br>*숫자만 입력 가능합니다.</span> <span id="pay_not_yet" style="display: none;">*현장에서
 								결제 바랍니다.</span>
 						</div>
 					</div>

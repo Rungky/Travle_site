@@ -193,7 +193,7 @@
 							<tr>
 								<td colspan="3"><span class="payCheck" data-pay="${result.PAY_CHECK}">숙소 예약번호 ${result.RESERVE_NO}</span>
 								<span class="statement" style="display: none;" data-reservono="${result.RESERVE_NO}">🟢결제완료</span>
-								<span class="nostatement" style="display: none;" data-reservono="${result.RESERVE_NO}">🔴미결제</span>
+								<span class="nostatement" style="display: none;" data-reservono="${result.RESERVE_NO}">🔴현장결제</span>
 								</td>
 								<td><input type="button" class="del check css"
 									data-checkout="${result.RESERVE_CHECKOUT}"
