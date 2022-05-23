@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*"%>
+	pageEncoding="UTF-8" import="java.util.*" import="com.spring.trip.dto.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
@@ -29,6 +29,7 @@
 		history_del();
 		hide();
 		bind();
+		init();
 	})
 
 	function hide() {
@@ -154,6 +155,31 @@
 		  });
 		}
 	}
+	
+	function init() {
+		
+		let payCheck = document.querySelectorAll(".payCheck");
+		let statement = document.querySelectorAll(".statement");
+		let nostatement = document.querySelectorAll(".nostatement");
+		console.log(payCheck);
+		for(let i = 0;i<payCheck.length;i++) {
+			let result = payCheck[i].dataset.pay;
+			console.log("result값", result);
+			if(result == 1){ 
+				
+				//statement[i].style.display = "visible";
+				//nostatement[i].style.display= "none";
+				$(statement[i]).show();
+				$(nostatement[i]).hide();
+			}else if(result == 0){
+				//nostatement[i].style.display = "visible";
+				//statement[i].style.display= "none";
+				$(statement[i]).hide();
+				$(nostatement[i]).show();
+			}
+		}
+		
+	}
 </script>
 </head>
 
@@ -170,10 +196,9 @@
 					<table style="padding: 10px 10px 10px 10px;" id="table_css">
 						<form action="${contextPath}/trip/reserDelete.do">
 							<tr>
-								<td colspan="3">숙소 예약번호 ${result.RESERVE_NO} 
-								<span id="statement" style="display: none;">🟢결제완료</span>
-								<span id="nostatement" style="display: none;">🔴미결제</span>
-								
+								<td colspan="3"><span class="payCheck" data-pay="${result.PAY_CHECK}">숙소 예약번호 ${result.RESERVE_NO}</span>
+								<span class="statement" style="display: none;" data-reservono="${result.RESERVE_NO}">🟢결제완료</span>
+								<span class="nostatement" style="display: none;" data-reservono="${result.RESERVE_NO}">🔴미결제</span>
 								</td>
 								<td><input type="button" class="del check css"
 									data-checkout="${result.RESERVE_CHECKOUT}"

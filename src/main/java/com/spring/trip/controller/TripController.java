@@ -413,13 +413,6 @@ public class TripController extends MultiActionController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/trip/history.do", method = RequestMethod.GET)
 	public ModelAndView history(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("history.do 진입");
