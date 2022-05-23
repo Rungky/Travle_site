@@ -175,11 +175,11 @@
 			    <c:if test="${not empty param.dorm_category_no }">
 			    	<input type="hidden" name="dorm_category_no" value="${param.dorm_category_no}">
 			    </c:if>
-				<c:if test="${not empty param.start}">
-					<input type="hidden" name="start" value="${param.start}">
+				<c:if test="${not empty param.date_s}">
+					<input type="hidden" name="date_s" value="${param.date_s}">
 				</c:if>
-				<c:if test="${not empty param.end}">
-					<input type="hidden" name="end" value="${param.end}">
+				<c:if test="${not empty param.date_e}">
+					<input type="hidden" name="date_e" value="${param.date_e}">
 				</c:if>
 				<c:if test="${not empty param.opt_wifi}">
 					<input type="hidden" name="opt_wifi" value="${param.opt_wifi}">
