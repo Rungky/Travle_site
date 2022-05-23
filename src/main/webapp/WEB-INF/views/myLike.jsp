@@ -70,6 +70,12 @@
 						</div>
 					</a>
 				</c:forEach>
+				<c:if test="${empty dorm_list}">
+					<div style="margin: 100px auto 0; text-align: center; font-size: 1.2em">
+						<span>관심등록한 숙소가 없습니다.</span><br> 
+						<a	href="${contextPath}/trip/reservation.do" style="font-size: 0.9em;">사적모임의 다양한 숙소 보러가기</a>
+					</div>
+				</c:if>
 			</div>
 
 		</section>
