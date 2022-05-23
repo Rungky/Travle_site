@@ -425,8 +425,10 @@ public class TripController extends MultiActionController {
 			mav.addObject("dto", dto);
 			List<ReservationDTO> reserList = tripService.selectReservationsList(member);
 			mav.addObject("reserList", reserList);
-			System.out.println(reserList.size());
-			System.out.println(reserList);
+			for(int i=0;i<reserList.size();i++) {
+				int review_checking = tripService.reviewChecking(reserList.get(i).getReserve_no());
+				reserList.get(i).setReser_review(review_checking);
+			}
 			if (reserList != null && reserList.size() > 0) {
 				System.out.println("List예약내역 출력시작");
 				mav.setViewName("history");

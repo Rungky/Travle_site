@@ -58,4 +58,5 @@ public interface TripDAO {
 	public PaymentDTO selectPayment(long pay_no);
 	public long paynoSelect(int reserve_no);
 	public PaymentDTO nopaynoSelect(long pay_no);
+	public int reviewChecking(int reserno);
 }

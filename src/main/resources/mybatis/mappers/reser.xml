@@ -35,7 +35,7 @@
 
 	<!-- 예약리스트 뽑기 -->
 	<select id="selectReservationsList" parameterType="String"
-		resultType="java.util.HashMap">
+		resultType="reservationDTO">
 		select reser.reserve_no,
 		dorm.dorm_name,
 		room.room_name, reser.member_id,

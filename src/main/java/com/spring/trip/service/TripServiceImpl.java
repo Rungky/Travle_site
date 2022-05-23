@@ -246,4 +246,8 @@ public class TripServiceImpl implements TripService {
 		System.out.println("서비스에서 나온 pay_no로 인한 dto결과값: " + dto );
 		return dto;
 	}
+	@Override
+	public int reviewChecking(int reserno) {
+		return tripDAO.reviewChecking(reserno);
+	}
 }

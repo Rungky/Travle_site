@@ -402,5 +402,10 @@ public class TripDAOImpl implements TripDAO{
 		return dto;
 	}
 
+	@Override
+	public int reviewChecking(int reserno) {
+		return sqlSession.selectOne("mapper.trip.reserReviewChecking", reserno);
+	}
+
 	
 }
