@@ -228,12 +228,12 @@
 	                	<br><br>
 	                	<c:choose>
 	                		<c:when test="${empty param.dorm_category_no }">
-			                	<a href="${contextPath}/reservation.do">
+			                	<a href="${contextPath}/trip/reservation.do">
 				                    <button type="button" class="bu re">초기화</button>
 				                </a>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<a href=${contextPath}/reservation.do?dorm_category_no=${param.dorm_category_no}">
+	                			<a href=${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
 				                    <input type="button" class="bu re" value ="초기화">
 				                </a>
 	                		</c:otherwise>
