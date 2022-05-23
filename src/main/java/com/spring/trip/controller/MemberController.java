@@ -89,34 +89,44 @@ public class MemberController {
 				String refererURL = (String) session.getAttribute("referer");
 				System.out.println("test : " + refererURL);
 				
-				String[] refererSplit = refererURL.split("/trip");
-				String url = "";
-				for(String test : refererSplit) {
-					System.out.println("refererSplit : " + test);
-					url = test;
+				if(refererURL != null) {
+					String[] refererSplit = refererURL.split("/trip");
+					String url = "";
+					for(String test : refererSplit) {
+						System.out.println("refererSplit : " + test);
+						url = test;
+					}
+					url = url.substring(1);
+					System.out.println("여기 url은 ? : " + url);
+					
+					if(url.contains("login") || url.contains("idFindCheck.do")
+							|| url.contains("pwFindCheck.do")
+							|| url.contains("signupCheck.do")
+							|| url.contains("newPw.do")
+							|| refererURL == null) {
+						session.setAttribute("id", login.getMember_id());
+						
+						ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+						System.out.println("url : " + url);
+						
+						return mav;
+					} else {  //login 이라는 단어가 포함되어 있는 경우 
+						session.setAttribute("id", login.getMember_id());
+//						System.out.println("else if  indexOf : "+url.indexOf("login"));
+						ModelAndView mav = new ModelAndView("redirect:" + url);
+						return mav;
+					}
+				} else {
+					session.setAttribute("id", login.getMember_id());
+					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+					
+					return mav;
 				}
 				
-				url = url.substring(1);
-				System.out.println("여기 url은 ? : " + url);
+				
 				
 				//login이라는 단어가 포함되어 있지 않은 경우
-				if(url.contains("login") || url.contains("idFindCheck.do")
-						|| url.contains("pwFindCheck.do")
-						|| url.contains("signupCheck.do")
-						|| url.contains("newPw.do")
-						|| url.contains("null")) {
-					session.setAttribute("id", login.getMember_id());
-					
-					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
-					System.out.println("url : " + url);
-					
-					return mav;
-				} else {  //login 이라는 단어가 포함되어 있는 경우 
-					session.setAttribute("id", login.getMember_id());
-//					System.out.println("else if  indexOf : "+url.indexOf("login"));
-					ModelAndView mav = new ModelAndView("redirect:" + url);
-					return mav;
-				}
+				
 			}
 		}
 	}
