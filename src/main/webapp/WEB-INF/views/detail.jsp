@@ -301,8 +301,9 @@
 	                    <tr>
 	                        <td colspan="2" class="title">${item.review_title}</td>
 	                    </tr>
+						
 	                    <tr>
-	                        <td class="star${item.score}"><span class="score">${item.review_score}</span></td>
+	                        <td class="star<fmt:formatNumber type="number" maxFractionDigits="0"  value="${item.review_score}" />"><span class="score">${item.review_score}</span></td>
 	                        <td></td>
 	                    </tr>
 	                    <tr>
