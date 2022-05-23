@@ -98,7 +98,7 @@
 			}
 		});
 	}
-
+	
 	function bind() {
 		let target = document.querySelectorAll('.btn_open');
 		let btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
