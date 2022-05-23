@@ -23,7 +23,7 @@
 	            <div data-tap="st0" class="tap_list">내 정보</div>
                 <div data-tap="st1" class="tap_list tap_state">회원 관리</div>
 	            <div data-tap="st2" class="tap_list tap_state">숙소 관리</div>
-<!-- 	            <div data-tap="st3" class="tap_list tap_state">문의 관리</div> -->
+ 	            <div data-tap="st3" class="tap_list tap_state">문의 관리</div> 
 	        </div>
     	</div>
     </nav>
@@ -166,23 +166,28 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>문의 번호</th>
                             <th>제목</th>
                             <th>내용</th>
+                            <th>아이디</th>
                             <th>게시 날짜</th>
-                            <th>수정</th>
+                            <th>답변달기</th>
+                            <th>글삭제</th>
                         </tr>
                     </thead>
                     <tbody>
+						<c:forEach var="question" items="${questionList}"  varStatus="questionNum">
                         <tr>
-                            <td>1</td>
-                            <td><input type="text" name="id" readonly value="값"></td>
-                            <td><input type="text" name="id" readonly value="값"></td>
-                            <td><input type="text" name="id" readonly value="값"></td>
-                            <td style="text-align: center;"><button class="bt" type="button" name="mod_text" value=''>수정하기</button></td>
+                            <td>${question.question_title}</td>
+                            <td>${question.question_contents}</td>
+                            <td>${question.member_id }</td>
+                            <td>${question.question_date}</td>
+                            <td><button class="btn_doAnswer" data-id="${question.question_no}">답변하기</button></td>
+                            <td style="text-align: center;"><button class="btn_adminRemove" data-id="${question.question_no}">삭제하기</button></td>
                         </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
+                
             </div>
         </div>
         <input type="hidden" id="nextpage" value="">
@@ -254,6 +259,37 @@
                 return;
             }
         })
+        
+      var admin_remove = document.querySelectorAll(".btn_adminRemove");
+    console.log(admin_remove.length);
+    for(let i=0; i<admin_remove.length; i++){
+    	admin_remove[i].addEventListener("click", function(event){
+        	let admin_remove = event.target.getAttribute("data-id");
+        	var isDel = window.confirm("정말 삭제하시겠습니까?");
+        	if(isDel){
+        		location.href="${contextPath}/trip/removeadminqna.do?admin_remove="+admin_remove;	
+        	}
+        })
+    }
+    
+    var list_answer = document.querySelectorAll(".btn_doAnswer");
+    console.log(list_answer.length);
+    for(let i=0; i<list_answer.length; i++){
+        list_answer[i].addEventListener("click", function(event){
+        	let product_no = event.target.getAttribute("data-id");
+            window.open("${contextPath}/trip/adminanswerqna.do?product_no="+product_no,"answer","width: 600px");
+        })
+    }
+    
+    var list_modreply = document.querySelectorAll(".reply_doMod");
+    console.log(list_modreply.length);
+    for(let i=0; i<list_modreply.length; i++){
+    	list_modreply[i].addEventListener("click", function(event){
+        	let reply_no = event.target.getAttribute("data-id");
+        	let parent_no = event.target.getAttribute("data-parentid");
+            window.open("${contextPath}/trip/adminmodreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
+        })
+    }
        
     </script>
 </body>

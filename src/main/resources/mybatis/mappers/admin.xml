@@ -61,4 +61,60 @@
 		DELETE FROM tb_dorm
 		WHERE dorm_no = #{dormno}
 	</delete>
+	
+	<!-- 문의조회 -->
+	<select id="allQuestion" resultType="questionDTO">
+		select * from tb_question
+		start with question_parentno=0
+		connect by prior question_no = question_parentno
+		order siblings by question_no
+	</select>
+	
+	<!-- 글삭제 -->
+	<delete id="admindeleteArticle" parameterType="int" >
+		delete from tb_question
+		where question_no in (
+		select question_no from tb_question
+		start with question_no = #{question_no}
+		connect by prior question_no = question_parentno
+		)
+	</delete>
+	
+	<!-- 답변작성 페이지 -->
+	<select id="adminselectQuestion" resultType="questionDTO" parameterType="int">
+		select * from tb_question
+		where question_no=#{question_no}
+	</select>
+	
+	<!-- 답변작성 -->
+	<insert id="admininsertReplyQuestion" parameterType="questionDTO">
+		INSERT INTO tb_question
+		VALUES (
+			tb_question_seq.nextval,
+			#{question_parentno},
+			#{question_title},
+			#{question_contents},
+			#{question_picture},
+			TO_DATE(SYSDATE, 'YY/MM/DD'),
+			#{question_view},
+			#{member_id}
+		)
+	</insert>
+	
+	<!-- 페이징 -->
+	<select id="countQuestion" resultType="int">
+		SELECT COUNT(*) FROM tb_question
+		WHERE question_parentno = 0
+	</select>	
+	
+	<select id="selectMemberQuestion" resultType="questionDTO" parameterType="java.util.HashMap">
+		select * from tb_question
+		where question_parentno=0
+		ORDER BY question_no DESC
+	</select>
+	
+	<select id="selectAnswer" resultType="questionDTO" parameterType="java.util.HashMap">
+		select * from tb_question
+		where question_parentno!=0
+	</select>
 </mapper>

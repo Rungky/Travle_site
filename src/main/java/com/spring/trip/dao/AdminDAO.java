@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.QuestionDTO;
 
 public interface AdminDAO {
 	public List<MemberDTO> allMembers();
@@ -13,4 +14,9 @@ public interface AdminDAO {
 	public int checkDormno(int dormno);
 	public void adminDormInsert(DormDTO dto);
 	public void adminDelDorm(int dormno);
+	public List<QuestionDTO> allQuestion();
+	public void admindeleteArticle(int question_no);
+	public List<QuestionDTO> adminselectQuestion(int question_no);
+	public void admininsertReplyQuestion (QuestionDTO questionDTO);
+	public int countQuestion();
 }

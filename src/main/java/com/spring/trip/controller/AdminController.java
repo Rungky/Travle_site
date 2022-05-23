@@ -1,5 +1,7 @@
 package com.spring.trip.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.service.AdminService;
 import com.spring.trip.service.MemberService;
 import com.spring.trip.service.TripService;
@@ -30,6 +33,7 @@ public class AdminController extends MultiActionController {
 	private AdminService adminService;
 	@Autowired
 	private MemberService memberService;
+	
 	
 	HttpSession session;
 	
@@ -53,6 +57,40 @@ public class AdminController extends MultiActionController {
 		mav.addObject("membersList", membersList);
 		List<DormDTO> dormslist = adminService.allDormsList();
 		mav.addObject("dormsList", dormslist);
+		List<QuestionDTO> questionList = adminService.allQuestion();
+		mav.addObject("questionList", questionList);
+		
+		int nowPage = 1; // 기본 값
+		if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+//	System.out.println("nowPage : " + nowPage);
+		int total = adminService.countQuestion();  // 게시물 수 부모 없는글 카운트
+//	System.out.println("total : " + total);
+		int pageNum = 5; // 한 페이지 게시물 5 개씩 (임의로 정함)
+		int pagingNum = 5; // 페이징 5개씩
+		int totalPage = (int) Math.ceil((double)total / pageNum); // 총 페이지 수
+//	System.out.println("totalPage : " + totalPage);
+		int totalPageCount = (totalPage+4) / pagingNum; // 페이징 수
+//	System.out.println("totalPageCount : " + totalPageCount);
+		int nowPageCount = (nowPage+4) / pagingNum; // 지금 페이징
+//	System.out.println("nowPageCount : " + nowPageCount);
+		int beginPage = 1 + (pageNum * (nowPage-1)); // 해당 페이지 게시물 begin 
+//	System.out.println("beginPage : " + beginPage);
+		int endPage = pageNum;	
+		if (totalPage == nowPage) {
+			endPage = total; 	// 마지막 페이지 일경우 게시물 범위 끝까지
+		} else {
+			endPage = pageNum + (pageNum * (nowPage - 1));	// 해당 페이지 게시물 end
+		}
+		
+		
+		
+		mav.addObject("nowPageCount", nowPageCount); // 지금 페이징
+		mav.addObject("totalPageCount", totalPageCount); // 총 페이징
+		mav.addObject("totalPage", totalPage); // 마지막 페이지
+		mav.addObject("beginPage", beginPage); // 해당 페이지 게시물 begin
+		mav.addObject("endPage", endPage); // 해당 페이지 게시물 end
+		mav.addObject("nowPage", nowPage); // 지금 페이지
 		mav.setViewName("admin");
 		return mav;
 	}
@@ -183,4 +221,72 @@ public class AdminController extends MultiActionController {
 			adminService.adminDelDorm(dormno);
 		}
 	}
+	
+	//삭제하기
+		@RequestMapping(value = "/trip/removeadminqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_adminremove(
+				@RequestParam("admin_remove") int admin_remove,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+			ModelAndView mav= new ModelAndView();
+		
+			adminService.admindeleteArticle(admin_remove);
+		
+			mav.setViewName("close");
+			mav.setViewName("redirect:admin.do");
+			return mav;
+		}
+		
+		//답변작성페이지
+		@RequestMapping(value = "/trip/adminanswerqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_answer(
+				@RequestParam("product_no") int product_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+		
+		QuestionList= adminService.adminselectQuestion(product_no);
+
+		mav.addObject("questionList", QuestionList);
+		mav.setViewName("qna_adminanswer");
+		return mav;
+		
+		}
+		
+		//답변작성
+		@RequestMapping(value = "/trip/adminreplyqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_answer(
+				@RequestParam("adminrecontent") String adminrecontent,
+				@RequestParam("adminparentNO") int adminparentNO,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+		
+			String id= (String)session.getAttribute("id");
+			
+			QuestionDTO qdto = new QuestionDTO();
+			qdto.setQuestion_contents(adminrecontent);
+			qdto.setQuestion_parentno(adminparentNO);
+			qdto.setQuestion_title("☞");
+			
+			long miliseconds = System.currentTimeMillis();
+	        Date date = new Date(miliseconds);
+			qdto.setQuestion_date(date);
+			qdto.setQuestion_picture("picture");
+			qdto.setQuestion_view(0);
+			qdto.setMember_id(id);
+			
+			adminService.admininsertReplyQuestion(qdto);
+			mav.setViewName("close");
+			return mav;
+		
+		}
+		
+		
+	
 }

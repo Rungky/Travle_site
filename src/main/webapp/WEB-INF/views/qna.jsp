@@ -36,7 +36,7 @@
 			                            <div class="fs_s margin_top">작성일 ${question.question_date}</div>
 			                        </div>
 			                        <div class="answer_button">
-			                            <button class="btn_doAnswer" data-id="${question.question_no}">답변하기</button>
+			                            <%-- <button class="btn_doAnswer" data-id="${question.question_no}">답변하기</button> --%>
 			                            <button class="btn_open">▼</button>
 			                            <button class="btn_doMod" data-id="${question.question_no}">수정하기</button>
 			                            <button class="btn_doRemove" data-id="${question.question_no}">삭제하기</button>
@@ -54,8 +54,8 @@
 				                            <div>
 				                            	${answerList.question_contents}
 				                            </div>
-				                            <button class="reply_doMod" data-id="${answerList.question_no}" data-parentid="${answerList.question_parentno}">답변수정</button>
-				                            <button class="reply_doRemove" data-id="${answerList.question_no}">답변삭제</button>
+				                           <%--  <button class="reply_doMod" data-id="${answerList.question_no}" data-parentid="${answerList.question_parentno}">답변수정</button>
+				                            <button class="reply_doRemove" data-id="${answerList.question_no}">답변삭제</button> --%>
 			                        	</div>
 			                        	</c:if>
 		                        	</c:forEach>
@@ -162,7 +162,7 @@
     }
     
     var list_remove = document.querySelectorAll(".btn_doRemove");
-    console.log(list_mod.length);
+    console.log(list_remove.length);
     for(let i=0; i<list_remove.length; i++){
     	list_remove[i].addEventListener("click", function(event){
         	let remove_no = event.target.getAttribute("data-id");
