@@ -36,185 +36,192 @@ public class MemberController {
 	private MemberService memberService;
 
 	// 로그인 페이지 이동
-	@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
-	public String loginForm(Model model, HttpServletRequest req, HttpServletResponse response) throws Exception{
-		String referer = req.getHeader("referer");
-		req.getSession().setAttribute("referer", referer);
-		model.addAttribute("referer", referer);
-		System.out.println("컨트롤러 referer : " + referer);
-		return "login";
-	}
-
-	// 회원가입 페이지 접속
-	@RequestMapping(value = "/trip/signup.do", method = RequestMethod.GET)
-	public String JoinForm() {
-		logger.info("get 회원가입 메소드 진입");
-		return "signup";
-	}
-
-	// 아이디 찾기 페이지 접속
-	@RequestMapping(value = "/trip/idFind.do", method = RequestMethod.GET)
-	public String idFindForm() {
-		logger.info("get 아이디 찾기 메소드 진입");
-		return "idFind";
-	}
-
-	// 비밀번호 찾기 페이지 접속
-	@RequestMapping(value = "/trip/pwFind.do", method = RequestMethod.GET)
-	public String pwFindForm() {
-		logger.info("get 비밀번호 찾기 메소드 진입");
-		return "pwFind";
-	}
-	// ------------------기능 메소드----------------------
-
-	// 로그인 기능
-	@RequestMapping(value = "/trip/loginCheck.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute MemberDTO dto, HttpServletRequest req) throws Exception {
-		int msg = 1;
-		logger.info("post login");
-
-		HttpSession session = req.getSession();
-		System.out.println("Controller  member_id : " + dto.getMember_id() + " member_pw : " + dto.getMember_pw());
-		if (dto == null) {
-			session.setAttribute("id", null);
-			ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
-			mav.addObject("msg", msg);
-			return mav;
-		} else {
-			MemberDTO login = memberService.login(dto);
-
-			if (login == null) {
-				session.setAttribute("id", null);
-				ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
-				mav.addObject("msg", msg);
-				return mav;
-			} else {
-				String refererURL = (String) session.getAttribute("referer");
-				System.out.println("test : " + refererURL);
-				
-				if(refererURL != null) {
-					String[] refererSplit = refererURL.split("/trip");
-					String url = "";
-					for(String test : refererSplit) {
-						System.out.println("refererSplit : " + test);
-						url = test;
-					}
-					url = url.substring(1);
-					System.out.println("여기 url은 ? : " + url);
-					
-					if(url.contains("login") || url.contains("idFindCheck.do")
-							|| url.contains("pwFindCheck.do")
-							|| url.contains("signupCheck.do")
-							|| url.contains("newPw.do")
-							|| refererURL == null) {
-						session.setAttribute("id", login.getMember_id());
-						
-						ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
-						System.out.println("url : " + url);
-						
-						return mav;
-					} else {  //login 이라는 단어가 포함되어 있는 경우 
-						session.setAttribute("id", login.getMember_id());
-//						System.out.println("else if  indexOf : "+url.indexOf("login"));
-						ModelAndView mav = new ModelAndView("redirect:" + url);
-						return mav;
-					}
-				} else {
-					session.setAttribute("id", login.getMember_id());
-					ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
-					
-					return mav;
-				}
-				
-				
-				
-				//login이라는 단어가 포함되어 있지 않은 경우
-				
+			@RequestMapping(value = "/trip/login.do", method = RequestMethod.GET)
+			public String loginForm(Model model, HttpServletRequest req, HttpServletResponse response) throws Exception{
+				String referer = req.getHeader("referer");
+				req.getSession().setAttribute("referer", referer);
+				model.addAttribute("referer", referer);
+				System.out.println("컨트롤러 referer : " + referer);
+				return "login";
 			}
-		}
-	}
 
-	// 회원가입 기능
-	@RequestMapping(value = "/trip/signupCheck.do", method = RequestMethod.POST)
-	public String postJoin(@ModelAttribute MemberDTO dto) throws Exception {
-		logger.info("post 회원가입 메소드 진입");
-		MemberDTO result = memberService.join(dto);
-		if (result == null) {
-			logger.info("controller if문   member_id : " + dto.getMember_id());
-			logger.info("controller if문   member_pw : " + dto.getMember_pw());
-			return "signup";
-		} else {
-			logger.info("controller else문    member_id : " + result.getMember_id());
-			logger.info("controller else문    member_pw : " + result.getMember_pw());
-			return "login";
-		}
-	}
+			// 회원가입 페이지 접속
+			@RequestMapping(value = "/trip/signup.do", method = RequestMethod.GET)
+			public String JoinForm() {
+				logger.info("get 회원가입 메소드 진입");
+				return "signup";
+			}
 
-	// 아이디 찾기 기능
-	@RequestMapping(value = "/trip/idFindCheck.do", method = RequestMethod.POST)
-	public String idFind(@ModelAttribute MemberDTO dto, Model model) throws Exception {
-		logger.info("post 아이디 찾기 메소드 진입");
-		MemberDTO result = memberService.idFind(dto);
-		if (result == null) {
-			model.addAttribute("member_id", null);
-		} else {
-			logger.info("controller else문    member_id : " + result.getMember_id());
-			model.addAttribute("member_id", result.getMember_id());
-		}
-		return "idFind_result";
-	}
+			// 아이디 찾기 페이지 접속
+			@RequestMapping(value = "/trip/idFind.do", method = RequestMethod.GET)
+			public String idFindForm() {
+				logger.info("get 아이디 찾기 메소드 진입");
+				return "idFind";
+			}
 
-	
-	// 로그아웃
-	@RequestMapping(value = "/trip/logoutCheck.do", method = RequestMethod.GET)
-	public ModelAndView  logout(HttpServletRequest request) throws Exception {
+			// 비밀번호 찾기 페이지 접속
+			@RequestMapping(value = "/trip/pwFind.do", method = RequestMethod.GET)
+			public String pwFindForm() {
+				logger.info("get 비밀번호 찾기 메소드 진입");
+				return "pwFind";
+			}
+			// ------------------기능 메소드----------------------
+			
+			//아이디 충복 체크 
+			@RequestMapping(value="/trip/idDuplCheck.do", method=RequestMethod.POST)
+			@ResponseBody
+			public String idDuplCheck(@RequestParam("member") String result) throws Exception{
+				String data = "0";
+				System.out.println("idDupl : ");
+				int idDupl = memberService.idDuplCheck(result);
+				logger.info("idDupl : " + idDupl);
+				if(idDupl > 0)
+					data = "1";
+				return data;
+			}
 
-		logger.info("logoutMainGET메서드 진입");
+			// 로그인 기능
+			@RequestMapping(value = "/trip/loginCheck.do", method = RequestMethod.POST)
+			public ModelAndView login(@ModelAttribute MemberDTO dto, HttpServletRequest req) throws Exception {
+				int msg = 1;
+				logger.info("post login");
 
-		HttpSession session = request.getSession();
-		session.invalidate();
+				HttpSession session = req.getSession();
+				System.out.println("Controller  member_id : " + dto.getMember_id() + " member_pw : " + dto.getMember_pw());
+				if (dto == null) {
+					session.setAttribute("id", null);
+					ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
+					mav.addObject("msg", msg);
+					return mav;
+				} else {
+					MemberDTO login = memberService.login(dto);
 
-		ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
-		return mav;
-	}
+					if (login == null) {
+						session.setAttribute("id", null);
+						ModelAndView mav = new ModelAndView("redirect:/trip/login.do");
+						mav.addObject("msg", msg);
+						return mav;
+					} else {
+						String refererURL = (String) session.getAttribute("referer");
+						System.out.println("test : " + refererURL);
+						
+						if(refererURL != null) {
+							String[] refererSplit = refererURL.split("/trip");
+							String url = "";
+							for(String test : refererSplit) {
+								System.out.println("refererSplit : " + test);
+								url = test;
+							}
+							url = url.substring(1);
+							System.out.println("여기 url은 ? : " + url);
+							
+							if(url.contains("login") || url.contains("idFindCheck.do")
+									|| url.contains("pwFindCheck.do")
+									|| url.contains("signupCheck.do")
+									|| url.contains("newPw.do")
+									|| refererURL == null) {
+								session.setAttribute("id", login.getMember_id());
+								
+								ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+								System.out.println("url : " + url);
+								
+								return mav;
+							} else {  //login 이라는 단어가 포함되어 있는 경우 
+								session.setAttribute("id", login.getMember_id());
+//								System.out.println("else if  indexOf : "+url.indexOf("login"));
+								ModelAndView mav = new ModelAndView("redirect:" + url);
+								return mav;
+							}
+						} else {
+							session.setAttribute("id", login.getMember_id());
+							ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+							
+							return mav;
+						}
+						
+						
+						
+						//login이라는 단어가 포함되어 있지 않은 경우
+						
+					}
+				}
+			}
+
+			// 회원가입 기능
+			@RequestMapping(value = "/trip/signupCheck.do", method = RequestMethod.POST)
+			public String postJoin(@ModelAttribute MemberDTO dto) throws Exception {
+				logger.info("post 회원가입 메소드 진입");
+				MemberDTO result = memberService.join(dto);
+				if (result == null) {
+					logger.info("controller if문   member_id : " + dto.getMember_id());
+					logger.info("controller if문   member_pw : " + dto.getMember_pw());
+					return "signup";
+				} else {
+					logger.info("controller else문    member_id : " + result.getMember_id());
+					logger.info("controller else문    member_pw : " + result.getMember_pw());
+					return "login";
+				}
+			}
+
+			// 아이디 찾기 기능
+			@RequestMapping(value = "/trip/idFindCheck.do", method = RequestMethod.POST)
+			public String idFind(@ModelAttribute MemberDTO dto, Model model) throws Exception {
+				logger.info("post 아이디 찾기 메소드 진입");
+				MemberDTO result = memberService.idFind(dto);
+				if (result == null) {
+					model.addAttribute("member_id", null);
+				} else {
+					
+					logger.info("controller else문    member_id : " + result.getMember_id());
+					model.addAttribute("member_id", result.getMember_id());
+				}
+				return "idFind_result";
+			}
+
+			
+			// 로그아웃
+			@RequestMapping(value = "/trip/logoutCheck.do", method = RequestMethod.GET)
+			public ModelAndView  logout(HttpServletRequest request) throws Exception {
+
+				logger.info("logoutMainGET메서드 진입");
+
+				HttpSession session = request.getSession();
+				session.invalidate();
+
+				ModelAndView mav = new ModelAndView("redirect:/trip/main.do");
+				return mav;
+			}
 
 
-	// 비밀번호 찾기 기능
-	@RequestMapping(value = "/trip/pwFindCheck.do", method = RequestMethod.POST)
-	public String pwFind(@ModelAttribute MemberDTO dto, Model model, HttpSession session) throws Exception {
-		logger.info("post 비밀번호 찾기 메소드 진입");
-		MemberDTO result = memberService.pwFind(dto);
+			// 비밀번호 찾기 기능
+			@RequestMapping(value = "/trip/pwFindCheck.do", method = RequestMethod.POST)
+			public String pwFind(@ModelAttribute MemberDTO dto, Model model, HttpSession session) throws Exception {
+				logger.info("post 비밀번호 찾기 메소드 진입");
+				MemberDTO result = memberService.pwFind(dto);
 
-		if (result == null) {
-			logger.info("controller if문   member_pw : " + dto.getMember_pw());
-			System.out.println("비밀번호 찾기" + dto.getMember_id());
-			System.out.println("비밀번호 찾기" + dto.getMember_pw());
-		} else {
-			System.out.println("비밀번호 찾기" + result.getMember_pw());
-			System.out.println("아이디" + result.getMember_id());
-			logger.info("controller else문    member_pw : " + result.getMember_pw());
-			session.setAttribute("id", dto.getMember_id());
-			model.addAttribute("member_pw", result.getMember_pw());
-		}
-		return "pwFind_result";
-	}
+				if (result == null) {
+					logger.info("controller if문   member_pw : " + dto.getMember_pw());
+					System.out.println("비밀번호 찾기" + dto.getMember_id());
+					System.out.println("비밀번호 찾기" + dto.getMember_pw());
+				} else {
+					System.out.println("비밀번호 찾기" + result.getMember_pw());
+					System.out.println("아이디" + result.getMember_id());
+					logger.info("controller else문    member_pw : " + result.getMember_pw());
+					model.addAttribute("member_id", result.getMember_id());
+					model.addAttribute("member_pw", result.getMember_pw());
+				}
+				return "pwFind_result";
+			}
 
-	// 새 비밀번호 변경하기
-	@RequestMapping(value = "/trip/newPw.do", method = RequestMethod.POST)
-	public String newPw(@ModelAttribute MemberDTO dto, HttpSession session, Model model, HttpServletRequest req)
-			throws Exception {
-		dto.setMember_id((String) session.getAttribute("id"));
-		System.out.println(session.getAttribute("id"));
+			// 새 비밀번호 변경하기
+			@RequestMapping(value = "/trip/newPw.do", method = RequestMethod.POST)
+			public String newPw(@ModelAttribute MemberDTO dto, HttpSession session, Model model, HttpServletRequest req)
+					throws Exception { 
 
-		System.out.println("세션에 저장한 아이디 : " + session.getAttribute("id"));
-		logger.info("세션에 저장한 아이디 : " + session.getAttribute("id"));
-		model.addAttribute("member_pw", dto.getMember_pw());
-		model.addAttribute("member_id", session.getAttribute("id"));
-
-		int result = memberService.newPw(dto);
-
-		return "login";
-	}
+				int result = memberService.newPw(dto);
+				
+				return "login";
+			}
 
 // 마이페이지
 	@RequestMapping(value = "/trip/mypage.do", method = RequestMethod.GET)

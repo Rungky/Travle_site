@@ -9,6 +9,8 @@ public interface MemberDAO {
 	
 	public void join(MemberDTO memberDTO);  //회원가입
 	
+	public int idDuplCheck(String result) throws Exception;
+	
 	public MemberDTO login(MemberDTO memberDTO) throws Exception;  //로그인
 	
 	public MemberDTO idFind(MemberDTO memberDTO);  //아이디 찾기
