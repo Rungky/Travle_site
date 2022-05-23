@@ -84,4 +84,15 @@ function bind(){
 		}
 	});
 
+	$("#signup").off("keydown").on("keydown", function(evt){
+			if($("#id").val() == '' || $("#pw").val() == '' 
+			|| $("#pw_2").val() == '' || $("#name_1").val() == '' || $("#tel_1").val() == ''){
+				if(evt.keyCode == 13){  //enter : 13일때
+					var text = "빈칸이 있습니다";
+					alert(text);
+					return false;
+				}
+			}
+	});
+
 }

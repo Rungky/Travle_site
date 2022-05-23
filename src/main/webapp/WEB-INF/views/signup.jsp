@@ -15,10 +15,13 @@
 
 <script>
 function signup() {
-	if (confirm("회원가입 완료!") == true) {
-		document.getElementById('signup').submit();
-	}
+
 }
+	$("document").ready(function(){
+		if(${param.msg} == 1){
+			alert("로그인에 실패했습니다. 다시 시도해주세요!");
+		}
+	});
 </script>
 
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
