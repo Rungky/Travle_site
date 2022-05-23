@@ -253,7 +253,7 @@
                 return;
             }
         })
-<<<<<<< HEAD
+
         $("#btn_withdraw").off("click").on("click", function(){
             if(confirm("탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.")==true){
                 $("#withdraw_form").submit();
@@ -292,7 +292,7 @@
             window.open("${contextPath}/trip/adminmodreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
         })
     }
-=======
+
         
         
         function del_button_event() {
@@ -320,7 +320,7 @@
         }
     }
         
->>>>>>> abafbaca9b04839ff44eb1c8bb7ad4031a105f1a
+
        
     </script>
 </body>
