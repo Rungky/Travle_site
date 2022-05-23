@@ -70,7 +70,7 @@
 				let no = $(this).data("num");
 				console.log("날짜가 지났습니다 삭제 가능함", no);
 					$.ajax({
-						url : "http://localhost:8080/final_trip/trip/Delete.do",
+						url : "${contextPath}/trip/Delete.do",
 						type : "get",
 						data : {
 							reserve_no : no
@@ -110,7 +110,7 @@
 		    let payCheck;
 		    let reserve_no = $(this).data("reserveno")
 		    $.ajax({
-				url : "http://localhost:8080/final_trip/trip/bridge.do",
+				url : "${contextPath}/trip/bridge.do",
 				type : "get",
 				data : {
 					reserve_no : reserve_no
