@@ -51,13 +51,13 @@
 				$("#check_2").prop("checked", true);
 			}
 			if(${opt_aircon}==1){
-				$("#check3").prop("checked", true);
+				$("#check_3").prop("checked", true);
 			}
 			if(${opt_dryer}==1){
-				$("#check4").prop("checked", true);
+				$("#check_4").prop("checked", true);
 			}
 			if(${opt_port}==1){
-				$("#check5").prop("checked", true);
+				$("#check_5").prop("checked", true);
 			}
 
 			let sb = ${param.price} + 0;
