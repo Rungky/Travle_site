@@ -207,7 +207,7 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
-			int room_no, int dorm_no, int pay_no, int pay_check) {
+			int room_no, int dorm_no, long pay_no, int pay_check) {
 		Map map = new HashMap();
 		map.put("member", member);
 		System.out.println(member);
@@ -367,8 +367,10 @@ public class TripDAOImpl implements TripDAO{
 	}
 
 	@Override
-	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, String real_name, String dorm_name, String room_name) {
+	public void insertPayment(long pay_no, int pay_check, String member, String pay_ment, String pay_num, String real_name, String dorm_name, String room_name) {
 		Map map = new HashMap();
+		map.put("pay_no", pay_no);
+		System.out.println("다오 pay_no" + pay_no);
 		map.put("pay_check", pay_check);
 		map.put("member", member);
 		map.put("pay_ment", pay_ment);
@@ -382,20 +384,21 @@ public class TripDAOImpl implements TripDAO{
 	}
 
 	@Override
-	public PaymentDTO selectPayment(String pay_num) {
-		PaymentDTO dto = sqlSession.selectOne("mapper.reser.paySelect", pay_num);
+	public PaymentDTO selectPayment(long pay_no) {
+		PaymentDTO dto = sqlSession.selectOne("mapper.reser.nopaynoSelect", pay_no);
 		return dto;
 	}
 
 	@Override
-	public int paynoSelect(int reserve_no) {
-		int pay_no = sqlSession.selectOne("mapper.reser.paynoSelect",reserve_no );
+	public long paynoSelect(int reserve_no) {
+		long pay_no = sqlSession.selectOne("mapper.reser.paynoSelect",reserve_no );
 		return pay_no;
 	}
 
 	@Override
-	public PaymentDTO nopaynoSelect(int pay_no) {
+	public PaymentDTO nopaynoSelect(long pay_no) {
 		PaymentDTO dto = sqlSession.selectOne("mapper.reser.nopaynoSelect",pay_no );
+		System.out.println("다오에서 나온 dto"+dto);
 		return dto;
 	}
 

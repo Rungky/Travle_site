@@ -328,10 +328,9 @@ public class TripController extends MultiActionController {
 		
 		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
-		
-		tripService.insertPayment(pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
-		PaymentDTO dto = tripService.selectPayment(pay_num);
-		int pay_no = dto.getPay_no();
+		long pay_no = System.currentTimeMillis();
+		tripService.insertPayment(pay_no, pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
+		PaymentDTO dto = tripService.selectPayment(pay_no);
 		System.out.println("컨트롤러 pay_no" + pay_no);
 	
 		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no, pay_no, pay_check);
@@ -385,9 +384,11 @@ public class TripController extends MultiActionController {
 		try {
 			System.out.println("bridge.do 진입함");
 			
-			
-			int pay_no = tripService.paynoSelect(reserve_no);
-			dto = tripService.nopaynoSelect(pay_no);
+			System.out.println(tripService.paynoSelect(reserve_no));
+			long pay_no = tripService.paynoSelect(reserve_no);
+			System.out.println("브릿지 pay_no" + pay_no);
+			System.out.println(pay_no);
+			dto = tripService.selectPayment(pay_no);
 			String real_name= dto.getReal_name();
 			String pay_ment = dto.getPay_ment();
 			String pay_num = dto.getPay_num();
@@ -439,6 +440,7 @@ public class TripController extends MultiActionController {
 				System.out.println("예약내역 없음");
 				mav.setViewName("nohistory");
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

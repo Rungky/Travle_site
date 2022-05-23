@@ -55,15 +55,16 @@
 			//항목 체크 
 
 			/*
-			var form = document.f1;
+			var form = document.text_one;
     		if (!form.text_one.value) {
         	alert("예약자명을 입력해 주십시오. ");
        	 	form.text_one.focus();
        	 	return;
     		}
  
+			var form = document.text_two;
     		if (!form.text_two.value) {
-        	alert("비밀번호를 입력해 주십시오.");
+        	alert("결제번호를 입력해 주십시오.");
         	form.text_two.focus(); 
         	return;
     		}		
@@ -139,11 +140,22 @@
 				$('#pay_not_yet').hide();
 				$('#card_not_yet').hide();
 				$('#payco_not_yet').show();
+				$('#pays').show();
+				$('#pay_num').show();
 			} else if($(this).val() == "phone" ){
 				$('#phone_not_yet').show();
 				$('#pay_not_yet').hide();
 				$('#payco_not_yet').hide();
 				$('#card_not_yet').hide();
+				$('#pays').show();
+				$('#pay_num').show();
+			}else if($(this).val() == "card" ){
+				$('#phone_not_yet').hide();
+				$('#pay_not_yet').hide();
+				$('#payco_not_yet').hide();
+				$('#card_not_yet').show();
+				$('#pays').show();
+				$('#pay_num').show();
 			}
 			})
 

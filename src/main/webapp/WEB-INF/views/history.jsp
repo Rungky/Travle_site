@@ -127,9 +127,12 @@
 					if(1 == data.pay_check) {
 						payCheck = "결제완료";
 						$('.pay_check').text(payCheck); 
+						
+						
 					} else if(0 == data.pay_check) {
 						payCheck = "미결제";
 						$('.pay_check').text(payCheck);
+						
 					}
 				},
 				fail : function(data) {
@@ -167,7 +170,11 @@
 					<table style="padding: 10px 10px 10px 10px;" id="table_css">
 						<form action="${contextPath}/trip/reserDelete.do">
 							<tr>
-								<td colspan="3">숙소 예약번호 ${result.RESERVE_NO}</td>
+								<td colspan="3">숙소 예약번호 ${result.RESERVE_NO} 
+								<span id="statement" style="display: none;">🟢결제완료</span>
+								<span id="nostatement" style="display: none;">🔴미결제</span>
+								
+								</td>
 								<td><input type="button" class="del check css"
 									data-checkout="${result.RESERVE_CHECKOUT}"
 									data-num="${result.RESERVE_NO}" value="X"></td>
@@ -207,7 +214,7 @@
 														<span>결제수단 : <span class="pay_ment"></span></span><br>
 														<span>> <span class="pay_num"></span></span><br>
 														<span>결제여부 : <span class="pay_check"></span></span></span><br>
-														<span>상품명 : <span class="dorm_name"></span> / <span class="room_name"></span></span>
+														<span>상품명 : <span class="dorm_name"></span> /  <br><span class="room_name"></span></span>
 													</p>
 													<input type="button" class="btn_close" value="x">
 												</div>

@@ -31,8 +31,8 @@ public interface TripService {
 			String picture, int reserveNo, String memberId);
 	public int selectTotalQuestion();
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, 
-			int reserve_pay,int room_no, int dorm_no, int pay_no, int pay_check);
-	public void insertPayment(int pay_check, String member, String pay_ment, String pay_num, 
+			int reserve_pay,int room_no, int dorm_no, long pay_no, int pay_check);
+	public void insertPayment(long pay_no, int pay_check, String member, String pay_ment, String pay_num, 
 			String real_name,String dorm_name,String room_name);
 	public MemberDTO memberDto(String member_id);
 	public int countQuestion(String id);
@@ -52,8 +52,8 @@ public interface TripService {
 	public List<QuestionDTO> selectmodReply(int question_no);
 	public void updateReply(QuestionDTO questionDTO);
 	public void deleteReply(int question_no);
-	public PaymentDTO selectPayment(String pay_num);
-	public int paynoSelect(int reserve_no);
-	public PaymentDTO nopaynoSelect(int pay_no);
+	public PaymentDTO selectPayment(long pay_no);
+	public long paynoSelect(int reserve_no);
+	public PaymentDTO nopaynoSelect(long pay_no);
 	
 }
