@@ -292,7 +292,7 @@
 			<!--  member_id 가져가야함-->
 			<form action="result.do">
 				<input type="button" id="btn_pay" class="box" name="action" value="결제하기">
-				<button class="box" onclick="history.back()">돌아가기</button>
+				<a href="${contextPath}/trip/detail.do?dormno=${param.dormno}&reserve_checkin=${param.reserve_checkin}&reserve_checkout=${param.reserve_checkout}"><input type="button" class="box" value="돌아가기"></a>
 				<input type="hidden"  id="dorm_no" value="${check.dorm_no}">
 				<input type="hidden"  id="room_no" value="${check.room_no}">
 				<!-- <input type="hidden" name="reserve_checkin"
