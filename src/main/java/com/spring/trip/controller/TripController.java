@@ -342,6 +342,7 @@ public class TripController extends MultiActionController {
 		return mav;
 	}
 
+	//예약취소하기
 	@RequestMapping(value = "/trip/reserDelete.do", method = RequestMethod.GET)
 	public ModelAndView reserDelete(@RequestParam("reserve_no") int reserve_no,
 			@RequestParam("reserve_checkin") Date reserve_checkin, HttpServletRequest request,
@@ -352,10 +353,11 @@ public class TripController extends MultiActionController {
 		Date date = new Date(miliseconds);
 		if (reserve_checkin.after(date))
 			tripService.reserDelete(reserve_no);
-		mav.setViewName("history");
+		mav.setViewName("forward:/trip/history.do");
 		return mav;
 	}
 
+	//예약내역 삭제하기
 	@RequestMapping(value = "/trip/Delete.do", method = RequestMethod.GET)
 	@ResponseBody
 	public JSONObject Delete(@RequestParam("reserve_no") int reserve_no, HttpServletRequest request,

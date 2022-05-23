@@ -68,27 +68,27 @@
 			console.log("최종 check", check);
 			if (check < date2) {
 				let no = $(this).data("num");
-				console.log("날짜가 같습니다 삭제 가능함", no);
-				$.ajax({
-					url : "http://localhost:8080/final_trip/trip/Delete.do",
-					type : "get",
-					data : {
-						reserve_no : no
-					},
-					success : function(data) {
-						console.log("컨트롤러에서 넘어온 값4", data.msg);
-						if (data.msg == 0 || data.msg == 1) {
-							console.log("값 가져옴 성공");
-							location.reload();
+				console.log("날짜가 지났습니다 삭제 가능함", no);
+					$.ajax({
+						url : "http://localhost:8080/final_trip/trip/Delete.do",
+						type : "get",
+						data : {
+							reserve_no : no
+						},
+						success : function(data) {
+							console.log("컨트롤러에서 넘어온 값4", data.msg);
+							if (data.msg == 0 || data.msg == 1) {
+								console.log("값 가져옴 성공");
+	                            location.reload();
+							}
+						},
+						fail : function(data) {
+							console.log("fail", data);
+						},
+						complete : function(data) {
+							console.log("comp", data);
 						}
-					},
-					fail : function(data) {
-						console.log("fail", data);
-					},
-					complete : function(data) {
-						console.log("comp", data);
-					}
-				})
+					})
 
 			} else {
 				console.log("날짜가 부합하지 않음");
@@ -191,8 +191,8 @@
 											<input type="button" class="rvbt button" id="re_button"
 											name="action" value="리뷰">
 										</a> <input type="submit" class="re button" value="예약 취소하기"
-											data-no="${result.RESERVE_NO}"
-											onclick="return confirm('예약을 취소하시겠습니까?')"> <input
+											data-no="${result.RESERVE_NO}" onclick="return confirm('예약을 취소하시겠습니까?')">
+											<input
 											type="hidden" name="reserve_checkin"
 											value="<fmt:formatDate value='${result.RESERVE_CHECKIN}' pattern='yyyy-MM-dd' />">
 										<input type="hidden" name="reserve_no"
