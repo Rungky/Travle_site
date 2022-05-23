@@ -54,7 +54,7 @@
                                     <input id="btn_logout" type="button" value="로그아웃">
                                 </form>
                                 <form id="withdraw_form" method="post" action="${contextPath}/trip/removeMember.do">
-                                    <input id="btn_withdraw" type="button" value="회원탈퇴">
+                                    <input id="btn_withdraw" type="button" onclick="del_button_event()"  value="회원탈퇴">
                                     <input type="hidden" name="member_id" value="${memberDTO.member_id}">
                                 </form>
                             </div>
@@ -248,13 +248,33 @@
                 return;
             }
         })
-        $("#btn_withdraw").off("click").on("click", function(){
-            if(confirm("탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.")==true){
-                $("#withdraw_form").submit();
-            }else{
-                return;
-            }
-        })
+        
+        
+        function del_button_event() {
+        	
+        if (confirm("사적모임 페이지를 탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.") == true) { //확인
+            $.ajax({
+                url: "${contextPath}/trip/pwCheck.do",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    member_pw : prompt("비밀번호를 입력하세요")
+                },
+                success: function (obj) {
+                	   if (obj.result == "true") {
+                           alert("탈퇴되었습니다.");
+                           location.replace("${contextPath}/trip/main.do}");
+                       } else {
+                           alert("비밀번호가 틀립니다. 다시 시도해주세요. ");
+                           return;
+                       }
+                }
+            });
+        } else {
+            return;
+        }
+    }
+        
        
     </script>
 </body>

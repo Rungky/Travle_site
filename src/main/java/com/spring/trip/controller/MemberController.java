@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.trip.dto.DormVO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.service.MemberService;
+
+import net.sf.json.JSONObject;
 
 @Controller
 public class MemberController {
@@ -226,6 +229,32 @@ public class MemberController {
 		mav.setViewName("mypage");
 		mav.addObject("member", memberDTO);
 		return mav;
+	}
+	
+	// 회원탈퇴 전 확인 
+	@RequestMapping(value="/trip/pwCheck.do", method=RequestMethod.POST)
+	public @ResponseBody JSONObject pwCheck(HttpServletRequest request, HttpServletResponse Response) throws Exception {
+		System.out.println("비밀번호 확인 진입");
+		HttpSession session = request.getSession();
+		String member_id = (String)session.getAttribute("id");
+		String member_pw = (String)request.getParameter("member_pw");
+		
+		JSONObject obj = new JSONObject();
+		MemberDTO memberDTO = memberService.select_myMember(member_id);
+		System.out.println("원래 비밀번호"+memberDTO.getMember_pw()+" / 입력한 비번 : "+member_pw);
+		
+		if(memberDTO.getMember_pw().equals(member_pw) ) {
+			memberService.removeMember(member_id);
+			System.out.println("삭제할 멤버 : "+member_id);
+			obj.put("result", "true");
+			System.out.println("제이슨 테스트 : "+obj.toString());
+			session.invalidate();
+			return obj;
+		}else {
+			System.out.println("탈퇴불가 비밀번호 틀림");
+			obj.put("result", "false");
+			return obj;
+		}
 	}
 	
 	// 회원정보 수정 
