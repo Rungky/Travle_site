@@ -130,7 +130,6 @@
 					} else if(0 == data.pay_check) {
 						payCheck = "미결제";
 						$('.pay_check').text(payCheck);
-						SS
 					}
 				},
 				fail : function(data) {
