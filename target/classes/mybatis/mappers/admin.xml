@@ -65,9 +65,8 @@
 	<!-- 문의조회 -->
 	<select id="allQuestion" resultType="questionDTO">
 		select * from tb_question
-		start with question_parentno=0
-		connect by prior question_no = question_parentno
-		order siblings by question_no
+		where question_parentno=0
+		ORDER BY question_no DESC
 	</select>
 	
 	<!-- 글삭제 -->
@@ -106,12 +105,6 @@
 		SELECT COUNT(*) FROM tb_question
 		WHERE question_parentno = 0
 	</select>	
-	
-	<select id="selectMemberQuestion" resultType="questionDTO" parameterType="java.util.HashMap">
-		select * from tb_question
-		where question_parentno=0
-		ORDER BY question_no DESC
-	</select>
 	
 	<select id="selectAnswer" resultType="questionDTO" parameterType="java.util.HashMap">
 		select * from tb_question

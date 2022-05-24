@@ -177,7 +177,7 @@
                         </tr>
                     </thead>
                     <tbody>
-						<c:forEach var="question" items="${questionList}"  varStatus="questionNum">
+						<c:forEach var="question" items="${questionList}" begin="${beginPage}" end="${endPage}">
 						<c:if test="${question.question_parentno==0}">
 							<tr>
 	                            <td>${question.question_title}</td>
@@ -189,17 +189,67 @@
 	                            <td class="answer_view" data-no="${question.question_no}">답변 보기</td>
                         	</tr>
 						</c:if>
-						<c:if test="${question.question_parentno!=0}">
-							<tr id="answers" data-parents="${question.question_parentno}" class="nodisplay">
-	                            <td>${question.question_title}</td>
-	                            <td>${question.question_contents}</td>
-	                            <td>${question.member_id }</td>
-	                            <td>${question.question_date}</td>
+						<c:forEach var="answers" items="${answersList}" varStatus="questionNum">
+						<c:if test="${answers.question_parentno==question.question_no }">
+							<tr id="answers" data-parents="${answers.question_parentno}" class="nodisplay">
+	                            <td>${answers.question_title}</td>
+	                            <td>${answers.question_contents}</td>
+	                            <td>${answers.member_id }</td>
+	                            <td>${answers.question_date}</td>
                         	</tr>
 						</c:if>
+						</c:forEach>
                     </c:forEach>
                     </tbody>
                 </table>
+                <div class="center">
+	            <div class="paging">
+					<c:if test="${nowPageCount != 1}">
+						<form>
+							<button class="pagebt">이전</button>
+							<input type="hidden" name="nowPage" value="${(nowPageCount-1)*5}">
+						</form>
+					</c:if>
+					<c:if test="${nowPageCount != totalPageCount}">
+						<c:forEach var="i" begin="${1+ (5 * (nowPageCount-1))}"
+							end="${5 + (5 * (nowPageCount-1))}">
+							<div class="">
+								<form>
+									<c:if test="${nowPage == i}">
+										<button class="pagebt nowpage">${i}</button>
+									</c:if>
+									<c:if test="${nowPage != i}">
+										<button class="pagebt">${i}</button>
+									</c:if>
+									<input type="hidden" name="nowPage" value="${i}">
+								</form>
+							</div>
+						</c:forEach>
+					</c:if>
+					<c:if test="${nowPageCount == totalPageCount}">
+						<c:forEach var="i" begin="${1+ (5 * (nowPageCount-1))}"
+							end="${totalPage}">
+							<div class="">
+								<form>
+									<c:if test="${nowPage == i}">
+										<button name="action" value="qna.do" class="pagebt nowpage">${i}</button>
+									</c:if>
+									<c:if test="${nowPage != i}">
+										<button name="action" value="qna.do" class="pagebt">${i}</button>
+									</c:if>
+									<input type="hidden" name="nowPage" value="${i}">
+								</form>
+							</div>
+						</c:forEach>
+					</c:if>
+					<c:if test="${nowPageCount != totalPageCount}">
+						<form>
+							<button class="pagebt">다음</button>
+							<input type="hidden" name="nowPage" value="${(nowPageCount+1)*5-4}">
+						</form>
+					</c:if>
+	            </div>
+            </div>
             </div>
         </div>
         <input type="hidden" id="nextpage" value="">

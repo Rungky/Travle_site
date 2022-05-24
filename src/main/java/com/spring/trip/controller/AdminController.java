@@ -3,10 +3,6 @@ package com.spring.trip.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import java.io.PrintWriter;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +23,7 @@ import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.service.AdminService;
 import com.spring.trip.service.MemberService;
+import com.spring.trip.service.TripService;
 
 @Controller
 public class AdminController extends MultiActionController {
@@ -35,6 +32,8 @@ public class AdminController extends MultiActionController {
 	private AdminService adminService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private TripService tripService;
 	
 	
 	HttpSession session;
@@ -52,17 +51,50 @@ public class AdminController extends MultiActionController {
 			ModelAndView mav= new ModelAndView("redirect:/trip/main.do");
 			return mav;
 		}
-		
 		ModelAndView mav= new ModelAndView();
+		
+		int nowPage = 1; // 기본 값
+		if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+//	System.out.println("nowPage : " + nowPage);
+		int total = adminService.countQuestion();  // 게시물 수 부모 없는글 카운트
+//	System.out.println("total : " + total);
+		int pageNum = 10; // 한 페이지 게시물 5 개씩 (임의로 정함)
+		int pagingNum = 5; // 페이징 5개씩
+		int totalPage = (int) Math.ceil((double)total / pageNum); // 총 페이지 수
+//	System.out.println("totalPage : " + totalPage);
+		int totalPageCount = (totalPage+4) / pagingNum; // 페이징 수
+//	System.out.println("totalPageCount : " + totalPageCount);
+		int nowPageCount = (nowPage+4) / pagingNum; // 지금 페이징
+//	System.out.println("nowPageCount : " + nowPageCount);
+		int beginPage = 1 + (pageNum * (nowPage-1)); // 해당 페이지 게시물 begin 
+//	System.out.println("beginPage : " + beginPage);
+		int endPage = pageNum;	
+		if (totalPage == nowPage) {
+			endPage = total; 	// 마지막 페이지 일경우 게시물 범위 끝까지
+		} else {
+			endPage = pageNum + (pageNum * (nowPage - 1));	// 해당 페이지 게시물 end
+		}
+		mav.addObject("nowPageCount", nowPageCount); // 지금 페이징
+		mav.addObject("totalPageCount", totalPageCount); // 총 페이징
+		mav.addObject("totalPage", totalPage); // 마지막 페이지
+		mav.addObject("beginPage", beginPage-1); // 해당 페이지 게시물 begin
+		mav.addObject("endPage", endPage-1); // 해당 페이지 게시물 end
+		mav.addObject("nowPage", nowPage); // 지금 페이지
+		
+		
 		mav.addObject("memberDTO",memberDTO);
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
 		List<DormDTO> dormslist = adminService.allDormsList();
 		mav.addObject("dormsList", dormslist);
 		List<QuestionDTO> questionList = adminService.allQuestion();
+		List<QuestionDTO> answersList = tripService.selectAnswer();
 		mav.addObject("questionList", questionList);
+		mav.addObject("answersList", answersList);
 		
 		mav.addObject("tabMove", request.getParameter("tabMove"));
+		
 		mav.setViewName("admin");
 		return mav;
 	}
