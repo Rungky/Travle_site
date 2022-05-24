@@ -21,9 +21,9 @@
 	            <a href="#">
 					<img src="${contextPath}/resources/image/logo-black.png" alt="로고">
 				</a>
-				<h2 style="text-align: center;">새 비밀번호 설정하기</h2>
 				
 				<c:if test = "${!empty member_pw}">
+				<h2 style="text-align: center;">새 비밀번호 설정하기</h2>
 	            	<form action="${ contextPath}/trip/newPw.do" id="newPw" method="post" name="f1">
 		                <div class="login_top">
 		                	<input type="hidden" id="id" name="member_id" value="${member_id}"/>
@@ -37,6 +37,7 @@
 	            	</form>
 		         </c:if>
 		         <c:if test = "${empty member_pw}">
+		         <h2 style="text-align: center;">비밀번호 찾기 결과</h2>
 		         	<div class="login_top">
 		            	<p>존재하지 않는 정보입니다.</p>
 		            </div>
