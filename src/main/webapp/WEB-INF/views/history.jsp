@@ -117,9 +117,6 @@
 					reserve_no : reserve_no
 				},
 				success : function(data) {
-					console.log("컨트롤러에서 넘어온 값", data.real_name);
-					console.log("컨트롤러에서 넘어온 값", data.pay_ment);
-					console.log("컨트롤러에서 넘어온 값", data.pay_num);
 					$('.real_name').text(data.real_name);
 					$('.pay_ment').text(data.pay_ment);
 					$('.pay_num').text(data.pay_num);
@@ -133,7 +130,7 @@
 					} else if(0 == data.pay_check) {
 						payCheck = "미결제";
 						$('.pay_check').text(payCheck);
-						
+						SS
 					}
 				},
 				fail : function(data) {
