@@ -233,7 +233,7 @@
 				                </a>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<a href=${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
+	                			<a href="${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
 				                    <input type="button" class="bu re" value ="초기화">
 				                </a>
 	                		</c:otherwise>

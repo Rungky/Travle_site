@@ -31,6 +31,7 @@
     <div id="hidden_bg" class="nodisplay"></div>
     <div id="hidden_contents" class="nodisplay"></div>
     <div id="insert_type" data-type="insert"></div>
+    <div id="nextpage" class="nodisplay" value=""></div>
     <section>
         <div class="fl_center">
         <div id="st0">
