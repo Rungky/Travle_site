@@ -63,7 +63,6 @@ public class AdminController extends MultiActionController {
 		mav.addObject("questionList", questionList);
 		
 		mav.addObject("tabMove", request.getParameter("tabMove"));
-		
 		mav.setViewName("admin");
 		return mav;
 	}
@@ -254,7 +253,7 @@ public class AdminController extends MultiActionController {
 			QuestionDTO qdto = new QuestionDTO();
 			qdto.setQuestion_contents(adminrecontent);
 			qdto.setQuestion_parentno(adminparentNO);
-			qdto.setQuestion_title("   [답변]");
+			qdto.setQuestion_title("[답변]");
 			
 			long miliseconds = System.currentTimeMillis();
 	        Date date = new Date(miliseconds);

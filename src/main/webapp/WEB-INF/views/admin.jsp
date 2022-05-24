@@ -188,7 +188,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                
             </div>
         </div>
         <input type="hidden" id="nextpage" value="">

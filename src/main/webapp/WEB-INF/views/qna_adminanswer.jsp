@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사적모임 | 답변작성 페이지</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link href="${contextPath}/resources/css/review.css" rel="stylesheet">
 </head>
@@ -51,10 +52,16 @@
                             <input class="input_reset" type="reset" value="지우기">
                         </div>
                     </form>
+                    <!-- <input class="input_close" type="button" value="취소하기"> -->
                 </div>
                </c:forEach>
             </div>
         </div>
     </section>
+    <!-- <script>
+    $(".input_close").off("click").on("click", function(){
+    	window.close();
+    });
+    </script> -->
 </body>
 </html>
