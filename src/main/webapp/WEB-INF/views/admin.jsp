@@ -283,17 +283,7 @@
         })
     }
     
-    var list_modreply = document.querySelectorAll(".reply_doMod");
-    console.log(list_modreply.length);
-    for(let i=0; i<list_modreply.length; i++){
-    	list_modreply[i].addEventListener("click", function(event){
-        	let reply_no = event.target.getAttribute("data-id");
-        	let parent_no = event.target.getAttribute("data-parentid");
-            window.open("${contextPath}/trip/adminmodreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
-        })
-    }
-
-        
+       
         
         function del_button_event() {
         	

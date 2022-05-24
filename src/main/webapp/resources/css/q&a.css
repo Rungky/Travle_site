@@ -89,7 +89,7 @@ section{
 	
 }
 
-.btn_doMod{
+.btn_doMod,.btn_doRemove{
 	width: 65px;
     height: 22px;
     font-size: 0.6em;
