@@ -1,6 +1,12 @@
 package com.spring.trip.controller;
 
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import java.io.PrintWriter;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +24,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.QuestionDTO;
 import com.spring.trip.service.AdminService;
 import com.spring.trip.service.MemberService;
 
@@ -28,6 +35,7 @@ public class AdminController extends MultiActionController {
 	private AdminService adminService;
 	@Autowired
 	private MemberService memberService;
+	
 	
 	HttpSession session;
 	
@@ -51,6 +59,9 @@ public class AdminController extends MultiActionController {
 		mav.addObject("membersList", membersList);
 		List<DormDTO> dormslist = adminService.allDormsList();
 		mav.addObject("dormsList", dormslist);
+		List<QuestionDTO> questionList = adminService.allQuestion();
+		mav.addObject("questionList", questionList);
+		
 		mav.setViewName("admin");
 		return mav;
 	}
@@ -190,4 +201,72 @@ public class AdminController extends MultiActionController {
 			adminService.adminDelDorm(dormno);
 		}
 	}
+	
+	//삭제하기
+		@RequestMapping(value = "/trip/removeadminqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_adminremove(
+				@RequestParam("admin_remove") int admin_remove,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+			ModelAndView mav= new ModelAndView();
+		
+			adminService.admindeleteArticle(admin_remove);
+		
+			mav.setViewName("close");
+			mav.setViewName("redirect:admin.do");
+			return mav;
+		}
+		
+		//답변작성페이지
+		@RequestMapping(value = "/trip/adminanswerqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_answer(
+				@RequestParam("product_no") int product_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+		
+		QuestionList= adminService.adminselectQuestion(product_no);
+
+		mav.addObject("questionList", QuestionList);
+		mav.setViewName("qna_adminanswer");
+		return mav;
+		
+		}
+		
+		//답변작성
+		@RequestMapping(value = "/trip/adminreplyqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_answer(
+				@RequestParam("adminrecontent") String adminrecontent,
+				@RequestParam("adminparentNO") int adminparentNO,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+		
+			String id= (String)session.getAttribute("id");
+			
+			QuestionDTO qdto = new QuestionDTO();
+			qdto.setQuestion_contents(adminrecontent);
+			qdto.setQuestion_parentno(adminparentNO);
+			qdto.setQuestion_title("☞");
+			
+			long miliseconds = System.currentTimeMillis();
+	        Date date = new Date(miliseconds);
+			qdto.setQuestion_date(date);
+			qdto.setQuestion_picture("picture");
+			qdto.setQuestion_view(0);
+			qdto.setMember_id(id);
+			
+			adminService.admininsertReplyQuestion(qdto);
+			mav.setViewName("close");
+			return mav;
+		
+		}
+		
+		
+	
 }

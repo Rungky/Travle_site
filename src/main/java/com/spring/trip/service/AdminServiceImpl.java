@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.trip.dao.AdminDAO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
+import com.spring.trip.dto.QuestionDTO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -51,6 +52,39 @@ public class AdminServiceImpl implements AdminService{
 	public void adminDelDorm(int dormno) {
 		adminDAO.adminDelDorm(dormno);
 	}
+
+	@Override
+	public List<QuestionDTO> allQuestion() {
+		List<QuestionDTO> list = adminDAO.allQuestion();
+		return list;
+	}
+
+	@Override
+	public void admindeleteArticle(int question_no) {
+		adminDAO.admindeleteArticle(question_no);
+		
+	}
+
+	@Override
+	public List<QuestionDTO> adminselectQuestion(int question_no) {
+		List<QuestionDTO> QuestionList = adminDAO.adminselectQuestion(question_no);
+		
+		return QuestionList;
+	}
+
+	@Override
+	public void admininsertReplyQuestion(QuestionDTO questionDTO) {
+		adminDAO.admininsertReplyQuestion(questionDTO);
+	}
+
+	@Override
+	public int countQuestion() {
+		return adminDAO.countQuestion();
+	}
+
+	
+
+	
 	
 
 }

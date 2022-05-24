@@ -12,7 +12,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/signup.css">
 <title>사적모임 | 회원가입</title>
-
 <script src="${contextPath}/resources/js/lib/jquery-3.6.0.js"></script>
 <script src="${contextPath}/resources/js/signup.js"></script>
 </head>
@@ -28,7 +27,10 @@
 				<h5>* 표시는 필수 입력 항목입니다.</h5>
 	                <div class="signup_top">
                         <p><span class="red">* </span>이메일 아이디</p>
+	                    <div id="idDuplCheck" class="nodisplay" data-member="none"></div>
 	                    <input type="text" name="member_id" id="id" class="email" placeholder="이메일 주소를 입력해주세요" />
+						<button type="button" id="id_check">중복체크</button>
+							
 	                    <div class="hide_1 red_1" id="no">유효한 이메일 주소를 입력해 주시기 바랍니다.</div>
 	                </div>
 	                <div class="signup_top">

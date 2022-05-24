@@ -617,7 +617,7 @@ public class TripController extends MultiActionController {
 		QuestionDTO qdto = new QuestionDTO();
 		qdto.setQuestion_contents(recontent);
 		qdto.setQuestion_parentno(parentNO);
-		qdto.setQuestion_title("retitle");
+		qdto.setQuestion_title("☞");
 		
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
