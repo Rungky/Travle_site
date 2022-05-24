@@ -192,10 +192,20 @@
 						<c:forEach var="answers" items="${answersList}" varStatus="questionNum">
 						<c:if test="${answers.question_parentno==question.question_no }">
 							<tr id="answers" data-parents="${answers.question_parentno}" class="nodisplay">
-	                            <td>${answers.question_title}</td>
-	                            <td>${answers.question_contents}</td>
-	                            <td>${answers.member_id }</td>
-	                            <td>${answers.question_date}</td>
+	                            <td colspan="7">
+	                            <div>
+	                            	<div>
+	                            		${answers.question_title}
+	                            	</div>
+	                            	<hr>
+	                            	<div>
+		  	                          	${answers.question_contents}
+	                            	</div>
+	                            	<div style="text-align:right;">
+		                            	${answers.member_id }<br>${answers.question_date}
+	                            	</div>
+	                            </div> 
+	                            </td>
                         	</tr>
 						</c:if>
 						</c:forEach>
@@ -208,6 +218,7 @@
 						<form>
 							<button class="pagebt">이전</button>
 							<input type="hidden" name="nowPage" value="${(nowPageCount-1)*5}">
+							<input type="hidden" name="tabMove" value="st3">
 						</form>
 					</c:if>
 					<c:if test="${nowPageCount != totalPageCount}">
@@ -222,6 +233,7 @@
 										<button class="pagebt">${i}</button>
 									</c:if>
 									<input type="hidden" name="nowPage" value="${i}">
+									<input type="hidden" name="tabMove" value="st3">
 								</form>
 							</div>
 						</c:forEach>
@@ -238,6 +250,7 @@
 										<button name="action" value="qna.do" class="pagebt">${i}</button>
 									</c:if>
 									<input type="hidden" name="nowPage" value="${i}">
+									<input type="hidden" name="tabMove" value="st3">
 								</form>
 							</div>
 						</c:forEach>
@@ -246,13 +259,13 @@
 						<form>
 							<button class="pagebt">다음</button>
 							<input type="hidden" name="nowPage" value="${(nowPageCount+1)*5-4}">
+							<input type="hidden" name="tabMove" value="st3">
 						</form>
 					</c:if>
 	            </div>
             </div>
             </div>
         </div>
-        <input type="hidden" id="nextpage" value="">
         </div>
     </section>
 
@@ -263,7 +276,8 @@
     			$("section > div > div").addClass("nodisplay");
                 $(".tap_list").addClass("tap_state");
                 $("#" + tabMove).removeClass("nodisplay");
-                $(".tab div[data-tap='st3'"+ tabMove +"").removeClass("tap_state");
+                $("[data-tap="+tabMove+"]").removeClass("tap_state");
+                console.log(tabMove);
     		}
     	});
     	
