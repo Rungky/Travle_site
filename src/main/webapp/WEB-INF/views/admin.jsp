@@ -196,6 +196,17 @@
     </section>
 
     <script>
+    	let tabMove = '${tabMove}';
+    	$(function(){
+    		if(tabMove != ""){
+    			$("section > div > div").addClass("nodisplay");
+                $(".tap_list").addClass("tap_state");
+                $("#" + tabMove).removeClass("nodisplay");
+                $(".tab div[data-tap='st3'"+ tabMove +"").removeClass("tap_state");
+    		}
+    	});
+    	
+    	
         let modify_text;
         $(".tap_list").off("click").on("click", function () {
             let tap_name = $(this).attr("data-tap");
@@ -309,8 +320,6 @@
             return;
         }
     }
-        
-
        
     </script>
 </body>

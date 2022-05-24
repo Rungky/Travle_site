@@ -48,7 +48,7 @@
                             <br>
                             <input type="hidden" name="adminparentNO" value="${question.question_no}">
                             <input class="input_submit" type="submit" value="답변등록">
-                            <input class="input_reset" type="reset" value="취소하기">
+                            <input class="input_reset" type="reset" value="지우기">
                         </div>
                     </form>
                 </div>

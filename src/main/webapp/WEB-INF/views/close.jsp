@@ -9,7 +9,13 @@
 <body>
 </body>
 <script>
-	window.opener.location.reload();
+	let tmpString = "tabMove=st3";
+	if( window.opener.location.href.indexOf("?") != -1 ){
+		window.opener.location.href += "&"+tmpString;
+	} else {
+		window.opener.location.href += "?"+tmpString;
+	}
+// 	window.opener.location.reload();
 	window.close();
 </script>
 </html>
