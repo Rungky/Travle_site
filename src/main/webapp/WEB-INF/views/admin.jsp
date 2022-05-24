@@ -173,18 +173,30 @@
                             <th>게시 날짜</th>
                             <th>답변달기</th>
                             <th>글삭제</th>
+                            <th>답변보기</th>
                         </tr>
                     </thead>
                     <tbody>
 						<c:forEach var="question" items="${questionList}"  varStatus="questionNum">
-                        <tr>
-                            <td>${question.question_title}</td>
-                            <td>${question.question_contents}</td>
-                            <td>${question.member_id }</td>
-                            <td>${question.question_date}</td>
-                            <td><button class="btn_doAnswer" data-id="${question.question_no}">답변하기</button></td>
-                            <td style="text-align: center;"><button class="btn_adminRemove" data-id="${question.question_no}">삭제하기</button></td>
-                        </tr>
+						<c:if test="${question.question_parentno==0}">
+							<tr>
+	                            <td>${question.question_title}</td>
+	                            <td>${question.question_contents}</td>
+	                            <td>${question.member_id }</td>
+	                            <td>${question.question_date}</td>
+	                            <td><button class="btn_doAnswer" data-id="${question.question_no}">답변하기</button></td>
+	                            <td style="text-align: center;"><button class="btn_adminRemove" data-id="${question.question_no}">삭제하기</button></td>
+	                            <td class="answer_view" data-no="${question.question_no}">답변 보기</td>
+                        	</tr>
+						</c:if>
+						<c:if test="${question.question_parentno!=0}">
+							<tr id="answers" data-parents="${question.question_parentno}" class="nodisplay">
+	                            <td>${question.question_title}</td>
+	                            <td>${question.question_contents}</td>
+	                            <td>${question.member_id }</td>
+	                            <td>${question.question_date}</td>
+                        	</tr>
+						</c:if>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -292,9 +304,6 @@
             window.open("${contextPath}/trip/adminanswerqna.do?product_no="+product_no,"answer","width: 600px");
         })
     }
-    
-       
-        
         function del_button_event() {
         	
         if (confirm("사적모임 페이지를 탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.") == true) { //확인
@@ -319,6 +328,19 @@
             return;
         }
     }
+    
+    $(".answer_view").off("click").on("click", function(){
+    	console.log("in");
+    	let questionNo = $(this).attr("data-no");
+    	console.log("부모번호 : "+questionNo);
+    	let answers = $("[data-parents="+questionNo+"]");
+    	console.log("답글 : "+answers.attr("data-parents"));
+    	if(answers.attr("class").includes("nodisplay")){
+    		answers.removeClass("nodisplay");
+    	}else {
+    		answers.addClass("nodisplay");
+    	}
+    });
        
     </script>
 </body>
