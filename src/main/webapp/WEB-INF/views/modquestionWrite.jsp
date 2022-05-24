@@ -14,7 +14,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사적모임 | Question page</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
     <link rel="stylesheet" href="${contextPath}/resources/css/questionWrite-style.css">
 </head>
@@ -43,11 +42,6 @@
             </c:forEach>
         </div>
     </section>
-    <script>
-    $(".question_input_btn").off("click").on("click", function(){
-    	window.close();
-    });
-    </script>
     <%@ include file="footer.jsp"%>
 </body>
 </html>
