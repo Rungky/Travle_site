@@ -1,10 +1,11 @@
 body{
     width: 100%;
+    margin : 0;
 }
 
 section{
-    margin: 150px auto;
-    width: 60%;
+    margin: auto;
+    width: 600px;
 }
 
 section > hr {
@@ -12,6 +13,7 @@ section > hr {
 }
 
 section .question_head {
+	width:600px;
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
@@ -30,8 +32,12 @@ section .question_text {
   text-align: center;
 }
 
+.question_input {
+	width : 600px;
+}
+
 section .question_input form .question_input_title {
-  width: 100%;
+  width: 590px;
   line-height: 30px;
   padding: 5px;
   margin-bottom: 10px;
@@ -45,14 +51,15 @@ section .question_input form > p {
 }
 
 section .question_input form > textarea {
-  font-size: large;
-  padding: 10px;
-  width: 100%;
-  height: 300px;
+	font-size: large;
+	padding: 10px;
+	width: 580px;
+	height: 300px;
+	resize: none;
 }
 
 section .question_input form .question_input_btn {
-  width: 48%;
+  width: 40%;
   height: 50px;
   font-size: large;
   margin-top: 10px;
@@ -63,4 +70,10 @@ section .question_input form .question_input_btn {
 
 section .question_input form .question_input_btn:hover {
   background-color: rgb(221, 221, 221);
+}
+
+.bts {
+	display : flex;
+	justify-content : space-between;
+	width : 100%;
 }

@@ -90,6 +90,27 @@ public class AdminController extends MultiActionController {
 		mav.addObject("dormsList", dormslist);
 		List<QuestionDTO> questionList = adminService.allQuestion();
 		List<QuestionDTO> answersList = tripService.selectAnswer();
+		
+		//출력할때 공백, 줄바꿈 html문으로 바꿔주기
+		for(int i =0; i<questionList.size();i++) {
+			String content = questionList.get(i).getQuestion_contents();
+			String title = questionList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			questionList.get(i).setQuestion_contents(content);
+			questionList.get(i).setQuestion_title(title);
+		}
+		for(int i =0; i<answersList.size();i++) {
+			String content = answersList.get(i).getQuestion_contents();
+			String title = answersList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			answersList.get(i).setQuestion_contents(content);
+			answersList.get(i).setQuestion_title(title);
+		}
+		
 		mav.addObject("questionList", questionList);
 		mav.addObject("answersList", answersList);
 		

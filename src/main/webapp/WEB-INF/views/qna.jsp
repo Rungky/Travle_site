@@ -157,7 +157,7 @@
     for(let i=0; i<list_mod.length; i++){
         list_mod[i].addEventListener("click", function(event){
         	let select_no = event.target.getAttribute("data-id");
-        	 window.open("${contextPath}/trip/modwrite.do?select_no="+select_no,"mod","width: 600px");
+        	 window.open("${contextPath}/trip/modwrite.do?select_no="+select_no,"mod","width=850, height=750");
         })
     }
     
@@ -179,7 +179,7 @@
     	list_modreply[i].addEventListener("click", function(event){
         	let reply_no = event.target.getAttribute("data-id");
         	let parent_no = event.target.getAttribute("data-parentid");
-            window.open("${contextPath}/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width: 600px");
+            window.open("${contextPath}/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width=700, height=400");
         })
     }
     

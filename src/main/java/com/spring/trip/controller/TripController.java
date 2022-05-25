@@ -510,6 +510,25 @@ public class TripController extends MultiActionController {
 			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
 			List<QuestionDTO> answerList = tripService.selectAnswer();
 			
+			for(int i =0; i<questionList.size();i++) {
+				String content = questionList.get(i).getQuestion_contents();
+				String title = questionList.get(i).getQuestion_title();
+				content = content.replaceAll("\n", "<br>");
+				content = content.replaceAll(" ", "&nbsp");
+				title = title.replaceAll(" ", "&nbsp");
+				questionList.get(i).setQuestion_contents(content);
+				questionList.get(i).setQuestion_title(title);
+			}
+			for(int i =0; i<answerList.size();i++) {
+				String content = answerList.get(i).getQuestion_contents();
+				String title = answerList.get(i).getQuestion_title();
+				content = content.replaceAll("\n", "<br>");
+				content = content.replaceAll(" ", "&nbsp");
+				title = title.replaceAll(" ", "&nbsp");
+				answerList.get(i).setQuestion_contents(content);
+				answerList.get(i).setQuestion_title(title);
+			}
+			
 			
 			int nowPage = 1; // 기본 값
 			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기

@@ -51,9 +51,10 @@ body{
     font-size: 16px;
 	background-color: rgb(65, 65, 65);
 	color: white;
+	z-index : 100;
 }
 .tap_state:hover {
-	background-color: rgb(65, 65, 65, 0.5);
+	background-color: rgb(120, 120, 120);
 }
 
 .tap_state {
@@ -66,6 +67,7 @@ body{
 table {
     border : 1px solid black;
     border-collapse: collapse;
+    z-index:5;
 }
 
 th, td {
@@ -79,6 +81,9 @@ th {
 
 .td_dorm {
 	width :70px;
+}
+#picture{
+	width:120px;
 }
 input {
     border: none;

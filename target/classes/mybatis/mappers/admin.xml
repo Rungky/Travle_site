@@ -16,7 +16,8 @@
 		WHERE member_id = #{member_id}
 	</update>
 	<select id="allDorm" resultType="dormDTO">
-		select * from tb_dorm
+		SELECT * FROM tb_dorm
+		ORDER BY dorm_category_no, dorm_no 
 	</select>
 	
 	<update id="adminDorm" parameterType="dormDTO">
@@ -32,6 +33,7 @@
 			opt_port = #{opt_port},
 			dorm_category_no = #{dorm_category_no}
 		WHERE dorm_no = #{dorm_no}
+		
 	</update>
 	
 	<insert id="adminDormInsert" parameterType="dormDTO">

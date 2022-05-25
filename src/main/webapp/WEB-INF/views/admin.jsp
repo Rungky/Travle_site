@@ -366,7 +366,7 @@
     for(let i=0; i<list_answer.length; i++){
         list_answer[i].addEventListener("click", function(event){
         	let product_no = event.target.getAttribute("data-id");
-            window.open("${contextPath}/trip/adminanswerqna.do?product_no="+product_no,"answer","width: 600px");
+            window.open("${contextPath}/trip/adminanswerqna.do?product_no="+product_no,"answer","width=600, height=570");
         })
     }
         function del_button_event() {
