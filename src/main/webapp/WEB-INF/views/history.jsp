@@ -191,9 +191,9 @@
 								<span class="statement" style="display: none;" data-reservono="${result.reserve_no}">🟢결제완료</span>
 								<span class="nostatement" style="display: none;" data-reservono="${result.reserve_no}">🔴미결제</span>
 								</td>
-								<td><input type="button" class="del check css"
+								<td style="margin:0px 0px; width:100px;"><input type="button" class="del check css"
 									data-checkout="${result.reserve_checkout}"
-									data-num="${result.reserve_no}" value="X"></td>
+									data-num="${result.reserve_no}" value="예약내역 지우기"></td>
 							</tr>
 							<tr>
 								<td rowspan="4" class="img"><img class="img2"
