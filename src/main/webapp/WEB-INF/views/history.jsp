@@ -196,9 +196,12 @@
 									data-num="${result.reserve_no}" value="예약내역 지우기"></td>
 							</tr>
 							<tr>
-								<td rowspan="4" class="img"><img class="img2"
+								<td rowspan="4" class="img">
+								<a href="${contextPath}/trip/detail.do?dormno=${result.dorm_no}">
+									<img class="img2" 
 									style="width: 150px; height: 130px; padding: 10px"
-									src="${contextPath}/resources/image/room/${result.room_picture}"></td>
+									src="${contextPath}/resources/image/room/${result.room_picture}">
+								</a></td>
 								<td>${result.dorm_name}</td>
 								<td rowspan="4" class="rv">
 									<div class="forms">

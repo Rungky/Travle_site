@@ -41,7 +41,7 @@
 		room.room_name, reser.member_id,
 		reser.reserve_checkin, reser.reserve_date,
 		reser.reserve_checkout, reser.reserve_pay, reser.pay_check,
-		room.room_picture, reser.reserve_person
+		room.room_picture, reser.reserve_person , reser.dorm_no
 		from tb_reservation reser, tb_room room, tb_dorm
 		dorm
 		where reser.room_no = room.room_no

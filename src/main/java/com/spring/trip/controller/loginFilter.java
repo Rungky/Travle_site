@@ -48,7 +48,6 @@ public class loginFilter implements Filter {
 				  || path.contains("pwFindCheck.do")
 				  || path.contains("newPw.do")
 				  || path.contains("main.do")
-				  || path.contains("admin.do")
 				  || path.contains("idDuplCheck.do")
 				  ) { 
         	chain.doFilter(request, response);

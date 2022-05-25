@@ -64,6 +64,7 @@ public class TripController extends MultiActionController {
 
 		java.util.Date today = new java.util.Date();
 		String checkin = sdf.format(today);
+		String today_str = checkin;
 		String checkout = tomorrow;
 
 		if (request.getParameter("reserve_checkin") != null)
@@ -105,9 +106,10 @@ public class TripController extends MultiActionController {
 		mav.addObject("roomsList", roomsList);
 		mav.addObject("reviewsList", reviewsList);
 		mav.addObject("roomday", reserveday);
+		mav.addObject("today", today_str);
 		mav.addObject("tomorrow", tomorrow);
-		mav.addObject("checkin", checkin);
-		mav.addObject("checkout", checkout);
+		mav.addObject("reserve_checkin", checkin);
+		mav.addObject("reserve_checkout", checkout);
 		mav.addObject("like_tg", like_tg);
 		mav.setViewName("detail");
 		return mav;

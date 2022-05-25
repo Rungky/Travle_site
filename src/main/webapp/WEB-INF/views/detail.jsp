@@ -189,9 +189,9 @@
                 <input id="tab2" type="radio" name="tabs">
                 <label for="tab2">리뷰</label>
 			 	<form  id="tb1" class="calender_box" action="detail.do">
-			 		<input  class="calender" type="date" name="reserve_checkin" min="${checkin}" value="${checkin}">
+			 		<input  class="calender" type="date" name="reserve_checkin" min="${today}" value="${reserve_checkin}">
 			 		<span style="font-size:30px;">~</span>
-			 		<input class="calender" type="date" name="reserve_checkout" min="${tomorrow}" value="${checkout}">
+			 		<input class="calender" type="date" name="reserve_checkout" min="${tomorrow}" value="${reserve_checkout}">
 			 		<button class="datebt">적용</button>
 			 		<input type="hidden" name="dormno" value="${dormdto.dorm_no}">
 			 	</form>
@@ -233,8 +233,8 @@
 		                                <input type="hidden" name="dormno" value="${dormdto.dorm_no}">
 		                                <input type="hidden" name="dormname" value="${dormdto.dorm_name}">
 		                                <input type="hidden" name="reserve_pay" value="${roomday * item.room_pay_night}">
-		                                <input type="hidden" name="reserve_checkin" value="${param.reserve_checkin}">
-		                                <input type="hidden" name="reserve_checkout" value="${param.reserve_checkout}">
+		                                <input type="hidden" name="reserve_checkin" value="${reserve_checkin}">
+		                                <input type="hidden" name="reserve_checkout" value="${reserve_checkout}">
 		                            </form>
 		                            </c:if>
 		                            <c:if test="${item.reserved == 1}">

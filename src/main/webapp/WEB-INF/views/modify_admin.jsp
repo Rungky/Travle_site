@@ -57,7 +57,7 @@
 						authority : authority
 					},
 					complete : function() {
-						opener.parent.location.reload();
+						opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st1";
 						window.close();
 					}
 				})
@@ -102,7 +102,7 @@
 						port : port
 					},
 					complete : function() {
-						opener.parent.location.reload();
+						opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st2";
 						window.close();
 					}
 				})
