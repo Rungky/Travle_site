@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${ pageContext.request.contextPath}" />
+<c:set var="URL" value="${pageContext.request.requestURL}" />
 
 <!DOCTYPE html>
 <html>
@@ -14,26 +15,18 @@
 <title>사적모임 | 관심숙소</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/myLike.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+	.underline{
+		text-decoration: underline;
+		font-weight: 600;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
 	<div id="wrap_mypage">
-
-		<nav id="mypage_nav">
-			<div>
-				<ul class="">
-					<li class="fw_b" style="font-size:1.1em; color:black;">사적모임✈️</li>
-					<br>
-					<li><a href="${contextPath}/trip/mypage.do">마이페이지</a></li>
-					<c:if  test="${member.member_authority eq 'admin'}">
-						<li id="admin"><a href="${contextPath}/trip/admin.do">관리자</a></li>
-					</c:if>
-					<li><a href="${contextPath}/trip/myLike.do">내 관심숙소</a></li>
-					<li><a href="${contextPath}/trip/history.do?id=${id}">내 예약내역</a></li>
-					<li><a href="${contextPath}/trip/qna.do">Q&A</a></li>
-				</ul>
-			</div>
-		</nav>
+	<%@include file = "mypage_nav.jsp" %>
 		<section id="like_section">
 			<div id="like_header">
 				내 관심숙소 👁️👁️
