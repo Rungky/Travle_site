@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -335,7 +336,11 @@ public class TripController extends MultiActionController {
 		PaymentDTO dto = tripService.selectPayment(pay_no);
 		System.out.println("컨트롤러 pay_no" + pay_no);
 	
-		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no, pay_no, pay_check);
+		
+		String in_time = "임의";
+		String out_time =  "임의";
+		tripService.insertReservation(member, reserve_checkin, reserve_checkout, 
+				reserve_pay, room_no, dorm_no, pay_no, pay_check, in_time, out_time);
 		
 		System.out.println("결제 인서트 성공");
 		mav.addObject("member_id", member);
@@ -450,7 +455,9 @@ public class TripController extends MultiActionController {
 	public ModelAndView page8(@RequestParam("dormno") int dorm_no, @RequestParam("roomno") int room_no,
 			@RequestParam("dormname") String dorm_name, @RequestParam("roomname") String room_name,
 			@RequestParam("reserve_pay") int roompay, @RequestParam("reserve_checkin") Date reserve_checkin,
-			@RequestParam("reserve_checkout") Date reserve_checkout, HttpServletRequest request,
+			@RequestParam("reserve_checkout") Date reserve_checkout, 
+			@RequestParam("dorm_in_time") String in_time,@RequestParam("dorm_out_time") String out_time,
+			HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
@@ -459,7 +466,7 @@ public class TripController extends MultiActionController {
 			MemberDTO dto = tripService.memberDto(member);
 			mav.addObject("dto", dto);
 			CheckDTO checkDto = tripService.checkList(dorm_no, room_no, dorm_name, room_name, reserve_checkin,
-					reserve_checkout, roompay);
+					reserve_checkout, roompay, in_time, out_time);
 			mav.addObject("check", checkDto);
 		} catch (Exception e) {
 			e.printStackTrace();

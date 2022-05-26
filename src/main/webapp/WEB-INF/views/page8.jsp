@@ -237,12 +237,12 @@
 				<br>
 				<div>
 					<div class="name2">[체크인]</div>
-					<div class="c4" id="checkin">${check.reserve_checkin}</div>
+					<div class="c4" id="checkin">${check.reserve_checkin} ${check.in_time }</div>
 				</div>
 				<br>
 				<div>
 					<div class="name2">[체크아웃]</div>
-					<div class="c5" id="checkout">${check.reserve_checkout}</div>
+					<div class="c5" id="checkout">${check.reserve_checkout} ${check.out_time }</div>
 				</div>
 				<br>
 				<div class="c6">

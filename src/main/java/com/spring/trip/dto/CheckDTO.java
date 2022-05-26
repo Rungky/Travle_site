@@ -10,6 +10,8 @@ public class CheckDTO {
 	private Date reserve_checkin;
 	private Date reserve_checkout;
 	private int reserve_pay;
+	private String in_time;
+	private String out_time;
 
 	
 	public Date getReserve_checkin() {
@@ -53,6 +55,18 @@ public class CheckDTO {
 	}
 	public void setRoom_name(String room_name) {
 		this.room_name = room_name;
+	}
+	public String getIn_time() {
+		return in_time;
+	}
+	public void setIn_time(String in_time) {
+		this.in_time = in_time;
+	}
+	public String getOut_time() {
+		return out_time;
+	}
+	public void setOut_time(String out_time) {
+		this.out_time = out_time;
 	}
 	
 	

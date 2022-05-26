@@ -3,6 +3,7 @@ package com.spring.trip.service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,8 +92,8 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public CheckDTO checkList(int dorm_no, int room_no, String dorm_name, String room_name, Date reserve_checkin,
-			Date reserve_checkout, int reserve_pay) {
-		CheckDTO dto = tripDAO.checkList(dorm_no, room_no, dorm_name, room_name, reserve_checkin, reserve_checkout, reserve_pay);
+			Date reserve_checkout, int reserve_pay, String in_time, String out_time) {
+		CheckDTO dto = tripDAO.checkList(dorm_no, room_no, dorm_name, room_name, reserve_checkin, reserve_checkout, reserve_pay, in_time, out_time);
 		return dto;
 	}
 
@@ -109,9 +110,9 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
-			int room_no, int dorm_no, long pay_no, int pay_check) {
+			int room_no, int dorm_no, long pay_no, int pay_check,String in_time, String out_time) {
 		
-		tripDAO.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no ,dorm_no, pay_no, pay_check);
+		tripDAO.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no ,dorm_no, pay_no, pay_check, in_time, out_time);
 		System.out.println("서비스쪽 이제 다오 메소드 들어가는중");
 	}
 
@@ -250,4 +251,5 @@ public class TripServiceImpl implements TripService {
 	public int reviewChecking(int reserno) {
 		return tripDAO.reviewChecking(reserno);
 	}
+	
 }
