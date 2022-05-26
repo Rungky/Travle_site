@@ -201,7 +201,10 @@ public class AdminController extends MultiActionController {
 			dto.setDorm_no(Integer.parseInt(request.getParameter("dormno")));
 			dto.setDorm_category_no(Integer.parseInt(request.getParameter("category")));
 			dto.setDorm_name(request.getParameter("name"));
-			dto.setDorm_contents(request.getParameter("contents"));
+			String contents = request.getParameter("contents");
+			contents = contents.replaceAll("\n", ",");
+			contents = contents.replaceAll("&nasp", " ");
+			dto.setDorm_contents(contents);
 			dto.setDorm_addr(request.getParameter("addr"));
 			dto.setDorm_picture(request.getParameter("picture"));
 			int wify = Integer.parseInt(request.getParameter("wifi"));

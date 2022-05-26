@@ -114,6 +114,8 @@
 			$("#hidden_bg").removeClass("contents_bg_off");
 			$("#hidden_contents").removeClass("nodisplay");
 			let contents = $(this).val();
+			contents = contents.replaceAll("\n","");
+			contents = contents.replaceAll(",","\n");
 			$("#contents_textarea").html(contents);
 		});
 
@@ -124,6 +126,8 @@
 		});
 
 		$("#ct_inbt").off("click").on("click", function() {
+			let contents = $("#contents_textarea").val();
+			contents = contents.replaceAll("\n",",");
 			$("#contents_textarea").html($("#contents_textarea").val());
 			$("#contents_val").attr("value", $("#contents_textarea").val() );
 			$("#hidden_bg").addClass("contents_bg_off");
