@@ -310,7 +310,9 @@
         	$("#hidden_bg").addClass("contents_bg_on");
         	$("#hidden_bg").removeClass("nodisplay");
         	$("#hidden_contents").removeClass("nodisplay");
-        	$("#hidden_contents").html($(this).val());
+        	let contents = $(this).val();
+        	contents = contents.replaceAll(" ", "&nbsp");
+        	$("#hidden_contents").html(contents);
         });
         
         $("#hidden_bg").off("click").on("click", function () {
