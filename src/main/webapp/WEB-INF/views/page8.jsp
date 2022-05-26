@@ -78,7 +78,7 @@
 			let dorm_name = $("#dorm").text();
 			let room_name = $("#room").text();
 			let in_time = $("#inTime").text();
-			let out_time = $("#outTIme").text();
+			let out_time = $("#outTime").text();
 			if(pay_num == '' && $("select[name=pay] option:selected").text() == '현장결제') pay_num = "현장에서 결제 바랍니다.";
 			
 				
