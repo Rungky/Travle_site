@@ -168,6 +168,7 @@
                 <table>
                     <thead>
                         <tr>
+                        	<th>문의 번호</th>
                             <th>제목</th>
                             <th>내용</th>
                             <th>아이디</th>
@@ -181,8 +182,9 @@
 						<c:forEach var="question" items="${questionList}" begin="${beginPage}" end="${endPage}">
 						<c:if test="${question.question_parentno==0}">
 							<tr>
+	                            <td>${question.question_no}</td>
 	                            <td>${question.question_title}</td>
-	                            <td>${question.question_contents}</td>
+	                            <td><button type="button" class="contents_bt" value="${question.question_contents}">내용 보기</button></td>
 	                            <td>${question.member_id }</td>
 	                            <td>${question.question_date}</td>
 	                            <td><button class="btn_doAnswer" data-id="${question.question_no}">답변하기</button></td>

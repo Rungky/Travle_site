@@ -12,6 +12,7 @@ public class ReviewDTO {
 	private int reserve_no; 
 	private String member_id;
 	private int score; 
+	private String member_names;
 	
 	
 	
@@ -68,6 +69,12 @@ public class ReviewDTO {
 	}
 	public void setScore(int score) {
 		this.score = score;
+	}
+	public String getMember_names() {
+		return member_names;
+	}
+	public void setMember_names(String member_names) {
+		this.member_names = member_names;
 	}
 	
 	
