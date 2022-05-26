@@ -127,10 +127,12 @@
 	</select>
 	<select id="selectReviewsList" resultType="reviewDTO" parameterType="int">
 		SELECT review_no, review_title, review_contents, review_score, review_date,
-		review_picture,rev.reserve_no, rev.member_id
-		FROM tb_review rev , tb_reservation res
+		review_picture,rev.reserve_no, rev.member_id, mem.member_names
+		FROM tb_review rev , tb_reservation res, tb_member mem
 		WHERE
 			rev.reserve_no = res.reserve_no
+		AND
+			res.member_id = mem.member_id
 		AND	
 			dorm_no = #{dormNo}
 		ORDER BY review_no desc

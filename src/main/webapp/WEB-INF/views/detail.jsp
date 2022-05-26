@@ -307,7 +307,7 @@
 	                        <td></td>
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2" class="rev">${item.member_id}</td>
+	                        <td colspan="2" class="rev">${item.member_names}</td>
 	                    </tr>
 	                    <tr>
 	                        <td colspan="2">${item.review_contents}</td>

@@ -102,6 +102,15 @@ public class TripController extends MultiActionController {
 		}
 
 		List<ReviewDTO> reviewsList = tripService.selectReviewsList(dormno);
+		for(int i =0; i<reviewsList.size();i++) {
+			String content = reviewsList.get(i).getReview_contents();
+			String title = reviewsList.get(i).getReview_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			reviewsList.get(i).setReview_contents(content);
+			reviewsList.get(i).setReview_title(title);
+		}
 		mav.addObject("dormdto", dormdto);
 		mav.addObject("roomsList", roomsList);
 		mav.addObject("reviewsList", reviewsList);
@@ -194,9 +203,7 @@ public class TripController extends MultiActionController {
 		memberId = (String) session.getAttribute("id");
 
 		if (title.equals("") || contents.equals("")) {
-			mav.addObject("textnull", "textnull");
-			System.out.println("�뀓�뒪�듃 null�삤瑜�");
-			mav.setViewName("redirect:review.do?reserve_no=" + reservNo + "");
+			mav.setViewName("redirect:review.do?reserve_no=" + reservNo + "&textnull=textnull");
 		} else {
 			System.out.println("INSERT");
 			tripService.insertReview(title, contents, score, date, picture, reservNo, memberId);
