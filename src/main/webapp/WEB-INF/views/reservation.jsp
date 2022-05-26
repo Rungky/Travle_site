@@ -319,7 +319,15 @@
 		                        </div>
 		                        <div class="price">
 		                            <p><strong>
-		                                <h3 class="font1">${i.min_pay_night}원</h3>
+		                            	<c:if test="${i.cnt_rno == 0}">
+			                        		<h3 class="font1">${i.min_pay_night}원</h3>
+		                            	</c:if>
+		                            	<c:if test="${i.cnt_rno != 0 && i.cnt_room > i.cnt_rno }">
+		                            		<h3 class="font1">${i.min_pay_night}원</h3>
+		                            	</c:if>
+		                            	<c:if test="${i.cnt_rno eq i.cnt_room }">
+		                            		<h3 class="font1">판매완료</h3>
+		                            	</c:if>
 		                            </strong></p>
 		                        </div>
 		                    </div>
