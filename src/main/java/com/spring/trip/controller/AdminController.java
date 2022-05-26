@@ -321,6 +321,66 @@ public class AdminController extends MultiActionController {
 		
 		}
 		
+		//답글수정페이지
+		@RequestMapping(value = "/trip/adminmodreplywrite.do", method = RequestMethod.GET)
+		public ModelAndView qna_modreplypage(
+				@RequestParam("reply_no") int reply_no,
+				@RequestParam("parent_no") int parent_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+		List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
 		
+		answerList= adminService.adminselectmodReply(reply_no);
+		QuestionList= adminService.adminselectAllQuestion(parent_no);
+
+		mav.addObject("questionList", QuestionList);
+		mav.addObject("answerList", answerList);
+		mav.setViewName("qna_modanswer");
+		return mav;
+		
+		}
+		
+		//답글수정
+		@RequestMapping(value = "/trip/adminmodreply.do", method = RequestMethod.GET)
+		public ModelAndView qna_modreply(
+				@RequestParam("recontent") String recontent,
+				@RequestParam("ReplyNO") int ReplyNO,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+		
+		QuestionDTO qdto = new QuestionDTO();
+		qdto.setQuestion_no(ReplyNO);
+		qdto.setQuestion_contents(recontent);
+		
+		adminService.adminupdateReply(qdto);
+
+		mav.addObject("questionList", QuestionList);
+		mav.setViewName("close");
+		return mav;
+		
+		}
+		
+		//답글삭제
+		@RequestMapping(value = "/trip/adminremovereply.do", method = RequestMethod.GET)
+		public ModelAndView qna_removereply(
+				@RequestParam("removereply_no") int removereply_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+		
+		adminService.admindeleteReply(removereply_no);
+		
+		mav.setViewName("redirect:admin.do?tabMove=st3");
+		return mav;
+		}
 	
 }

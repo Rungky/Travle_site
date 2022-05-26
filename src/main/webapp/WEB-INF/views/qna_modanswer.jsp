@@ -32,7 +32,7 @@
                 </div>
                     <c:forEach var="answerList" items="${answerList}"> 
                 <div id="main_contents">
-                    <form id="review_form" action="${contextPath}/trip/modreply.do">
+                    <form id="review_form" action="${contextPath}/trip/adminmodreply.do">
                   
                      <c:forEach var="question" items="${questionList}">
                      

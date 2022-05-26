@@ -205,6 +205,8 @@
 	                            	<div style="text-align:right;">
 		                            	${answers.member_id }<br>${answers.question_date}
 	                            	</div>
+	                            	  <button class="reply_doMod" data-id="${answers.question_no}" data-parentid="${answers.question_parentno}">답변수정</button>
+				                      <button class="reply_doRemove" data-id="${answers.question_no}">답변삭제</button> 
 	                            </div> 
 	                            </td>
                         	</tr>
@@ -406,7 +408,28 @@
     		answers.addClass("nodisplay");
     	}
     });
-       
+    
+    var admin_modreply = document.querySelectorAll(".reply_doMod");
+    console.log(admin_modreply.length);
+    for(let i=0; i<admin_modreply.length; i++){
+    	admin_modreply[i].addEventListener("click", function(event){
+        	let reply_no = event.target.getAttribute("data-id");
+        	let parent_no = event.target.getAttribute("data-parentid");
+            window.open("${contextPath}/trip/adminmodreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width=700, height=400");
+        })
+    }
+    
+    var admin_removereply = document.querySelectorAll(".reply_doRemove");
+    console.log(admin_removereply.length);
+    for(let i=0; i<admin_removereply.length; i++){
+    	admin_removereply[i].addEventListener("click", function(event){
+        	let removereply_no = event.target.getAttribute("data-id");
+        	var isDel = window.confirm("정말 삭제하시겠습니까?");
+        	if(isDel){
+        		location.href="${contextPath}/trip/adminremovereply.do?removereply_no="+removereply_no;	
+        	}
+        })
+    }
     </script>
 </body>
 
