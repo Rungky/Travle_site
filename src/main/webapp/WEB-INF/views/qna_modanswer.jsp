@@ -45,7 +45,7 @@
 					</c:forEach>
                         <div class="review_contents">
                             <div class="fs_m fw_6" style="margin-top: 5px;">답변내용 작성</div>
-                            <input class="input_contents" type="text" name="recontent" value="${answerList.question_contents}">
+                            <textarea class="input_contents" type="text" name="adminrecontent" placeholder="질문에 대한 답변을 남겨주세요!">${answerList.question_contents}</textarea>
                         </div>
                         <div class="margin_auto">
                             <br>

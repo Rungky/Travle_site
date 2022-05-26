@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사적모임 | Question page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="${contextPath}/resources/css/questionWrite-style.css">
 </head>
 <body>
@@ -35,12 +36,18 @@
                     <textarea placeholder="내용을 입력해주세요." name="content">${question.question_contents}</textarea><br>
                     <input type="hidden" name="questionNO" value="${question.question_no}">
                     <div class="bts">
-	                    <input class="question_input_btn" type="submit" value="수정하기"><input class="question_input_btn" type="button" value="취소하기">
+	                    <input class="question_input_btn" type="submit" value="수정하기"><input class="question_input_btn" type="button" value="지우기">
                     </div>
-                </form>    
+                </form>
+                <!-- <div><input class="input_close" type="button" value="취소하기"></div>    --> 
             </div>
             </c:forEach>
         </div>
     </section>
+    <!--  <script>
+    $(".input_close").off("click").on("click", function(){
+    	window.close();
+    });
+    </script>  -->
 </body>
 </html>
