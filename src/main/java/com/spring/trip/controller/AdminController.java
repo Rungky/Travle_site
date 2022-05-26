@@ -287,6 +287,16 @@ public class AdminController extends MultiActionController {
 		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
 		
 		QuestionList= adminService.adminselectQuestion(product_no);
+		
+		for(int i =0; i<QuestionList.size();i++) {
+			String content = QuestionList.get(i).getQuestion_contents();
+			String title = QuestionList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			QuestionList.get(i).setQuestion_contents(content);
+			QuestionList.get(i).setQuestion_title(title);
+		}
 
 		mav.addObject("questionList", QuestionList);
 		mav.setViewName("qna_adminanswer");
@@ -337,9 +347,20 @@ public class AdminController extends MultiActionController {
 		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
 		List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
 		
+		
 		answerList= adminService.adminselectmodReply(reply_no);
 		QuestionList= adminService.adminselectAllQuestion(parent_no);
-
+		
+		for(int i =0; i<QuestionList.size();i++) {
+			String content = QuestionList.get(i).getQuestion_contents();
+			String title = QuestionList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			QuestionList.get(i).setQuestion_contents(content);
+			QuestionList.get(i).setQuestion_title(title);
+		}
+		
 		mav.addObject("questionList", QuestionList);
 		mav.addObject("answerList", answerList);
 		mav.setViewName("qna_modanswer");
@@ -350,7 +371,7 @@ public class AdminController extends MultiActionController {
 		//답글수정
 		@RequestMapping(value = "/trip/adminmodreply.do", method = RequestMethod.GET)
 		public ModelAndView qna_modreply(
-				@RequestParam("recontent") String recontent,
+				@RequestParam("adminrecontent") String adminrecontent,
 				@RequestParam("ReplyNO") int ReplyNO,
 				HttpServletRequest request, 
 				HttpServletResponse response) throws Exception {
@@ -361,7 +382,7 @@ public class AdminController extends MultiActionController {
 		
 		QuestionDTO qdto = new QuestionDTO();
 		qdto.setQuestion_no(ReplyNO);
-		qdto.setQuestion_contents(recontent);
+		qdto.setQuestion_contents(adminrecontent);
 		
 		adminService.adminupdateReply(qdto);
 
