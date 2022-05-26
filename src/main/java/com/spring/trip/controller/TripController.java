@@ -324,6 +324,8 @@ public class TripController extends MultiActionController {
 			@RequestParam("pay_ment") String pay_ment,
 			@RequestParam("pay_num") String pay_num,
 			@RequestParam("real_name") String real_name,
+			@RequestParam("in_time") String in_time,
+			@RequestParam("out_time") String out_time,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
@@ -342,10 +344,7 @@ public class TripController extends MultiActionController {
 		tripService.insertPayment(pay_no, pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
 		PaymentDTO dto = tripService.selectPayment(pay_no);
 		System.out.println("컨트롤러 pay_no" + pay_no);
-	
-		
-		String in_time = "임의";
-		String out_time =  "임의";
+		System.out.println("컨트롤러 in_time" + in_time);
 		tripService.insertReservation(member, reserve_checkin, reserve_checkout, 
 				reserve_pay, room_no, dorm_no, pay_no, pay_check, in_time, out_time);
 		

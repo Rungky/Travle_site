@@ -77,6 +77,8 @@
 			let pay_num = document.getElementById('pay_num').value;
 			let dorm_name = $("#dorm").text();
 			let room_name = $("#room").text();
+			let in_time = $("#inTime").text();
+			let out_time = $("#outTIme").text();
 			if(pay_num == '' && $("select[name=pay] option:selected").text() == '현장결제') pay_num = "현장에서 결제 바랍니다.";
 			
 				
@@ -94,7 +96,9 @@
 						pay_num : pay_num,
 						pay_check : pay_check,
 						dorm_name : dorm_name,
-						room_name : room_name
+						room_name : room_name,
+						in_time: in_time,
+						out_time : out_time
 						
 					},
 					success : function(data) {
@@ -237,12 +241,12 @@
 				<br>
 				<div>
 					<div class="name2">[체크인]</div>
-					<div class="c4" id="checkin">${check.reserve_checkin} ${check.in_time }</div>
+					<div class="c4" id="checkin">${check.reserve_checkin}</div><span id="inTime"> ${check.in_time }</span>
 				</div>
 				<br>
 				<div>
 					<div class="name2">[체크아웃]</div>
-					<div class="c5" id="checkout">${check.reserve_checkout} ${check.out_time }</div>
+					<div class="c5" id="checkout">${check.reserve_checkout}</div><span id="outTime"> ${check.out_time }</span>
 				</div>
 				<br>
 				<div class="c6">
