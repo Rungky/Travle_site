@@ -23,7 +23,9 @@
 		SELECT d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no,
 			d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port, 
 			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
-		FROM tb_dorm d, tb_room m left join (tb_reservation r left join tb_review vo on r.reserve_no = vo.reserve_no) on m.dorm_no = r.dorm_no
+		FROM tb_dorm d, tb_room m 
+			left join tb_reservation r on m.room_no = r.room_no
+	        left join tb_review vo on r.reserve_no = vo.reserve_no
 		]]>
 	    <where>
     		d.dorm_no = m.dorm_no
