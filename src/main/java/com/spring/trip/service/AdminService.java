@@ -19,4 +19,8 @@ public interface AdminService {
 	public List<QuestionDTO> adminselectQuestion(int question_no);
 	public void admininsertReplyQuestion (QuestionDTO questionDTO);
 	public int countQuestion();
+	public List<QuestionDTO> adminselectAllQuestion(int parentno);
+	public List<QuestionDTO> adminselectmodReply(int question_no);
+	public void adminupdateReply(QuestionDTO questionDTO);
+	public void admindeleteReply(int question_no);
 }

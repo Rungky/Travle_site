@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${ pageContext.request.contextPath}" />
+<c:set var="URL" value="${pageContext.request.requestURL}" />
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,12 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/mypage-style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+	.underline{
+		text-decoration: underline;
+		font-weight: 600;
+	}
+</style>
 </head>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
@@ -53,33 +60,15 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-	<div id="wrap_mypage">
-
-		<nav id="mypage_nav">
-			<div>
-				<ul class="">
-					<li class="fw_b" style="font-size: 1.1em; color: black;">사적모임✈️</li>
-					<br>
-					<li><a href="${contextPath}/trip/mypage.do">마이페이지</a></li>
-					<c:if test="${member.member_authority eq 'admin'}">
-						<li id="admin"><a href="${contextPath}/trip/admin.do">관리자</a></li>
-					</c:if>
-					<li><a href="${contextPath}/trip/myLike.do">내 관심숙소</a></li>
-					<li><a href="${contextPath}/trip/history.do">내 예약내역</a></li>
-					<li><a href="${contextPath}/trip/qna.do">Q&A</a></li>
-				</ul>
-			</div>
-		</nav>
-
+	<div id="wrap_mypage">	
+	<%@include file = "mypage_nav.jsp" %>
 		<section>
 			<div class="mypage_main">
 				<div class="mypage_header">
-
 					<div>
 						<h2>마이페이지</h2>
 						<!--로그인한 회원 정보에 맞게 출력되야함-->
 						<p>${member.member_id}</p>
-
 					</div>
 				</div>
 				<hr>
@@ -185,9 +174,6 @@
     function del_button_event() {
 
         if (confirm("사적모임 페이지를 탈퇴하시겠습니까?탈퇴한 회원은 복구되지 않습니다.") == true) { //확인
-
-            //let re_pw = prompt("비밀번호를 입력하세요");
-            //console.log(re_pw);
 
             $.ajax({
                 url: "${contextPath}/trip/pwCheck.do",

@@ -82,7 +82,26 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.countQuestion();
 	}
 
+	@Override
+	public List<QuestionDTO> adminselectAllQuestion(int parentno) {
+		List<QuestionDTO> QuestionList = adminDAO.adminselectAllQuestion(parentno);		
+		return QuestionList;
+	}
+	@Override
+	public List<QuestionDTO> adminselectmodReply(int question_no) {
+		List<QuestionDTO> answerList = adminDAO.adminselectmodReply(question_no);
+		
+		return answerList;
+	}
+	@Override
+	public void adminupdateReply(QuestionDTO questionDTO) {
+		adminDAO.adminupdateReply(questionDTO);	
+	}
 	
+	@Override
+	public void admindeleteReply(int question_no) {
+		adminDAO.admindeleteReply(question_no);
+	}
 
 	
 	

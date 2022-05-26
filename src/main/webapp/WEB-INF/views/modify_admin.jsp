@@ -57,7 +57,7 @@
 						authority : authority
 					},
 					complete : function() {
-						opener.parent.location.reload();
+						opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st1";
 						window.close();
 					}
 				})
@@ -102,7 +102,7 @@
 						port : port
 					},
 					complete : function() {
-						opener.parent.location.reload();
+						opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st2";
 						window.close();
 					}
 				})
@@ -114,6 +114,8 @@
 			$("#hidden_bg").removeClass("contents_bg_off");
 			$("#hidden_contents").removeClass("nodisplay");
 			let contents = $(this).val();
+			contents = contents.replaceAll("\n","");
+			contents = contents.replaceAll(",","\n");
 			$("#contents_textarea").html(contents);
 		});
 
@@ -124,6 +126,8 @@
 		});
 
 		$("#ct_inbt").off("click").on("click", function() {
+			let contents = $("#contents_textarea").val();
+			contents = contents.replaceAll("\n",",");
 			$("#contents_textarea").html($("#contents_textarea").val());
 			$("#contents_val").attr("value", $("#contents_textarea").val() );
 			$("#hidden_bg").addClass("contents_bg_off");

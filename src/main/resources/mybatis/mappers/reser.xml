@@ -36,19 +36,18 @@
 	<!-- 예약리스트 뽑기 -->
 	<select id="selectReservationsList" parameterType="String"
 		resultType="reservationDTO">
-		select reser.reserve_no,
+		SELECT reser.reserve_no,
 		dorm.dorm_name,
 		room.room_name, reser.member_id,
 		reser.reserve_checkin, reser.reserve_date,
 		reser.reserve_checkout, reser.reserve_pay, reser.pay_check,
-		room.room_picture, reser.reserve_person
-		from tb_reservation reser, tb_room room, tb_dorm
-		dorm
-		where reser.room_no = room.room_no
-		and reser.dorm_no = room.dorm_no
-		and room.dorm_no = dorm.dorm_no
-		and reser.member_id = #{member}
-		order by reserve_no desc
+		room.room_picture, reser.reserve_person , reser.dorm_no
+		FROM tb_reservation reser, tb_room room, tb_dorm dorm
+		WHERE reser.room_no = room.room_no
+		AND reser.dorm_no = room.dorm_no
+		AND room.dorm_no = dorm.dorm_no
+		AND reser.member_id = #{member}
+		ORDER BY reserve_no DESC
 	</select>
 
 	<select id="memberDto" parameterType="String"

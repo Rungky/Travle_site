@@ -64,6 +64,7 @@ public class TripController extends MultiActionController {
 
 		java.util.Date today = new java.util.Date();
 		String checkin = sdf.format(today);
+		String today_str = checkin;
 		String checkout = tomorrow;
 
 		if (request.getParameter("reserve_checkin") != null)
@@ -105,9 +106,10 @@ public class TripController extends MultiActionController {
 		mav.addObject("roomsList", roomsList);
 		mav.addObject("reviewsList", reviewsList);
 		mav.addObject("roomday", reserveday);
+		mav.addObject("today", today_str);
 		mav.addObject("tomorrow", tomorrow);
-		mav.addObject("checkin", checkin);
-		mav.addObject("checkout", checkout);
+		mav.addObject("reserve_checkin", checkin);
+		mav.addObject("reserve_checkout", checkout);
 		mav.addObject("like_tg", like_tg);
 		mav.setViewName("detail");
 		return mav;
@@ -508,6 +510,25 @@ public class TripController extends MultiActionController {
 			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
 			List<QuestionDTO> answerList = tripService.selectAnswer();
 			
+			for(int i =0; i<questionList.size();i++) {
+				String content = questionList.get(i).getQuestion_contents();
+				String title = questionList.get(i).getQuestion_title();
+				content = content.replaceAll("\n", "<br>");
+				content = content.replaceAll(" ", "&nbsp");
+				title = title.replaceAll(" ", "&nbsp");
+				questionList.get(i).setQuestion_contents(content);
+				questionList.get(i).setQuestion_title(title);
+			}
+			for(int i =0; i<answerList.size();i++) {
+				String content = answerList.get(i).getQuestion_contents();
+				String title = answerList.get(i).getQuestion_title();
+				content = content.replaceAll("\n", "<br>");
+				content = content.replaceAll(" ", "&nbsp");
+				title = title.replaceAll(" ", "&nbsp");
+				answerList.get(i).setQuestion_contents(content);
+				answerList.get(i).setQuestion_title(title);
+			}
+			
 			
 			int nowPage = 1; // 기본 값
 			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
@@ -705,65 +726,65 @@ public class TripController extends MultiActionController {
 		return mav;
 	}
 	
-	//답글수정페이지
-	@RequestMapping(value = "/trip/modreplywrite.do", method = RequestMethod.GET)
-	public ModelAndView qna_modreplypage(
-			@RequestParam("reply_no") int reply_no,
-			@RequestParam("parent_no") int parent_no,
-			HttpServletRequest request, 
-			HttpServletResponse response) throws Exception {
-
-	ModelAndView mav= new ModelAndView();
-
-	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
-	List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
+//	//답글수정페이지
+//	@RequestMapping(value = "/trip/modreplywrite.do", method = RequestMethod.GET)
+//	public ModelAndView qna_modreplypage(
+//			@RequestParam("reply_no") int reply_no,
+//			@RequestParam("parent_no") int parent_no,
+//			HttpServletRequest request, 
+//			HttpServletResponse response) throws Exception {
+//
+//	ModelAndView mav= new ModelAndView();
+//
+//	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+//	List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
+//	
+//	answerList= tripService.selectmodReply(reply_no);
+//	QuestionList= tripService.selectAllQuestion(parent_no);
+//
+//	mav.addObject("questionList", QuestionList);
+//	mav.addObject("answerList", answerList);
+//	mav.setViewName("qna_modanswer");
+//	return mav;
+//	
+//	}
 	
-	answerList= tripService.selectmodReply(reply_no);
-	QuestionList= tripService.selectAllQuestion(parent_no);
-
-	mav.addObject("questionList", QuestionList);
-	mav.addObject("answerList", answerList);
-	mav.setViewName("qna_modanswer");
-	return mav;
-	
-	}
-	
-	//답글수정
-	@RequestMapping(value = "/trip/modreply.do", method = RequestMethod.GET)
-	public ModelAndView qna_modreply(
-			@RequestParam("recontent") String recontent,
-			@RequestParam("ReplyNO") int ReplyNO,
-			HttpServletRequest request, 
-			HttpServletResponse response) throws Exception {
-
-	ModelAndView mav= new ModelAndView();
-
-	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
-	
-	QuestionDTO qdto = new QuestionDTO();
-	qdto.setQuestion_no(ReplyNO);
-	qdto.setQuestion_contents(recontent);
-	
-	tripService.updateReply(qdto);
-
-	mav.addObject("questionList", QuestionList);
-	mav.setViewName("close");
-	return mav;
-	
-	}
-	
-	//답글삭제
-	@RequestMapping(value = "/trip/removereply.do", method = RequestMethod.GET)
-	public ModelAndView qna_removereply(
-			@RequestParam("removereply_no") int removereply_no,
-			HttpServletRequest request, 
-			HttpServletResponse response) throws Exception {
-
-	ModelAndView mav= new ModelAndView();
-	
-	tripService.deleteReply(removereply_no);
-	
-	mav.setViewName("redirect:qna.do");
-	return mav;
-	}
+//	//답글수정
+//	@RequestMapping(value = "/trip/modreply.do", method = RequestMethod.GET)
+//	public ModelAndView qna_modreply(
+//			@RequestParam("recontent") String recontent,
+//			@RequestParam("ReplyNO") int ReplyNO,
+//			HttpServletRequest request, 
+//			HttpServletResponse response) throws Exception {
+//
+//	ModelAndView mav= new ModelAndView();
+//
+//	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+//	
+//	QuestionDTO qdto = new QuestionDTO();
+//	qdto.setQuestion_no(ReplyNO);
+//	qdto.setQuestion_contents(recontent);
+//	
+//	tripService.updateReply(qdto);
+//
+//	mav.addObject("questionList", QuestionList);
+//	mav.setViewName("close");
+//	return mav;
+//	
+//	}
+//	
+//	//답글삭제
+//	@RequestMapping(value = "/trip/removereply.do", method = RequestMethod.GET)
+//	public ModelAndView qna_removereply(
+//			@RequestParam("removereply_no") int removereply_no,
+//			HttpServletRequest request, 
+//			HttpServletResponse response) throws Exception {
+//
+//	ModelAndView mav= new ModelAndView();
+//	
+//	tripService.deleteReply(removereply_no);
+//	
+//	mav.setViewName("redirect:qna.do");
+//	return mav;
+//	}
 }

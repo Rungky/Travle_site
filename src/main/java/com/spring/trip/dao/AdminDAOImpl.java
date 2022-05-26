@@ -84,5 +84,33 @@ public class AdminDAOImpl implements AdminDAO {
 		return count;
 	}
 
+	@Override
+	public List<QuestionDTO> adminselectAllQuestion(int parentno) {
+		List<QuestionDTO> QuestionList = new ArrayList();
+		QuestionList =  sqlSession.selectList("mapper.admin.selectAllQuestion", parentno);
+		
+		return QuestionList;
+	}
+
+	@Override
+	public List<QuestionDTO> adminselectmodReply(int question_no) {
+		List<QuestionDTO> answerList = new ArrayList();
+		answerList =  sqlSession.selectList("mapper.admin.selectmodReply", question_no);
+		
+		return answerList;
+	}
+
+	@Override
+	public void adminupdateReply(QuestionDTO questionDTO) {
+		sqlSession.update("mapper.admin.updateReply", questionDTO);
+		
+	}
+
+	@Override
+	public void admindeleteReply(int question_no) {
+		sqlSession.delete("mapper.admin.deleteReply", question_no);
+		
+	}
+
 
 }

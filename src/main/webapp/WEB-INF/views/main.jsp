@@ -55,8 +55,8 @@
 					앱 다운 받고 <span style="font-weight: 700;">더 많은 혜택</span> 받으세요!
 				</p>
 				<div class="ad_imgs">
-					<img src="${contextPath}/resources/image/playStore.png"> <img
-						src="${contextPath}/resources/image/appStore.png">
+					<a href="https://play.google.com/store/apps"><img src="${contextPath}/resources/image/playStore.png"></a> 
+					<a href="https://www.apple.com/kr/app-store/" ><img  src="${contextPath}/resources/image/appStore.png"></a>
 				</div>
 			</div>
 		</section>

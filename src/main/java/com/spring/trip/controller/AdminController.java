@@ -90,6 +90,27 @@ public class AdminController extends MultiActionController {
 		mav.addObject("dormsList", dormslist);
 		List<QuestionDTO> questionList = adminService.allQuestion();
 		List<QuestionDTO> answersList = tripService.selectAnswer();
+		
+		//출력할때 공백, 줄바꿈 html문으로 바꿔주기
+		for(int i =0; i<questionList.size();i++) {
+			String content = questionList.get(i).getQuestion_contents();
+			String title = questionList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			questionList.get(i).setQuestion_contents(content);
+			questionList.get(i).setQuestion_title(title);
+		}
+		for(int i =0; i<answersList.size();i++) {
+			String content = answersList.get(i).getQuestion_contents();
+			String title = answersList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			answersList.get(i).setQuestion_contents(content);
+			answersList.get(i).setQuestion_title(title);
+		}
+		
 		mav.addObject("questionList", questionList);
 		mav.addObject("answersList", answersList);
 		
@@ -180,7 +201,10 @@ public class AdminController extends MultiActionController {
 			dto.setDorm_no(Integer.parseInt(request.getParameter("dormno")));
 			dto.setDorm_category_no(Integer.parseInt(request.getParameter("category")));
 			dto.setDorm_name(request.getParameter("name"));
-			dto.setDorm_contents(request.getParameter("contents"));
+			String contents = request.getParameter("contents");
+			contents = contents.replaceAll("\n", ",");
+			contents = contents.replaceAll("&nasp", " ");
+			dto.setDorm_contents(contents);
 			dto.setDorm_addr(request.getParameter("addr"));
 			dto.setDorm_picture(request.getParameter("picture"));
 			int wify = Integer.parseInt(request.getParameter("wifi"));
@@ -300,6 +324,66 @@ public class AdminController extends MultiActionController {
 		
 		}
 		
+		//답글수정페이지
+		@RequestMapping(value = "/trip/adminmodreplywrite.do", method = RequestMethod.GET)
+		public ModelAndView qna_modreplypage(
+				@RequestParam("reply_no") int reply_no,
+				@RequestParam("parent_no") int parent_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+		List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
 		
+		answerList= adminService.adminselectmodReply(reply_no);
+		QuestionList= adminService.adminselectAllQuestion(parent_no);
+
+		mav.addObject("questionList", QuestionList);
+		mav.addObject("answerList", answerList);
+		mav.setViewName("qna_modanswer");
+		return mav;
+		
+		}
+		
+		//답글수정
+		@RequestMapping(value = "/trip/adminmodreply.do", method = RequestMethod.GET)
+		public ModelAndView qna_modreply(
+				@RequestParam("recontent") String recontent,
+				@RequestParam("ReplyNO") int ReplyNO,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
+		
+		QuestionDTO qdto = new QuestionDTO();
+		qdto.setQuestion_no(ReplyNO);
+		qdto.setQuestion_contents(recontent);
+		
+		adminService.adminupdateReply(qdto);
+
+		mav.addObject("questionList", QuestionList);
+		mav.setViewName("close");
+		return mav;
+		
+		}
+		
+		//답글삭제
+		@RequestMapping(value = "/trip/adminremovereply.do", method = RequestMethod.GET)
+		public ModelAndView qna_removereply(
+				@RequestParam("removereply_no") int removereply_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+		
+		adminService.admindeleteReply(removereply_no);
+		
+		mav.setViewName("redirect:admin.do?tabMove=st3");
+		return mav;
+		}
 	
 }
