@@ -301,7 +301,9 @@ footer{
  background-position: right -160px; border: 1px solid rgb(0, 144, 227); color: rgb(0, 144, 227);
 }
 .select .sub {
- padding: 6px 0px; border: 1px solid rgb(171, 173, 179); left: 0px; top: 0px; display: none; position: relative; z-index: 10; overflow-x: hidden; overflow-y: scroll; max-height: 168px; background-color: rgb(255, 255, 255);margin:0 auto;
+ padding: 6px 0px; border: 1px solid rgb(171, 173, 179); left: 0px; top: 0px; display: none; 
+ position: relative; z-index: 10; overflow-x: hidden; overflow-y: hidden; max-height: 168px; 
+ background-color: rgb(255, 255, 255);margin:0 auto;
 }
 .select .sub {
  width: 130px;
@@ -312,9 +314,9 @@ footer{
 .select .sub .optionList li:hover{
  background-color: rgb(108, 108, 108);
 }
-.select .sub .optionList:hover li {
+/* .select .sub .optionList:hover li {
  color: rgb(255, 255, 255);
-}
+} */
 .select .sub .optionList li {
  padding: 5px 15px; color: rgb(51, 51, 51);
 }

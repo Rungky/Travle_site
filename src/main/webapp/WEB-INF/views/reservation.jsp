@@ -184,11 +184,11 @@
 				<div id="optionData" class="sub">
 				 	<div class="optionList" style=""onClick="">
 						<ul>
-							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=1">호텔</a></li>
-							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=4">게스트하우스</a></li>
-							<li><a href="${contextPath}/trip/reservation.do">전체 보기</a></li>
-							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=3">리조트</a></li>
-							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=2">펜션</a></li>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=1"><li>호텔</li></a>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=4"><li>게스트하우스</li></a>
+							<a href="${contextPath}/trip/reservation.do"><li>전체 보기</li></a>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=3"><li>리조트</li></a>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=2"><li>펜션</li></a>
 						</ul>
 				  	</div>
 				</div>
