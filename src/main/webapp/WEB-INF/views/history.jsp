@@ -30,6 +30,10 @@
 		hide();
 		bind();
 		init();
+		var box = $(".rvbt[name='1']");
+		box.css("background-color", "gray").css("color", "white");
+		box.parent('a').attr("href", "#").attr("onClick", "return false;");
+		
 	})
 
 	function hide() {
@@ -48,12 +52,13 @@
 
 			if (target2 <= date2) {
 				//이때에 예약번호를 가진 버튼을 숨긴다
-				$($(".re")[i]).hide();
+				$($(".re")[i]).css("background-color", "gray").css("color", "white");
+				$($(".re")[i]).attr("onClick", "return false");
 				$($(".rvbt")[i]).show();
 
 			} else {
 				$($(".re")[i]).show();
-				$($(".rvbt")[i]).hide();
+				$($(".rvbt")[i]).css("background-color", "gray").css("color", "white");
 			}
 		}
 	}
@@ -198,31 +203,27 @@
 							<tr>
 								<td rowspan="4" class="img">
 								<a href="${contextPath}/trip/detail.do?dormno=${result.dorm_no}">
-									<img class="img2" 
-									style="width: 150px; height: 130px; padding: 10px"
+									<img class="img2" style="width: 150px; height: 130px; padding: 10px"
 									src="${contextPath}/resources/image/room/${result.room_picture}">
 								</a></td>
 								<td>${result.dorm_name}</td>
 								<td rowspan="4" class="rv">
 									<div class="forms">
-										<c:if test="${result.reser_review==0}">
-											<a
-												href="${contextPath}/trip/review.do?reserve_no=${result.reserve_no}">
-												<input type="button" class="rvbt button" id="re_button"
-												name="action" value="리뷰">
-											</a> 
-										</c:if>
-										<input type="submit" class="re button" value="예약 취소하기"
-											data-no="${result.reserve_no}" onclick="return confirm('예약을 취소하시겠습니까?')">
+									
+										<a id="remove" href="${contextPath}/trip/review.do?reserve_no=${result.reserve_no}">
+											<input type="button" style="width:100px;" class="rvbt button" id="re_button" name="${result.reser_review}" value="리뷰"><br>
+										</a><br>
+										<div>
+											<input type="submit" class="re button" value="예약 취소하기"
+												data-no="${result.reserve_no}" onclick="return confirm('예약을 취소하시겠습니까?')">
 											<input
-											type="hidden" name="reserve_checkin"
-											value="<fmt:formatDate value='${result.reserve_checkin}' pattern='yyyy-MM-dd' />">
-										<input type="hidden" name="reserve_no"
-											value="${result.reserve_no}"><br>
+												type="hidden" name="reserve_checkin"
+												value="<fmt:formatDate value='${result.reserve_checkin}' pattern='yyyy-MM-dd' />">
+											<input type="hidden" name="reserve_no" value="${result.reserve_no}"><br>
+										</div>
 										<br>
-
 										<div class="wrap">
-											<a href="#pop_info_1" class="btn_open" data-reserveno="${result.reserve_no}">결제 정보</a> <a
+											<a href="#pop_info_1" class="btn_open"  style="display:block;width:80px;" data-reserveno="${result.reserve_no}">결제 정보</a> <a
 												href="#pop_info_2" class="btn_open" style="display: none;">팝업 열기2</a>
 
 
