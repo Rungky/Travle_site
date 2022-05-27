@@ -810,65 +810,65 @@ public class TripController extends MultiActionController {
 		
 		}
 	
-//	//답글수정페이지
-//	@RequestMapping(value = "/trip/modreplywrite.do", method = RequestMethod.GET)
-//	public ModelAndView qna_modreplypage(
-//			@RequestParam("reply_no") int reply_no,
-//			@RequestParam("parent_no") int parent_no,
-//			HttpServletRequest request, 
-//			HttpServletResponse response) throws Exception {
-//
-//	ModelAndView mav= new ModelAndView();
-//
-//	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
-//	List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
-//	
-//	answerList= tripService.selectmodReply(reply_no);
-//	QuestionList= tripService.selectAllQuestion(parent_no);
-//
-//	mav.addObject("questionList", QuestionList);
-//	mav.addObject("answerList", answerList);
-//	mav.setViewName("qna_modanswer");
-//	return mav;
-//	
-//	}
+	//답글수정페이지
+	@RequestMapping(value = "/trip/remodreplywrite.do", method = RequestMethod.GET)
+	public ModelAndView qna_modreplypage(
+			@RequestParam("reply_no") int reply_no,
+			@RequestParam("parent_no") int parent_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
+	List<QuestionDTO> reanswerList = new ArrayList<QuestionDTO>();
 	
-//	//답글수정
-//	@RequestMapping(value = "/trip/modreply.do", method = RequestMethod.GET)
-//	public ModelAndView qna_modreply(
-//			@RequestParam("recontent") String recontent,
-//			@RequestParam("ReplyNO") int ReplyNO,
-//			HttpServletRequest request, 
-//			HttpServletResponse response) throws Exception {
-//
-//	ModelAndView mav= new ModelAndView();
-//
-//	List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
-//	
-//	QuestionDTO qdto = new QuestionDTO();
-//	qdto.setQuestion_no(ReplyNO);
-//	qdto.setQuestion_contents(recontent);
-//	
-//	tripService.updateReply(qdto);
-//
-//	mav.addObject("questionList", QuestionList);
-//	mav.setViewName("close");
-//	return mav;
-//	
-//	}
-//	
-//	//답글삭제
-//	@RequestMapping(value = "/trip/removereply.do", method = RequestMethod.GET)
-//	public ModelAndView qna_removereply(
-//			@RequestParam("removereply_no") int removereply_no,
-//			HttpServletRequest request, 
-//			HttpServletResponse response) throws Exception {
-//
-//	ModelAndView mav= new ModelAndView();
-//	
-//	tripService.deleteReply(removereply_no);
-//	
-//	mav.setViewName("redirect:qna.do");
-//	return mav;
-//	}
+	reanswerList= tripService.selectmodReply(reply_no);
+	answerList= tripService.selectAllQuestion(parent_no);
+
+	mav.addObject("answerList", answerList);
+	mav.addObject("reanswerList", reanswerList);
+	mav.setViewName("reqna_modanswer");
+	return mav;
+	
+	}
+	
+	//답글수정
+	@RequestMapping(value = "/trip/remodreply.do", method = RequestMethod.GET)
+	public ModelAndView qna_modreply(
+			@RequestParam("dorecontent") String dorecontent,
+			@RequestParam("ReplyNO") int ReplyNO,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+
+	List<QuestionDTO> reanswerList = new ArrayList<QuestionDTO>();
+	
+	QuestionDTO qdto = new QuestionDTO();
+	qdto.setQuestion_no(ReplyNO);
+	qdto.setQuestion_contents(dorecontent);
+	
+	tripService.updateReply(qdto);
+
+	mav.addObject("reanswerList", reanswerList);
+	mav.setViewName("close");
+	return mav;
+	
+	}
+	
+	//답글삭제
+	@RequestMapping(value = "/trip/doremovereply.do", method = RequestMethod.GET)
+	public ModelAndView qna_removereply(
+			@RequestParam("removereply_no") int removereply_no,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+
+	ModelAndView mav= new ModelAndView();
+	
+	tripService.deleteReply(removereply_no);
+	
+	mav.setViewName("redirect:qna.do");
+	return mav;
+	}
 }
