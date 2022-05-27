@@ -33,7 +33,7 @@
 	<script>
 		let mod = document.getElementById("mod");
 		mod.innerHTML = opener.$("#nextpage").attr("value");
-		console.log(mod.innerHTML);
+		$("#category").removeAttr("disabled");
 		let type = $(".bt").attr("value");
 		let i_ = $(".bt").attr("data-i");
 		let check_text = opener.$("#tr_time"+i_).html();

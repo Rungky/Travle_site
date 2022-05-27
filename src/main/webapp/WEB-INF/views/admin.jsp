@@ -112,7 +112,14 @@
                         <tr>
                             <input type="hidden" id="dormno" class="td_dorm" name="dormno" value="${dorm.dorm_no}">
                             <td>${dorm.dorm_no}</td>
-                            <td><input type="text" id="category" class="td_dorm" name="category" readonly value="${dorm.dorm_category_no}"></td>
+                            <td>
+                            	<select id="category" class="td_dorm" name="category" disabled>
+                            		<option value="1" ${dorm.dorm_category_no eq 1 ? 'selected' : ''}>호텔</option>
+                            		<option value="2" ${dorm.dorm_category_no eq 2 ? 'selected' : ''}>펜션</option>
+                            		<option value="3" ${dorm.dorm_category_no eq 3 ? 'selected' : ''}>리조트</option>
+                            		<option value="4" ${dorm.dorm_category_no eq 4 ? 'selected' : ''}>게스트하우스</option>
+                            	</select>
+                            </td>
                             <td><input type="text" id="name" name="name" readonly value="${dorm.dorm_name}"></td>
                             <td><button type="button" class="contents_bt" name="content" value="${dorm.dorm_contents}">내용 보기</button></td>
                             <input type="hidden" id="contents_val" name="contents" value="${dorm.dorm_contents}">
@@ -203,7 +210,7 @@
 						<c:forEach var="answers" items="${answersList}" varStatus="questionNum">
 						<c:if test="${answers.question_parentno==question.question_no }">
 							<tr id="answers" data-parents="${answers.question_parentno}" class="nodisplay">
-	                            <td colspan="7">
+	                            <td colspan="8">
 	                            <div>
 	                            	<div>
 	                            		${answers.question_title}
