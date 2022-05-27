@@ -59,4 +59,7 @@ public interface TripDAO {
 	public long paynoSelect(int reserve_no);
 	public PaymentDTO nopaynoSelect(long pay_no);
 	public int reviewChecking(int reserno);
+	public List<QuestionDTO> reselectReply(int question_no);
+	public void reinsertReplyQuestion (QuestionDTO questionDTO);
+	
 }

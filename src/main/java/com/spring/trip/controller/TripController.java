@@ -509,6 +509,7 @@ public class TripController extends MultiActionController {
 			
 			List<QuestionDTO> questionList = tripService.selectMemberQuestion(id);
 			List<QuestionDTO> answerList = tripService.selectAnswer();
+			List<QuestionDTO> reanswerList = tripService.selectAnswer();
 			
 			for(int i =0; i<questionList.size();i++) {
 				String content = questionList.get(i).getQuestion_contents();
@@ -529,7 +530,15 @@ public class TripController extends MultiActionController {
 				answerList.get(i).setQuestion_title(title);
 			}
 			
-			
+			for(int i =0; i<reanswerList.size();i++) {
+				String content = reanswerList.get(i).getQuestion_contents();
+				String title = reanswerList.get(i).getQuestion_title();
+				content = content.replaceAll("\n", "<br>");
+				content = content.replaceAll(" ", "&nbsp");
+				title = title.replaceAll(" ", "&nbsp");
+				reanswerList.get(i).setQuestion_contents(content);
+				reanswerList.get(i).setQuestion_title(title);
+			}
 			int nowPage = 1; // 기본 값
 			if(request.getParameter("nowPage")!=null) // 지금 페이지가 어딘지 값 받기
 				nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -554,6 +563,7 @@ public class TripController extends MultiActionController {
 			}
 			mav.addObject("questionList", questionList); // 부모 없는글
 			mav.addObject("answerList", answerList);
+			mav.addObject("reanswerList", reanswerList);
 			mav.addObject("nowPageCount", nowPageCount); // 지금 페이징
 			mav.addObject("totalPageCount", totalPageCount); // 총 페이징
 			mav.addObject("totalPage", totalPage); // 마지막 페이지
@@ -725,6 +735,55 @@ public class TripController extends MultiActionController {
 		mav.setViewName("redirect:qna.do");
 		return mav;
 	}
+	
+	//답변의 답변 작성페이지
+		@RequestMapping(value = "/trip/reanswerqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_reanswer(
+				@RequestParam("answer_no") int answer_no,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+
+		List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
+		
+		answerList= tripService.reselectReply(answer_no);
+
+		mav.addObject("answerList", answerList);
+		mav.setViewName("reqna_answer");
+		return mav;
+		
+		}
+		
+		//답변의 답변작성
+		@RequestMapping(value = "/trip/doreplyqna.do", method = RequestMethod.GET)
+		public ModelAndView qna_rewriteanswer(
+				@RequestParam("dorecontent") String recontent,
+				@RequestParam("reparentNO") int reparentNO,
+				HttpServletRequest request, 
+				HttpServletResponse response) throws Exception {
+
+		ModelAndView mav= new ModelAndView();
+		
+			String id= (String)session.getAttribute("id");
+			
+			QuestionDTO qdto = new QuestionDTO();
+			qdto.setQuestion_contents(recontent);
+			qdto.setQuestion_parentno(reparentNO);
+			qdto.setQuestion_title("[답변]");
+			
+			long miliseconds = System.currentTimeMillis();
+	        Date date = new Date(miliseconds);
+			qdto.setQuestion_date(date);
+			qdto.setQuestion_picture("picture");
+			qdto.setQuestion_view(0);
+			qdto.setMember_id(id);
+			
+			tripService.reinsertReplyQuestion(qdto);
+			mav.setViewName("redirect:replylist.do");
+			return mav;
+		
+		}
 	
 //	//답글수정페이지
 //	@RequestMapping(value = "/trip/modreplywrite.do", method = RequestMethod.GET)

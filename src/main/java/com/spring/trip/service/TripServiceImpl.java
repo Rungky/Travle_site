@@ -250,4 +250,16 @@ public class TripServiceImpl implements TripService {
 	public int reviewChecking(int reserno) {
 		return tripDAO.reviewChecking(reserno);
 	}
+	@Override
+	public List<QuestionDTO> reselectReply(int question_no) {
+		List<QuestionDTO> answerList = tripDAO.reselectReply(question_no);
+		
+		return answerList;
+	}
+	@Override
+	public void reinsertReplyQuestion(QuestionDTO questionDTO) {
+		tripDAO.reinsertReplyQuestion(questionDTO);
+		
+	}
+	
 }

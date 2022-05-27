@@ -407,5 +407,20 @@ public class TripDAOImpl implements TripDAO{
 		return sqlSession.selectOne("mapper.trip.reserReviewChecking", reserno);
 	}
 
+	@Override
+	public List<QuestionDTO> reselectReply(int question_no) {
+		List<QuestionDTO> answerList = new ArrayList();
+		answerList =  sqlSession.selectList("mapper.qna.reselectReply", question_no);
+		
+		return answerList;
+	}
+
+	@Override
+	public void reinsertReplyQuestion(QuestionDTO questionDTO) {
+		sqlSession.insert("mapper.qna.reinsertReplyQuestion", questionDTO);	
+	}
+
+	
+
 	
 }
