@@ -303,6 +303,18 @@ public class TripController extends MultiActionController {
 		mav.addObject("order", order);
 		mav.addObject("price", price);
 		mav.addObject("search", search);
+		switch(dorm_category_no) {
+			case 0: mav.addObject("dorm", "전체숙소");
+				break;
+			case 1: mav.addObject("dorm", "호텔");
+				break;
+			case 2: mav.addObject("dorm", "펜션");
+				break;
+			case 3: mav.addObject("dorm", "리조트");
+				break;
+			case 4: mav.addObject("dorm", "게스트하우스");
+				break;
+		}
 
 		mav.addObject("dormsList", dormsList);
 

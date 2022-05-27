@@ -289,3 +289,37 @@ footer{
     background-color: rgb(245,245,245);
     padding : 50px;
 }
+.select {
+	position:relative;
+	left:240px;
+	bottom:37px;
+}
+.select p {
+ width:100px;background: url("bg_selectbox.gif") no-repeat; font: 12px/20px "돋움", "dotum"; padding: 0px 14px; border: 1px solid rgb(171, 173, 179); height: 20px; color: rgb(51, 51, 51); overflow: hidden; cursor: pointer; font-size-adjust: none; font-stretch: normal;;margin:0 auto;
+}
+.select p.on {
+ background-position: right -160px; border: 1px solid rgb(0, 144, 227); color: rgb(0, 144, 227);
+}
+.select .sub {
+ padding: 6px 0px; border: 1px solid rgb(171, 173, 179); left: 0px; top: 0px; display: none; position: relative; z-index: 10; overflow-x: hidden; overflow-y: scroll; max-height: 168px; background-color: rgb(255, 255, 255);margin:0 auto;
+}
+.select .sub {
+ width: 130px;
+}
+.select .sub .optionList {
+ width: 400px; overflow: hidden; float: left; display: inline-block;cursor:pointer;font: 12px/20px "돋움", "dotum";
+}
+.select .sub .optionList li:hover{
+ background-color: rgb(108, 108, 108);
+}
+.select .sub .optionList:hover li {
+ color: rgb(255, 255, 255);
+}
+.select .sub .optionList li {
+ padding: 5px 15px; color: rgb(51, 51, 51);
+}
+
+.select .sub .optionList ul {
+	list-style:none;
+	padding-left:0px;
+}
