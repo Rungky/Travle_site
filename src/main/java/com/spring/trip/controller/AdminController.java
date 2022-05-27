@@ -87,6 +87,12 @@ public class AdminController extends MultiActionController {
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
 		List<DormDTO> dormslist = adminService.allDormsList();
+		for(int i =0; i<dormslist.size();i++) {
+			String content = dormslist.get(i).getDorm_contents();
+			content = content.replaceAll("\n", "");
+			dormslist.get(i).setDorm_contents(content);
+		}
+		
 		mav.addObject("dormsList", dormslist);
 		List<QuestionDTO> questionList = adminService.allQuestion();
 		List<QuestionDTO> answersList = tripService.selectAnswer();
