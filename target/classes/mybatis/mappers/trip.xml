@@ -16,20 +16,29 @@
 		<result property="opt_port" column="opt_port"></result>
 		<result property="min_pay_night" column="min_pay_night"></result>
 		<result property="count_reserve_no" column="count_reserve_no"></result>
+		<result property="cnt_rno" column="cnt_rno"></result>
 	</resultMap>
 	
 	<select id="selectDormList" resultType="dormVO" parameterType="java.util.HashMap">
 		<![CDATA[
 		SELECT d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no,
 			d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port, 
+<<<<<<< HEAD
 			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
 		FROM tb_dorm d, tb_room m 
 			left join tb_reservation r on m.room_no = r.room_no
+=======
+			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no,
+    		count(m.room_no) as cnt_room, count(r.room_no) as cnt_rno
+		FROM tb_dorm d, tb_room m 
+			left join ( select * from tb_reservation where not(to_date(#{date_e}, 'yy/MM/dd') <= reserve_checkin 
+				or to_date(#{date_s}, 'yy/MM/dd') >= reserve_checkout or reserve_checkin is null)) 
+				r on m.room_no = r.room_no
+>>>>>>> a2771bfa011cdb3726b6d33f79dfab152fe49d50
 	        left join tb_review vo on r.reserve_no = vo.reserve_no
 		]]>
 	    <where>
     		d.dorm_no = m.dorm_no
-    		and (to_date(#{date_e}, 'yy/MM/dd') <![CDATA[<=]]> r.reserve_checkin or to_date(#{date_s}, 'yy/MM/dd') <![CDATA[>=]]> r.reserve_checkout or r.reserve_checkin is null)
     		and m.room_person <![CDATA[>=]]> #{room_person}
     		and dorm_name like '%'||#{search}||'%'
 	    	<if test="dorm_category_no != 0">
@@ -124,10 +133,12 @@
 	</select>
 	<select id="selectReviewsList" resultType="reviewDTO" parameterType="int">
 		SELECT review_no, review_title, review_contents, review_score, review_date,
-		review_picture,rev.reserve_no, rev.member_id
-		FROM tb_review rev , tb_reservation res
+		review_picture,rev.reserve_no, rev.member_id, mem.member_names
+		FROM tb_review rev , tb_reservation res, tb_member mem
 		WHERE
 			rev.reserve_no = res.reserve_no
+		AND
+			res.member_id = mem.member_id
 		AND	
 			dorm_no = #{dormNo}
 		ORDER BY review_no desc
