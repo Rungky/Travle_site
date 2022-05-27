@@ -126,44 +126,19 @@
                             <td><input type="text" id="addr" name="addr" readonly value="${dorm.dorm_addr}"></td>
                             <td><input type="text" id="picture" name="picture" readonly value="${dorm.dorm_picture}"></td>
                             <td>
-                            <c:if test="${dorm.opt_wifi==1}">
-                                wifi<input type="checkbox" id="wifi" name="wifi"  onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_wifi!=1}">
-                                wifi<input type="checkbox" id="wifi" name="wifi"  onClick="return false;" value="1">
-                            </c:if>
+                                wifi<input type="checkbox" id="wifi" name="wifi"  onClick="return false;" value="1" ${dorm.opt_wifi==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_parking==1}">
-                                parking<input type="checkbox" id="parking" name="parking" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_parking!=1}">
-                                parking<input type="checkbox" id="parking" name="parking" onClick="return false;" value="1">
-                            </c:if>
+                                parking<input type="checkbox" id="parking" name="parking" onClick="return false;" value="1" ${dorm.opt_parking==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_aircon==1}">
-                                aircon<input type="checkbox" id="aircon" name="aircon" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_aircon!=1}">
-                                aircon<input type="checkbox" id="aircon" name="aircon" onClick="return false;" value="1">
-                            </c:if>
+                                aircon<input type="checkbox" id="aircon" name="aircon" onClick="return false;" value="1" ${dorm.opt_aircon==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_dryer==1}">
-                                dryer<input type="checkbox" id="dryer" name="dryer" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_dryer!=1}">
-                                dryer<input type="checkbox" id="dryer" name="dryer" onClick="return false;" value="1">
-                            </c:if>
+                                dryer<input type="checkbox" id="dryer" name="dryer" onClick="return false;" value="1" ${dorm.opt_dryer==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_port==1}">
-                                port<input type="checkbox" id="port" name="port" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_port!=1}">
-                                port<input type="checkbox" id="port" name="port" onClick="return false;" value="1">
-                            </c:if>
+                                port<input type="checkbox" id="port" name="port" onClick="return false;" value="1" ${dorm.opt_port==1 ? 'checked' : ''}>
                             </td>
                             <td style="text-align: center;"><button class="bt" name="type" value="dorm" data-i="${i.index}">수정하기</button></td>
                         </tr>
