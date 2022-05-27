@@ -58,9 +58,9 @@
 				                           <%--  <button class="reply_doMod" data-id="${answerList.question_no}" data-parentid="${answerList.question_parentno}">답변수정</button>
 				                            <button class="reply_doRemove" data-id="${answerList.question_no}">답변삭제</button> --%>
 			                        	</div>
-			                        	</c:if>
 			                        	<c:forEach var="reanswerList" items="${reanswerList}"> 
 			                        	<c:if test="${answerList.question_no == reanswerList.question_parentno}">
+			                        		
 			                        	<div class="qna_answer2 fs_s4">
 				                            <br>
 				                            <div><span class="fw_6 fs_m3">답변 &nbsp;</span><span class="fs_s3">작성일 ${reanswerList.question_date}</span></div>
@@ -71,8 +71,10 @@
 				                           <%--  <button class="reply_doMod" data-id="${answerList.question_no}" data-parentid="${answerList.question_parentno}">답변수정</button>
 				                            <button class="reply_doRemove" data-id="${answerList.question_no}">답변삭제</button> --%>
 			                        	</div>
+			                        		
 			                        	</c:if>
 			                        	</c:forEach>
+			                        	</c:if>
 		                        	</c:forEach>
 			                    </div>
 			                </div>
