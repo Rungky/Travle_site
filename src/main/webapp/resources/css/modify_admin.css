@@ -79,3 +79,6 @@ td, th {
 	display:flex;
 	justify-content:space-between;
 }
+.times {
+	width:50px;
+}

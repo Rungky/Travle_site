@@ -33,6 +33,11 @@ public class TripServiceImpl implements TripService {
 		return dto;
 	}
 	@Override
+	public DormDTO selectDorm(String contents, String addr) {
+		DormDTO dto = tripDAO.selectDorm(contents,addr);
+		return dto;
+	}
+	@Override
 	public void changeLike(int dormNo, int num) {
 		tripDAO.changeLike(dormNo, num);
 	}
@@ -251,5 +256,6 @@ public class TripServiceImpl implements TripService {
 	public int reviewChecking(int reserno) {
 		return tripDAO.reviewChecking(reserno);
 	}
+	
 	
 }

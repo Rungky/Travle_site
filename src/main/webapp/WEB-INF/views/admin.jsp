@@ -108,7 +108,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<c:forEach var="dorm" items="${dormsList}">
+                    	<c:forEach var="dorm" items="${dormsList}" varStatus="i">
                         <tr>
                             <input type="hidden" id="dormno" class="td_dorm" name="dormno" value="${dorm.dorm_no}">
                             <td>${dorm.dorm_no}</td>
@@ -158,7 +158,15 @@
                                 port<input type="checkbox" id="port" name="port" onClick="return false;" value="1">
                             </c:if>
                             </td>
-                            <td style="text-align: center;"><button class="bt" name="type" value="dorm">수정하기</button></td>
+                            <td style="text-align: center;"><button class="bt" name="type" value="dorm" data-i="${i.index}">수정하기</button></td>
+                        </tr>
+                        <tr id="tr_time${i.index}">
+                        	<td colspan="12" id="hidden_checkinout" class="nodisplay">
+                        		<div style="text-align:right;">
+                        			체크인 : <input type="text" id="in_time" class="times" name="in_time" value="${dorm.in_time}">
+                        			체크아웃 : <input type="text" id="out_time" class="times" name="out_time" value="${dorm.out_time}">
+                        		</div>
+                        	</td>
                         </tr>
                         </c:forEach>
                     </tbody>

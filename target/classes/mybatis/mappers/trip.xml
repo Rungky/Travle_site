@@ -23,21 +23,13 @@
 		<![CDATA[
 		SELECT d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no,
 			d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port, 
-			Min(h1.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
-		FROM tb_dorm d, tb_room m left join(
-			    select dorm_no, room_no, room_pay_night from tb_room
-			    minus
-			    select room.dorm_no, room.room_no, room.room_pay_night
-			    from tb_room room, tb_reservation reser
-			    where (
-			            '2022/05/27' <= reser.reserve_checkin and  reser.reserve_checkin < '2022/05/28'
-			            OR '2022/05/27' < reser.reserve_checkout and  reser.reserve_checkout <= '2022/05/28'
-			            OR '2022/05/27' > reser.reserve_checkin and  reser.reserve_checkout > '2022/05/28')
-			    	AND reser.room_no = room.room_no ) h1 on m.room_no = h1.room_no
-		    left join (
-		        select reserv.reserve_no, reserv.room_no from tb_review revi, tb_reservation reserv
-		        where revi.reserve_no = reserv.reserve_no
-		    ) vo on m.room_no = vo.room_no
+			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no,
+    		count(m.room_no) as cnt_room, count(r.room_no) as cnt_rno
+		FROM tb_dorm d, tb_room m 
+			left join ( select * from tb_reservation where not(to_date(#{date_e}, 'yy/MM/dd') <= reserve_checkin 
+				or to_date(#{date_s}, 'yy/MM/dd') >= reserve_checkout or reserve_checkin is null)) 
+				r on m.room_no = r.room_no
+	        left join tb_review vo on r.reserve_no = vo.reserve_no
 		]]>
 	    <where>
     		d.dorm_no = m.dorm_no
@@ -89,6 +81,12 @@
 		select * from tb_dorm
 		where dorm_no = #{dormNo}
 	</select>
+	<select id="selectDorm2" parameterType="java.util.HashMap" resultType="dormDTO">
+		SELECT * FROM tb_dorm
+		WHERE dorm_contents = #{contents}
+		AND dorm_addr = #{addr}
+	</select>
+	
 	<update id="changeLike" parameterType="java.util.HashMap">
 		UPDATE tb_dorm SET
 		like_cnt = #{totalCount}

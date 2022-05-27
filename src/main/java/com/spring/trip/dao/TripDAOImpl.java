@@ -38,6 +38,20 @@ public class TripDAOImpl implements TripDAO{
 		dto.setScoreAvr(dtoTemp.getScoreAvr());
 		return dto;
 	}
+	@Override
+	public DormDTO selectDorm(String contents, String addr) {
+		Map map = new HashMap();
+		map.put("contents", contents);
+		map.put("addr", addr);
+		
+		DormDTO dto = new DormDTO();
+		dto = sqlSession.selectOne("mapper.trip.selectDorm2", map);
+		int dormNo = dto.getDorm_no();
+		DormDTO dtoTemp = scoreAverage(dormNo);
+		dto.setReview_count(dtoTemp.getReview_count());
+		dto.setScoreAvr(dtoTemp.getScoreAvr());
+		return dto;
+	}
 
 	@Override
 	public DormDTO scoreAverage(int dormNo) {

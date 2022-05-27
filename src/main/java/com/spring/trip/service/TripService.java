@@ -16,6 +16,7 @@ import com.spring.trip.dto.RoomDTO;
 
 public interface TripService {
 	public DormDTO selectDorm(int dormNo);
+	public DormDTO selectDorm(String contents, String addr);
 	public void changeLike(int dormNo, int num);
 	public boolean checkLike(int dormNo, String id);
 	public void insertLike(int dormNo, String id);

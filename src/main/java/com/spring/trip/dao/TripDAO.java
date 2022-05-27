@@ -18,6 +18,7 @@ import com.spring.trip.dto.RoomDTO;
 
 public interface TripDAO {
 	public DormDTO selectDorm(int dormNo);
+	public DormDTO selectDorm(String contents, String addr);
 	public DormDTO scoreAverage(int dormNo);
 	public void changeLike(int dormNo, int num);
 	public boolean checkLike(int dormNo, String id);
