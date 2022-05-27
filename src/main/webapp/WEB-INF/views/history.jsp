@@ -264,9 +264,9 @@
 						</tr>
 						<tr>
 							<td>체크인 : <span class="checkin css"><fmt:formatDate
-										value="${result.reserve_checkin}" pattern="yyyy-MM-dd" /></span> /
+										value="${result.reserve_checkin}" pattern="yyyy-MM-dd" /></span>${result.in_time } /
 								체크아웃 : <span class="check css"><fmt:formatDate
-										value="${result.reserve_checkout}" pattern="yyyy-MM-dd" /></span>
+										value="${result.reserve_checkout}" pattern="yyyy-MM-dd" /></span>${result.out_time }
 							</td>
 						</tr>
 						<tr>

@@ -38,6 +38,20 @@ public class TripDAOImpl implements TripDAO{
 		dto.setScoreAvr(dtoTemp.getScoreAvr());
 		return dto;
 	}
+	@Override
+	public DormDTO selectDorm(String contents, String addr) {
+		Map map = new HashMap();
+		map.put("contents", contents);
+		map.put("addr", addr);
+		
+		DormDTO dto = new DormDTO();
+		dto = sqlSession.selectOne("mapper.trip.selectDorm2", map);
+		int dormNo = dto.getDorm_no();
+		DormDTO dtoTemp = scoreAverage(dormNo);
+		dto.setReview_count(dtoTemp.getReview_count());
+		dto.setScoreAvr(dtoTemp.getScoreAvr());
+		return dto;
+	}
 
 	@Override
 	public DormDTO scoreAverage(int dormNo) {
@@ -165,7 +179,7 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public CheckDTO checkList(int dorm_no, int room_no, String dorm_name, String room_name, Date reserve_checkin,
-			Date reserve_checkout, int reserve_pay) {
+			Date reserve_checkout, int reserve_pay, String in_time, String out_time) {
 		CheckDTO dto = new CheckDTO();
 		dto.setDorm_no(dorm_no);
 		dto.setRoom_no(room_no);
@@ -174,6 +188,8 @@ public class TripDAOImpl implements TripDAO{
 		dto.setReserve_checkin(reserve_checkin);
 		dto.setReserve_checkout(reserve_checkout);
 		dto.setReserve_pay(reserve_pay);
+		dto.setIn_time(in_time);
+		dto.setOut_time(out_time);
 		
 		return dto;
 	}
@@ -207,7 +223,7 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, int reserve_pay,
-			int room_no, int dorm_no, long pay_no, int pay_check) {
+			int room_no, int dorm_no, long pay_no, int pay_check, String in_time, String out_time) {
 		Map map = new HashMap();
 		map.put("member", member);
 		System.out.println(member);
@@ -220,6 +236,8 @@ public class TripDAOImpl implements TripDAO{
 		map.put("pay_no", pay_no);
 		System.out.println(pay_no);
 		map.put("pay_check", pay_check);
+		map.put("in_time", in_time);
+		map.put("out_time", out_time);
 		sqlSession.insert("mapper.reser.insertReservation", map);
 		System.out.println("예약인서트 성공");
 	}
@@ -419,6 +437,8 @@ public class TripDAOImpl implements TripDAO{
 	public void reinsertReplyQuestion(QuestionDTO questionDTO) {
 		sqlSession.insert("mapper.qna.reinsertReplyQuestion", questionDTO);	
 	}
+
+	
 
 	
 

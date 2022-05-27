@@ -22,7 +22,9 @@
 		#{room_no},
 		#{dorm_no},
 		#{pay_no},
-		#{pay_check}
+		#{pay_check},
+		#{in_time},
+		#{out_time}
 		)
 	</insert>
 
@@ -40,7 +42,8 @@
 		dorm.dorm_name,
 		room.room_name, reser.member_id,
 		reser.reserve_checkin, reser.reserve_date,
-		reser.reserve_checkout, reser.reserve_pay, reser.pay_check,
+		reser.reserve_checkout, reser.reserve_pay, 
+		reser.pay_check, reser.in_time, reser.out_time,
 		room.room_picture, reser.reserve_person , reser.dorm_no
 		FROM tb_reservation reser, tb_room room, tb_dorm dorm
 		WHERE reser.room_no = room.room_no
@@ -89,5 +92,11 @@
 		select * from tb_payment
 		where pay_no = #{pay_no}
 	</select>
+	
+	<!-- in_time out_time 불러오기 -->
+	<!--  <select i="inoutselect" parameterType="int" resultType="java.util.HashMap">
+		select in_time, out_time from tb_dorm
+		where dorm_no = #{dorm_no}
+	</select> -->
 
 </mapper>

@@ -235,6 +235,8 @@
 		                                <input type="hidden" name="reserve_pay" value="${roomday * item.room_pay_night}">
 		                                <input type="hidden" name="reserve_checkin" value="${reserve_checkin}">
 		                                <input type="hidden" name="reserve_checkout" value="${reserve_checkout}">
+		                                <input type="hidden" name="dorm_in_time" value="${dormdto.in_time}">
+		                                <input type="hidden" name="dorm_out_time" value="${dormdto.out_time}">
 		                            </form>
 		                            </c:if>
 		                            <c:if test="${item.reserved == 1}">
@@ -307,7 +309,7 @@
 	                        <td></td>
 	                    </tr>
 	                    <tr>
-	                        <td colspan="2" class="rev">${item.member_id}</td>
+	                        <td colspan="2" class="rev">${item.member_names}</td>
 	                    </tr>
 	                    <tr>
 	                        <td colspan="2">${item.review_contents}</td>

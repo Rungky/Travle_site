@@ -23,10 +23,24 @@ public class DormVO {
 	private int count_reserve_no;
 	private int room_persion;
 	private String search;
+	private int cnt_room;
+	public int getCnt_room() {
+		return cnt_room;
+	}
+	public void setCnt_room(int cnt_room) {
+		this.cnt_room = cnt_room;
+	}
+	private int cnt_rno;
 	
 	
 	
 
+	public int getCnt_rno() {
+		return cnt_rno;
+	}
+	public void setCnt_rno(int cnt_rno) {
+		this.cnt_rno = cnt_rno;
+	}
 	public String getSearch() {
 		return search;
 	}

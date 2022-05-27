@@ -21,7 +21,9 @@
 </div>
 <h1 style="text-align: center;">수정</h1>
 		<div class="fl_center">
-			<table id="mod">
+			<table >
+			<tbody id="mod">
+			</tbody>
 			</table>
 		</div>
 		<div class="bts">
@@ -29,13 +31,22 @@
 			<button type="button" onclick="window.close()"id="bt2">닫기</button>
 		</div>
 	<script>
-		document.getElementById("mod").innerHTML = opener.$("#nextpage").attr("value");
+		let mod = document.getElementById("mod");
+		mod.innerHTML = opener.$("#nextpage").attr("value");
+		console.log(mod.innerHTML);
+		let type = $(".bt").attr("value");
+		let i_ = $(".bt").attr("data-i");
+		let check_text = opener.$("#tr_time"+i_).html();
 		$(".bts").prepend($("#mod tr td:last-child").html());
 		$("#mod tr th:last-child").remove();
 		$("#mod tr td:last-child").remove();
+		$("#mod").append("<tr id='check_'></tr>");
+		$("#check_").html(check_text);
+		console.log(check_text);
 		$("input:checkbox").removeAttr("onClick");
 		$("input").removeAttr("readonly");
-		let type = $(".bt").attr("value");
+		$("#hidden_checkinout").removeClass("nodisplay");
+		$("#hidden_checkinout").attr("colspan", "11");
 		console.log("type");
 
 		$(".bt").off("click").on("click", function() {
@@ -68,6 +79,8 @@
 				let contents_val = $("#contents_val").val();
 				let addr = $("#addr").val();
 				let picture = $("#picture").val();
+				let in_time = $("#in_time").val();
+				let out_time = $("#out_time").val();
 				let wifi=0;
 				let parking=0;
 				let aircon=0;
@@ -99,7 +112,9 @@
 						parking : parking,
 						aircon : aircon,
 						dryer : dryer,
-						port : port
+						port : port,
+						in_time : in_time,
+						out_time : out_time
 					},
 					complete : function() {
 						opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st2";

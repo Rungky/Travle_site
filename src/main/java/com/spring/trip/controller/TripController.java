@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,6 +103,15 @@ public class TripController extends MultiActionController {
 		}
 
 		List<ReviewDTO> reviewsList = tripService.selectReviewsList(dormno);
+		for(int i =0; i<reviewsList.size();i++) {
+			String content = reviewsList.get(i).getReview_contents();
+			String title = reviewsList.get(i).getReview_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			reviewsList.get(i).setReview_contents(content);
+			reviewsList.get(i).setReview_title(title);
+		}
 		mav.addObject("dormdto", dormdto);
 		mav.addObject("roomsList", roomsList);
 		mav.addObject("reviewsList", reviewsList);
@@ -194,9 +204,7 @@ public class TripController extends MultiActionController {
 		memberId = (String) session.getAttribute("id");
 
 		if (title.equals("") || contents.equals("")) {
-			mav.addObject("textnull", "textnull");
-			System.out.println("�뀓�뒪�듃 null�삤瑜�");
-			mav.setViewName("redirect:review.do?reserve_no=" + reservNo + "");
+			mav.setViewName("redirect:review.do?reserve_no=" + reservNo + "&textnull=textnull");
 		} else {
 			System.out.println("INSERT");
 			tripService.insertReview(title, contents, score, date, picture, reservNo, memberId);
@@ -316,6 +324,8 @@ public class TripController extends MultiActionController {
 			@RequestParam("pay_ment") String pay_ment,
 			@RequestParam("pay_num") String pay_num,
 			@RequestParam("real_name") String real_name,
+			@RequestParam("in_time") String in_time,
+			@RequestParam("out_time") String out_time,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
@@ -334,8 +344,9 @@ public class TripController extends MultiActionController {
 		tripService.insertPayment(pay_no, pay_check, member, pay_ment, pay_num, real_name, dorm_name, room_name);
 		PaymentDTO dto = tripService.selectPayment(pay_no);
 		System.out.println("컨트롤러 pay_no" + pay_no);
-	
-		tripService.insertReservation(member, reserve_checkin, reserve_checkout, reserve_pay, room_no, dorm_no, pay_no, pay_check);
+		System.out.println("컨트롤러 in_time" + in_time);
+		tripService.insertReservation(member, reserve_checkin, reserve_checkout, 
+				reserve_pay, room_no, dorm_no, pay_no, pay_check, in_time, out_time);
 		
 		System.out.println("결제 인서트 성공");
 		mav.addObject("member_id", member);
@@ -450,7 +461,9 @@ public class TripController extends MultiActionController {
 	public ModelAndView page8(@RequestParam("dormno") int dorm_no, @RequestParam("roomno") int room_no,
 			@RequestParam("dormname") String dorm_name, @RequestParam("roomname") String room_name,
 			@RequestParam("reserve_pay") int roompay, @RequestParam("reserve_checkin") Date reserve_checkin,
-			@RequestParam("reserve_checkout") Date reserve_checkout, HttpServletRequest request,
+			@RequestParam("reserve_checkout") Date reserve_checkout, 
+			@RequestParam("dorm_in_time") String in_time,@RequestParam("dorm_out_time") String out_time,
+			HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		String member = (String) session.getAttribute("id");
@@ -459,7 +472,7 @@ public class TripController extends MultiActionController {
 			MemberDTO dto = tripService.memberDto(member);
 			mav.addObject("dto", dto);
 			CheckDTO checkDto = tripService.checkList(dorm_no, room_no, dorm_name, room_name, reserve_checkin,
-					reserve_checkout, roompay);
+					reserve_checkout, roompay, in_time, out_time);
 			mav.addObject("check", checkDto);
 		} catch (Exception e) {
 			e.printStackTrace();
