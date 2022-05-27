@@ -288,6 +288,7 @@ public class TripDAOImpl implements TripDAO{
 		map.put("order", order);
 		map.put("price", price);
 		map.put("search", search);
+	
 		
 		List<DormVO> dormList = sqlSession.selectList("mapper.trip.selectDormList", map);
 

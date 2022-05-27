@@ -42,7 +42,8 @@ public interface TripDAO {
 	public List<QuestionDTO> selectAnswer();
 	public void insertNewQuestion (QuestionDTO questionDTO);
 	public void insertReplyQuestion (QuestionDTO questionDTO);
-	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
+	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, 
+			int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
 	public List<QuestionDTO> selectQuestion(int question_no);
 	public List<QuestionDTO> selectReply();
 	public void plusViewCount(int articleNo);

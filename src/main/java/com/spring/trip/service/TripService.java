@@ -47,7 +47,8 @@ public interface TripService {
 	public void updateArticle(QuestionDTO questionDTO);
 	public List<QuestionDTO> selectmodQuestion(int question_no);
 	public void deleteArticle(int question_no);
-	List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search);
+	List<DormVO> getDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, 
+			int order, int price, String search);
 	public List<DormDTO> selectMain_dormList(); // 메인 숙소 추천
 	public List<QuestionDTO> selectAllQuestion(int parentno);
 	public List<QuestionDTO> selectmodReply(int question_no);
