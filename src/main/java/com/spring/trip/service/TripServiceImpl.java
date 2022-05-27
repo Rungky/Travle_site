@@ -209,14 +209,14 @@ public class TripServiceImpl implements TripService {
 	}
 	@Override
 	public List<QuestionDTO> selectAllQuestion(int parentno) {
-		List<QuestionDTO> QuestionList = tripDAO.selectAllQuestion(parentno);		
-		return QuestionList;
+		List<QuestionDTO> answerList = tripDAO.selectAllQuestion(parentno);		
+		return answerList;
 	}
 	@Override
 	public List<QuestionDTO> selectmodReply(int question_no) {
-		List<QuestionDTO> answerList = tripDAO.selectmodReply(question_no);
+		List<QuestionDTO> reanswerList = tripDAO.selectmodReply(question_no);
 		
-		return answerList;
+		return reanswerList;
 	}
 	@Override
 	public void updateReply(QuestionDTO questionDTO) {

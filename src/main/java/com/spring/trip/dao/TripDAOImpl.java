@@ -359,18 +359,18 @@ public class TripDAOImpl implements TripDAO{
 
 	@Override
 	public List<QuestionDTO> selectAllQuestion(int parentno) {
-		List<QuestionDTO> QuestionList = new ArrayList();
-		QuestionList =  sqlSession.selectList("mapper.qna.selectAllQuestion", parentno);
+		List<QuestionDTO> answerList = new ArrayList();
+		answerList =  sqlSession.selectList("mapper.qna.selectAllQuestion", parentno);
 		
-		return QuestionList;
+		return answerList;
 	}
 
 	@Override
 	public List<QuestionDTO> selectmodReply(int question_no) {
-		List<QuestionDTO> answerList = new ArrayList();
-		answerList =  sqlSession.selectList("mapper.qna.selectmodReply", question_no);
+		List<QuestionDTO> reanswerList = new ArrayList();
+		reanswerList =  sqlSession.selectList("mapper.qna.selectmodReply", question_no);
 		
-		return answerList;
+		return reanswerList;
 	}
 
 	@Override
