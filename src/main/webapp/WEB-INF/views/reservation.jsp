@@ -146,7 +146,18 @@
 	  
 	}
 	
+	$(document).ready(function(){  
+		$(".select p").click(function(){    
+			$(".select p").addClass("on");  
+			$(".select .sub").slideToggle("fast");   
+		});
+		 
+		$(".select .sub").mouseleave(function() {
+			$(".select p").removeClass("on"); 
+			$(this).hide();
+		});
 
+	});
 	
 </script>
 
@@ -167,7 +178,21 @@
 <div class="clear" style="position:relative;">
 	<div class="order">
 		<div class="or_l" style="float:left; line-height:50px; margin-left:20px; font-size:16px;">
-		총 ${dormsList.size()} 개의 숙소가 검색되었습니다.
+		총 ${dormsList.size()} 개의 숙소가 검색되었습니다.&nbsp&nbsp 숙소 > 
+			<div class="select">
+				<p id="optionDefault">${dorm}</p>
+				<div id="optionData" class="sub">
+				 	<div class="optionList" style=""onClick="">
+						<ul>
+							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=1">호텔</a></li>
+							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=4">게스트하우스</a></li>
+							<li><a href="${contextPath}/trip/reservation.do">전체 보기</a></li>
+							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=3">리조트</a></li>
+							<li><a href="${contextPath}/trip/reservation.do?dorm_category_no=2">펜션</a></li>
+						</ul>
+				  	</div>
+				</div>
+			</div>
 		</div>
 		<div></div>
 		<div class="or_r">
