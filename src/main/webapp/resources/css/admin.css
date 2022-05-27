@@ -85,6 +85,13 @@ th {
 #picture{
 	width:120px;
 }
+#category {
+	font-size:17px;
+	border:none;
+	color:black;
+	-webkit-appearance:none;
+	opacity: 1;
+}
 input {
     border: none;
     margin: none;

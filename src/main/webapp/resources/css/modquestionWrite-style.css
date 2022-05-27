@@ -64,8 +64,7 @@ section .question_input form .question_input_btn {
   font-size: large;
   margin-top: 10px;
   margin-right: 8px;
-  margin-left: 35px;
-  margin-bottom: 20px;
+  margin-left: 8px;
   border-radius: 10px;
 }
 
@@ -78,3 +77,20 @@ section .question_input form .question_input_btn:hover {
 	justify-content : space-between;
 	width : 100%;
 }
+
+.question_input_close{
+  width: 40%;
+  height: 50px;
+  font-size: large;
+  margin-top: 40px;
+  margin-right: 8px;
+  margin-left: 30%;
+  border-radius: 10px;
+}
+
+.question_input_close:hover {
+  background-color: rgb(221, 221, 221);
+}
+
+
+	

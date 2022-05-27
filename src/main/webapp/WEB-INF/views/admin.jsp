@@ -108,57 +108,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<c:forEach var="dorm" items="${dormsList}">
+                    	<c:forEach var="dorm" items="${dormsList}" varStatus="i">
                         <tr>
                             <input type="hidden" id="dormno" class="td_dorm" name="dormno" value="${dorm.dorm_no}">
                             <td>${dorm.dorm_no}</td>
-                            <td><input type="text" id="category" class="td_dorm" name="category" readonly value="${dorm.dorm_category_no}"></td>
+                            <td>
+                            	<select id="category" class="td_dorm" name="category" disabled>
+                            		<option value="1" ${dorm.dorm_category_no eq 1 ? 'selected' : ''}>호텔</option>
+                            		<option value="2" ${dorm.dorm_category_no eq 2 ? 'selected' : ''}>펜션</option>
+                            		<option value="3" ${dorm.dorm_category_no eq 3 ? 'selected' : ''}>리조트</option>
+                            		<option value="4" ${dorm.dorm_category_no eq 4 ? 'selected' : ''}>게스트하우스</option>
+                            	</select>
+                            </td>
                             <td><input type="text" id="name" name="name" readonly value="${dorm.dorm_name}"></td>
                             <td><button type="button" class="contents_bt" name="content" value="${dorm.dorm_contents}">내용 보기</button></td>
                             <input type="hidden" id="contents_val" name="contents" value="${dorm.dorm_contents}">
                             <td><input type="text" id="addr" name="addr" readonly value="${dorm.dorm_addr}"></td>
                             <td><input type="text" id="picture" name="picture" readonly value="${dorm.dorm_picture}"></td>
                             <td>
-                            <c:if test="${dorm.opt_wifi==1}">
-                                wifi<input type="checkbox" id="wifi" name="wifi"  onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_wifi!=1}">
-                                wifi<input type="checkbox" id="wifi" name="wifi"  onClick="return false;" value="1">
-                            </c:if>
+                                wifi<input type="checkbox" id="wifi" name="wifi"  onClick="return false;" value="1" ${dorm.opt_wifi==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_parking==1}">
-                                parking<input type="checkbox" id="parking" name="parking" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_parking!=1}">
-                                parking<input type="checkbox" id="parking" name="parking" onClick="return false;" value="1">
-                            </c:if>
+                                parking<input type="checkbox" id="parking" name="parking" onClick="return false;" value="1" ${dorm.opt_parking==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_aircon==1}">
-                                aircon<input type="checkbox" id="aircon" name="aircon" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_aircon!=1}">
-                                aircon<input type="checkbox" id="aircon" name="aircon" onClick="return false;" value="1">
-                            </c:if>
+                                aircon<input type="checkbox" id="aircon" name="aircon" onClick="return false;" value="1" ${dorm.opt_aircon==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_dryer==1}">
-                                dryer<input type="checkbox" id="dryer" name="dryer" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_dryer!=1}">
-                                dryer<input type="checkbox" id="dryer" name="dryer" onClick="return false;" value="1">
-                            </c:if>
+                                dryer<input type="checkbox" id="dryer" name="dryer" onClick="return false;" value="1" ${dorm.opt_dryer==1 ? 'checked' : ''}>
                             </td>
                             <td>
-                            <c:if test="${dorm.opt_port==1}">
-                                port<input type="checkbox" id="port" name="port" onClick="return false;" value="1" checked>
-                            </c:if>
-                            <c:if test="${dorm.opt_port!=1}">
-                                port<input type="checkbox" id="port" name="port" onClick="return false;" value="1">
-                            </c:if>
+                                port<input type="checkbox" id="port" name="port" onClick="return false;" value="1" ${dorm.opt_port==1 ? 'checked' : ''}>
                             </td>
-                            <td style="text-align: center;"><button class="bt" name="type" value="dorm">수정하기</button></td>
+                            <td style="text-align: center;"><button class="bt" name="type" value="dorm" data-i="${i.index}">수정하기</button></td>
+                        </tr>
+                        <tr id="tr_time${i.index}">
+                        	<td colspan="12" id="hidden_checkinout" class="nodisplay">
+                        		<div style="text-align:right;">
+                        			체크인 : <input type="text" id="in_time" class="times" name="in_time" value="${dorm.in_time}">
+                        			체크아웃 : <input type="text" id="out_time" class="times" name="out_time" value="${dorm.out_time}">
+                        		</div>
+                        	</td>
                         </tr>
                         </c:forEach>
                     </tbody>
@@ -195,7 +185,7 @@
 						<c:forEach var="answers" items="${answersList}" varStatus="questionNum">
 						<c:if test="${answers.question_parentno==question.question_no }">
 							<tr id="answers" data-parents="${answers.question_parentno}" class="nodisplay">
-	                            <td colspan="7">
+	                            <td colspan="8">
 	                            <div>
 	                            	<div>
 	                            		${answers.question_title}

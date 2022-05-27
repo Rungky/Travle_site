@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.trip">
 
+<<<<<<< HEAD
 	<resultMap id="map" type="dormVO">
 		<result property="dorm_no" column="dorm_no"></result>
 		<result property="dorm_name" column="dorm_name"></result>
@@ -23,21 +24,19 @@
 		<![CDATA[
 		SELECT d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no,
 			d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port, 
-			Min(h1.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
-		FROM tb_dorm d, tb_room m left join(
-			    select dorm_no, room_no, room_pay_night from tb_room
-			    minus
-			    select room.dorm_no, room.room_no, room.room_pay_night
-			    from tb_room room, tb_reservation reser
-			    where (
-			            '2022/05/27' <= reser.reserve_checkin and  reser.reserve_checkin < '2022/05/28'
-			            OR '2022/05/27' < reser.reserve_checkout and  reser.reserve_checkout <= '2022/05/28'
-			            OR '2022/05/27' > reser.reserve_checkin and  reser.reserve_checkout > '2022/05/28')
-			    	AND reser.room_no = room.room_no ) h1 on m.room_no = h1.room_no
-		    left join (
-		        select reserv.reserve_no, reserv.room_no from tb_review revi, tb_reservation reserv
-		        where revi.reserve_no = reserv.reserve_no
-		    ) vo on m.room_no = vo.room_no
+<<<<<<< HEAD
+			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
+		FROM tb_dorm d, tb_room m 
+			left join tb_reservation r on m.room_no = r.room_no
+=======
+			Min(m.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no,
+    		count(m.room_no) as cnt_room, count(r.room_no) as cnt_rno
+		FROM tb_dorm d, tb_room m 
+			left join ( select * from tb_reservation where not(to_date(#{date_e}, 'yy/MM/dd') <= reserve_checkin 
+				or to_date(#{date_s}, 'yy/MM/dd') >= reserve_checkout or reserve_checkin is null)) 
+				r on m.room_no = r.room_no
+>>>>>>> a2771bfa011cdb3726b6d33f79dfab152fe49d50
+	        left join tb_review vo on r.reserve_no = vo.reserve_no
 		]]>
 	    <where>
     		d.dorm_no = m.dorm_no
@@ -83,12 +82,99 @@
 	    	ORDER BY min_pay_night desc
 	    </if>
 	</select>
+=======
+	   <resultMap id="map" type="dormVO">
+      <result property="dorm_no" column="dorm_no"></result>
+      <result property="dorm_name" column="dorm_name"></result>
+      <result property="dorm_addr" column="dorm_addr"></result>
+      <result property="dorm_picture" column="dorm_picture"></result>
+      <result property="opt_wifi" column="opt_wifi"></result>
+      <result property="opt_parking" column="opt_parking"></result>
+      <result property="opt_aircon" column="opt_aircon"></result>
+      <result property="opt_dryer" column="opt_dryer"></result>
+      <result property="opt_port" column="opt_port"></result>
+      <result property="min_pay_night" column="min_pay_night"></result>
+      <result property="count_reserve_no" column="count_reserve_no"></result>
+      <result property="cnt_rno" column="cnt_rno"></result>
+   </resultMap>
+   
+   <select id="selectDormList" resultType="dormVO" parameterType="java.util.HashMap">
+      <![CDATA[
+      SELECT d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no,
+         d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port, 
+         Min(h1.room_pay_night) as min_pay_night, count(vo.reserve_no) as count_reserve_no
+      FROM tb_dorm d, tb_room m left join(
+             select dorm_no, room_no, room_pay_night from tb_room
+             minus
+             select room.dorm_no, room.room_no, room.room_pay_night
+             from tb_room room, tb_reservation reser
+             where (
+                     '2022/05/27' <= reser.reserve_checkin and  reser.reserve_checkin < '2022/05/28'
+                     OR '2022/05/27' < reser.reserve_checkout and  reser.reserve_checkout <= '2022/05/28'
+                     OR '2022/05/27' > reser.reserve_checkin and  reser.reserve_checkout > '2022/05/28')
+                AND reser.room_no = room.room_no ) h1 on m.room_no = h1.room_no
+          left join (
+              select reserv.reserve_no, reserv.room_no from tb_review revi, tb_reservation reserv
+              where revi.reserve_no = reserv.reserve_no
+          ) vo on m.room_no = vo.room_no
+      ]]>
+       <where>
+          d.dorm_no = m.dorm_no
+          and m.room_person <![CDATA[>=]]> #{room_person}
+          and dorm_name like '%'||#{search}||'%'
+          <if test="dorm_category_no != 0">
+             and d.dorm_category_no = #{dorm_category_no}
+          </if>
+          <if test="opt_wifi == 1">
+             and d.opt_wifi <![CDATA[>=]]> #{opt_wifi}
+          </if>
+          <if test="opt_parking == 1">
+             and d.opt_parking <![CDATA[>=]]> #{opt_parking}
+          </if>
+          <if test="opt_aircon == 1">
+             and d.opt_aircon <![CDATA[>=]]> #{opt_aircon}
+          </if>
+          <if test="opt_dryer == 1">
+             and d.opt_dryer <![CDATA[>=]]> #{opt_dryer}
+          </if>
+          <if test="opt_port == 1">
+             and d.opt_port <![CDATA[>=]]> #{opt_port}
+          </if>
+          <if test="price == 1">
+             and room_pay_night <![CDATA[<=]]> 50000
+          </if>
+          <if test="price == 2">
+             and (room_pay_night <![CDATA[<=]]> 100000 and room_pay_night <![CDATA[>]]> 50000)
+          </if>
+          <if test="price == 3">
+             and (room_pay_night <![CDATA[<=]]> 200000 and room_pay_night <![CDATA[>]]> 100000)
+          </if>
+          <if test="price == 4">
+             and room_pay_night <![CDATA[>]]> 200000
+          </if>
+       </where>
+       GROUP BY d.dorm_no, d.dorm_name, d.dorm_addr, d.dorm_picture, d.dorm_category_no, 
+          d.opt_wifi, d.opt_parking, d.opt_aircon, d.opt_dryer, d.opt_port
+       <if test="order == 1">
+          ORDER BY min_pay_night
+       </if>
+       <if test="order == 2">
+          ORDER BY min_pay_night desc
+       </if>
+   </select>
+>>>>>>> 8bcc46b3ca531e8eda739bfcd1ebe62d195703a4
 
 
 	<select id="selectDorm" parameterType="int" resultType="dormDTO">
 		select * from tb_dorm
 		where dorm_no = #{dormNo}
 	</select>
+	<select id="selectDorm2" parameterType="java.util.HashMap" resultType="dormDTO">
+		SELECT * FROM tb_dorm
+		WHERE dorm_contents = #{contents}
+		AND dorm_addr = #{addr}
+	</select>
+	
 	<update id="changeLike" parameterType="java.util.HashMap">
 		UPDATE tb_dorm SET
 		like_cnt = #{totalCount}

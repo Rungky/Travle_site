@@ -18,6 +18,7 @@ import com.spring.trip.dto.RoomDTO;
 
 public interface TripDAO {
 	public DormDTO selectDorm(int dormNo);
+	public DormDTO selectDorm(String contents, String addr);
 	public DormDTO scoreAverage(int dormNo);
 	public void changeLike(int dormNo, int num);
 	public boolean checkLike(int dormNo, String id);
@@ -42,7 +43,8 @@ public interface TripDAO {
 	public List<QuestionDTO> selectAnswer();
 	public void insertNewQuestion (QuestionDTO questionDTO);
 	public void insertReplyQuestion (QuestionDTO questionDTO);
-	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
+	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, 
+			int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
 	public List<QuestionDTO> selectQuestion(int question_no);
 	public List<QuestionDTO> selectReply();
 	public void plusViewCount(int articleNo);
@@ -60,5 +62,9 @@ public interface TripDAO {
 	public long paynoSelect(int reserve_no);
 	public PaymentDTO nopaynoSelect(long pay_no);
 	public int reviewChecking(int reserno);
+
+	public List<QuestionDTO> reselectReply(int question_no);
+	public void reinsertReplyQuestion (QuestionDTO questionDTO);
+
 	
 }

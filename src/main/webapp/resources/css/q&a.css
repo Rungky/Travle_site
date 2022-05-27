@@ -1,8 +1,11 @@
  
  .fs_s{ font-size: 0.4em;}
  .fs_s2{ font-size: 0.8em;}
+ .fs_s3{ font-size: 0.4em;}
+ .fs_s4{ font-size: 0.8em;}
  .fs_m{ font-size: 0.9em;}
  .fs_m2{ font-size: 1.0em;}
+ .fs_m3{ font-size: 1.0em;}
  .fs_l{ font-size: 1.1em;}
  .fw_6{ font-weight: 600;}
  .fw_7{ font-weight: 700;}
@@ -128,6 +131,10 @@ section{
     padding: 7px 25px 10px;
 }
 
+.qna_answer2{
+    padding: 7px 25px 10px 50px;;
+}
+
 #qna_page{
     margin-top: 30px;
     text-align: center;
@@ -161,3 +168,6 @@ section{
 	font-weight : bold;
 	color : red;
 }
+
+
+

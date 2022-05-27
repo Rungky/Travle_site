@@ -40,13 +40,6 @@
 <div id="dorm" class="nodisplay">
 	<table>
 		<tr>
-			<th>숙소넘버</th>
-			<td>
-			<div id="dormno_checking" class="nodisplay" data-dormno="none"></div>
-				<input id="dormno" class="input_dormno" type="text" name="dormno"><button type="button" id="id_check">중복체크</button>
-			</td>
-		</tr>
-		<tr>
 			<th>카테고리</th>
 			<td>
 				<select id="category" name="category">
@@ -82,6 +75,12 @@
 			</td>
 		</tr>
 		<tr>
+		<th>체크인 / 체크아웃</th>
+			<td>
+				<input id="in_time" class="input_time" type="text" name="in_time"> : <input id="out_time" class="input_time" type="text" name="out_time">  
+			</td>
+		</tr>
+		<tr>
 			<th>옵션</th>
 			<td>
 				<input id="wifi" type="checkbox" name="wifi" value="1">wifi 
@@ -101,6 +100,7 @@
 
 <script>
 	let type = opener.$("#insert_type").attr("data-type");
+	console.log(type);
 	console.log("type : " + type);
 	if(type=="mem"){
 		$("#mem").removeClass("nodisplay");
@@ -147,12 +147,13 @@
 		if (type == "mem") {
 			
 		} else if (type == "dorm") {
-			let dormno = $("#dormno").val();
 			let category = $("#category").val();
 			let name = $("#name").val();
 			let contents_val = $("#contents").val();
 			let addr = $("#addr").val();
 			let picture = $("#picture").val();
+			let in_time = $("#in_time").val();
+			let out_time = $("#out_time").val();
 			let wifi=0;
 			let parking=0;
 			let aircon=0;
@@ -174,7 +175,6 @@
 				type : "post",
 				data : {
 					type : type,
-					dormno : dormno,
 					category : category,
 					name : name,
 					contents : contents_val,
@@ -184,9 +184,12 @@
 					parking : parking,
 					aircon : aircon,
 					dryer : dryer,
-					port : port
+					port : port,
+					in_time : in_time,
+					out_time : out_time
 				},
-				complete : function() {
+				success : function(data) {
+					alert("숙소 넘버는 ["+data+"] 입니다!");
 					opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st2";
 					window.close();
 				}

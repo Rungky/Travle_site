@@ -38,6 +38,20 @@ public class TripDAOImpl implements TripDAO{
 		dto.setScoreAvr(dtoTemp.getScoreAvr());
 		return dto;
 	}
+	@Override
+	public DormDTO selectDorm(String contents, String addr) {
+		Map map = new HashMap();
+		map.put("contents", contents);
+		map.put("addr", addr);
+		
+		DormDTO dto = new DormDTO();
+		dto = sqlSession.selectOne("mapper.trip.selectDorm2", map);
+		int dormNo = dto.getDorm_no();
+		DormDTO dtoTemp = scoreAverage(dormNo);
+		dto.setReview_count(dtoTemp.getReview_count());
+		dto.setScoreAvr(dtoTemp.getScoreAvr());
+		return dto;
+	}
 
 	@Override
 	public DormDTO scoreAverage(int dormNo) {
@@ -288,6 +302,7 @@ public class TripDAOImpl implements TripDAO{
 		map.put("order", order);
 		map.put("price", price);
 		map.put("search", search);
+	
 		
 		List<DormVO> dormList = sqlSession.selectList("mapper.trip.selectDormList", map);
 
@@ -410,6 +425,21 @@ public class TripDAOImpl implements TripDAO{
 	public int reviewChecking(int reserno) {
 		return sqlSession.selectOne("mapper.trip.reserReviewChecking", reserno);
 	}
+
+	@Override
+	public List<QuestionDTO> reselectReply(int question_no) {
+		List<QuestionDTO> answerList = new ArrayList();
+		answerList =  sqlSession.selectList("mapper.qna.reselectReply", question_no);
+		
+		return answerList;
+	}
+
+	@Override
+	public void reinsertReplyQuestion(QuestionDTO questionDTO) {
+		sqlSession.insert("mapper.qna.reinsertReplyQuestion", questionDTO);	
+	}
+
+	
 
 	
 
