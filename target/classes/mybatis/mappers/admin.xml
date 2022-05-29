@@ -88,7 +88,7 @@
 	</update>
 	
 	<insert id="adminRoomInsert" parameterType="roomDTO">
-		INSERT INTO tb_dorm
+		INSERT INTO tb_room
 		   VALUES
 	    	(
 	    		tb_room_seq.nextval,
@@ -103,7 +103,7 @@
 	
 	<delete id="adminRoomDelete" parameterType="int">
 		DELETE FROM tb_room
-		WHERE dorm_no = #{room_no}
+		WHERE room_no = #{room_no}
 	</delete>
 	
 	<!-- 문의조회 -->
