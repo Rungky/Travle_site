@@ -116,4 +116,25 @@
 		WHERE question_parentno = 0
 		AND member_id = #{id}
 	</select>
+	
+	<!-- 답변의 답변페이지 -->
+	<select id="reselectReply" resultType="questionDTO" parameterType="int">
+		select * from tb_question
+		where question_no=#{question_no}
+	</select>
+	
+	<!-- 답변의 답변작성 -->
+	<insert id="reinsertReplyQuestion" parameterType="questionDTO">
+		INSERT INTO tb_question
+		VALUES (
+			tb_question_seq.nextval,
+			#{question_parentno},
+			#{question_title},
+			#{question_contents},
+			#{question_picture},
+			TO_DATE(SYSDATE, 'YY/MM/DD'),
+			#{question_view},
+			#{member_id}
+		)
+	</insert>
 </mapper>

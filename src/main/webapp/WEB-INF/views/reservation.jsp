@@ -146,7 +146,18 @@
 	  
 	}
 	
+	$(document).ready(function(){  
+		$(".select p").click(function(){    
+			$(".select p").addClass("on");  
+			$(".select .sub").slideToggle("fast");   
+		});
+		 
+		$(".select .sub").mouseleave(function() {
+			$(".select p").removeClass("on"); 
+			$(this).hide();
+		});
 
+	});
 	
 </script>
 
@@ -167,7 +178,21 @@
 <div class="clear" style="position:relative;">
 	<div class="order">
 		<div class="or_l" style="float:left; line-height:50px; margin-left:20px; font-size:16px;">
-		총 ${dormsList.size()} 개의 숙소가 검색되었습니다.
+		총 ${dormsList.size()} 개의 숙소가 검색되었습니다.&nbsp&nbsp 숙소 > 
+			<div class="select">
+				<p id="optionDefault">${dorm}</p>
+				<div id="optionData" class="sub">
+				 	<div class="optionList" style=""onClick="">
+						<ul>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=1"><li>호텔</li></a>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=4"><li>게스트하우스</li></a>
+							<a href="${contextPath}/trip/reservation.do"><li>전체 보기</li></a>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=3"><li>리조트</li></a>
+							<a href="${contextPath}/trip/reservation.do?dorm_category_no=2"><li>펜션</li></a>
+						</ul>
+				  	</div>
+				</div>
+			</div>
 		</div>
 		<div></div>
 		<div class="or_r">
@@ -221,27 +246,6 @@
 	                check In>> <input type="date" id="start" name="date_s" value="${date_s}" min="${today}"><br>
 	                check Out>> <input type="date" id="end" name="date_e" value="${date_e}" min="${today}">
 	            </div>
-	            <div class="ner2">
-	                <h3>상세조건</h3>
-	                <div class="boxx">
-	                	<input type="text" id="search_box" name="search" placeholder="숙소명 검색">
-	                	<br><br>
-	                	<c:choose>
-	                		<c:when test="${empty param.dorm_category_no }">
-			                	<a href="${contextPath}/trip/reservation.do">
-				                    <button type="button" class="bu re">초기화</button>
-				                </a>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<a href="${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
-				                    <input type="button" class="bu re" value ="초기화">
-				                </a>
-	                		</c:otherwise>
-	                	</c:choose>
-	                    &nbsp&nbsp<button type="submit" id="sub_btn" class="bu che">적용</button>
-	                </div>
-	            </div>
-	            <br><br>
 	            <div class="ner3">
 	                <h3>인원</h3>
 	                	<input type="button" class="p minus" value="-" onClick='count("minus")' />
@@ -293,6 +297,27 @@
 	                    </select>
 					 </div>
 	            </div>
+	            <br>
+	            <div class="ner2">
+	                <h3>상세조건</h3>
+	                <div class="boxx">
+	                	<input type="text" id="search_box" name="search" placeholder="숙소명 검색">
+	                	<br><br>
+	                	<c:choose>
+	                		<c:when test="${empty param.dorm_category_no }">
+			                	<a href="${contextPath}/trip/reservation.do">
+				                    <button type="button" class="bu re">초기화</button>
+				                </a>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<a href="${contextPath}/trip/reservation.do?dorm_category_no=${param.dorm_category_no}">
+				                    <input type="button" class="bu re" value ="초기화">
+				                </a>
+	                		</c:otherwise>
+	                	</c:choose>
+	                    &nbsp&nbsp<button type="submit" id="sub_btn" class="bu che">적용</button>
+	                </div>
+	            </div>
             </form>
         </div>
         <div></div>
@@ -319,7 +344,12 @@
 		                        </div>
 		                        <div class="price">
 		                            <p><strong>
-		                                <h3 class="font1">${i.min_pay_night}원</h3>
+		                            	<c:if test="${i.min_pay_night ne 0 }">
+			                        		<h3 class="font1">${i.min_pay_night}원</h3>
+			                        	</c:if>
+			                        	<c:if test="${i.min_pay_night eq 0 }">
+			                        		<h3 class="font1">판매 완료</h3>
+			                        	</c:if>
 		                            </strong></p>
 		                        </div>
 		                    </div>

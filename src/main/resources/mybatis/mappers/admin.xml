@@ -32,7 +32,9 @@
 			opt_aircon = #{opt_aircon},
 			opt_dryer = #{opt_dryer},
 			opt_port = #{opt_port},
-			dorm_category_no = #{dorm_category_no}
+			dorm_category_no = #{dorm_category_no},
+			in_time = #{in_time},
+			out_time = #{out_time}
 		WHERE dorm_no = #{dorm_no}
 	</update>
 	
@@ -40,7 +42,7 @@
 		INSERT INTO tb_dorm
 		VALUES
 		(
-			#{dorm_no},
+			tb_dorm_seq.nextval,
 			#{dorm_name},
 			#{dorm_contents},
 			#{dorm_addr},
@@ -51,9 +53,12 @@
 			#{opt_aircon},
 			#{opt_dryer},
 			#{opt_port},
-			#{dorm_category_no}
+			#{dorm_category_no},
+			#{in_time},
+			#{out_time}
 		)
 	</insert>
+<!-- 	dorm_no 유효성 -->
 	<select id="dormnoChecking" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM tb_dorm
 		WHERE dorm_no = #{dormno}

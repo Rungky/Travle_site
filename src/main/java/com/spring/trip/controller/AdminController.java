@@ -89,6 +89,12 @@ public class AdminController extends MultiActionController {
 		List <MemberDTO> membersList = adminService.allMembers();
 		mav.addObject("membersList", membersList);
 		List<DormDTO> dormslist = adminService.allDormsList();
+		for(int i =0; i<dormslist.size();i++) {
+			String content = dormslist.get(i).getDorm_contents();
+			content = content.replaceAll("\n", "");
+			dormslist.get(i).setDorm_contents(content);
+		}
+		
 		mav.addObject("dormsList", dormslist);
 		List<RoomVO> roomsList = adminService.allRoomsList();
 		mav.addObject("roomsList", roomsList);
@@ -142,27 +148,28 @@ public class AdminController extends MultiActionController {
 	}
 	
 	@RequestMapping(value="/trip/insert_admin2.do", method=RequestMethod.POST)
-	public void adminInsert2(
+	@ResponseBody
+	public String adminInsert2(
 			@RequestParam("type") String type,
 			HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		if(type.equals("mem")) {
-			
+			return "";
 		} else if(type.equals("dorm")) {
 			DormDTO dto = new DormDTO();
-			dto.setDorm_no(Integer.parseInt(request.getParameter("dormno")));
 			dto.setDorm_category_no(Integer.parseInt(request.getParameter("category")));
 			dto.setDorm_name(request.getParameter("name"));
 			String contents = request.getParameter("contents");
 			String temp = contents.replace("\n", ",");
 			contents = temp.replaceAll("  ", " ");
-			System.out.println(contents);
 			dto.setDorm_contents(contents);
-			dto.setDorm_addr(request.getParameter("addr"));
+			String addr = request.getParameter("addr");
+			dto.setDorm_addr(addr);
 			String pictureTemp = request.getParameter("picture");
 			String picture = pictureTemp.substring(pictureTemp.lastIndexOf("\\")+1);
-			System.out.println(picture);
 			dto.setDorm_picture(picture);
+			dto.setIn_time(request.getParameter("in_time"));
+			dto.setOut_time(request.getParameter("out_time"));
 			int wify = Integer.parseInt(request.getParameter("wifi"));
 			int parking = Integer.parseInt(request.getParameter("parking"));
 			int aircon = Integer.parseInt(request.getParameter("aircon"));
@@ -175,8 +182,11 @@ public class AdminController extends MultiActionController {
 			dto.setOpt_dryer(dryer);
 			dto.setOpt_port(port);
 			adminService.adminDormInsert(dto);
-		}else if(type.equals("room")) {
 			
+			DormDTO dormdto = tripService.selectDorm(contents, addr);
+			return dormdto.getDorm_no()+"";
+		} else {
+			return "";
 		}
 	}
 	
@@ -211,8 +221,11 @@ public class AdminController extends MultiActionController {
 			contents = contents.replaceAll("\n", ",");
 			contents = contents.replaceAll("&nasp", " ");
 			dto.setDorm_contents(contents);
-			dto.setDorm_addr(request.getParameter("addr"));
+			String addr = request.getParameter("addr");
+			dto.setDorm_addr(addr);
 			dto.setDorm_picture(request.getParameter("picture"));
+			dto.setIn_time(request.getParameter("in_time"));
+			dto.setOut_time(request.getParameter("out_time"));
 			int wify = Integer.parseInt(request.getParameter("wifi"));
 			int parking = Integer.parseInt(request.getParameter("parking"));
 			int aircon = Integer.parseInt(request.getParameter("aircon"));
@@ -312,6 +325,16 @@ public class AdminController extends MultiActionController {
 		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
 		
 		QuestionList= adminService.adminselectQuestion(product_no);
+		
+		for(int i =0; i<QuestionList.size();i++) {
+			String content = QuestionList.get(i).getQuestion_contents();
+			String title = QuestionList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			QuestionList.get(i).setQuestion_contents(content);
+			QuestionList.get(i).setQuestion_title(title);
+		}
 
 		mav.addObject("questionList", QuestionList);
 		mav.setViewName("qna_adminanswer");
@@ -362,9 +385,20 @@ public class AdminController extends MultiActionController {
 		List<QuestionDTO> QuestionList = new ArrayList<QuestionDTO>();
 		List<QuestionDTO> answerList = new ArrayList<QuestionDTO>();
 		
+		
 		answerList= adminService.adminselectmodReply(reply_no);
 		QuestionList= adminService.adminselectAllQuestion(parent_no);
-
+		
+		for(int i =0; i<QuestionList.size();i++) {
+			String content = QuestionList.get(i).getQuestion_contents();
+			String title = QuestionList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			QuestionList.get(i).setQuestion_contents(content);
+			QuestionList.get(i).setQuestion_title(title);
+		}
+		
 		mav.addObject("questionList", QuestionList);
 		mav.addObject("answerList", answerList);
 		mav.setViewName("qna_modanswer");
@@ -375,7 +409,7 @@ public class AdminController extends MultiActionController {
 		//답글수정
 		@RequestMapping(value = "/trip/adminmodreply.do", method = RequestMethod.GET)
 		public ModelAndView qna_modreply(
-				@RequestParam("recontent") String recontent,
+				@RequestParam("adminrecontent") String adminrecontent,
 				@RequestParam("ReplyNO") int ReplyNO,
 				HttpServletRequest request, 
 				HttpServletResponse response) throws Exception {
@@ -386,7 +420,7 @@ public class AdminController extends MultiActionController {
 		
 		QuestionDTO qdto = new QuestionDTO();
 		qdto.setQuestion_no(ReplyNO);
-		qdto.setQuestion_contents(recontent);
+		qdto.setQuestion_contents(adminrecontent);
 		
 		adminService.adminupdateReply(qdto);
 

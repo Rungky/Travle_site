@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <title>사적모임 | 답변작성 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/header_footer.css">
 <link href="${contextPath}/resources/css/review.css" rel="stylesheet">
 </head>
 <body>
@@ -30,34 +31,36 @@
                         <hr>
                     </div>
                 </div>
-                <c:forEach var="question" items="${questionList}" varStatus="questionNum">
+                    <c:forEach var="reanswerList" items="${reanswerList}"> 
                 <div id="main_contents">
-                    <form id="review_form" action="${contextPath}/trip/adminreplyqna.do">
-                    
+                    <form id="review_form" action="${contextPath}/trip/remodreply.do">
+                  
+                     <c:forEach var="answerList" items="${answerList}">
+                     
                         <div class="review_title">
                             <!--데이터 받아와서 표시하기-->
-                            <div class="fs_m2 fw_6">질문제목 : ${question.question_title}</div><hr>
-                            <div class="fs_m2">${question.question_contents}</div>
+                            <div class="fs_m2">답변:${answerList.question_contents}</div>
                         </div> <br>
-                    
+                       
+					</c:forEach>
                         <div class="review_contents">
                             <div class="fs_m fw_6" style="margin-top: 5px;">답변내용 작성</div>
-                            <textarea class="input_contents" type="text" name="adminrecontent" placeholder="질문에 대한 답변을 남겨주세요!"></textarea>
+                            <textarea class="input_contents" type="text" name="dorecontent" placeholder="질문에 대한 답변을 남겨주세요!">${reanswerList.question_contents}</textarea>
                         </div>
                         <div class="margin_auto">
                             <br>
-                            <input type="hidden" name="adminparentNO" value="${question.question_no}">
-                            <input class="input_submit" type="submit" value="답변등록">
-                            <input class="input_reset" type="reset" value="지우기">
+                            <input type="hidden" name="ReplyNO" value="${reanswerList.question_no}">
+                            <input class="input_submit" type="submit" value="수정하기">
+                            <input class="input_reset" type="reset" value="원래대로">
                         </div>
-                    </form>
-                    <input class="input_close" type="button" value="돌아가기"> 
+           		 </form>
+           		 <input class="input_close" type="button" value="돌아가기"> 
                 </div>
-               </c:forEach>
+             </c:forEach>
             </div>
         </div>
     </section>
-    <script>
+     <script>
     $(".input_close").off("click").on("click", function(){
     	window.close();
     });

@@ -30,23 +30,22 @@
                         <hr>
                     </div>
                 </div>
-                <c:forEach var="question" items="${questionList}" varStatus="questionNum">
+                <c:forEach var="answer" items="${answerList}">
                 <div id="main_contents">
-                    <form id="review_form" action="${contextPath}/trip/adminreplyqna.do">
+                    <form id="review_form" action="${contextPath}/trip/doreplyqna.do">
                     
                         <div class="review_title">
                             <!--데이터 받아와서 표시하기-->
-                            <div class="fs_m2 fw_6">질문제목 : ${question.question_title}</div><hr>
-                            <div class="fs_m2">${question.question_contents}</div>
+                            <div class="fs_m2">답글:${answer.question_contents}</div>
                         </div> <br>
                     
                         <div class="review_contents">
                             <div class="fs_m fw_6" style="margin-top: 5px;">답변내용 작성</div>
-                            <textarea class="input_contents" type="text" name="adminrecontent" placeholder="질문에 대한 답변을 남겨주세요!"></textarea>
+                            <textarea class="input_contents" type="text" name="dorecontent" placeholder="답변을 남겨주세요!"></textarea>
                         </div>
                         <div class="margin_auto">
                             <br>
-                            <input type="hidden" name="adminparentNO" value="${question.question_no}">
+                            <input type="hidden" name="reparentNO" value="${answer.question_no}">
                             <input class="input_submit" type="submit" value="답변등록">
                             <input class="input_reset" type="reset" value="지우기">
                         </div>

@@ -86,7 +86,6 @@ th {
 	width:120px;
 }
 
-
  #st4 table #room_person{
 	width: 45px;
 } 
@@ -94,6 +93,13 @@ th {
 	width: 100px;
 }
 
+#category {
+	font-size:17px;
+	border:none;
+	color:black;
+	-webkit-appearance:none;
+	opacity: 1;
+}
 
 input {
     border: none;

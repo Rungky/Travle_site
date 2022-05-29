@@ -7,9 +7,25 @@
 <title>사적모임 | 리뷰 페이지</title>
  <link href="${pageContext.request.contextPath}/resources/css/header_footer.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/css/review.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	if(${!empty textnull}){
+	if(${!empty param.textnull}){
 		alert("제목이나 내용이 작성되지 않았습니다!");
+	}
+	window.onload = function(){
+		
+		$(".input_title").off("keydown").on("keydown",function(evt){
+			if(evt.keyCode == 13){
+				$(".input_contents").focus();
+				return false;
+			}
+		});
+		$(".input_contents").off("keydown").on("keydown",function(evt){
+			if(evt.keyCode == 13){
+				$(".input_submit").focus();
+				return false;
+			}
+		});
 	}
 </script>
 </head>

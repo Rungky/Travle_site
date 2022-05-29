@@ -54,9 +54,26 @@
 				                            <div>
 				                            	${answerList.question_contents}
 				                            </div>
+				                            <button class="reply_reanswer" data-id="${answerList.question_no}">답변쓰기</button>
 				                           <%--  <button class="reply_doMod" data-id="${answerList.question_no}" data-parentid="${answerList.question_parentno}">답변수정</button>
 				                            <button class="reply_doRemove" data-id="${answerList.question_no}">답변삭제</button> --%>
 			                        	</div>
+			                        		<c:forEach var="reanswerList" items="${reanswerList}"> 
+			                        		<c:if test="${answerList.question_no == reanswerList.question_parentno}">
+			                        		
+			                        	<div class="qna_answer2 fs_s4">
+				                            <br>
+				                            <div><span class="fw_6 fs_m3">답변 &nbsp;</span><span class="fs_s3">작성일 ${reanswerList.question_date}</span></div>
+				                            <div>
+				                            	${reanswerList.question_contents}
+				                            </div>
+				                           <!--  <button class="reply_reanswer" data-id="${answerList.question_no}">답변쓰기</button> -->
+				                             <button class="reply_doMod" data-id="${reanswerList.question_no}" data-parentid="${reanswerList.question_parentno}">답변수정</button>
+				                            <button class="reply_doRemove" data-id="${reanswerList.question_no}">답변삭제</button> 
+			                        	</div>
+			                        		
+			                        		</c:if>
+			                        		</c:forEach>
 			                        	</c:if>
 		                        	</c:forEach>
 			                    </div>
@@ -173,13 +190,22 @@
         })
     }
     
+    var list_reanswer = document.querySelectorAll(".reply_reanswer");
+    console.log(list_reanswer.length);
+    for(let i=0; i<list_reanswer.length; i++){
+    	list_reanswer[i].addEventListener("click", function(event){
+        	let answer_no = event.target.getAttribute("data-id");
+            window.open("${contextPath}/trip/reanswerqna.do?answer_no="+answer_no,"answer","width: 600px");
+        })
+    }
+    
     var list_modreply = document.querySelectorAll(".reply_doMod");
     console.log(list_modreply.length);
     for(let i=0; i<list_modreply.length; i++){
     	list_modreply[i].addEventListener("click", function(event){
         	let reply_no = event.target.getAttribute("data-id");
         	let parent_no = event.target.getAttribute("data-parentid");
-            window.open("${contextPath}/trip/modreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width=700, height=400");
+            window.open("${contextPath}/trip/remodreplywrite.do?reply_no="+reply_no+"&parent_no="+parent_no,"mod","width=700, height=400");
         })
     }
     
@@ -190,7 +216,7 @@
         	let removereply_no = event.target.getAttribute("data-id");
         	var isDel = window.confirm("정말 삭제하시겠습니까?");
         	if(isDel){
-        		location.href="${contextPath}/trip/removereply.do?removereply_no="+removereply_no;	
+        		location.href="${contextPath}/trip/doremovereply.do?removereply_no="+removereply_no;	
         	}
         })
     }

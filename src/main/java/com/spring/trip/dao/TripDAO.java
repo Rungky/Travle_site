@@ -2,6 +2,7 @@ package com.spring.trip.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -17,6 +18,7 @@ import com.spring.trip.dto.RoomDTO;
 
 public interface TripDAO {
 	public DormDTO selectDorm(int dormNo);
+	public DormDTO selectDorm(String contents, String addr);
 	public DormDTO scoreAverage(int dormNo);
 	public void changeLike(int dormNo, int num);
 	public boolean checkLike(int dormNo, String id);
@@ -29,19 +31,20 @@ public interface TripDAO {
 	public List<ReservationDTO> selectReservationsList(String member);
 	public int reserDelete(int reserve_no);
 	public CheckDTO checkList(int dorm_no, int room_no, String dorm_name, String room_name, 
-			Date reserve_checkin,Date reserve_checkout, int reserve_pay) ;
+			Date reserve_checkin,Date reserve_checkout, int reserve_pay, String in_time, String out_time) ;
 	public void insertReview(String title, String contents, double reviewScore, Date date, 
 			String picture, int reserveNo, String memberId);
 	public int selectTotalQuestion();
 	public void insertReservation(String member, Date reserve_checkin, Date reserve_checkout, 
-			int reserve_pay,int room_no, int dorm_no, long pay_no, int pay_check);
+			int reserve_pay,int room_no, int dorm_no, long pay_no, int pay_check, String in_time, String out_time);
 	public MemberDTO memberDto(String member_id);
 	public int countQuestion(String id);
 	public List<QuestionDTO> selectMemberQuestion(String id);
 	public List<QuestionDTO> selectAnswer();
 	public void insertNewQuestion (QuestionDTO questionDTO);
 	public void insertReplyQuestion (QuestionDTO questionDTO);
-	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
+	public List<DormVO> selectDormList(int dorm_category_no, Date start, Date end, int opt_wifi, 
+			int opt_parking, int opt_aircon, int opt_dryer, int opt_port, int room_person, int order, int price, String search) throws DataAccessException;
 	public List<QuestionDTO> selectQuestion(int question_no);
 	public List<QuestionDTO> selectReply();
 	public void plusViewCount(int articleNo);
@@ -59,4 +62,9 @@ public interface TripDAO {
 	public long paynoSelect(int reserve_no);
 	public PaymentDTO nopaynoSelect(long pay_no);
 	public int reviewChecking(int reserno);
+
+	public List<QuestionDTO> reselectReply(int question_no);
+	public void reinsertReplyQuestion (QuestionDTO questionDTO);
+
+	
 }
