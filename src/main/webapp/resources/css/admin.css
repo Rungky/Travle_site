@@ -85,6 +85,16 @@ th {
 #picture{
 	width:120px;
 }
+
+
+ #st4 table #room_person{
+	width: 45px;
+} 
+#st4 table .pay{
+	width: 100px;
+}
+
+
 input {
     border: none;
     margin: none;

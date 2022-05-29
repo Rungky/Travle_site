@@ -238,9 +238,9 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 회원탈퇴 전 확인 
+	//  비밀번호 확인 
 	@RequestMapping(value="/trip/pwCheck.do", method=RequestMethod.POST)
-	public @ResponseBody JSONObject pwCheck(HttpServletRequest request, HttpServletResponse Response) throws Exception {
+	public @ResponseBody JSONObject pwCheck2(HttpServletRequest request, HttpServletResponse Response) throws Exception {
 		System.out.println("비밀번호 확인 진입");
 		HttpSession session = request.getSession();
 		String member_id = (String)session.getAttribute("id");
@@ -251,25 +251,52 @@ public class MemberController {
 		System.out.println("원래 비밀번호"+memberDTO.getMember_pw()+" / 입력한 비번 : "+member_pw);
 		
 		if(memberDTO.getMember_pw().equals(member_pw) ) {
-			memberService.removeMember(member_id);
-			System.out.println("삭제할 멤버 : "+member_id);
 			obj.put("result", "true");
 			System.out.println("제이슨 테스트 : "+obj.toString());
-			session.invalidate();
 			return obj;
 		}else {
-			System.out.println("탈퇴불가 비밀번호 틀림");
+			System.out.println("변경불가 비밀번호 틀림");
 			obj.put("result", "false");
 			return obj;
 		}
 	}
 	
+	
+	@RequestMapping(value = "/trip/modifyPw.do", method = RequestMethod.POST)
+	 public void modify_Pw(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("member_id") String member_id
+			)throws Exception{
+		
+		System.out.println("modifyPW 진입");
+		String member_pw = (String)request.getParameter("member_pw");
+		
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMember_id(member_id);
+		memberDTO.setMember_pw(member_pw);
+		
+		System.out.println("비밀번호 변경 "+memberDTO.toString());
+		memberService.modifyMember(memberDTO);
+		System.out.println("memerModify DAO 실행 완료 : 비밀번호 수정 ");
+	}
+	
+	
+	//회원 탈퇴
+		@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.POST)
+		public void removeMember(HttpServletRequest request, HttpServletResponse response,
+				@RequestParam("member_id") String member_id) throws Exception {
+			System.out.println("removeMember.do 진입 / 탈퇴할 회원 : "+member_id);
+			memberService.removeMember(member_id);
+			HttpSession session = request.getSession();
+			session.invalidate();
+		}
+	
 	// 회원정보 수정 
 		@RequestMapping(value = "/trip/modifyMember.do", method = RequestMethod.POST)
 		public ModelAndView modifyMember(HttpServletRequest request, HttpServletResponse response,
-				@RequestParam("member_id") String member_id)
+				@RequestParam("member_id") String member_id )
 				throws Exception {
 
+			System.out.println("member_id:"+member_id);
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMember_id(member_id);
 			
@@ -294,21 +321,8 @@ public class MemberController {
 			return mav;
 		}
 	
-
-//회원 탈퇴
-	@RequestMapping(value = "/trip/removeMember.do", method = RequestMethod.POST)
-	public ModelAndView removeMember(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("member_id") String member_id) throws Exception {
-		HttpSession session = request.getSession();
-		// String member_id = (String) session.getAttribute("id");
-		memberService.removeMember(member_id);
-		session.invalidate();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/trip/main.do");
-		return mav;
-	}
-
-// 관심숙소
+	
+ //관심숙소
 	@RequestMapping(value = "/trip/myLike.do", method = RequestMethod.GET)
 	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response
 			) throws Exception {

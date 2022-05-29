@@ -16,6 +16,7 @@
 		<typeAlias type="com.spring.trip.dto.ReservationDTO" alias="reservationDTO"></typeAlias>
 		<typeAlias type="com.spring.trip.dto.ReviewDTO" alias="reviewDTO"></typeAlias>
 		<typeAlias type="com.spring.trip.dto.RoomDTO" alias="roomDTO"></typeAlias>
+		<typeAlias type="com.spring.trip.dto.RoomVO" alias="roomVO"></typeAlias>
 		<typeAlias type="com.spring.trip.dto.PaymentDTO" alias="paymentDTO"></typeAlias>
 	</typeAliases>
 

@@ -188,7 +188,7 @@ border-radius: 0px;
 .memberOut{
 display: flex;
 flex-direction: column;
-margin: 0 auto;
+margin: 5px auto 0;
 }
 
 .wrap_form2 {
@@ -217,7 +217,7 @@ padding: 0 20px 0;
 width: 100%;
 height: 30px;
 font-size: 15px;
-background-color: white;
+background-color: initial;
 text-align: center;
 border: none;
 margin: 0 auto;
@@ -229,6 +229,60 @@ font-weight: 600;
 text-decoration: underline;
 }
 
+
+
+/*비밀번호 수정관련*/
+
+.hidden{
+	display:none;
+}
+
+#modify_pw{
+	font-size: 1em;
+	text-align: right;
+	margin-top: 10px;
+}
+
+#modify_pw:hover{
+  font-weight: 600;
+}
+/**
+body:not(#wrap_pw), input:not(#wrap_pw *){
+	background-color: rgba(1, 1, 1, 0.5);
+	border-color: rgba(1, 1, 1, 0.5);
+}
+**/
+.background_dark{
+	background-color: rgba(1, 1, 1, 0.5);
+	border-color: rgba(1, 1, 1, 0.5);
+}
+
+#wrap_pw{
+	position: fixed;
+	top: 40%;
+	left: 35%;
+	width: 400px;
+	border: 1px solid black;
+	background-color: white;
+	text-align: center;
+}
+
+#input_pw {
+	width: 330px;
+	margin: 50px auto 50px;
+}
+
+#input_pw button{
+	margin-top: 20px;
+	width: 100px;
+}
+
+#input_pw>div {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	margin-bottom: 6px;
+}
 
 
 @media screen and (max-width:2200px)  {

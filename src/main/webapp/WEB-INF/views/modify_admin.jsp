@@ -106,6 +106,32 @@
 						window.close();
 					}
 				})
+			}else if(type == "room"){
+				let room_no = $("#room_no").val();
+				let room_name = $("#room_name").val();
+				let room_contents = $("#room_contents_val").val();
+				let room_picture = $("#room_picture").val();
+				let room_pay_day = $("#room_pay_day").val();
+				let room_pay_night = $("#room_pay_night").val();
+				let room_person = $("#room_person").val();
+				
+				$.ajax({
+					url : "update_admin.do",
+					type : "post",
+					data : {
+						type : type,
+						room_no : room_no,
+						room_name : room_name,
+						room_contents : room_contents,
+						room_picture : room_picture,
+						room_pay_day : room_pay_day,
+						room_pay_night : room_pay_night,
+						room_person : room_person
+					},
+					complete : function() {
+						opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st4";
+						window.close();	}
+				})
 			}
 		})
 
@@ -151,6 +177,7 @@
 		});
 		
 		$("#del_bt").off("click").on("click", function() {
+			console.log(type);
 			if(type=="mem"){
 				let id = $("#id").val();
 				$.ajax({
@@ -182,6 +209,21 @@
 						dormno : dormno,
 					},
 					complete : function() {
+						alert("삭제 되었습니다!");
+						opener.parent.location.reload();
+						window.close();
+					}
+				})
+			} else if(type == "room"){
+				let room_no = $("#room_no").val();
+				$.ajax({
+					url:"delete_admin.do",
+					type : "POST",
+					data : {
+						type : type,
+						room_no : room_no
+					},
+					complete : function(){
 						alert("삭제 되었습니다!");
 						opener.parent.location.reload();
 						window.close();

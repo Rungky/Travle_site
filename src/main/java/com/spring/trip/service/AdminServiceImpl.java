@@ -9,6 +9,8 @@ import com.spring.trip.dao.AdminDAO;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.dto.QuestionDTO;
+import com.spring.trip.dto.RoomDTO;
+import com.spring.trip.dto.RoomVO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -52,13 +54,34 @@ public class AdminServiceImpl implements AdminService{
 	public void adminDelDorm(int dormno) {
 		adminDAO.adminDelDorm(dormno);
 	}
+	
+	@Override
+	public List<RoomVO> allRoomsList() {
+		List<RoomVO> list = adminDAO.allRoomsList();
+		return list;
+	}
 
 	@Override
 	public List<QuestionDTO> allQuestion() {
 		List<QuestionDTO> list = adminDAO.allQuestion();
 		return list;
 	}
+	
+	@Override
+	public void adminRoom(RoomDTO roomDTO) {
+		adminDAO.adminRoom(roomDTO);
+	}
 
+	@Override
+	public void adminRoomInsert(RoomDTO roomDTO) {
+		adminDAO.adminRoomInsert(roomDTO);
+	}
+
+	@Override
+	public void adminRoomDelete(int room_no) {
+		adminDAO.adminRoomDelete(room_no);
+	}
+	
 	@Override
 	public void admindeleteArticle(int question_no) {
 		adminDAO.admindeleteArticle(question_no);
@@ -102,7 +125,6 @@ public class AdminServiceImpl implements AdminService{
 	public void admindeleteReply(int question_no) {
 		adminDAO.admindeleteReply(question_no);
 	}
-
 	
 	
 
