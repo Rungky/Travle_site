@@ -223,7 +223,7 @@
 										</div>
 										<br>
 										<div class="wrap">
-											<a href="#pop_info_1" class="btn_open"  style="display:block;width:80px;" data-reserveno="${result.reserve_no}">결제 정보</a> <a
+											<a href="#pop_info_1" class="btn_open"  style="display:block;width:80px; margin:0 auto;" data-reserveno="${result.reserve_no}">결제 정보</a> <a
 												href="#pop_info_2" class="btn_open" style="display: none;">팝업 열기2</a>
 
 
