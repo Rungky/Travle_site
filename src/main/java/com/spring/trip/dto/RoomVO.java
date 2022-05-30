@@ -1,41 +1,42 @@
 package com.spring.trip.dto;
 
-public class RoomDTO {
-	private int room_no;
+public class RoomVO {
+	
 	private int dorm_no; 
+	private String dorm_name; 
+	private int dorm_category_no;
+	private int room_no;
 	private String room_name; 
 	private String room_contents; 
 	private String room_picture; 
 	private int room_pay_day; 
 	private int room_pay_night;
 	private int room_person;
-	private int reserved;
 	
-	@Override
-	public String toString() {
-		return "RoomDTO [room_no=" + room_no + ", dorm_no=" + dorm_no + ", room_name=" + room_name + ", room_contents="
-				+ room_contents + ", room_picture=" + room_picture + ", room_pay_day=" + room_pay_day
-				+ ", room_pay_night=" + room_pay_night + ", room_person=" + room_person + ", reserved=" + reserved
-				+ "]";
-	}
 	
-	public int getReserved() {
-		return reserved;
+	public int getDorm_no() {
+		return dorm_no;
 	}
-	public void setReserved(int reserved) {
-		this.reserved = reserved;
+	public void setDorm_no(int dorm_no) {
+		this.dorm_no = dorm_no;
+	}
+	public String getDorm_name() {
+		return dorm_name;
+	}
+	public void setDorm_name(String dorm_name) {
+		this.dorm_name = dorm_name;
+	}
+	public int getDorm_category_no() {
+		return dorm_category_no;
+	}
+	public void setDorm_category_no(int dorm_category_no) {
+		this.dorm_category_no = dorm_category_no;
 	}
 	public int getRoom_no() {
 		return room_no;
 	}
 	public void setRoom_no(int room_no) {
 		this.room_no = room_no;
-	}
-	public int getDorm_no() {
-		return dorm_no;
-	}
-	public void setDorm_no(int dorm_no) {
-		this.dorm_no = dorm_no;
 	}
 	public String getRoom_name() {
 		return room_name;
@@ -72,8 +73,7 @@ public class RoomDTO {
 	}
 	public void setRoom_person(int room_person) {
 		this.room_person = room_person;
-	} 
-	
+	}
 	
 	
 	

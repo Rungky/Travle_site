@@ -15,6 +15,7 @@
 			member_authority = #{member_authority}
 		WHERE member_id = #{member_id}
 	</update>
+	
 	<select id="allDorm" resultType="dormDTO">
 		SELECT * FROM tb_dorm
 		ORDER BY dorm_category_no, dorm_no 
@@ -35,7 +36,6 @@
 			in_time = #{in_time},
 			out_time = #{out_time}
 		WHERE dorm_no = #{dorm_no}
-		
 	</update>
 	
 	<insert id="adminDormInsert" parameterType="dormDTO">
@@ -67,6 +67,43 @@
 	<delete id="adminDormDelete" parameterType="int">
 		DELETE FROM tb_dorm
 		WHERE dorm_no = #{dormno}
+	</delete>
+	
+	<select id="allRoom" resultType="roomVO">
+		select * from tb_dorm d
+		left join tb_room r
+		on d.dorm_no = r.dorm_no
+		order by d.dorm_no
+	</select>
+	
+	<update id="adminRoom" parameterType="roomDTO">
+		UPDATE tb_room SET
+			room_name = #{room_name},
+			room_contents = #{room_contents},
+			room_picture = #{room_picture},
+			room_pay_day = #{room_pay_day},
+			room_pay_night = #{room_pay_night},
+			room_person = #{room_person}	
+		WHERE room_no = #{room_no}
+	</update>
+	
+	<insert id="adminRoomInsert" parameterType="roomDTO">
+		INSERT INTO tb_room
+		   VALUES
+	    	(
+	    		tb_room_seq.nextval,
+	    		#{room_name},
+	    		#{room_contents},
+	    		#{room_picture},
+	    		#{room_pay_day},
+	    		#{room_pay_night},
+	    		#{room_person},
+	    	)
+	   </insert>
+	
+	<delete id="adminRoomDelete" parameterType="int">
+		DELETE FROM tb_room
+		WHERE room_no = #{room_no}
 	</delete>
 	
 	<!-- 문의조회 -->

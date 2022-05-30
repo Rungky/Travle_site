@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.dto.QuestionDTO;
+import com.spring.trip.dto.RoomDTO;
+import com.spring.trip.dto.RoomVO;
 import com.spring.trip.service.AdminService;
 import com.spring.trip.service.MemberService;
 import com.spring.trip.service.TripService;
@@ -94,6 +96,8 @@ public class AdminController extends MultiActionController {
 		}
 		
 		mav.addObject("dormsList", dormslist);
+		List<RoomVO> roomsList = adminService.allRoomsList();
+		mav.addObject("roomsList", roomsList);
 		List<QuestionDTO> questionList = adminService.allQuestion();
 		List<QuestionDTO> answersList = tripService.selectAnswer();
 		
@@ -178,6 +182,7 @@ public class AdminController extends MultiActionController {
 			dto.setOpt_dryer(dryer);
 			dto.setOpt_port(port);
 			adminService.adminDormInsert(dto);
+			
 			DormDTO dormdto = tripService.selectDorm(contents, addr);
 			return dormdto.getDorm_no()+"";
 		} else {
@@ -234,6 +239,20 @@ public class AdminController extends MultiActionController {
 			dto.setOpt_port(port);
 			System.out.println(dto.getOpt_wifi());
 			adminService.adminDorm(dto);
+		}else if(type.equals("room")) {
+			System.out.println("객실정보 수정 진입");
+			RoomDTO roomDTO = new RoomDTO();
+			roomDTO.setRoom_no(Integer.parseInt(request.getParameter("room_no")));
+			roomDTO.setRoom_name(request.getParameter("room_name"));
+			roomDTO.setRoom_contents(request.getParameter("room_contents"));
+			roomDTO.setRoom_picture(request.getParameter("room_picture"));
+			roomDTO.setRoom_pay_day(Integer.parseInt( request.getParameter("room_pay_day")));
+			roomDTO.setRoom_pay_night(Integer.parseInt( request.getParameter("room_pay_night")));
+			roomDTO.setRoom_person(Integer.parseInt(request.getParameter("room_person")));
+			System.out.println("객실정보 수정 진입/ 수정할 정보 :"+roomDTO.toString());
+			
+			adminService.adminRoom(roomDTO);
+			System.out.println("객실정보 수정완료");
 			
 		}
 	}
@@ -271,6 +290,10 @@ public class AdminController extends MultiActionController {
 			int dormno = Integer.parseInt(request.getParameter("dormno"));
 			System.out.println("dorm 삭제 성공");
 			adminService.adminDelDorm(dormno);
+		}else if(type.equals("room")) {
+			int room_no = Integer.parseInt(request.getParameter("room_no"));
+			System.out.println("admin_ room 삭제 진입"+room_no);
+			adminService.adminRoomDelete(room_no);
 		}
 	}
 	

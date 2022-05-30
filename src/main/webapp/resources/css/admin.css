@@ -85,6 +85,26 @@ th {
 #picture{
 	width:120px;
 }
+
+#st4 table .pay{
+	width: 100px;
+}
+#st4 table .no{
+	width: 45px;
+	text-align: center;
+}
+#st4 table #room_picture{
+	width:120px;
+	text-align: center
+}
+#st4 table .no_room{
+	text-align:center; 
+	font-size: 0.9em; 
+	font-weight: 600;
+	background-color: rgb(190, 190, 190); 
+	color:white;
+}
+
 #category {
 	font-size:17px;
 	border:none;
@@ -92,6 +112,7 @@ th {
 	-webkit-appearance:none;
 	opacity: 1;
 }
+
 input {
     border: none;
     margin: none;

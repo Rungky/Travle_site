@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.spring.trip.dto.DormDTO;
 import com.spring.trip.dto.MemberDTO;
 import com.spring.trip.dto.QuestionDTO;
+import com.spring.trip.dto.RoomDTO;
+import com.spring.trip.dto.RoomVO;
 
 
 @Repository
@@ -52,6 +54,28 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void adminDelDorm(int dormno) {
 		sqlSession.delete("mapper.admin.adminDormDelete", dormno);
+	}
+	
+	@Override
+	public List<RoomVO> allRoomsList() {
+		List<RoomVO> list = sqlSession.selectList("mapper.admin.allRoom");
+		return list;
+	}
+	
+	@Override
+	public void adminRoom(RoomDTO roomDTO) {
+		System.out.println("adminDAO : adminRoom 진입");
+		sqlSession.update("mapper.admin.adminRoom", roomDTO);
+	}
+
+	@Override
+	public void adminRoomInsert(RoomDTO roomDTO) {
+		sqlSession.insert("mapper.admin.adminRoomInsert", roomDTO);
+	}
+
+	@Override
+	public void adminRoomDelete(int room_no) {
+		sqlSession.delete("mapper.admin.adminRoomDelete", room_no);
 	}
 
 	@Override
@@ -111,6 +135,8 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.delete("mapper.admin.deleteReply", question_no);
 		
 	}
+
+	
 
 
 }
