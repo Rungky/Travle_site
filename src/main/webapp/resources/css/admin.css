@@ -19,7 +19,7 @@ body{
     display: flex;
 }
 
-.insert_bt{
+.insert_bt:not(.insert_bt2){
 	width: 100px;
 	text-align: center;
 	font-size: 1.1em;

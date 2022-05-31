@@ -92,10 +92,132 @@
 		</tr>
 	</table>
 	<div class="fl_between">
-		<button id="insert_bt" type="button">추가</button>
+		<button id="insert_bt" class="insert_bt" type="button">추가</button>
 		<button id="close_bt" type="button">닫기</button>
 	</div>
 </div>
+
+
+
+
+
+<div id="room" class="nodisplay">
+<table>
+		<tr>
+			<th>숙소명</th>
+			<td>	
+				<span id="selected_dorm"></span>
+				<button id="btn_selectDorm">숙소 선택</button>
+				<input type="hidden"  id="room_dorm_no" name="room_dorm_no" >
+			</td>
+		</tr>
+		<tr>
+			<th>객실명</th>
+			<td>
+				<input type="text" id="room_name" name="room_name">
+			</td>
+		</tr>
+		<tr>
+			<th>객실소개</th>
+			<td>
+				<textarea id="room_contents_val" name="contents"></textarea> <div>숙소소개 엔터로 한줄씩 구분 지어주세요!</div>
+			</td>
+		</tr>
+		<tr>
+			<th>그림 파일</th>
+			<td>
+				<input type="file" id="room_picture" name="picture" >
+			</td>
+		</tr>
+		<tr>
+			<th>당일요금</th>
+			<td>
+				<input type="number" id="room_pay_day" name="room_pay_day" class="pay" >
+			</td>
+		</tr>
+		<tr>
+		<th>1박 요금</th>
+			<td>
+				<input type="number"  id="room_pay_night" name="room_pay_night" class="pay" >
+			</td>
+		</tr>
+		<tr>
+			<th>객실인원</th>
+			<td>
+				 <input  type="number"  id="room_person" name="room_person"  class="no" >
+			</td>
+		</tr>
+	</table>
+	<div id="dorm_list" class="hidden">
+		<table>
+			<c:forEach var="dorm" items="${dorm_list}">
+				<tr>
+					<td>
+						<input type="radio" id="radio_selectDorm" name="radio_selectDorm" value="${dorm.dorm_no}">
+						<span id="r_dorm_no">${dorm.dorm_no}</span> &nbsp;&nbsp;<span id="r_dorm_name">${dorm.dorm_name}</span>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<button id="btn_dormSelect">선택</button><button id="btn_dormClose">닫기</button>
+	</div>
+	<div class="fl_between">
+		<button id="insert_bt" class="insert_bt"  type="button">추가</button>
+		<button id="close_bt" type="button">닫기</button>
+	</div>
+	</div>
+	<script>
+	$("#btn_selectDorm").off("click").on("click",function(){
+		$("#dorm_list").removeClass("hidden");
+	})
+	
+	$("#btn_dormClose").off("click").on("click",function(){
+		$("#dorm_list").addClass("hidden");
+	})
+	
+	$("#btn_dormSelect").off("click").on("click",function(){
+		$("#dorm_list").addClass("hidden");
+		let dorm_no = $('input[name="radio_selectDorm"]:checked').val();
+		console.log("dorm_no"+dorm_no);
+		
+		let r_dorm_name = $('input[name="radio_selectDorm"]:checked').parent().children("#r_dorm_name").text();
+		console.log(r_dorm_name)
+		$('input[name=room_dorm_no]').attr("value",dorm_no);
+		$("#selected_dorm").text(dorm_no+" : "+r_dorm_name);
+	})
+	
+	
+	</script>
+	
+	<style>
+#r_dorm_no{
+	font-size: 700;
+}
+
+#btn_dormSelect, #btn_dormClose{
+	 width: 80px;
+	 margin:  10px;
+}
+
+.hidden{
+	display:none;
+}
+
+#dorm_list{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -200px 0 0 -200px;
+	width: 400px;
+	height: 400px;
+	overflow-y : scroll;
+	border: 1px solid black;
+	background-color: white;
+	text-align: center;
+}
+
+</style>
+
 
 
 <script>
@@ -106,6 +228,8 @@
 		$("#mem").removeClass("nodisplay");
 	} else if(type=="dorm"){
 		$("#dorm").removeClass("nodisplay");
+	} else if (type =="room"){
+		$("#room").removeClass("nodisplay");
 	}
 	$("#id_check").off("click").on("click", function() {
 		let dormno = $("#dormno").val();
@@ -133,7 +257,7 @@
 		})
 	});
 	
-	$("#insert_bt").off("click").on("click", function() {
+	$(".insert_bt").off("click").on("click", function() {
 		let dormno_val = $("#dormno").val();
 		let data_dormno = $("#dormno_checking").attr("data-dormno");
 		if( dormno_val!= data_dormno) {
@@ -194,8 +318,35 @@
 					window.close();
 				}
 			})
+		}else if (type == "room"){
+			let dorm_no = $("#room_dorm_no").val();
+			let room_name = $("#room_name").val();
+			let room_contents = $("#room_contents_val").val();
+			let room_picture = $("#room_picture").val();
+			let room_pay_day = $("#room_pay_day").val();
+			let room_pay_night = $("#room_pay_night").val();
+			let room_person = $("#room_person").val();
+			
+			$.ajax({
+				url : "insert_admin2.do",
+				type : "post",
+				data : {
+					type : type,
+					dorm_no : dorm_no,
+					room_name : room_name,
+					room_contents : room_contents,
+					room_picture : room_picture,
+					room_pay_day : room_pay_day,
+					room_pay_night : room_pay_night,
+					room_person : room_person
+				},
+				success : function(data){
+					console.log(data);
+					alert("객실번호는 ["+data+"] 입니다!")
+					opener.parent.location.href = "${pageContext.request.contextPath}/trip/admin.do?tabMove=st4";
+					window.close();	}
+			})
 		}
-
 	})
 </script>
 </body>

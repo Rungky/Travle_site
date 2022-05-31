@@ -261,12 +261,7 @@
 	            </div>
             </div>
             </div>
-            
-            
-                   <!--  ===========================  -->
-            
-            
-                <div id="st4" class="nodisplay">
+          	<div id="st4" class="nodisplay">
                <div style="text-align:right;"><button data-type="room" class="insert_bt" type="button">객실 추가</button></div>
                 <table > 
                     <thead>
@@ -289,23 +284,25 @@
                        	<tr>
                        	    <td class="no">${room.dorm_no}</td>
                             <td>${room.dorm_name}</td>
-                            <td class="no_room" colspan="8"> 객실 없음 </td>
+                            <td class="no_room" colspan="7"> 객실 없음 </td>
+                            <td ><button data-type="room" class="insert_bt insert_bt2" type="button" style="none;">객실추가</button></td>
                             </tr>
                        	</c:if>
                        	<c:if test="${room.room_no ne '0'}">
-                        <tr>
-                            <td class="no">${room.dorm_no}</td>
-                            <td>${room.dorm_name}</td>
-                            <td class="no">${room.room_no}</td>
-                            <input type="hidden" id="room_no" name="room_no" class="no" value="${room.room_no}">
-                            <td><input type="text" id="room_name" name="room_name" readonly value="${room.room_name}"></td>
-                            <td><button type="button" class="contents_bt" name="content" readonly  value="${room.room_contents}">내용 보기</button></td>
-                             <input type="hidden" id="room_contents_val" name="contents" value="${room.room_contents}">
-                            <td><input type="text" id="room_picture" name="picture" readonly value="${room.room_picture}"></td>
-                            <td><input type="text" id="room_pay_day" name="room_pay_day" class="pay" readonly value="${room.room_pay_day}"></td>
-                           <td><input type="text"  id="room_pay_night" name="room_pay_night" class="pay " readonly value="${room.room_pay_night}"></td>
-                           <td><input  type="number"  id="room_person" name="room_person"  class="no"  readonly  value="${room.room_person}"></td>
-                            <td style="text-align: center;">
+                     	   <tr>
+                         	<td class="no">${room.dorm_no}</td>
+                          	 <input type="hidden" id="room_dorm_no" value="${room.dorm_no}">
+                           	 <td>${room.dorm_name}</td>
+                         	 <td class="no">${room.room_no}</td>
+                         	 <input type="hidden" id="room_no" name="room_no" class="no" value="${room.room_no}">
+                       	     <td><input type="text" id="room_name" name="room_name" readonly value="${room.room_name}"></td>
+	                           <td><button type="button" class="contents_bt" name="content" readonly  value="${room.room_contents}">내용 보기</button></td>
+	                       	   <input type="hidden" id="room_contents_val" name="contents" value="${room.room_contents}">
+                       	  	   <td><input type="text" id="room_picture" name="picture" readonly value="${room.room_picture}"></td>
+                       	  	   <td><input type="text" id="room_pay_day" name="room_pay_day" class="pay" readonly value="${room.room_pay_day}"></td>
+                        	   <td><input type="text"  id="room_pay_night" name="room_pay_night" class="pay" readonly value="${room.room_pay_night}"></td>
+                      		    <td><input  type="number"  id="room_person" name="room_person"  class="no"  readonly  value="${room.room_person}"></td>
+                        	    <td style="text-align: center;">
                                <button class="bt" name="type" value="room">수정하기</button>
                             </td>
                         </tr>
@@ -314,11 +311,6 @@
                     </tbody>
                 </table>
             </div>
-  
-            
-            <!-- =====================  -->
-
-            
         </div>
     </section>
   </div>

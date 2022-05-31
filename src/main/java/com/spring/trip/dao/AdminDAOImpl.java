@@ -63,14 +63,20 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
+	public RoomVO selectOne_room(RoomVO roomVO) {
+		return sqlSession.selectOne("mapper.admin.selectOne_room",roomVO);
+	}
+	
+	
+	@Override
 	public void adminRoom(RoomDTO roomDTO) {
 		System.out.println("adminDAO : adminRoom 진입");
 		sqlSession.update("mapper.admin.adminRoom", roomDTO);
 	}
 
 	@Override
-	public void adminRoomInsert(RoomDTO roomDTO) {
-		sqlSession.insert("mapper.admin.adminRoomInsert", roomDTO);
+	public void adminRoomInsert(RoomVO roomVO) {
+		sqlSession.insert("mapper.admin.adminRoomInsert", roomVO);
 	}
 
 	@Override

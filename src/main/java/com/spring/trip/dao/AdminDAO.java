@@ -18,8 +18,9 @@ public interface AdminDAO {
 	public void adminDelDorm(int dormno);
 	
 	public List<RoomVO> allRoomsList();
+	public RoomVO selectOne_room(RoomVO roomVO);
 	public void adminRoom(RoomDTO roomDTO);
-	public void adminRoomInsert(RoomDTO roomDTO);
+	public void adminRoomInsert(RoomVO roomVO);
 	public void adminRoomDelete(int room_no);
 	
 	public List<QuestionDTO> allQuestion();

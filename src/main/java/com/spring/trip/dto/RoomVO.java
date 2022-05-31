@@ -13,6 +13,13 @@ public class RoomVO {
 	private int room_pay_night;
 	private int room_person;
 	
+	@Override
+	public String toString() {
+		return "RoomVO [dorm_no=" + dorm_no + ", dorm_name=" + dorm_name + ", dorm_category_no=" + dorm_category_no
+				+ ", room_no=" + room_no + ", room_name=" + room_name + ", room_contents=" + room_contents
+				+ ", room_picture=" + room_picture + ", room_pay_day=" + room_pay_day + ", room_pay_night="
+				+ room_pay_night + ", room_person=" + room_person + "]";
+	}
 	
 	public int getDorm_no() {
 		return dorm_no;

@@ -60,6 +60,11 @@ public class AdminServiceImpl implements AdminService{
 		List<RoomVO> list = adminDAO.allRoomsList();
 		return list;
 	}
+	
+	@Override
+	public RoomVO selectOne_room(RoomVO roomVO) {
+		return adminDAO.selectOne_room(roomVO);
+	}
 
 	@Override
 	public List<QuestionDTO> allQuestion() {
@@ -73,8 +78,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void adminRoomInsert(RoomDTO roomDTO) {
-		adminDAO.adminRoomInsert(roomDTO);
+	public void adminRoomInsert(RoomVO roomVO) {
+		adminDAO.adminRoomInsert(roomVO);
 	}
 
 	@Override
