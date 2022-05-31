@@ -196,13 +196,14 @@ public class AdminController extends MultiActionController {
 			String temp = room_contents.replace("\n", ",");
 			room_contents = temp.replaceAll("  ", " ");
 			roomVO.setRoom_contents(room_contents);		
-			roomVO.setRoom_picture(request.getParameter("room_picture"));
+			String pictureTemp = request.getParameter("room_picture");
+			String room_picture = pictureTemp.substring(pictureTemp.lastIndexOf("\\")+1);
+			roomVO.setRoom_picture(room_picture);
 			roomVO.setRoom_pay_day(Integer.parseInt(request.getParameter("room_pay_day")));
 			roomVO.setRoom_pay_night(Integer.parseInt(request.getParameter("room_pay_night")));
 			roomVO.setRoom_person(Integer.parseInt(request.getParameter("room_person")));
 			System.out.println("인서트할 객실 정보 :"+roomVO.toString());		
 			adminService.adminRoomInsert(roomVO);
-			System.out.println("객실정보 인서트완료");	
 			
 			RoomVO roomVO2 =  adminService.selectOne_room(roomVO);
 			System.out.println("인서트된 돔 : "+roomVO2.toString());

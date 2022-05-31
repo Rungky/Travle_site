@@ -166,60 +166,7 @@
 		<button id="close_bt" type="button">닫기</button>
 	</div>
 	</div>
-	<script>
-	$("#btn_selectDorm").off("click").on("click",function(){
-		$("#dorm_list").removeClass("hidden");
-	})
 	
-	$("#btn_dormClose").off("click").on("click",function(){
-		$("#dorm_list").addClass("hidden");
-	})
-	
-	$("#btn_dormSelect").off("click").on("click",function(){
-		$("#dorm_list").addClass("hidden");
-		let dorm_no = $('input[name="radio_selectDorm"]:checked').val();
-		console.log("dorm_no"+dorm_no);
-		
-		let r_dorm_name = $('input[name="radio_selectDorm"]:checked').parent().children("#r_dorm_name").text();
-		console.log(r_dorm_name)
-		$('input[name=room_dorm_no]').attr("value",dorm_no);
-		$("#selected_dorm").text(dorm_no+" : "+r_dorm_name);
-	})
-	
-	
-	</script>
-	
-	<style>
-#r_dorm_no{
-	font-size: 700;
-}
-
-#btn_dormSelect, #btn_dormClose{
-	 width: 80px;
-	 margin:  10px;
-}
-
-.hidden{
-	display:none;
-}
-
-#dorm_list{
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin: -200px 0 0 -200px;
-	width: 400px;
-	height: 400px;
-	overflow-y : scroll;
-	border: 1px solid black;
-	background-color: white;
-	text-align: center;
-}
-
-</style>
-
-
-
 <script>
 	let type = opener.$("#insert_type").attr("data-type");
 	console.log(type);
@@ -348,6 +295,27 @@
 			})
 		}
 	})
+	
+	// room 
+	$("#btn_selectDorm").off("click").on("click",function(){
+		$("#dorm_list").removeClass("hidden");
+	})
+	
+	$("#btn_dormClose").off("click").on("click",function(){
+		$("#dorm_list").addClass("hidden");
+	})
+	
+	$("#btn_dormSelect").off("click").on("click",function(){
+		$("#dorm_list").addClass("hidden");
+		let dorm_no = $('input[name="radio_selectDorm"]:checked').val();
+		console.log("dorm_no"+dorm_no);
+		
+		let r_dorm_name = $('input[name="radio_selectDorm"]:checked').parent().children("#r_dorm_name").text();
+		console.log(r_dorm_name)
+		$('input[name=room_dorm_no]').attr("value",dorm_no);
+		$("#selected_dorm").text(dorm_no+" : "+r_dorm_name);
+	})
+	
 </script>
 </body>
 </html>
