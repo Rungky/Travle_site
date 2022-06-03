@@ -154,7 +154,9 @@ public class AdminController extends MultiActionController {
 	public ModelAndView adminInsert(
 			HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
+		
 		ModelAndView mav= new ModelAndView();
+		mav.addObject("dorm_list",	adminService.allDormsList());
 		mav.setViewName("insert_admin");
 		return mav;
 	}
@@ -197,7 +199,29 @@ public class AdminController extends MultiActionController {
 			
 			DormDTO dormdto = tripService.selectDorm(contents, addr);
 			return dormdto.getDorm_no()+"";
-		} else {
+		}else if(type.equals("room")) {
+			System.out.println("객실 인서트 진입");
+			RoomVO roomVO = new RoomVO();
+			roomVO.setDorm_no(Integer.parseInt(request.getParameter("dorm_no")));
+			roomVO.setRoom_name(request.getParameter("room_name"));
+			String room_contents = request.getParameter("room_contents");
+			String temp = room_contents.replace("\n", ",");
+			room_contents = temp.replaceAll("  ", " ");
+			roomVO.setRoom_contents(room_contents);		
+			String pictureTemp = request.getParameter("room_picture");
+			String room_picture = pictureTemp.substring(pictureTemp.lastIndexOf("\\")+1);
+			roomVO.setRoom_picture(room_picture);
+			roomVO.setRoom_pay_day(Integer.parseInt(request.getParameter("room_pay_day")));
+			roomVO.setRoom_pay_night(Integer.parseInt(request.getParameter("room_pay_night")));
+			roomVO.setRoom_person(Integer.parseInt(request.getParameter("room_person")));
+			System.out.println("인서트할 객실 정보 :"+roomVO.toString());		
+			adminService.adminRoomInsert(roomVO);
+			
+			RoomVO roomVO2 =  adminService.selectOne_room(roomVO);
+			System.out.println("인서트된 돔 : "+roomVO2.toString());
+			System.out.println(roomVO2.getDorm_no());
+			return roomVO2.getRoom_no()+"";
+		}else {
 			return "";
 		}
 	}

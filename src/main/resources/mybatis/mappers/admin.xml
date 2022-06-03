@@ -76,6 +76,13 @@
 		order by d.dorm_no
 	</select>
 	
+	<select id="selectOne_room" resultType="roomVO">
+		select * from tb_room
+		where dorm_no = #{dorm_no}
+		and room_name = #{room_name}
+		and room_contents = #{room_contents}
+	</select>
+	
 	<update id="adminRoom" parameterType="roomDTO">
 		UPDATE tb_room SET
 			room_name = #{room_name},
@@ -87,17 +94,18 @@
 		WHERE room_no = #{room_no}
 	</update>
 	
-	<insert id="adminRoomInsert" parameterType="roomDTO">
+	<insert id="adminRoomInsert" parameterType="roomVO">
 		INSERT INTO tb_room
 		   VALUES
 	    	(
 	    		tb_room_seq.nextval,
+	    		#{dorm_no},
 	    		#{room_name},
 	    		#{room_contents},
 	    		#{room_picture},
 	    		#{room_pay_day},
 	    		#{room_pay_night},
-	    		#{room_person},
+	    		#{room_person}
 	    	)
 	   </insert>
 	
