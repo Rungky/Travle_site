@@ -100,6 +100,7 @@ public class AdminController extends MultiActionController {
 		mav.addObject("roomsList", roomsList);
 		List<QuestionDTO> questionList = adminService.allQuestion();
 		List<QuestionDTO> answersList = tripService.selectAnswer();
+		List<QuestionDTO> reanswersList = tripService.selectAnswer();
 		
 		//출력할때 공백, 줄바꿈 html문으로 바꿔주기
 		for(int i =0; i<questionList.size();i++) {
@@ -121,8 +122,19 @@ public class AdminController extends MultiActionController {
 			answersList.get(i).setQuestion_title(title);
 		}
 		
+		for(int i =0; i<reanswersList.size();i++) {
+			String content = reanswersList.get(i).getQuestion_contents();
+			String title = reanswersList.get(i).getQuestion_title();
+			content = content.replaceAll("\n", "<br>");
+			content = content.replaceAll(" ", "&nbsp");
+			title = title.replaceAll(" ", "&nbsp");
+			reanswersList.get(i).setQuestion_contents(content);
+			reanswersList.get(i).setQuestion_title(title);
+		}
+		
 		mav.addObject("questionList", questionList);
 		mav.addObject("answersList", answersList);
+		mav.addObject("reanswersList", reanswersList);
 		
 		mav.addObject("tabMove", request.getParameter("tabMove"));
 		

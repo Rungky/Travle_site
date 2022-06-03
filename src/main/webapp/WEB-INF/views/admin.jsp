@@ -199,8 +199,24 @@
 		                            	${answers.member_id }<br>${answers.question_date}
 	                            	</div>
 	                            	  <button class="reply_doMod" data-id="${answers.question_no}" data-parentid="${answers.question_parentno}">답변수정</button>
-				                      <button class="reply_doRemove" data-id="${answers.question_no}">답변삭제</button> 
+				                      <button class="reply_doRemove" data-id="${answers.question_no}">답변삭제</button>
+	                            </div><br>
+	                            <c:forEach var="reanswer" items="${reanswersList}">
+	                            <c:if test="${reanswer.question_parentno==answers.question_no }">
+	                           <div>
+	                            	<div class=doreply_title>
+	                            		${reanswer.question_title}
+	                            	</div>
+	                            	<hr>
+	                            	<div class=doreply_contents>
+		  	                          	${reanswer.question_contents}
+	                            	</div>
+	                            	<div style="text-align:right;">
+		                            	${reanswer.member_id }<br>${reanswer.question_date}
+	                            	</div>
 	                            </div> 
+	                            	</c:if>
+	                            </c:forEach>
 	                            </td>
                         	</tr>
 						</c:if>

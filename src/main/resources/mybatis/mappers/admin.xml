@@ -178,6 +178,10 @@
 	<!-- 답글삭제 -->
 	<delete id="deleteReply" parameterType="int" >
 		delete from tb_question
-		where question_no = #{question_no}
+		where question_no in (
+		select question_no from tb_question
+		start with question_no = #{question_no}
+		connect by prior question_no = question_parentno
+		)
 	</delete>
 </mapper>
