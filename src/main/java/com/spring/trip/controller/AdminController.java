@@ -199,8 +199,12 @@ public class AdminController extends MultiActionController {
 			String pictureTemp = request.getParameter("room_picture");
 			String room_picture = pictureTemp.substring(pictureTemp.lastIndexOf("\\")+1);
 			roomVO.setRoom_picture(room_picture);
-			roomVO.setRoom_pay_day(Integer.parseInt(request.getParameter("room_pay_day")));
+			if(request.getParameter("room_pay_day") != null && request.getParameter("room_pay_day") != "" ) {
+				roomVO.setRoom_pay_day(Integer.parseInt(request.getParameter("room_pay_day")));
+			}
+			if(request.getParameter("room_pay_night") != null && request.getParameter("room_pay_night") != ""){
 			roomVO.setRoom_pay_night(Integer.parseInt(request.getParameter("room_pay_night")));
+			}
 			roomVO.setRoom_person(Integer.parseInt(request.getParameter("room_person")));
 			System.out.println("인서트할 객실 정보 :"+roomVO.toString());		
 			adminService.adminRoomInsert(roomVO);
@@ -270,8 +274,12 @@ public class AdminController extends MultiActionController {
 			roomDTO.setRoom_name(request.getParameter("room_name"));
 			roomDTO.setRoom_contents(request.getParameter("room_contents"));
 			roomDTO.setRoom_picture(request.getParameter("room_picture"));
-			roomDTO.setRoom_pay_day(Integer.parseInt( request.getParameter("room_pay_day")));
-			roomDTO.setRoom_pay_night(Integer.parseInt( request.getParameter("room_pay_night")));
+			if(request.getParameter("room_pay_day") != null && request.getParameter("room_pay_day") != "" ) {
+				roomDTO.setRoom_pay_day(Integer.parseInt(request.getParameter("room_pay_day")));
+			}
+			if(request.getParameter("room_pay_night") != null && request.getParameter("room_pay_night") != ""){
+				roomDTO.setRoom_pay_night(Integer.parseInt(request.getParameter("room_pay_night")));
+			}
 			roomDTO.setRoom_person(Integer.parseInt(request.getParameter("room_person")));
 			System.out.println("객실정보 수정 진입/ 수정할 정보 :"+roomDTO.toString());
 			

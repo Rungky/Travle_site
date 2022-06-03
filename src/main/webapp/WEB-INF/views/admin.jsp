@@ -280,7 +280,7 @@
                     </thead>
                     <tbody>
                        <c:forEach var="room" items="${roomsList}">
-                       	<c:if test="${room.room_no eq '0'}">
+                       	<c:if test="${room.room_no eq '-1'}">
                        	<tr>
                        	    <td class="no">${room.dorm_no}</td>
                             <td>${room.dorm_name}</td>
@@ -288,7 +288,7 @@
                             <td ><button data-type="room" class="insert_bt insert_bt2" type="button" style="none;">객실추가</button></td>
                             </tr>
                        	</c:if>
-                       	<c:if test="${room.room_no ne '0'}">
+                       	<c:if test="${room.room_no ne '-1'}">
                      	   <tr>
                          	<td class="no">${room.dorm_no}</td>
                           	 <input type="hidden" id="room_dorm_no" value="${room.dorm_no}">
@@ -299,8 +299,18 @@
 	                           <td><button type="button" class="contents_bt" name="content" readonly  value="${room.room_contents}">내용 보기</button></td>
 	                       	   <input type="hidden" id="room_contents_val" name="contents" value="${room.room_contents}">
                        	  	   <td><input type="text" id="room_picture" name="picture" readonly value="${room.room_picture}"></td>
-                       	  	   <td><input type="text" id="room_pay_day" name="room_pay_day" class="pay" readonly value="${room.room_pay_day}"></td>
-                        	   <td><input type="text"  id="room_pay_night" name="room_pay_night" class="pay" readonly value="${room.room_pay_night}"></td>
+                       	  	   <c:if test = "${room.room_pay_day ne  '-1'}">
+                       	  		   <td><input type="number" id="room_pay_day" name="room_pay_day" class="pay" readonly value="${room.room_pay_day}"></td>
+                       	  	   </c:if>
+                       	  	   <c:if test = "${room.room_pay_day  eq  '-1'}">
+                        	 	  <td><input type="number" id="room_pay_day" name="room_pay_day" class="pay" readonly ></td>
+                       	  	   </c:if>
+                       	  	   	<c:if test = "${room.room_pay_night ne  '-1'}">
+                       	  	  	 <td><input type="number" id="room_pay_night" name="room_pay_night" class="pay" readonly value="${room.room_pay_night}"></td>
+                       	  	   </c:if>
+                       	  	   <c:if test = "${room.room_pay_night  eq  '-1'}">
+                        	  	 <td><input type="number" id="room_pay_night" name="room_pay_night" class="pay" readonly ></td>
+                       	  	   </c:if>
                       		    <td><input  type="number"  id="room_person" name="room_person"  class="no"  readonly  value="${room.room_person}"></td>
                         	    <td style="text-align: center;">
                                <button class="bt" name="type" value="room">수정하기</button>

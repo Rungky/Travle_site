@@ -88,8 +88,18 @@
 			room_name = #{room_name},
 			room_contents = #{room_contents},
 			room_picture = #{room_picture},
-			room_pay_day = #{room_pay_day},
-			room_pay_night = #{room_pay_night},
+			<if test = "room_pay_day != -1 and ''!=room_pay_day">
+				room_pay_day = #{room_pay_day},
+			</if>
+			<if  test = "room_pay_day  == -1 or ''==room_pay_day">
+				room_pay_day = null,
+			</if>
+			<if test = "room_pay_night != -1 and ''!=room_pay_night">
+				room_pay_night = #{room_pay_night},
+			</if>
+			<if  test = "room_pay_night  == -1 or ''==room_pay_night">
+					room_pay_night =null,
+			</if>
 			room_person = #{room_person}	
 		WHERE room_no = #{room_no}
 	</update>
@@ -103,8 +113,18 @@
 	    		#{room_name},
 	    		#{room_contents},
 	    		#{room_picture},
-	    		#{room_pay_day},
-	    		#{room_pay_night},
+	    		<if test = "room_pay_day != -1 and ''!=room_pay_day">
+	    			#{room_pay_day, jdbcType=INTEGER},
+	    		</if>
+	    		<if  test = "room_pay_day  == -1 or ''==room_pay_day">
+	    			null,
+	    		</if>
+	    		<if test = "room_pay_night  != -1 and ''!=room_pay_night">
+	    			#{room_pay_night, jdbcType=INTEGER},
+	    		</if>
+	    		<if test = "room_pay_night  == -1 or ''==room_pay_night">
+	    			null,
+	    		</if>
 	    		#{room_person}
 	    	)
 	   </insert>
