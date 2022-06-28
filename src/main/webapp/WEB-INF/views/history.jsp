@@ -169,6 +169,7 @@
 			if(result == 1){ 
 				$(statement[i]).show();
 				$(nostatement[i]).hide();
+				
 			}else if(result == 0){
 				$(statement[i]).hide();
 				$(nostatement[i]).show();

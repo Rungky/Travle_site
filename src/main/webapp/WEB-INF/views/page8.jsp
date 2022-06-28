@@ -66,7 +66,7 @@
 			} else {
 				pay_check = 1;
 			}
-			
+			console.log("아작스 진입전 pay_check", pay_check);
 			let dorm_no = document.querySelector("#dorm_no").value
 			let room_no = document.querySelector("#room_no").value
 			let reserve_checkin = $("#checkin").text();
@@ -79,6 +79,8 @@
 			let room_name = $("#room").text();
 			let in_time = $("#inTime").text();
 			let out_time = $("#outTime").text();
+			
+			
 			if(pay_num == '' && $("select[name=pay] option:selected").text() == '현장결제') pay_num = "현장에서 결제 바랍니다.";
 			
 				
@@ -88,15 +90,15 @@
 					data : {
 						dorm_no : dorm_no,
 						room_no : room_no,
+						dorm_name : dorm_name,
+						room_name : room_name,
 						reserve_checkin : reserve_checkin,
 						reserve_checkout : reserve_checkout,
 						reserve_pay : reserve_pay,
-						pay_ment : pay_ment,
-						real_name : real_name,
-						pay_num : pay_num,
 						pay_check : pay_check,
-						dorm_name : dorm_name,
-						room_name : room_name,
+						pay_ment : pay_ment,
+						pay_num : pay_num,
+						real_name : real_name,
 						in_time: in_time,
 						out_time : out_time
 						
@@ -241,12 +243,16 @@
 				<br>
 				<div>
 					<div class="name2">[체크인]</div>
-					<div class="c4" id="checkin">${check.reserve_checkin}</div><span id="inTime"> ${check.in_time }</span>
+					<div class="only">
+						<div class="c4 only" id="checkin">${check.reserve_checkin}</div><div class="llo" id="inTime"> ${check.in_time }</div>
+					</div>
 				</div>
 				<br>
 				<div>
 					<div class="name2">[체크아웃]</div>
-					<div class="c5" id="checkout">${check.reserve_checkout}</div><span id="outTime"> ${check.out_time }</span>
+					<div class="only">
+						<div class="c5 only" id="checkout">${check.reserve_checkout}</div><div class="llo" id="outTime"> ${check.out_time }</div>
+					</div>
 				</div>
 				<br>
 				<div class="c6">

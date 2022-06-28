@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -329,7 +332,7 @@ public class TripController extends MultiActionController {
 			@RequestParam("room_no") int room_no,
 			@RequestParam("dorm_name") String dorm_name,
 			@RequestParam("room_name") String room_name,
-			@RequestParam("reserve_checkin") Date reserve_checkin,
+			@RequestParam("reserve_checkin")  Date reserve_checkin,
 			@RequestParam("reserve_checkout") Date reserve_checkout, 
 			@RequestParam("reserve_pay") int reserve_pay,
 			@RequestParam("pay_check") int pay_check,
@@ -341,8 +344,10 @@ public class TripController extends MultiActionController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
+
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		System.out.println("result.to진입");
 		System.out.println(dorm_no);
 		System.out.println(reserve_checkout);
 		System.out.println(pay_ment);

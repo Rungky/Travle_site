@@ -61,7 +61,7 @@ footer{
     background-color: rgb(245,245,245);
     padding : 50px;
 }
-.c1,.c2,.c3,.c4,.c5,.c6,.c7 {
+.c1,.c2,.c3,.c4,.c5,.c6,.c7, .llo {
     font-weight: bold;
     margin-left: 15px;
     font-size: 18px;
@@ -73,6 +73,14 @@ footer{
     font-size: 18px;
     line-height: 1.6;
 }
+
+.only {
+	display: flex;
+	flex-direction: row;
+}
+
+
+
 
 #impor {
 	font-weight:400;
