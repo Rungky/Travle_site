@@ -5,12 +5,12 @@ public class RoomVO {
 	private int dorm_no; 
 	private String dorm_name; 
 	private int dorm_category_no;
-	private int room_no;
+	private int room_no = -1;
 	private String room_name; 
 	private String room_contents; 
 	private String room_picture; 
-	private int room_pay_day; 
-	private int room_pay_night;
+	private int room_pay_day = -1; 
+	private int room_pay_night = -1;
 	private int room_person;
 	
 	@Override

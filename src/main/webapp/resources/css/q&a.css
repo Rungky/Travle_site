@@ -169,5 +169,18 @@ section{
 	color : red;
 }
 
+.reply_reanswer{
+	width: 60px;
+    height: 20px;
+    font-size: 0.6em;
+    background-color: #ffffff233233233;
+    border: rgb(233,233,233) solid 1px;
+}
 
-
+.reply_doMod,.reply_doRemove{
+	width: 60px;
+    height: 20px;
+    font-size: 0.6em;
+    background-color: #ffffff233233233;
+    border: rgb(233,233,233) solid 1px;
+}
