@@ -30,7 +30,7 @@ import com.spring.trip.service.TripService;
 @Controller
 public class AdminController extends MultiActionController {
 	
-	@Autowired
+	@Autowired 
 	private AdminService adminService;
 	@Autowired
 	private MemberService memberService;
